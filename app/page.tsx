@@ -33,14 +33,14 @@ export default function OnboardingPage() {
           {/* Bottom Buttons */}
           <div className="space-y-3 pb-4">
             <Link
-              href="/signup"
+              href="/signup?type=agency"
               className="flex items-center justify-center w-full h-14 border-2 border-white/60 text-white font-semibold rounded-xl hover:bg-white/10 transition-all"
             >
               에이전시로 시작하기
             </Link>
 
             <Link
-              href="/signup"
+              href="/signup?type=actor"
               className="flex items-center justify-center w-full h-14 bg-white text-gray-900 font-semibold rounded-xl hover:bg-gray-100 transition-all"
             >
               배우로 시작하기

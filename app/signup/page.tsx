@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { ChevronLeftIcon, EyeIcon, EyeOffIcon } from "./icons";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -12,7 +13,11 @@ interface FormErrors {
   passwordConfirm?: string;
 }
 
-export default function SignupPage() {
+function SignupContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const userType = searchParams.get("type") || "actor"; // actor | agency
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -90,9 +95,12 @@ export default function SignupPage() {
   };
 
   const handleTermsAgree = () => {
-    // 회원가입 완료 처리
-    console.log("회원가입 완료:", { email, password });
-    alert("회원가입이 완료되었습니다!");
+    // 약관 동의 후 해당 타입의 프로필 작성 페이지로 이동
+    if (userType === "agency") {
+      router.push("/signup/agency");
+    } else {
+      router.push("/signup/actor");
+    }
   };
 
   return (
@@ -102,6 +110,7 @@ export default function SignupPage() {
         <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
           <div className="px-4 h-14 flex items-center">
             <button
+              onClick={() => router.back()}
               className="w-10 h-10 flex items-center justify-center -ml-2 rounded-full hover:bg-gray-100 transition-colors"
               aria-label="뒤로가기"
             >
@@ -206,5 +215,17 @@ export default function SignupPage() {
         />
       </div>
     </div>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex justify-center items-center">
+        <div className="text-gray-500">로딩 중...</div>
+      </div>
+    }>
+      <SignupContent />
+    </Suspense>
   );
 }
