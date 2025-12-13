@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import Image from 'next/image';
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 export interface Actor {
   id: string;
@@ -51,15 +51,15 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
+      if (e.key === "ArrowLeft") {
         goToPrev();
-      } else if (e.key === 'ArrowRight') {
+      } else if (e.key === "ArrowRight") {
         goToNext();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [goToPrev, goToNext]);
 
   // Get side cards
@@ -88,13 +88,7 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
           className="hidden sm:block shrink-0 w-20 md:w-24 opacity-50 hover:opacity-70 transition-opacity"
         >
           <div className="aspect-3/4 relative rounded-lg overflow-hidden bg-gray-200">
-            <Image
-              src={leftCard.imageUrl}
-              alt={leftCard.name}
-              fill
-              className="object-cover"
-              sizes="96px"
-            />
+            <Image src={leftCard.imageUrl} alt={leftCard.name} fill className="object-cover" sizes="96px" />
           </div>
         </button>
 
@@ -112,13 +106,13 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
                   priority
                 />
               </div>
-              
+
               <div className="mt-4 text-center">
                 <h2 className="text-xl font-bold text-gray-900">{activeActor.name}</h2>
                 <p className="mt-1 text-sm text-gray-500">
                   {activeActor.age} · 필모 {activeActor.filmography}편
                 </p>
-                
+
                 <div className="mt-3 flex flex-wrap justify-center gap-2">
                   {activeActor.tags.map((tag, index) => (
                     <span
@@ -140,13 +134,7 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
           className="hidden sm:block shrink-0 w-20 md:w-24 opacity-50 hover:opacity-70 transition-opacity"
         >
           <div className="aspect-3/4 relative rounded-lg overflow-hidden bg-gray-200">
-            <Image
-              src={rightCard.imageUrl}
-              alt={rightCard.name}
-              fill
-              className="object-cover"
-              sizes="96px"
-            />
+            <Image src={rightCard.imageUrl} alt={rightCard.name} fill className="object-cover" sizes="96px" />
           </div>
         </button>
       </div>
@@ -160,25 +148,18 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
               onClick={() => setActiveIndex(index)}
               className={`
                 relative shrink-0 flex flex-col items-center gap-1 p-1 rounded-lg transition-all
-                ${index === activeIndex 
-                  ? 'bg-gray-100' 
-                  : 'opacity-60 hover:opacity-100'
-                }
+                ${index === activeIndex ? "bg-gray-100" : "opacity-60 hover:opacity-100"}
               `}
             >
-              <div className={`
+              <div
+                className={`
                 w-12 h-12 rounded-full overflow-hidden border-2 transition-all
-                ${index === activeIndex ? 'border-gray-800' : 'border-transparent'}
-              `}>
-                <img
-                  src={actor.imageUrl}
-                  alt={actor.name}
-                  className="w-full h-full object-cover"
-                />
+                ${index === activeIndex ? "border-gray-800" : "border-transparent"}
+              `}
+              >
+                <img src={actor.imageUrl} alt={actor.name} className="w-full h-full object-cover" />
               </div>
-              <span className="text-[10px] text-gray-600 font-medium truncate max-w-[50px]">
-                {actor.name}
-              </span>
+              <span className="text-[10px] text-gray-600 font-medium truncate max-w-[50px]">{actor.name}</span>
             </button>
           ))}
         </div>
@@ -192,10 +173,7 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
             onClick={() => setActiveIndex(index)}
             className={`
               h-1.5 rounded-full transition-all duration-300
-              ${index === activeIndex 
-                ? 'bg-gray-800 w-6' 
-                : 'bg-gray-300 w-1.5 hover:bg-gray-400'
-              }
+              ${index === activeIndex ? "bg-gray-800 w-6" : "bg-gray-300 w-1.5 hover:bg-gray-400"}
             `}
             aria-label={`${index + 1}번째 배우로 이동`}
           />
