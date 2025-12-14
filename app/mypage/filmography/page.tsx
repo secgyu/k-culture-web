@@ -111,8 +111,7 @@ export default function FilmographyManagePage() {
   };
 
   const handleEdit = (id: string) => {
-    // TODO: 수정 모달 또는 페이지로 이동
-    console.log("Edit:", id);
+    router.push(`/mypage/filmography/edit/${id}`);
   };
 
   return (
