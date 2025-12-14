@@ -1,20 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useSyncExternalStore, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 // 아이콘 컴포넌트들
-function ChevronLeftIcon({ className }: { className?: string }) {
+function ChevronLeftIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+    <svg className={className} style={style} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
     </svg>
   );
 }
 
-function PencilIcon({ className }: { className?: string }) {
+function PencilIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+    <svg className={className} style={style} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -24,17 +25,17 @@ function PencilIcon({ className }: { className?: string }) {
   );
 }
 
-function XMarkIcon({ className }: { className?: string }) {
+function XMarkIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+    <svg className={className} style={style} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
   );
 }
 
-function XCircleIcon({ className }: { className?: string }) {
+function XCircleIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <svg className={className} style={style} viewBox="0 0 24 24" fill="currentColor">
       <path
         fillRule="evenodd"
         d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
@@ -52,92 +53,58 @@ interface Character {
   ageRange: string;
   roleType: string;
   description: string;
+  specialTags?: string[];
+  keywords?: string[];
 }
 
-// 성별 옵션
-const genderOptions = ["남성", "여성", "무관"];
+// localStorage 커스텀 훅
+function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+  const getSnapshot = useCallback(() => {
+    if (typeof window === "undefined") return JSON.stringify(initialValue);
+    const stored = localStorage.getItem(key);
+    return stored ?? JSON.stringify(initialValue);
+  }, [key, initialValue]);
 
-// 나이대 옵션
-const ageRangeOptions = ["10대", "20대", "30대", "40대", "50대", "60대 이상"];
+  const getServerSnapshot = useCallback(() => JSON.stringify(initialValue), [initialValue]);
 
-// 역할 유형 옵션
-const roleTypeOptions = ["주연", "조연", "단역", "엑스트라", "특별출연"];
+  const subscribe = useCallback(
+    (callback: () => void) => {
+      const handleStorageChange = (e: StorageEvent) => {
+        if (e.key === key) callback();
+      };
+      window.addEventListener("storage", handleStorageChange);
+      return () => window.removeEventListener("storage", handleStorageChange);
+    },
+    [key]
+  );
+
+  const storedValue = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
+  const setValue = useCallback(
+    (value: T) => {
+      localStorage.setItem(key, JSON.stringify(value));
+      window.dispatchEvent(new StorageEvent("storage", { key }));
+    },
+    [key]
+  );
+
+  return [JSON.parse(storedValue) as T, setValue];
+}
 
 export default function CharactersPage() {
   const router = useRouter();
-  const [characters, setCharacters] = useState<Character[]>([]);
-  const [showModal, setShowModal] = useState(false);
-  const [editingCharacter, setEditingCharacter] = useState<Character | null>(null);
-
-  // 모달 폼 상태
-  const [characterName, setCharacterName] = useState("");
-  const [gender, setGender] = useState("");
-  const [ageRange, setAgeRange] = useState("");
-  const [roleType, setRoleType] = useState("");
-  const [description, setDescription] = useState("");
-
-  const isFormValid = characterName.trim() !== "" && gender !== "" && ageRange !== "" && roleType !== "";
-
-  const resetForm = () => {
-    setCharacterName("");
-    setGender("");
-    setAgeRange("");
-    setRoleType("");
-    setDescription("");
-    setEditingCharacter(null);
-  };
-
-  const openAddModal = () => {
-    resetForm();
-    setShowModal(true);
-  };
-
-  const openEditModal = (character: Character) => {
-    setEditingCharacter(character);
-    setCharacterName(character.name);
-    setGender(character.gender);
-    setAgeRange(character.ageRange);
-    setRoleType(character.roleType);
-    setDescription(character.description);
-    setShowModal(true);
-  };
-
-  const handleSaveCharacter = () => {
-    if (!isFormValid) return;
-
-    if (editingCharacter) {
-      // 수정
-      setCharacters((prev) =>
-        prev.map((c) =>
-          c.id === editingCharacter.id
-            ? { ...c, name: characterName, gender, ageRange, roleType, description }
-            : c
-        )
-      );
-    } else {
-      // 추가
-      const newCharacter: Character = {
-        id: Date.now().toString(),
-        name: characterName,
-        gender,
-        ageRange,
-        roleType,
-        description,
-      };
-      setCharacters((prev) => [...prev, newCharacter]);
-    }
-
-    setShowModal(false);
-    resetForm();
-  };
+  const [characters, setCharacters] = useLocalStorage<Character[]>("newProjectCharacters", []);
 
   const handleDeleteCharacter = (id: string) => {
-    setCharacters((prev) => prev.filter((c) => c.id !== id));
+    const updated = characters.filter((c) => c.id !== id);
+    setCharacters(updated);
   };
 
   const handleComplete = () => {
     if (characters.length > 0) {
       console.log("프로젝트 생성 완료:", { characters });
+      // 임시 저장 데이터 삭제
+      setCharacters([]);
       router.push("/mypage/projects");
     }
   };
@@ -187,11 +154,7 @@ export default function CharactersPage() {
           ) : (
             <div className="space-y-4">
               {characters.map((character, index) => (
-                <div
-                  key={character.id}
-                  className="p-4 rounded-xl border"
-                  style={{ borderColor: "#E5E8EB" }}
-                >
+                <div key={character.id} className="p-4 rounded-xl border" style={{ borderColor: "#E5E8EB" }}>
                   <div className="flex items-start justify-between mb-2">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
@@ -205,17 +168,19 @@ export default function CharactersPage() {
                       <p className="text-sm mb-1" style={{ color: "#8B95A1" }}>
                         {character.ageRange} · {character.gender}
                       </p>
-                      <span
-                        className="inline-block px-2 py-0.5 rounded text-xs"
-                        style={{ backgroundColor: "#F2F4F6", color: "#4E5968" }}
-                      >
-                        {character.roleType}
-                      </span>
+                      {character.roleType && (
+                        <span
+                          className="inline-block px-2 py-0.5 rounded text-xs"
+                          style={{ backgroundColor: "#F2F4F6", color: "#4E5968" }}
+                        >
+                          {character.roleType}
+                        </span>
+                      )}
                     </div>
                     <div className="flex items-center gap-2">
-                      <button onClick={() => openEditModal(character)}>
+                      <Link href={`/mypage/projects/new/characters/add?edit=${character.id}`}>
                         <PencilIcon className="w-5 h-5" style={{ color: "#6B7684" }} />
-                      </button>
+                      </Link>
                       <button onClick={() => handleDeleteCharacter(character.id)}>
                         <XMarkIcon className="w-5 h-5" style={{ color: "#6B7684" }} />
                       </button>
@@ -230,14 +195,14 @@ export default function CharactersPage() {
               ))}
 
               {/* 캐릭터 추가 버튼 (목록 아래) */}
-              <button
-                onClick={openAddModal}
+              <Link
+                href="/mypage/projects/new/characters/add"
                 className="w-full py-3 rounded-xl border border-dashed flex items-center justify-center gap-2"
                 style={{ borderColor: "#E5E8EB", color: "#6B7684" }}
               >
                 <span className="text-xl">+</span>
                 <span className="text-sm font-medium">캐릭터 추가</span>
-              </button>
+              </Link>
             </div>
           )}
         </main>
@@ -245,161 +210,24 @@ export default function CharactersPage() {
         {/* 하단 버튼 */}
         <div className="fixed bottom-0 left-0 right-0 bg-white px-5 py-6 max-w-lg mx-auto">
           {characters.length === 0 ? (
-            <button
-              onClick={openAddModal}
-              className="w-full py-4 rounded-xl font-medium"
-              style={{ backgroundColor: "rgba(25, 31, 40, 0.3)", color: "#FFFFFF" }}
+            <Link
+              href="/mypage/projects/new/characters/add"
+              className="w-full py-4 rounded-xl font-medium flex items-center justify-center"
+              style={{ backgroundColor: "#191F28", color: "#FFFFFF" }}
             >
               캐릭터 추가하기
-            </button>
+            </Link>
           ) : (
             <button
               onClick={handleComplete}
               className="w-full py-4 rounded-xl font-medium text-white"
               style={{ backgroundColor: "#191F28" }}
             >
-              캐릭터 추가하기
+              완료
             </button>
           )}
         </div>
-
-        {/* 캐릭터 추가/수정 모달 */}
-        {showModal && (
-          <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/50">
-            <div className="w-full max-w-lg bg-white rounded-t-2xl max-h-[90vh] overflow-y-auto">
-              <div className="p-5">
-                {/* 모달 헤더 */}
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold" style={{ color: "#191F28" }}>
-                    {editingCharacter ? "캐릭터 수정" : "캐릭터 추가"}
-                  </h3>
-                  <button
-                    onClick={() => {
-                      setShowModal(false);
-                      resetForm();
-                    }}
-                  >
-                    <XMarkIcon className="w-6 h-6" style={{ color: "#6B7684" }} />
-                  </button>
-                </div>
-
-                {/* 캐릭터명 */}
-                <div className="mb-4">
-                  <label className="block text-sm mb-2" style={{ color: "#4E5968" }}>
-                    캐릭터명
-                  </label>
-                  <input
-                    type="text"
-                    value={characterName}
-                    onChange={(e) => setCharacterName(e.target.value)}
-                    placeholder="캐릭터명을 입력해주세요"
-                    className="w-full px-4 py-3 rounded-xl border outline-none"
-                    style={{ borderColor: "#E5E8EB", color: "#191F28" }}
-                  />
-                </div>
-
-                {/* 성별 */}
-                <div className="mb-4">
-                  <label className="block text-sm mb-2" style={{ color: "#4E5968" }}>
-                    성별
-                  </label>
-                  <div className="flex gap-2">
-                    {genderOptions.map((option) => (
-                      <button
-                        key={option}
-                        onClick={() => setGender(option)}
-                        className="flex-1 py-3 rounded-xl border text-sm font-medium transition-colors"
-                        style={{
-                          borderColor: gender === option ? "#191F28" : "#E5E8EB",
-                          backgroundColor: gender === option ? "#191F28" : "#FFFFFF",
-                          color: gender === option ? "#FFFFFF" : "#4E5968",
-                        }}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 나이대 */}
-                <div className="mb-4">
-                  <label className="block text-sm mb-2" style={{ color: "#4E5968" }}>
-                    나이대
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {ageRangeOptions.map((option) => (
-                      <button
-                        key={option}
-                        onClick={() => setAgeRange(option)}
-                        className="px-4 py-2 rounded-full border text-sm font-medium transition-colors"
-                        style={{
-                          borderColor: ageRange === option ? "#191F28" : "#E5E8EB",
-                          backgroundColor: ageRange === option ? "#191F28" : "#FFFFFF",
-                          color: ageRange === option ? "#FFFFFF" : "#4E5968",
-                        }}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 역할 유형 */}
-                <div className="mb-4">
-                  <label className="block text-sm mb-2" style={{ color: "#4E5968" }}>
-                    역할 유형
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {roleTypeOptions.map((option) => (
-                      <button
-                        key={option}
-                        onClick={() => setRoleType(option)}
-                        className="px-4 py-2 rounded-full border text-sm font-medium transition-colors"
-                        style={{
-                          borderColor: roleType === option ? "#191F28" : "#E5E8EB",
-                          backgroundColor: roleType === option ? "#191F28" : "#FFFFFF",
-                          color: roleType === option ? "#FFFFFF" : "#4E5968",
-                        }}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 상세 설명 */}
-                <div className="mb-6">
-                  <label className="block text-sm mb-2" style={{ color: "#4E5968" }}>
-                    캐릭터 상세 설명
-                  </label>
-                  <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="캐릭터에 대한 상세 설명을 입력해주세요"
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-xl border outline-none resize-none"
-                    style={{ borderColor: "#E5E8EB", color: "#191F28" }}
-                  />
-                </div>
-
-                {/* 저장 버튼 */}
-                <button
-                  onClick={handleSaveCharacter}
-                  disabled={!isFormValid}
-                  className="w-full py-4 rounded-xl font-medium transition-colors"
-                  style={{
-                    backgroundColor: isFormValid ? "#191F28" : "rgba(25, 31, 40, 0.3)",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {editingCharacter ? "수정하기" : "추가하기"}
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
 }
-
