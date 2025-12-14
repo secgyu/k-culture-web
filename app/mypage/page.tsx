@@ -313,10 +313,10 @@ export default function MyPage() {
         <section className="px-5 py-6 border-t border-gray-100">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-bold text-gray-900">대표 영상</h2>
-            <button className="flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600">
+            <Link href="/mypage/showreel" className="flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600">
               <PencilIcon className="w-4 h-4" />
               <span>수정하기</span>
-            </button>
+            </Link>
           </div>
           <div className="space-y-4">
             {actor.showreels.map((showreel) => (
