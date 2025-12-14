@@ -49,7 +49,6 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
     }
   };
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") {
@@ -63,7 +62,6 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [goToPrev, goToNext]);
 
-  // Get side cards
   const getCardIndex = (offset: number) => {
     const index = activeIndex + offset;
     if (index < 0) return actors.length + index;
@@ -74,7 +72,6 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
   const leftCard = actors[getCardIndex(-1)];
   const rightCard = actors[getCardIndex(1)];
 
-  // 샘플 필모그래피 데이터
   const sampleWorks = [
     {
       name: "나의아저씨",
@@ -90,7 +87,6 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
 
   return (
     <div className="w-full flex flex-col overflow-hidden">
-      {/* Main Carousel Area */}
       <div
         className="relative flex items-center justify-center gap-3 px-5 py-4"
         style={{ height: "400px" }}
@@ -98,13 +94,11 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Left Side Card */}
         <button
           onClick={goToPrev}
           className="shrink-0 flex flex-col justify-end items-center"
           style={{ width: "184px", height: "332px" }}
         >
-          {/* Card Image */}
           <div
             className="absolute rounded-md overflow-hidden bg-white"
             style={{
@@ -116,7 +110,6 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
           >
             <Image src={leftCard.imageUrl} alt={leftCard.name} fill className="object-cover" sizes="160px" />
           </div>
-          {/* Card Bottom Blur */}
           <div
             className="relative w-full"
             style={{
@@ -129,13 +122,10 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
             }}
           />
         </button>
-
-        {/* Center Active Card */}
         <div
           className="shrink-0 flex flex-col justify-end items-center relative"
           style={{ width: "230px", height: "400px" }}
         >
-          {/* Card Image */}
           <div
             className="absolute rounded-md overflow-hidden"
             style={{
@@ -155,7 +145,6 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
               priority
             />
           </div>
-          {/* Card Bottom Blur */}
           <div
             className="relative w-full"
             style={{
@@ -168,14 +157,11 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
             }}
           />
         </div>
-
-        {/* Right Side Card */}
         <button
           onClick={goToNext}
           className="shrink-0 flex flex-col justify-end items-center"
           style={{ width: "185px", height: "332px" }}
         >
-          {/* Card Image */}
           <div
             className="absolute rounded-md overflow-hidden bg-white"
             style={{
@@ -187,7 +173,6 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
           >
             <Image src={rightCard.imageUrl} alt={rightCard.name} fill className="object-cover" sizes="160px" />
           </div>
-          {/* Card Bottom Blur */}
           <div
             className="relative w-full"
             style={{
@@ -201,25 +186,17 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
           />
         </button>
       </div>
-
-      {/* Actor Info Section */}
       <div className="flex flex-col items-center px-5 py-4 gap-8">
-        {/* Actor Details */}
         <div className="flex flex-col items-center gap-3">
-          {/* Name */}
           <h2
             className="font-bold text-[#191F28]"
             style={{ fontSize: "24px", lineHeight: "28px", letterSpacing: "-0.022em" }}
           >
             {activeActor.name}
           </h2>
-
-          {/* Age & Filmography */}
           <p className="text-base text-[#4E5968]" style={{ letterSpacing: "-0.02em" }}>
             {activeActor.age} · 필모 {activeActor.filmography}편
           </p>
-
-          {/* Tags */}
           <div className="flex flex-wrap justify-center gap-1.5">
             {activeActor.tags.map((tag, index) => (
               <span
@@ -235,8 +212,6 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
             ))}
           </div>
         </div>
-
-        {/* Filmography Chips */}
         <div className="flex gap-1.5 overflow-x-auto hide-scrollbar w-full justify-center">
           {sampleWorks.map((work, index) => (
             <div

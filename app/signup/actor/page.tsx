@@ -51,7 +51,6 @@ export default function ActorSignupPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center">
       <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col border-x border-gray-200 overflow-hidden">
-        {/* Header */}
         <header className="sticky top-0 z-50 bg-white">
           <div className="px-4 h-14 flex items-center">
             <button
@@ -64,11 +63,8 @@ export default function ActorSignupPage() {
             <h1 className="ml-2 text-base font-semibold text-[#191F28]">배우 프로필 등록</h1>
           </div>
         </header>
-
-        {/* Form */}
         <main className="flex-1 w-full px-5 py-6">
           <div className="space-y-6">
-            {/* Profile Image */}
             <div className="relative w-[100px] h-[100px]">
               <div
                 onClick={handleImageClick}
@@ -83,7 +79,6 @@ export default function ActorSignupPage() {
                   </svg>
                 )}
               </div>
-              {/* Edit Button */}
               <button
                 onClick={handleImageClick}
                 className="absolute -bottom-1 -right-1 w-10 h-10 bg-white rounded-full shadow-sm flex items-center justify-center border border-[#E5E8EB]"
@@ -102,8 +97,6 @@ export default function ActorSignupPage() {
               </button>
               <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
             </div>
-
-            {/* Name Field */}
             <div className="space-y-2 pt-4">
               <label className="text-sm font-medium text-[#4E5968]">이름</label>
               <div className="relative border-b border-[#E5E8EB]">
@@ -133,8 +126,6 @@ export default function ActorSignupPage() {
                 )}
               </div>
             </div>
-
-            {/* Introduction Field */}
             <div className="space-y-2 pt-2">
               <label className="text-sm font-medium text-[#4E5968]">한 줄 소개</label>
               <textarea
@@ -145,8 +136,6 @@ export default function ActorSignupPage() {
                 className="w-full p-4 text-base text-[#191F28] placeholder-[#8B95A1] border border-[#E5E8EB] rounded-xl focus:border-gray-400 focus:outline-none resize-none"
               />
             </div>
-
-            {/* Age Group Field */}
             <div className="space-y-2 pt-2">
               <label className="text-sm font-medium text-[#4E5968]">나이대</label>
               <button
@@ -170,8 +159,6 @@ export default function ActorSignupPage() {
             </div>
           </div>
         </main>
-
-        {/* Bottom Button */}
         <div className="p-5 pb-8 w-full">
           <Button
             onClick={handleSubmit}
@@ -183,8 +170,6 @@ export default function ActorSignupPage() {
             다음
           </Button>
         </div>
-
-        {/* Age Select Modal */}
         <AgeSelectModal
           open={showAgeModal}
           onOpenChange={setShowAgeModal}

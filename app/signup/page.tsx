@@ -32,7 +32,6 @@ function SignupContent() {
   const [isValid, setIsValid] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
 
-  // 이메일 유효성 검사
   const validateEmail = (value: string): string | undefined => {
     if (!value) return undefined;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,7 +41,6 @@ function SignupContent() {
     return undefined;
   };
 
-  // 비밀번호 유효성 검사
   const validatePassword = (value: string): string | undefined => {
     if (!value) return undefined;
     if (value.length < 8) {
@@ -51,7 +49,6 @@ function SignupContent() {
     return undefined;
   };
 
-  // 비밀번호 확인 유효성 검사
   const validatePasswordConfirm = (value: string, pwd: string): string | undefined => {
     if (!value) return undefined;
     if (value !== pwd) {
@@ -60,7 +57,6 @@ function SignupContent() {
     return undefined;
   };
 
-  // 실시간 유효성 검사
   useEffect(() => {
     const newErrors: FormErrors = {};
 
@@ -90,12 +86,10 @@ function SignupContent() {
 
   const handleSubmit = () => {
     if (!isValid) return;
-    // 약관동의 모달 열기
     setShowTermsModal(true);
   };
 
   const handleTermsAgree = () => {
-    // 약관 동의 후 해당 타입의 프로필 작성 페이지로 이동
     if (userType === "agency") {
       router.push("/signup/agency");
     } else {
@@ -106,7 +100,6 @@ function SignupContent() {
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center">
       <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col border-x border-gray-200 overflow-hidden">
-        {/* Header */}
         <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
           <div className="px-4 h-14 flex items-center">
             <button
@@ -119,11 +112,8 @@ function SignupContent() {
             <h1 className="flex-1 text-center text-lg font-semibold text-gray-900 -ml-10">회원가입</h1>
           </div>
         </header>
-
-        {/* Form */}
         <main className="flex-1 w-full px-5 py-6">
           <div className="space-y-6">
-            {/* Email Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700">이메일 주소</label>
               <Input
@@ -137,8 +127,6 @@ function SignupContent() {
               />
               {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
             </div>
-
-            {/* Password Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700">비밀번호</label>
               <div className="relative">
@@ -162,8 +150,6 @@ function SignupContent() {
               </div>
               {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
             </div>
-
-            {/* Password Confirm Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700">비밀번호 확인</label>
               <div className="relative">
@@ -189,8 +175,6 @@ function SignupContent() {
             </div>
           </div>
         </main>
-
-        {/* Bottom Button */}
         <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4 w-full">
           <Button
             onClick={handleSubmit}
@@ -202,8 +186,6 @@ function SignupContent() {
             다음
           </Button>
         </div>
-
-        {/* Terms Modal */}
         <TermsModal open={showTermsModal} onOpenChange={setShowTermsModal} onAgree={handleTermsAgree} />
       </div>
     </div>

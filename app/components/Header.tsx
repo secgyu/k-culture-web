@@ -40,14 +40,11 @@ export default function Header({ title, highlightedName }: HeaderProps) {
         className="max-w-lg mx-auto h-full flex items-center justify-between"
         style={{ padding: "0px 20px", gap: "1px" }}
       >
-        {/* Left Side */}
         <div className="flex items-center gap-3" style={{ width: "24px" }}>
           <button className="w-6 h-6 flex items-center justify-center" aria-label="뒤로가기">
             <ArrowLeftIcon className="w-6 h-6" />
           </button>
         </div>
-
-        {/* Center - Title */}
         <h1
           className="font-semibold text-[#191F28] flex items-center justify-center"
           style={{
@@ -61,8 +58,6 @@ export default function Header({ title, highlightedName }: HeaderProps) {
           {highlightedName && <span className="text-[#8B95A1]">&apos;</span>}
           <span className="text-[#191F28] ml-1">{title}</span>
         </h1>
-
-        {/* Right Side */}
         <div className="flex items-center justify-end gap-3" style={{ width: "24px" }}>
           <button className="w-6 h-6 flex items-center justify-center" aria-label="검색">
             <SearchIcon className="w-6 h-6" />

@@ -32,7 +32,6 @@ export default function ActorCard({
       `}
     >
       {isActive ? (
-        // Active (Center) Card - Full Details
         <div className="p-4">
           <div className="relative aspect-3/4 w-full overflow-hidden rounded-xl bg-gray-100">
             <Image
@@ -44,13 +43,11 @@ export default function ActorCard({
               priority
             />
           </div>
-
           <div className="mt-4 text-center">
             <h2 className="text-xl font-bold text-gray-900">{name}</h2>
             <p className="mt-1 text-sm text-gray-500">
               {age} · 필모 {filmography}편
             </p>
-
             <div className="mt-3 flex flex-wrap justify-center gap-2">
               {tags.map((tag, index) => (
                 <span key={index} className="px-3 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full">
@@ -61,7 +58,6 @@ export default function ActorCard({
           </div>
         </div>
       ) : (
-        // Side Cards - Thumbnail only
         <div className="p-2">
           <div className="relative aspect-3/4 w-full overflow-hidden rounded-lg bg-gray-100">
             <Image src={imageUrl} alt={name} fill className="object-cover" sizes="96px" />

@@ -4,7 +4,6 @@ export default function OnboardingPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center">
       <div className="relative w-full max-w-lg min-h-screen overflow-hidden">
-        {/* Background Image with Overlay */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -12,10 +11,7 @@ export default function OnboardingPage() {
           }}
         />
         <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/80" />
-
-        {/* Content */}
         <div className="relative z-10 min-h-screen flex flex-col px-6 py-12">
-          {/* Header Text */}
           <div className="flex-1 flex flex-col justify-center">
             <div className="space-y-2">
               <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">시나리오에</h1>
@@ -29,8 +25,6 @@ export default function OnboardingPage() {
               시놉시스 기반 배우 추천, 배우를 위한 새로운 기회
             </p>
           </div>
-
-          {/* Bottom Buttons */}
           <div className="space-y-3 pb-4">
             <Link
               href="/signup?type=agency"

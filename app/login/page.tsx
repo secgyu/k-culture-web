@@ -43,15 +43,11 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center">
       <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col border-x border-gray-200">
-        {/* Logo/Title */}
         <div className="px-8 pt-44 pb-24">
           <h1 className="text-5xl font-bold text-[#191F28] tracking-tight">배우담</h1>
         </div>
-
-        {/* Form */}
         <div className="flex-1 px-8">
           <div className="space-y-0">
-            {/* Email Field */}
             <div className="py-5 border-b border-[#E5E8EB]">
               <input
                 type="email"
@@ -61,8 +57,6 @@ export default function LoginPage() {
                 className="w-full text-base text-[#191F28] placeholder-[#8B95A1] bg-transparent focus:outline-none"
               />
             </div>
-
-            {/* Password Field */}
             <div className="py-5 border-b border-[#E5E8EB] flex items-center">
               <input
                 type={showPassword ? "text" : "password"}
@@ -76,31 +70,21 @@ export default function LoginPage() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="ml-2 text-[#6B7684] hover:text-[#4E5968]"
               >
-                {showPassword ? (
-                  <EyeOffIcon className="w-5 h-5" />
-                ) : (
-                  <EyeIcon className="w-5 h-5" />
-                )}
+                {showPassword ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
               </button>
             </div>
-
-            {/* Login Button */}
             <div className="pt-8">
               <button
                 onClick={handleLogin}
                 disabled={!isValid}
                 className={`w-full h-14 text-base font-semibold rounded-2xl transition-all ${
-                  isValid
-                    ? "bg-[#191F28] hover:bg-[#2d3540] text-white"
-                    : "bg-[#191F28] text-white opacity-100"
+                  isValid ? "bg-[#191F28] hover:bg-[#2d3540] text-white" : "bg-[#191F28] text-white opacity-100"
                 }`}
               >
                 로그인
               </button>
             </div>
           </div>
-
-          {/* Links */}
           <div className="flex items-center justify-center mt-6">
             <Link href="/signup" className="text-sm text-[#4E5968] hover:text-[#191F28] px-6">
               회원가입

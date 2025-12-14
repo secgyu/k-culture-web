@@ -39,7 +39,6 @@ export default function AgencySignupPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center">
       <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col border-x border-gray-200 overflow-hidden">
-        {/* Header */}
         <header className="sticky top-0 z-50 bg-white">
           <div className="px-4 h-14 flex items-center">
             <button
@@ -52,15 +51,10 @@ export default function AgencySignupPage() {
             <h1 className="ml-2 text-base font-semibold text-[#191F28]">에이전시 프로필 등록</h1>
           </div>
         </header>
-
-        {/* Form */}
         <main className="flex-1 w-full px-5 py-6">
           <div className="space-y-6">
-            {/* Section: 에이전시 소개 */}
             <div className="space-y-4">
               <h2 className="text-sm font-medium text-[#4E5968]">에이전시 소개</h2>
-
-              {/* Agency Name Field */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#4E5968]">에이전시명</label>
                 <div className="relative border-b border-[#E5E8EB]">
@@ -90,8 +84,6 @@ export default function AgencySignupPage() {
                   )}
                 </div>
               </div>
-
-              {/* Representative Name Field */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#4E5968]">대표자명</label>
                 <div className="relative border-b border-[#E5E8EB]">
@@ -121,8 +113,6 @@ export default function AgencySignupPage() {
                   )}
                 </div>
               </div>
-
-              {/* Founded Year Field */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#4E5968]">설립연도</label>
                 <div className="relative border-b border-[#E5E8EB]">
@@ -153,8 +143,6 @@ export default function AgencySignupPage() {
                 </div>
               </div>
             </div>
-
-            {/* Section: 주요 분야 */}
             <div className="space-y-4 pt-4">
               <h2 className="text-sm font-medium text-[#4E5968]">주요 분야</h2>
               <div className="flex flex-wrap gap-2">
@@ -179,8 +167,6 @@ export default function AgencySignupPage() {
             </div>
           </div>
         </main>
-
-        {/* Bottom Button */}
         <div className="p-5 pb-8 w-full">
           <Button
             onClick={handleSubmit}

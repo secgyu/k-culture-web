@@ -52,7 +52,6 @@ export default function TermsModal({ open, onOpenChange, onAgree }: TermsModalPr
     }
   };
 
-  // 모달 열릴 때 초기화
   useEffect(() => {
     if (open) {
       setTerms((prev) => prev.map((term) => ({ ...term, checked: false })));
@@ -63,26 +62,16 @@ export default function TermsModal({ open, onOpenChange, onAgree }: TermsModalPr
 
   return (
     <>
-      {/* 블러 배경 - 헤더 포함 전체 컨테이너 */}
-      <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm z-[60]"
-        onClick={() => onOpenChange(false)}
-      />
-
-      {/* 바텀시트 모달 - 컨테이너 내부 하단에 위치 */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-[60]" onClick={() => onOpenChange(false)} />
       <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl z-[70] animate-slide-up">
-        {/* 핸들 바 */}
         <div className="flex justify-center pt-3 pb-2">
           <div className="w-10 h-1 bg-gray-300 rounded-full" />
         </div>
-
-        {/* 헤더 */}
         <div className="px-5 py-4 border-b border-gray-100">
           <h2 className="text-lg font-semibold text-center text-gray-900">약관 동의</h2>
         </div>
 
         <div className="px-5 py-4">
-          {/* 전체 동의 */}
           <button
             type="button"
             onClick={handleAllCheck}
@@ -97,11 +86,7 @@ export default function TermsModal({ open, onOpenChange, onAgree }: TermsModalPr
             </div>
             <span className="flex-1 text-left text-base font-semibold text-gray-900">전체 동의</span>
           </button>
-
-          {/* 구분선 */}
           <div className="my-4 border-t border-gray-100" />
-
-          {/* 개별 약관 */}
           <div className="space-y-1">
             {terms.map((term) => (
               <button
@@ -128,8 +113,6 @@ export default function TermsModal({ open, onOpenChange, onAgree }: TermsModalPr
             ))}
           </div>
         </div>
-
-        {/* 동의 버튼 */}
         <div className="px-5 pb-8 pt-2">
           <Button
             onClick={handleAgree}
