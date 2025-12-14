@@ -32,6 +32,14 @@ function UploadIcon({ className }: { className?: string }) {
   );
 }
 
+function XMarkIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  );
+}
+
 function XCircleIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -44,65 +52,108 @@ function XCircleIcon({ className }: { className?: string }) {
   );
 }
 
-// 영상 타입
-interface ShowreelItem {
+// 업로드된 파일 타입
+interface UploadedFile {
   id: string;
-  title: string;
-  duration: string;
-  thumbnail: string;
+  name: string;
+  size: string;
+  format: string;
 }
 
-// 샘플 쇼릴 데이터
-const initialShowreels: ShowreelItem[] = [
-  {
-    id: "s1",
-    title: "2023 연기 쇼릴",
-    duration: "3:24",
-    thumbnail: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=225&fit=crop",
-  },
-];
-
-// 연도 옵션
-const years = Array.from({ length: 10 }, (_, i) => 2024 - i);
+// 역할 종류 옵션
+const roleTypes = ["주연", "조연", "단역", "엑스트라", "특별출연"];
 
 // 장르 옵션
 const genres = ["영화", "드라마", "뮤지컬", "연극", "웹드라마", "광고", "기타"];
 
-// 영상 유형 옵션
-const videoTypes = ["쇼릴", "오디션 영상", "자기소개 영상", "연기 클립", "기타"];
+// 대표 장르 옵션
+const representativeGenres = ["액션", "로맨스", "코미디", "스릴러", "공포", "SF", "판타지", "드라마"];
 
-export default function ShowreelManagePage() {
+// 연도 옵션
+const years = Array.from({ length: 20 }, (_, i) => 2024 - i);
+
+// 태그 옵션
+const availableTags = [
+  { id: "acting", label: "연기" },
+  { id: "action", label: "액션" },
+  { id: "drama", label: "드라마" },
+  { id: "humor", label: "유머" },
+];
+
+export default function ShowreelEditPage() {
   const router = useRouter();
-  const [showreels, setShowreels] = useState<ShowreelItem[]>(initialShowreels);
-  const [year, setYear] = useState(2023);
-  const [genre, setGenre] = useState("영화");
-  const [videoType, setVideoType] = useState("쇼릴");
 
-  const [showYearDropdown, setShowYearDropdown] = useState(false);
+  // 업로드된 파일 목록
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
+
+  // 폼 상태
+  const [roleType, setRoleType] = useState("");
+  const [workTitle, setWorkTitle] = useState("");
+  const [year, setYear] = useState("");
+  const [genre, setGenre] = useState("");
+  const [role, setRole] = useState("");
+  const [representativeGenre, setRepresentativeGenre] = useState("");
+
+  // 드롭다운 상태
+  const [showRoleTypeDropdown, setShowRoleTypeDropdown] = useState(false);
   const [showGenreDropdown, setShowGenreDropdown] = useState(false);
-  const [showTypeDropdown, setShowTypeDropdown] = useState(false);
+  const [showYearDropdown, setShowYearDropdown] = useState(false);
+  const [showRepGenreDropdown, setShowRepGenreDropdown] = useState(false);
 
-  const handleDelete = (id: string) => {
-    if (confirm("이 영상을 삭제하시겠습니까?")) {
-      setShowreels((prev) => prev.filter((item) => item.id !== id));
-    }
-  };
+  // 선택된 태그
+  const [selectedTags, setSelectedTags] = useState<typeof availableTags>([]);
 
-  const handleUpload = () => {
-    // TODO: 파일 업로드 로직
-    console.log("Upload video");
-  };
-
-  const handleSave = () => {
-    // TODO: API 호출로 저장
-    console.log("Save:", { showreels, year, genre, videoType });
-    router.back();
-  };
-
+  // 드롭다운 모두 닫기
   const closeAllDropdowns = () => {
-    setShowYearDropdown(false);
+    setShowRoleTypeDropdown(false);
     setShowGenreDropdown(false);
-    setShowTypeDropdown(false);
+    setShowYearDropdown(false);
+    setShowRepGenreDropdown(false);
+  };
+
+  // 파일 업로드 핸들러 (시뮬레이션)
+  const handleUpload = () => {
+    if (uploadedFiles.length >= 5) {
+      alert("최대 5개까지 업로드 가능합니다.");
+      return;
+    }
+
+    const newFile: UploadedFile = {
+      id: `file-${Date.now()}`,
+      name: `showreel_${uploadedFiles.length + 1}`,
+      size: "15.5MB",
+      format: "mp4",
+    };
+    setUploadedFiles((prev) => [...prev, newFile]);
+  };
+
+  // 파일 삭제 핸들러
+  const handleDeleteFile = (id: string) => {
+    setUploadedFiles((prev) => prev.filter((file) => file.id !== id));
+  };
+
+  // 태그 삭제 핸들러
+  const handleRemoveTag = (tagId: string) => {
+    setSelectedTags((prev) => prev.filter((t) => t.id !== tagId));
+  };
+
+  // 추가하기 버튼 활성화 여부
+  const isAddEnabled = uploadedFiles.length > 0;
+
+  // 저장 핸들러
+  const handleAdd = () => {
+    if (!isAddEnabled) return;
+    console.log("Add showreel:", {
+      uploadedFiles,
+      roleType,
+      workTitle,
+      year,
+      genre,
+      role,
+      representativeGenre,
+      selectedTags,
+    });
+    router.back();
   };
 
   return (
@@ -115,23 +166,23 @@ export default function ShowreelManagePage() {
               <ChevronLeftIcon className="w-6 h-6" style={{ color: "#191F28" }} />
             </button>
             <h1 className="text-lg font-semibold" style={{ color: "#191F28" }}>
-              쇼릴 관리
+              쇼릴 편집하기
             </h1>
           </div>
         </header>
 
         {/* 메인 콘텐츠 */}
-        <main className="flex-1">
-          {/* 상단 설명 및 업로드 영역 */}
+        <main className="flex-1 pb-32">
+          {/* 영상 업로드 섹션 */}
           <section className="px-5 py-6 border-b" style={{ borderColor: "#F2F4F6" }}>
             <p className="text-sm mb-4" style={{ color: "#4E5968" }}>
-              배우님의 연기력을 보여줄 수 있는 쇼릴 영상을 업로드해주세요. mp4, mov 형식의 파일을 지원합니다.
+              대표영상 업로드 (최대 5개), mp4, mov 형식 지원
             </p>
 
-            {/* 파일 업로드 영역 */}
+            {/* 파일 업로드 박스 */}
             <button
               onClick={handleUpload}
-              className="w-full rounded-xl py-10 flex flex-col items-center justify-center gap-3 transition-colors hover:bg-gray-100"
+              className="w-full rounded-xl py-12 flex flex-col items-center justify-center gap-3 transition-colors hover:bg-gray-50"
               style={{
                 backgroundColor: "#F9FAFB",
                 border: "1px dashed #E5E8EB",
@@ -139,79 +190,112 @@ export default function ShowreelManagePage() {
             >
               <UploadIcon className="w-6 h-6" style={{ color: "#6B7684" }} />
               <div className="text-center">
-                <p className="text-sm font-medium" style={{ color: "#4E5968" }}>
-                  영상 파일 업로드
+                <p className="text-sm" style={{ color: "#4E5968" }}>
+                  대표영상 업로드 (최대 5개)
                 </p>
                 <p className="text-xs mt-1" style={{ color: "#8B95A1" }}>
-                  mp4, mov 형식 지원 (최대 500MB)
+                  mp4, mov 형식 지원
                 </p>
               </div>
             </button>
-          </section>
 
-          {/* 등록된 영상 목록 */}
-          <section className="px-5 py-6 border-b" style={{ borderColor: "#F2F4F6" }}>
-            <h2 className="text-base font-semibold mb-4" style={{ color: "#4E5968" }}>
-              등록된 영상
-            </h2>
-
-            {showreels.length > 0 ? (
-              <div className="space-y-3">
-                {showreels.map((item) => (
+            {/* 업로드된 파일 목록 */}
+            {uploadedFiles.length > 0 && (
+              <div className="mt-4 space-y-3">
+                {uploadedFiles.map((file) => (
                   <div
-                    key={item.id}
-                    className="flex items-center gap-4 p-4 rounded-xl border"
+                    key={file.id}
+                    className="flex items-center justify-between p-4 rounded-xl border"
                     style={{ borderColor: "#E5E8EB" }}
                   >
-                    {/* 썸네일 */}
-                    <div
-                      className="w-24 h-16 rounded-lg bg-gray-200 bg-cover bg-center shrink-0"
-                      style={{ backgroundImage: `url(${item.thumbnail})` }}
-                    />
-
-                    {/* 정보 */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-sm font-medium truncate" style={{ color: "#191F28" }}>
-                        {item.title}
-                      </h3>
-                      <p className="text-xs mt-1" style={{ color: "#8B95A1" }}>
-                        {item.duration}
+                    <div>
+                      <p className="text-sm font-medium" style={{ color: "#191F28" }}>
+                        {file.size}
+                      </p>
+                      <p className="text-xs mt-0.5" style={{ color: "#8B95A1" }}>
+                        {file.format}
                       </p>
                     </div>
-
-                    {/* 삭제 버튼 */}
-                    <button onClick={() => handleDelete(item.id)} className="shrink-0">
-                      <XCircleIcon className="w-6 h-6" style={{ color: "#B0B8C1" }} />
+                    <button
+                      onClick={() => handleDeleteFile(file.id)}
+                      className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+                    >
+                      <XMarkIcon className="w-5 h-5" style={{ color: "#6B7684" }} />
                     </button>
                   </div>
                 ))}
               </div>
-            ) : (
-              <div className="py-10 text-center">
-                <p className="text-sm" style={{ color: "#8B95A1" }}>
-                  등록된 영상이 없습니다.
-                </p>
-              </div>
             )}
           </section>
 
-          {/* 영상 설정 */}
-          <section className="px-5 py-6 space-y-4">
-            {/* 연도 */}
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: "#4E5968" }}>
-                연도
-              </label>
+          {/* 역할 종류 드롭다운 */}
+          <section className="px-5 py-4 border-b" style={{ borderColor: "#E5E8EB" }}>
+            <div className="relative">
+              <button
+                onClick={() => {
+                  closeAllDropdowns();
+                  setShowRoleTypeDropdown(!showRoleTypeDropdown);
+                }}
+                className="w-full flex items-center justify-between py-3"
+              >
+                <span style={{ color: roleType ? "#191F28" : "#8B95A1" }}>{roleType || "역할 종류"}</span>
+                <ChevronDownIcon className="w-5 h-5" style={{ color: "#6B7684" }} />
+              </button>
+              {showRoleTypeDropdown && (
+                <div
+                  className="absolute top-full left-0 right-0 mt-1 bg-white border rounded-xl shadow-lg max-h-48 overflow-y-auto z-10"
+                  style={{ borderColor: "#E5E8EB" }}
+                >
+                  {roleTypes.map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => {
+                        setRoleType(type);
+                        setShowRoleTypeDropdown(false);
+                      }}
+                      className="w-full text-left px-4 py-3 hover:bg-gray-50"
+                      style={{ color: roleType === type ? "#E50815" : "#191F28" }}
+                    >
+                      {type}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* 작품 정보 입력 카드 */}
+          <section className="px-5 py-6 border-b" style={{ borderColor: "#F2F4F6" }}>
+            <div className="rounded-xl border p-4 space-y-4" style={{ borderColor: "#E5E8EB" }}>
+              {/* 작품명 입력 */}
+              <div>
+                <label className="block text-sm mb-2" style={{ color: "#4E5968" }}>
+                  작품명
+                </label>
+                <input
+                  type="text"
+                  placeholder="작품명을 입력하세요"
+                  value={workTitle}
+                  onChange={(e) => setWorkTitle(e.target.value)}
+                  className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  style={{ borderColor: "#E5E8EB", color: "#191F28" }}
+                />
+              </div>
+
+              {/* 연도 선택 */}
               <div className="relative">
+                <label className="block text-sm mb-2" style={{ color: "#4E5968" }}>
+                  연도
+                </label>
                 <button
                   onClick={() => {
                     closeAllDropdowns();
                     setShowYearDropdown(!showYearDropdown);
                   }}
-                  className="w-full flex items-center justify-between border rounded-xl px-4 py-3"
+                  className="w-full flex items-center justify-between px-4 py-3 border rounded-xl"
                   style={{ borderColor: "#E5E8EB" }}
                 >
-                  <span style={{ color: "#191F28" }}>{year}</span>
+                  <span style={{ color: year ? "#191F28" : "#8B95A1" }}>{year || "연도 선택"}</span>
                   <ChevronDownIcon className="w-5 h-5" style={{ color: "#6B7684" }} />
                 </button>
                 {showYearDropdown && (
@@ -223,11 +307,11 @@ export default function ShowreelManagePage() {
                       <button
                         key={y}
                         onClick={() => {
-                          setYear(y);
+                          setYear(String(y));
                           setShowYearDropdown(false);
                         }}
                         className="w-full text-left px-4 py-3 hover:bg-gray-50"
-                        style={{ color: year === y ? "#E50815" : "#191F28" }}
+                        style={{ color: year === String(y) ? "#E50815" : "#191F28" }}
                       >
                         {y}
                       </button>
@@ -235,23 +319,21 @@ export default function ShowreelManagePage() {
                   </div>
                 )}
               </div>
-            </div>
 
-            {/* 장르 */}
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: "#4E5968" }}>
-                장르
-              </label>
+              {/* 장르 선택 */}
               <div className="relative">
+                <label className="block text-sm mb-2" style={{ color: "#4E5968" }}>
+                  장르
+                </label>
                 <button
                   onClick={() => {
                     closeAllDropdowns();
                     setShowGenreDropdown(!showGenreDropdown);
                   }}
-                  className="w-full flex items-center justify-between border rounded-xl px-4 py-3"
+                  className="w-full flex items-center justify-between px-4 py-3 border rounded-xl"
                   style={{ borderColor: "#E5E8EB" }}
                 >
-                  <span style={{ color: "#191F28" }}>{genre}</span>
+                  <span style={{ color: genre ? "#191F28" : "#8B95A1" }}>{genre || "장르 선택"}</span>
                   <ChevronDownIcon className="w-5 h-5" style={{ color: "#6B7684" }} />
                 </button>
                 {showGenreDropdown && (
@@ -275,62 +357,120 @@ export default function ShowreelManagePage() {
                   </div>
                 )}
               </div>
-            </div>
 
-            {/* 영상 유형 */}
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: "#4E5968" }}>
-                영상 유형
-              </label>
-              <div className="relative">
-                <button
-                  onClick={() => {
-                    closeAllDropdowns();
-                    setShowTypeDropdown(!showTypeDropdown);
-                  }}
-                  className="w-full flex items-center justify-between border rounded-xl px-4 py-3"
+              {/* 역할 입력 */}
+              <div>
+                <label className="block text-sm mb-2" style={{ color: "#4E5968" }}>
+                  역할
+                </label>
+                <input
+                  type="text"
+                  placeholder="역할을 입력하세요"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  style={{ borderColor: "#E5E8EB", color: "#191F28" }}
+                />
+              </div>
+            </div>
+          </section>
+
+          {/* 대표 장르 드롭다운 */}
+          <section className="px-5 py-4 border-b" style={{ borderColor: "#E5E8EB" }}>
+            <div className="relative">
+              <button
+                onClick={() => {
+                  closeAllDropdowns();
+                  setShowRepGenreDropdown(!showRepGenreDropdown);
+                }}
+                className="w-full flex items-center justify-between py-3"
+              >
+                <span style={{ color: representativeGenre ? "#191F28" : "#8B95A1" }}>
+                  {representativeGenre || "대표 장르"}
+                </span>
+                <ChevronDownIcon className="w-5 h-5" style={{ color: "#6B7684" }} />
+              </button>
+              {showRepGenreDropdown && (
+                <div
+                  className="absolute top-full left-0 right-0 mt-1 bg-white border rounded-xl shadow-lg max-h-48 overflow-y-auto z-10"
                   style={{ borderColor: "#E5E8EB" }}
                 >
-                  <span style={{ color: "#191F28" }}>{videoType}</span>
-                  <ChevronDownIcon className="w-5 h-5" style={{ color: "#6B7684" }} />
-                </button>
-                {showTypeDropdown && (
+                  {representativeGenres.map((rg) => (
+                    <button
+                      key={rg}
+                      onClick={() => {
+                        setRepresentativeGenre(rg);
+                        setShowRepGenreDropdown(false);
+                      }}
+                      className="w-full text-left px-4 py-3 hover:bg-gray-50"
+                      style={{ color: representativeGenre === rg ? "#E50815" : "#191F28" }}
+                    >
+                      {rg}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* 태그 섹션 */}
+          <section className="px-5 py-6">
+            {/* 선택된 태그 */}
+            {selectedTags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-4">
+                {selectedTags.map((tag) => (
                   <div
-                    className="absolute top-full left-0 right-0 mt-1 bg-white border rounded-xl shadow-lg max-h-48 overflow-y-auto z-10"
-                    style={{ borderColor: "#E5E8EB" }}
+                    key={tag.id}
+                    className="flex items-center gap-1 px-4 py-2 rounded-full"
+                    style={{ backgroundColor: "#F2F4F6" }}
                   >
-                    {videoTypes.map((t) => (
-                      <button
-                        key={t}
-                        onClick={() => {
-                          setVideoType(t);
-                          setShowTypeDropdown(false);
-                        }}
-                        className="w-full text-left px-4 py-3 hover:bg-gray-50"
-                        style={{ color: videoType === t ? "#E50815" : "#191F28" }}
-                      >
-                        {t}
-                      </button>
-                    ))}
+                    <span className="text-sm" style={{ color: "#4E5968" }}>
+                      {tag.label}
+                    </span>
+                    <button onClick={() => handleRemoveTag(tag.id)} className="ml-1">
+                      <XMarkIcon className="w-4 h-4" style={{ color: "#4E5968" }} />
+                    </button>
                   </div>
-                )}
+                ))}
               </div>
+            )}
+
+            {/* 선택 가능한 태그 */}
+            <div className="flex flex-wrap gap-2">
+              {availableTags
+                .filter((tag) => !selectedTags.some((t) => t.id === tag.id))
+                .map((tag) => (
+                  <button
+                    key={tag.id}
+                    onClick={() => setSelectedTags((prev) => [...prev, tag])}
+                    className="flex items-center gap-1 px-4 py-2 rounded-full"
+                    style={{ backgroundColor: "#F2F4F6" }}
+                  >
+                    <span className="text-sm" style={{ color: "#4E5968" }}>
+                      {tag.label}
+                    </span>
+                    <XMarkIcon className="w-4 h-4" style={{ color: "#4E5968" }} />
+                  </button>
+                ))}
             </div>
           </section>
         </main>
 
-        {/* 하단 저장 버튼 */}
-        <div className="sticky bottom-0 bg-white px-5 py-6">
+        {/* 하단 추가하기 버튼 */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white px-5 py-6 max-w-lg mx-auto">
           <button
-            onClick={handleSave}
-            className="w-full py-4 rounded-xl font-medium text-white"
-            style={{ backgroundColor: "#191F28" }}
+            onClick={handleAdd}
+            disabled={!isAddEnabled}
+            className="w-full py-4 rounded-xl font-medium text-white transition-colors"
+            style={{
+              backgroundColor: isAddEnabled ? "#191F28" : "#E5E8EB",
+              color: isAddEnabled ? "#FFFFFF" : "#B0B8C1",
+            }}
           >
-            저장하기
+            추가하기
           </button>
         </div>
       </div>
     </div>
   );
 }
-
