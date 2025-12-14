@@ -33,9 +33,7 @@ function CompleteContent() {
           </div>
 
           {/* Title */}
-          <h1 className="text-2xl font-bold text-[#191F28] mb-3">
-            회원가입 완료!
-          </h1>
+          <h1 className="text-2xl font-bold text-[#191F28] mb-3">회원가입 완료!</h1>
 
           {/* Description */}
           <p className="text-base text-gray-500 text-center leading-relaxed">
@@ -71,13 +69,14 @@ function CompleteContent() {
 
 export default function SignupCompletePage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gray-50 flex justify-center items-center">
-        <div className="text-gray-500">로딩 중...</div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 flex justify-center items-center">
+          <div className="text-gray-500">로딩 중...</div>
+        </div>
+      }
+    >
       <CompleteContent />
     </Suspense>
   );
 }
-

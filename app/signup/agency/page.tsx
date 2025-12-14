@@ -5,15 +5,7 @@ import { useRouter } from "next/navigation";
 import { ChevronLeftIcon } from "../icons";
 import { Button } from "@/components/ui/button";
 
-const specialtyOptions = [
-  "드라마",
-  "영화제작",
-  "광고/CF",
-  "뮤직비디오",
-  "웹드라마",
-  "SF",
-  "스릴러배우전문",
-];
+const specialtyOptions = ["드라마", "영화제작", "광고/CF", "뮤직비디오", "웹드라마", "SF", "스릴러배우전문"];
 
 export default function AgencySignupPage() {
   const router = useRouter();
@@ -85,7 +77,13 @@ export default function AgencySignupPage() {
                       onClick={handleClearAgencyName}
                       className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#B0B8C1] flex items-center justify-center"
                     >
-                      <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}>
+                      <svg
+                        className="w-3 h-3 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={3}
+                      >
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     </button>
@@ -110,7 +108,13 @@ export default function AgencySignupPage() {
                       onClick={handleClearRepresentativeName}
                       className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#B0B8C1] flex items-center justify-center"
                     >
-                      <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}>
+                      <svg
+                        className="w-3 h-3 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={3}
+                      >
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     </button>
@@ -135,7 +139,13 @@ export default function AgencySignupPage() {
                       onClick={handleClearFoundedYear}
                       className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#B0B8C1] flex items-center justify-center"
                     >
-                      <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}>
+                      <svg
+                        className="w-3 h-3 text-white"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={3}
+                      >
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     </button>
@@ -176,9 +186,7 @@ export default function AgencySignupPage() {
             onClick={handleSubmit}
             disabled={!isValid}
             className={`w-full h-14 text-base font-semibold rounded-xl transition-all ${
-              isValid
-                ? "bg-[#191F28] hover:bg-gray-800 text-white"
-                : "bg-[#191F28]/30 text-white cursor-not-allowed"
+              isValid ? "bg-[#191F28] hover:bg-gray-800 text-white" : "bg-[#191F28]/30 text-white cursor-not-allowed"
             }`}
           >
             다음

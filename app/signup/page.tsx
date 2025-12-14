@@ -116,9 +116,7 @@ function SignupContent() {
             >
               <ChevronLeftIcon className="w-6 h-6 text-gray-800" />
             </button>
-            <h1 className="flex-1 text-center text-lg font-semibold text-gray-900 -ml-10">
-              회원가입
-            </h1>
+            <h1 className="flex-1 text-center text-lg font-semibold text-gray-900 -ml-10">회원가입</h1>
           </div>
         </header>
 
@@ -198,9 +196,7 @@ function SignupContent() {
             onClick={handleSubmit}
             disabled={!isValid}
             className={`w-full h-14 text-base font-semibold rounded-xl transition-all ${
-              isValid
-                ? "bg-gray-900 hover:bg-gray-800 text-white"
-                : "bg-gray-100 text-gray-400 cursor-not-allowed"
+              isValid ? "bg-gray-900 hover:bg-gray-800 text-white" : "bg-gray-100 text-gray-400 cursor-not-allowed"
             }`}
           >
             다음
@@ -208,11 +204,7 @@ function SignupContent() {
         </div>
 
         {/* Terms Modal */}
-        <TermsModal
-          open={showTermsModal}
-          onOpenChange={setShowTermsModal}
-          onAgree={handleTermsAgree}
-        />
+        <TermsModal open={showTermsModal} onOpenChange={setShowTermsModal} onAgree={handleTermsAgree} />
       </div>
     </div>
   );
@@ -220,11 +212,13 @@ function SignupContent() {
 
 export default function SignupPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gray-50 flex justify-center items-center">
-        <div className="text-gray-500">로딩 중...</div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 flex justify-center items-center">
+          <div className="text-gray-500">로딩 중...</div>
+        </div>
+      }
+    >
       <SignupContent />
     </Suspense>
   );

@@ -13,7 +13,13 @@ interface FilterBarProps {
 function ChevronDownIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 20 20" fill="none">
-      <path d="M5 7.5L10 12.5L15 7.5" stroke="#B0B8C1" strokeWidth={1.25} strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M5 7.5L10 12.5L15 7.5"
+        stroke="#B0B8C1"
+        strokeWidth={1.25}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }

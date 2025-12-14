@@ -76,8 +76,14 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
 
   // 샘플 필모그래피 데이터
   const sampleWorks = [
-    { name: "나의아저씨", thumbnail: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=48&h=48&fit=crop" },
-    { name: "미스터선샤인", thumbnail: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=48&h=48&fit=crop" },
+    {
+      name: "나의아저씨",
+      thumbnail: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=48&h=48&fit=crop",
+    },
+    {
+      name: "미스터선샤인",
+      thumbnail: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=48&h=48&fit=crop",
+    },
     { name: "시그널", thumbnail: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=48&h=48&fit=crop" },
     { name: "비밀의숲", thumbnail: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=48&h=48&fit=crop" },
   ];
@@ -244,10 +250,7 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
               <div className="w-6 h-6 rounded-full overflow-hidden bg-gray-200">
                 <Image src={work.thumbnail} alt={work.name} width={24} height={24} className="object-cover" />
               </div>
-              <span
-                className="text-xs font-medium text-[#4E5968]"
-                style={{ letterSpacing: "-0.02em" }}
-              >
+              <span className="text-xs font-medium text-[#4E5968]" style={{ letterSpacing: "-0.02em" }}>
                 {work.name}
               </span>
             </div>

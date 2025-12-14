@@ -8,7 +8,13 @@ interface HeaderProps {
 function ArrowLeftIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none">
-      <path d="M5 12H19M5 12L11 18M5 12L11 6" stroke="#191F28" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M5 12H19M5 12L11 18M5 12L11 6"
+        stroke="#191F28"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
