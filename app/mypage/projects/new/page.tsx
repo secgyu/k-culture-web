@@ -46,7 +46,8 @@ export default function NewProjectPage() {
 
   const handleSubmit = () => {
     if (isFormValid) {
-      console.log("프로젝트 추가:", {
+      // 프로젝트 정보를 저장하고 캐릭터 입력 페이지로 이동
+      console.log("프로젝트 정보:", {
         projectName,
         company,
         projectType,
@@ -54,7 +55,7 @@ export default function NewProjectPage() {
         shootingPeriod,
         roleInfo,
       });
-      router.back();
+      router.push("/mypage/projects/new/characters");
     }
   };
 
