@@ -1,25 +1,31 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useCallback } from "react";
 
 declare global {
   interface Window {
-    Scalar?: unknown;
+    Scalar?: {
+      createApiReference: (selector: string, options: { content: string }) => void;
+    };
   }
 }
 
 export default function ApiDocsClient({ spec }: { spec: string }) {
-  useEffect(() => {
-    if (!window.Scalar) return;
-    // @ts-expect-error Scalar is not typed
-    window.Scalar.createApiReference("#app2", { content: spec });
+  const handleScriptLoad = useCallback(() => {
+    if (window.Scalar) {
+      window.Scalar.createApiReference("#scalar-api-docs", { content: spec });
+    }
   }, [spec]);
 
   return (
     <>
-      <div id="app2" />
-      <Script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference" strategy="afterInteractive" />
+      <div id="scalar-api-docs" style={{ minHeight: "100vh" }} />
+      <Script
+        src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"
+        strategy="afterInteractive"
+        onLoad={handleScriptLoad}
+      />
     </>
   );
 }
