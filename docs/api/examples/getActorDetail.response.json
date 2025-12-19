@@ -7,14 +7,7 @@
     "filmographyCount": 15,
     "description": "깊은 눈빛으로 서사를 만드는 배우",
     "profileImage": "https://storage.k-culture.com/actors/550e8400-kim-profile.jpg",
-    "skills": [
-      "영어(원어민 수준)",
-      "피아노",
-      "검술",
-      "승마",
-      "와이어 액션",
-      "현대 무용"
-    ],
+    "skills": ["영어(원어민 수준)", "피아노", "검술", "승마", "와이어 액션", "현대 무용"],
     "filmography": [
       {
         "id": "f-550e8400-001",
@@ -76,6 +69,3 @@
     ]
   }
 }
-
-
-

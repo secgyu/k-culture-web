@@ -28,6 +28,7 @@ POST /api/auth/login
 ```
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com",
@@ -36,6 +37,7 @@ POST /api/auth/login
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -64,6 +66,7 @@ POST /api/auth/signup
 ```
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com",
@@ -77,6 +80,7 @@ POST /api/auth/signup
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -99,6 +103,7 @@ POST /api/auth/forgot-password
 ```
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com"
@@ -106,6 +111,7 @@ POST /api/auth/forgot-password
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -122,11 +128,13 @@ POST /api/auth/logout
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true
@@ -144,11 +152,13 @@ DELETE /api/auth/account
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -179,6 +189,7 @@ GET /api/actors
 | `limit` | number | 페이지당 개수 |
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -214,6 +225,7 @@ GET /api/actors/{actorId}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -260,6 +272,7 @@ POST /api/actors/recommend
 ```
 
 **Request Body:**
+
 ```json
 {
   "projectId": "project_123",
@@ -274,6 +287,7 @@ POST /api/actors/recommend
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -302,6 +316,7 @@ POST /api/actors/profile
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 Content-Type: multipart/form-data
@@ -316,6 +331,7 @@ Content-Type: multipart/form-data
 | `profileImage` | file | 프로필 이미지 |
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -338,6 +354,7 @@ GET /api/actors/{actorId}/portfolio
 ```
 
 **Response:**
+
 ```
 Content-Type: application/pdf
 Content-Disposition: attachment; filename="portfolio_김배우.pdf"
@@ -354,11 +371,13 @@ POST /api/actors/{actorId}/contact
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "message": "안녕하세요, 새 프로젝트 캐스팅 관련 연락드립니다.",
@@ -368,6 +387,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -397,6 +417,7 @@ GET /api/actors/{actorId}/filmography
 | `type` | string | 작품 유형 (영화, 드라마, 뮤지컬 등) |
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -427,6 +448,7 @@ GET /api/filmography/{filmographyId}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -453,11 +475,13 @@ POST /api/filmography
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "title": "서울의 밤",
@@ -470,6 +494,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -489,11 +514,13 @@ PUT /api/filmography/{filmographyId}
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "title": "서울의 밤",
@@ -505,6 +532,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -526,11 +554,13 @@ DELETE /api/filmography/{filmographyId}
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -551,6 +581,7 @@ GET /api/actors/{actorId}/showreels
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -586,6 +617,7 @@ POST /api/showreels
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 Content-Type: multipart/form-data
@@ -604,6 +636,7 @@ Content-Type: multipart/form-data
 | `tags` | string[] | 태그 목록 |
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -626,11 +659,13 @@ PUT /api/showreels/{showreelId}
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "title": "Updated Showreel",
@@ -645,6 +680,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -664,11 +700,13 @@ DELETE /api/showreels/{showreelId}
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -687,6 +725,7 @@ GET /api/projects
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
@@ -699,6 +738,7 @@ Authorization: Bearer {accessToken}
 | `limit` | number | 페이지당 개수 |
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -736,11 +776,13 @@ GET /api/projects/{projectId}
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -777,11 +819,13 @@ POST /api/projects
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "projectName": "킹더랜드 시즌2",
@@ -794,6 +838,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -815,11 +860,13 @@ PUT /api/projects/{projectId}
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "projectName": "킹더랜드 시즌2",
@@ -832,6 +879,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -851,11 +899,13 @@ DELETE /api/projects/{projectId}
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -874,11 +924,13 @@ GET /api/projects/{projectId}/characters
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -910,11 +962,13 @@ POST /api/projects/{projectId}/characters
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "name": "서은우",
@@ -928,6 +982,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -949,11 +1004,13 @@ PUT /api/characters/{characterId}
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "name": "서은우",
@@ -967,6 +1024,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -986,11 +1044,13 @@ DELETE /api/characters/{characterId}
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1011,11 +1071,13 @@ POST /api/agencies/profile
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "agencyName": "스튜디오 드래곤",
@@ -1026,6 +1088,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1047,11 +1110,13 @@ PUT /api/agencies/profile
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "agencyName": "스튜디오 드래곤",
@@ -1062,6 +1127,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1083,11 +1149,13 @@ GET /api/users/me
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1124,6 +1192,7 @@ PUT /api/users/profile
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 Content-Type: multipart/form-data
@@ -1143,6 +1212,7 @@ Content-Type: multipart/form-data
 | `profileImage` | file | 프로필 이미지 |
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1165,11 +1235,13 @@ GET /api/users/settings/notifications
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1192,11 +1264,13 @@ PUT /api/users/settings/notifications
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "castingNotification": true,
@@ -1206,6 +1280,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1230,6 +1305,7 @@ GET /api/favorites
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
@@ -1242,6 +1318,7 @@ Authorization: Bearer {accessToken}
 | `limit` | number | 페이지당 개수 |
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1282,11 +1359,13 @@ POST /api/favorites
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Request Body:**
+
 ```json
 {
   "type": "actor",
@@ -1295,6 +1374,7 @@ Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1315,11 +1395,13 @@ DELETE /api/favorites/{favoriteId}
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1338,6 +1420,7 @@ POST /api/upload/image
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 Content-Type: multipart/form-data
@@ -1350,6 +1433,7 @@ Content-Type: multipart/form-data
 | `type` | string | 업로드 타입 (profile, thumbnail, portfolio) |
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1373,6 +1457,7 @@ POST /api/upload/video
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer {accessToken}
 Content-Type: multipart/form-data
@@ -1385,6 +1470,7 @@ Content-Type: multipart/form-data
 | `type` | string | 업로드 타입 (showreel) |
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -1420,84 +1506,85 @@ Content-Type: multipart/form-data
 
 ### 공통 에러 코드
 
-| 코드 | HTTP Status | 설명 |
-|------|-------------|------|
-| `UNAUTHORIZED` | 401 | 인증 필요 |
-| `FORBIDDEN` | 403 | 권한 없음 |
-| `NOT_FOUND` | 404 | 리소스 없음 |
-| `VALIDATION_ERROR` | 400 | 유효성 검사 실패 |
-| `INTERNAL_ERROR` | 500 | 서버 오류 |
+| 코드               | HTTP Status | 설명             |
+| ------------------ | ----------- | ---------------- |
+| `UNAUTHORIZED`     | 401         | 인증 필요        |
+| `FORBIDDEN`        | 403         | 권한 없음        |
+| `NOT_FOUND`        | 404         | 리소스 없음      |
+| `VALIDATION_ERROR` | 400         | 유효성 검사 실패 |
+| `INTERNAL_ERROR`   | 500         | 서버 오류        |
 
 ---
 
 ## API 엔드포인트 요약
 
-| 카테고리 | 메서드 | 엔드포인트 | 설명 |
-|----------|--------|------------|------|
-| 인증 | POST | `/api/auth/login` | 로그인 |
-| 인증 | POST | `/api/auth/signup` | 회원가입 |
-| 인증 | POST | `/api/auth/forgot-password` | 비밀번호 찾기 |
-| 인증 | POST | `/api/auth/logout` | 로그아웃 |
-| 인증 | DELETE | `/api/auth/account` | 계정 삭제 |
-| 배우 | GET | `/api/actors` | 배우 목록 조회 |
-| 배우 | GET | `/api/actors/{id}` | 배우 상세 조회 |
-| 배우 | POST | `/api/actors/recommend` | AI 배우 추천 |
-| 배우 | POST | `/api/actors/profile` | 배우 프로필 등록 |
-| 배우 | GET | `/api/actors/{id}/portfolio` | 포트폴리오 다운로드 |
-| 배우 | POST | `/api/actors/{id}/contact` | 연락하기 |
-| 필모 | GET | `/api/actors/{id}/filmography` | 필모그래피 목록 |
-| 필모 | GET | `/api/filmography/{id}` | 필모그래피 상세 |
-| 필모 | POST | `/api/filmography` | 필모그래피 생성 |
-| 필모 | PUT | `/api/filmography/{id}` | 필모그래피 수정 |
-| 필모 | DELETE | `/api/filmography/{id}` | 필모그래피 삭제 |
-| 쇼릴 | GET | `/api/actors/{id}/showreels` | 쇼릴 목록 |
-| 쇼릴 | POST | `/api/showreels` | 쇼릴 생성 |
-| 쇼릴 | PUT | `/api/showreels/{id}` | 쇼릴 수정 |
-| 쇼릴 | DELETE | `/api/showreels/{id}` | 쇼릴 삭제 |
-| 프로젝트 | GET | `/api/projects` | 프로젝트 목록 |
-| 프로젝트 | GET | `/api/projects/{id}` | 프로젝트 상세 |
-| 프로젝트 | POST | `/api/projects` | 프로젝트 생성 |
-| 프로젝트 | PUT | `/api/projects/{id}` | 프로젝트 수정 |
-| 프로젝트 | DELETE | `/api/projects/{id}` | 프로젝트 삭제 |
-| 캐릭터 | GET | `/api/projects/{id}/characters` | 캐릭터 목록 |
-| 캐릭터 | POST | `/api/projects/{id}/characters` | 캐릭터 생성 |
-| 캐릭터 | PUT | `/api/characters/{id}` | 캐릭터 수정 |
-| 캐릭터 | DELETE | `/api/characters/{id}` | 캐릭터 삭제 |
-| 에이전시 | POST | `/api/agencies/profile` | 에이전시 프로필 등록 |
-| 에이전시 | PUT | `/api/agencies/profile` | 에이전시 프로필 수정 |
-| 사용자 | GET | `/api/users/me` | 내 정보 조회 |
-| 사용자 | PUT | `/api/users/profile` | 프로필 수정 |
-| 사용자 | GET | `/api/users/settings/notifications` | 알림 설정 조회 |
-| 사용자 | PUT | `/api/users/settings/notifications` | 알림 설정 수정 |
-| 찜 | GET | `/api/favorites` | 찜 목록 조회 |
-| 찜 | POST | `/api/favorites` | 찜 추가 |
-| 찜 | DELETE | `/api/favorites/{id}` | 찜 삭제 |
-| 업로드 | POST | `/api/upload/image` | 이미지 업로드 |
-| 업로드 | POST | `/api/upload/video` | 영상 업로드 |
+| 카테고리 | 메서드 | 엔드포인트                          | 설명                 |
+| -------- | ------ | ----------------------------------- | -------------------- |
+| 인증     | POST   | `/api/auth/login`                   | 로그인               |
+| 인증     | POST   | `/api/auth/signup`                  | 회원가입             |
+| 인증     | POST   | `/api/auth/forgot-password`         | 비밀번호 찾기        |
+| 인증     | POST   | `/api/auth/logout`                  | 로그아웃             |
+| 인증     | DELETE | `/api/auth/account`                 | 계정 삭제            |
+| 배우     | GET    | `/api/actors`                       | 배우 목록 조회       |
+| 배우     | GET    | `/api/actors/{id}`                  | 배우 상세 조회       |
+| 배우     | POST   | `/api/actors/recommend`             | AI 배우 추천         |
+| 배우     | POST   | `/api/actors/profile`               | 배우 프로필 등록     |
+| 배우     | GET    | `/api/actors/{id}/portfolio`        | 포트폴리오 다운로드  |
+| 배우     | POST   | `/api/actors/{id}/contact`          | 연락하기             |
+| 필모     | GET    | `/api/actors/{id}/filmography`      | 필모그래피 목록      |
+| 필모     | GET    | `/api/filmography/{id}`             | 필모그래피 상세      |
+| 필모     | POST   | `/api/filmography`                  | 필모그래피 생성      |
+| 필모     | PUT    | `/api/filmography/{id}`             | 필모그래피 수정      |
+| 필모     | DELETE | `/api/filmography/{id}`             | 필모그래피 삭제      |
+| 쇼릴     | GET    | `/api/actors/{id}/showreels`        | 쇼릴 목록            |
+| 쇼릴     | POST   | `/api/showreels`                    | 쇼릴 생성            |
+| 쇼릴     | PUT    | `/api/showreels/{id}`               | 쇼릴 수정            |
+| 쇼릴     | DELETE | `/api/showreels/{id}`               | 쇼릴 삭제            |
+| 프로젝트 | GET    | `/api/projects`                     | 프로젝트 목록        |
+| 프로젝트 | GET    | `/api/projects/{id}`                | 프로젝트 상세        |
+| 프로젝트 | POST   | `/api/projects`                     | 프로젝트 생성        |
+| 프로젝트 | PUT    | `/api/projects/{id}`                | 프로젝트 수정        |
+| 프로젝트 | DELETE | `/api/projects/{id}`                | 프로젝트 삭제        |
+| 캐릭터   | GET    | `/api/projects/{id}/characters`     | 캐릭터 목록          |
+| 캐릭터   | POST   | `/api/projects/{id}/characters`     | 캐릭터 생성          |
+| 캐릭터   | PUT    | `/api/characters/{id}`              | 캐릭터 수정          |
+| 캐릭터   | DELETE | `/api/characters/{id}`              | 캐릭터 삭제          |
+| 에이전시 | POST   | `/api/agencies/profile`             | 에이전시 프로필 등록 |
+| 에이전시 | PUT    | `/api/agencies/profile`             | 에이전시 프로필 수정 |
+| 사용자   | GET    | `/api/users/me`                     | 내 정보 조회         |
+| 사용자   | PUT    | `/api/users/profile`                | 프로필 수정          |
+| 사용자   | GET    | `/api/users/settings/notifications` | 알림 설정 조회       |
+| 사용자   | PUT    | `/api/users/settings/notifications` | 알림 설정 수정       |
+| 찜       | GET    | `/api/favorites`                    | 찜 목록 조회         |
+| 찜       | POST   | `/api/favorites`                    | 찜 추가              |
+| 찜       | DELETE | `/api/favorites/{id}`               | 찜 삭제              |
+| 업로드   | POST   | `/api/upload/image`                 | 이미지 업로드        |
+| 업로드   | POST   | `/api/upload/video`                 | 영상 업로드          |
 
 ---
 
 ## 구현 우선순위 제안
 
 ### Phase 1: 핵심 기능
+
 1. 인증 API (로그인/회원가입)
 2. 배우 프로필 등록/수정
 3. 배우 목록/상세 조회
 
 ### Phase 2: 프로필 관리
+
 4. 필모그래피 CRUD
 5. 쇼릴 CRUD
 6. 파일 업로드 (이미지/영상)
 
 ### Phase 3: 프로젝트 & 캐스팅
+
 7. 프로젝트 CRUD
 8. 캐릭터 CRUD
 9. AI 배우 추천
 
 ### Phase 4: 부가 기능
+
 10. 찜 목록
 11. 연락하기
 12. 알림 설정
-
-
-

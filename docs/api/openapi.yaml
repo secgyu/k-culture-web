@@ -2981,5 +2981,3 @@ paths:
                       mimeType: video/mp4
         "401":
           $ref: "#/components/responses/UnauthorizedError"
-
-
