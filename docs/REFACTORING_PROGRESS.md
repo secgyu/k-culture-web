@@ -25,90 +25,74 @@ app/[feature]/
 
 ### 1. `/mypage` 메인 페이지
 
-- `ProfileSection.tsx` - useGetMyProfile
-- `FilmographySection.tsx` - useGetMyProfile + useGetActorFilmography
-- `SkillsSection.tsx` - (아직 mock 데이터)
-- `ShowreelSection.tsx` - useGetMyProfile + useGetActorShowreels
+- [x] `ProfileSection.tsx` - useGetMyProfile
+- [x] `FilmographySection.tsx` - useGetMyProfile + useGetActorFilmography
+- [ ] `SkillsSection.tsx` - (아직 mock 데이터)
+- [x] `ShowreelSection.tsx` - useGetMyProfile + useGetActorShowreels
 
 ### 2. `/mypage/filmography` 필모그래피 관리
 
-- `_components/FilmographyManageContent.tsx`
-  - useGetMyProfile (actorId 조회)
-  - useGetActorFilmography (목록 조회)
-  - useDeleteFilmography (삭제)
-- `_components/FilmographyEditForm.tsx`
-  - useGetFilmographyDetail (상세 조회)
-  - useUpdateFilmography (수정)
-- `_components/Icons.tsx` - 공통 아이콘
+- [x] `FilmographyManageContent.tsx` 생성
+- [x] useGetMyProfile (actorId 조회)
+- [x] useGetActorFilmography (목록 조회)
+- [x] useDeleteFilmography (삭제)
+- [x] `FilmographyEditForm.tsx` 생성
+- [x] useGetFilmographyDetail (상세 조회)
+- [x] useUpdateFilmography (수정)
 
 ### 3. `/mypage/settings` 설정 페이지
 
-- `_components/SettingsContent.tsx`
-  - useGetMyProfile (프로필 조회)
-  - useGetNotificationSettings (알림 설정 조회)
-  - useUpdateNotificationSettings (알림 설정 수정)
-- `_components/ProfileEditForm.tsx`
-  - useGetMyProfile (프로필 조회)
-  - useUpdateMyProfile (프로필 수정)
-- `_components/Icons.tsx` - 공통 아이콘
+- [x] `SettingsContent.tsx` 생성
+- [x] useGetMyProfile (프로필 조회)
+- [x] useGetNotificationSettings (알림 설정 조회)
+- [x] useUpdateNotificationSettings (알림 설정 수정)
+- [x] `ProfileEditForm.tsx` 생성
+- [x] useUpdateMyProfile (프로필 수정)
 
 ### 4. `/mypage/showreel` 쇼릴 관리
 
-- `_components/ShowreelEditContent.tsx`
-  - useGetMyProfile (actorId 조회)
-  - useCreateShowreel (쇼릴 생성)
-- `_components/Icons.tsx` - 공통 아이콘
-- ⚠️ **미구현**: useGetActorShowreels, useDeleteShowreel (목록 관리 페이지 없음)
+- [x] `ShowreelEditContent.tsx` 생성
+- [x] useGetMyProfile (actorId 조회)
+- [x] useCreateShowreel (쇼릴 생성)
+- [ ] useGetActorShowreels 연동 (목록 관리 페이지 없음)
+- [ ] useDeleteShowreel 연동 (목록 관리 페이지 없음)
 
 ### 5. `/mypage/projects` 프로젝트 관리
 
-- `_components/ProjectsContent.tsx`
-  - useGetProjects (프로젝트 목록 조회)
-- `_components/Icons.tsx` - 공통 아이콘
+- [x] `ProjectsContent.tsx` 생성
+- [x] useGetProjects 연동
 
 ### 6. `/mypage/projects/new` 프로젝트 생성
 
-- `_components/ProjectCreateForm.tsx`
-  - useCreateProject (프로젝트 생성)
+- [x] `ProjectCreateForm.tsx` 생성
+- [x] useCreateProject 연동
 
 ### 7. `/mypage/projects/new/characters` 캐릭터 관리
 
-- `_components/CharactersContent.tsx`
-  - useGetProjectCharacters (캐릭터 목록 조회)
-  - useDeleteCharacter (캐릭터 삭제)
-- `_components/CharacterAddForm.tsx`
-  - useCreateCharacter (캐릭터 생성)
-- `_components/Icons.tsx` - 공통 아이콘
+- [x] `CharactersContent.tsx` 생성
+- [x] useGetProjectCharacters 연동
+- [x] useDeleteCharacter 연동
+- [x] `CharacterAddForm.tsx` 생성
+- [x] useCreateCharacter 연동
 
 ### 8. `/recommend` 추천 페이지
 
-- `_components/RecommendContent.tsx`
-  - useRecommendActors (AI 배우 추천)
-  - 필터 기반 검색 (성별, 나이대, 역할유형)
+- [x] `RecommendContent.tsx` 생성
+- [x] useRecommendActors 연동 (AI 배우 추천)
 
 ### 9. `/actors/[id]` 배우 상세 페이지
 
-- `_components/ActorDetailContent.tsx`
-  - useGetActorDetail (배우 상세 조회)
-  - useContactActor (배우 연락)
-  - useDownloadActorPortfolio (포트폴리오 다운로드)
-- `_components/Icons.tsx` - 공통 아이콘
-- ⚠️ **미구현**: useAddFavorite, useRemoveFavorite (UI에 즐겨찾기 버튼 없음)
+- [x] `ActorDetailContent.tsx` 생성
+- [x] useGetActorDetail 연동
+- [x] useContactActor 연동
+- [x] useDownloadActorPortfolio 연동
+- [ ] useAddFavorite 연동 (UI에 즐겨찾기 버튼 없음)
+- [ ] useRemoveFavorite 연동 (UI에 즐겨찾기 버튼 없음)
 
 ### 10. `/` 메인 페이지
 
-- `_components/OnboardingContent.tsx` - 온보딩/랜딩 UI (정적 페이지)
-- ℹ️ **참고**: 배우 목록(useGetActors)은 사용 안 함 - 현재 디자인이 온보딩 페이지
-
----
-
-## 📋 추후 작업 가능 항목
-
-| 항목 | 설명 |
-|------|------|
-| 쇼릴 목록 관리 | `/mypage/showreel`에 목록 조회/삭제 기능 추가시 useGetActorShowreels, useDeleteShowreel 연동 |
-| 즐겨찾기 기능 | `/actors/[id]`에 즐겨찾기 버튼 추가시 useAddFavorite, useRemoveFavorite 연동 |
-| 홈 배우 목록 | 메인 페이지에 배우 목록 섹션 추가시 useGetActors 연동 |
+- [x] `OnboardingContent.tsx` 생성 (온보딩/랜딩 UI)
+- [ ] useGetActors 연동 (현재 디자인이 온보딩 페이지라 불필요)
 
 ---
 
