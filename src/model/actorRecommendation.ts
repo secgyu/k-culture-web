@@ -17,15 +17,15 @@
  */
 
 export interface ActorRecommendation {
-  id?: string;
-  name?: string;
+  id: string;
+  name: string;
   imageUrl?: string;
   /**
    * AI 매칭 점수
    * @minimum 0
    * @maximum 100
    */
-  matchScore?: number;
+  matchScore: number;
   /** 추천 사유 */
   matchReasons?: string[];
 }

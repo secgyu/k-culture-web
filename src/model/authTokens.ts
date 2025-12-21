@@ -18,7 +18,7 @@
 
 export interface AuthTokens {
   /** JWT Access Token */
-  accessToken?: string;
+  accessToken: string;
   /** JWT Refresh Token */
-  refreshToken?: string;
+  refreshToken: string;
 }

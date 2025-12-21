@@ -19,10 +19,10 @@ import type { CharacterSummaryGender } from './characterSummaryGender';
 import type { CharacterSummaryRoleType } from './characterSummaryRoleType';
 
 export interface CharacterSummary {
-  id?: string;
-  name?: string;
-  gender?: CharacterSummaryGender;
+  id: string;
+  name: string;
+  gender: CharacterSummaryGender;
   /** 나이대 (예: '30대') */
   ageRange?: string;
-  roleType?: CharacterSummaryRoleType;
+  roleType: CharacterSummaryRoleType;
 }

@@ -18,13 +18,13 @@
 import type { ProjectStatus } from './projectStatus';
 
 export interface ProjectSummary {
-  id?: string;
+  id: string;
   /** @nullable */
   thumbnail?: string | null;
   /** 제작사 */
   company?: string;
-  title?: string;
-  status?: ProjectStatus;
+  title: string;
+  status: ProjectStatus;
   /**
    * 진행률
    * @minimum 0

@@ -17,8 +17,8 @@
  */
 
 export interface ActorSummary {
-  id?: string;
-  name?: string;
+  id: string;
+  name: string;
   imageUrl?: string;
   /** 나이대 (예: '20대 중반') */
   age?: string;

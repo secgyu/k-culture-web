@@ -19,12 +19,12 @@ import type { UserType } from './userType';
 
 export interface User {
   /** 사용자 고유 ID */
-  id?: string;
+  id: string;
   /** 이메일 주소 */
-  email?: string;
+  email: string;
   /** 사용자 이름/닉네임 */
-  name?: string;
-  type?: UserType;
+  name: string;
+  type: UserType;
   /**
    * 프로필 이미지 URL
    * @nullable

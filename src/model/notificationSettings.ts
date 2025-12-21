@@ -18,9 +18,9 @@
 
 export interface NotificationSettings {
   /** 캐스팅 제안 알림 */
-  castingNotification?: boolean;
+  castingNotification: boolean;
   /** 메시지 알림 */
-  messageNotification?: boolean;
+  messageNotification: boolean;
   /** 마케팅 알림 */
-  marketingNotification?: boolean;
+  marketingNotification: boolean;
 }

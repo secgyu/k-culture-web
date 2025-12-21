@@ -19,10 +19,10 @@ import type { UserType } from './userType';
 import type { NotificationSettings } from './notificationSettings';
 
 export interface UserProfile {
-  id?: string;
-  email?: string;
-  name?: string;
-  type?: UserType;
+  id: string;
+  email: string;
+  name: string;
+  type: UserType;
   /** @nullable */
   profileImage?: string | null;
   /** 포지션 (배우, 모델, 가수 등) */

@@ -19,8 +19,8 @@ import type { ProjectStatus } from './projectStatus';
 import type { CharacterSummary } from './characterSummary';
 
 export interface ProjectDetail {
-  id?: string;
-  projectName?: string;
+  id: string;
+  projectName: string;
   company?: string;
   /** 작품 유형 (영화, 드라마 등) */
   projectType?: string;
@@ -35,7 +35,7 @@ export interface ProjectDetail {
    * @nullable
    */
   roleInfo?: string | null;
-  status?: ProjectStatus;
+  status: ProjectStatus;
   characters?: CharacterSummary[];
   createdAt?: string;
   updatedAt?: string;

@@ -13,7 +13,7 @@ export const createQueryClient = () =>
         // 10분간 캐시 유지
         gcTime: 10 * 60 * 1000,
         // 재시도 1회
-        retry: 1,
+        retry: 2,
         // 창 포커스시 자동 리페치 비활성화
         refetchOnWindowFocus: false,
       },

@@ -21,15 +21,15 @@ export interface Pagination {
    * 현재 페이지 번호
    * @minimum 1
    */
-  page?: number;
+  page: number;
   /**
    * 페이지당 항목 수
    * @minimum 1
    * @maximum 100
    */
-  limit?: number;
+  limit: number;
   /** 전체 항목 수 */
-  total?: number;
+  total: number;
   /** 전체 페이지 수 */
-  totalPages?: number;
+  totalPages: number;
 }

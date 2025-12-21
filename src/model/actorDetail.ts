@@ -19,8 +19,8 @@ import type { FilmographyItem } from './filmographyItem';
 import type { ShowreelItem } from './showreelItem';
 
 export interface ActorDetail {
-  id?: string;
-  name?: string;
+  id: string;
+  name: string;
   /** 출생년도 */
   birthYear?: number;
   filmographyCount?: number;

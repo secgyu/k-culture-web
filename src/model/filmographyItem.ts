@@ -19,10 +19,10 @@ import type { FilmographyItemType } from './filmographyItemType';
 import type { FilmographyItemRoleType } from './filmographyItemRoleType';
 
 export interface FilmographyItem {
-  id?: string;
-  year?: number;
-  type?: FilmographyItemType;
-  title?: string;
+  id: string;
+  year: number;
+  type: FilmographyItemType;
+  title: string;
   /** 역할명 */
   role?: string;
   roleType?: FilmographyItemRoleType;

@@ -23,7 +23,7 @@ export interface CursorPagination {
    */
   cursor?: string | null;
   /** 다음 페이지 존재 여부 */
-  hasMore?: boolean;
+  hasMore: boolean;
   /** 페이지당 항목 수 */
-  limit?: number;
+  limit: number;
 }

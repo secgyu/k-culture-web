@@ -17,8 +17,8 @@
  */
 
 export interface ShowreelItem {
-  id?: string;
-  title?: string;
+  id: string;
+  title: string;
   /** 재생시간 (예: '3:15') */
   duration?: string;
   thumbnail?: string;

@@ -17,11 +17,11 @@
  */
 
 export interface CharacterDetail {
-  id?: string;
-  name?: string;
-  gender?: string;
+  id: string;
+  name: string;
+  gender: string;
   ageRange?: string;
-  roleType?: string;
+  roleType: string;
   /** @nullable */
   description?: string | null;
   specialTags?: string[];
