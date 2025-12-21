@@ -7,6 +7,19 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'salty-order.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'oval-dress.org',
+      },
+      {
+        protocol: 'https',
+        hostname: 'scratchy-request.net',
+      },
+
     ],
   },
 };

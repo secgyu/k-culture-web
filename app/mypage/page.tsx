@@ -1,10 +1,14 @@
 "use client";
 
-import { getFilmographyDetail, useGetActorFilmography } from "@/src/filmography/filmography";
-import { getFilmographyMock } from "@/src/filmography/filmography.msw";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useGetMyProfile } from "@/src/users/users";
+import { useGetActorFilmography } from "@/src/filmography/filmography";
+import { useGetActorShowreels } from "@/src/showreels/showreels";
+import type { FilmographyItem } from "@/src/model";
 
+// ===== 아이콘 컴포넌트 =====
 function SettingsIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -94,181 +98,234 @@ function UserIcon({ className }: { className?: string }) {
   );
 }
 
-interface FilmographyItem {
-  id: string;
-  year: number;
-  type: "영화" | "드라마";
-  title: string;
-  role: string;
-  character?: string;
-  thumbnail: string;
-}
-
-const myActorData = {
-  id: "me",
-  name: "김배우",
-  birthYear: 1990,
-  filmographyCount: 15,
-  description: "깊은 눈빛으로 서사를 만드는 배우",
-  profileImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=1000&fit=crop&crop=face",
-  skills: ["영어(원어민 수준)", "피아노", "검술", "승마", "와이어 액션", "현대 무용"],
-  filmography: [
-    {
-      id: "f1",
-      year: 2023,
-      type: "영화" as const,
-      title: "제목이 긴 경우 이런식으로 들어갈 예정입니다",
-      role: "주연",
-      character: "강민준",
-      thumbnail: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=200&h=280&fit=crop",
-    },
-    {
-      id: "f2",
-      year: 2023,
-      type: "영화" as const,
-      title: "서울의 밤",
-      role: "주연",
-      character: "강민준",
-      thumbnail: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=200&h=280&fit=crop",
-    },
-    {
-      id: "f3",
-      year: 2022,
-      type: "영화" as const,
-      title: "제목이 긴 경우 이런식으로 들어갈 예정입니다",
-      role: "주연",
-      character: "강민준",
-      thumbnail: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=200&h=280&fit=crop",
-    },
-    {
-      id: "f4",
-      year: 2022,
-      type: "드라마" as const,
-      title: "코드네임 : 그림자",
-      role: "조연",
-      character: "에이전트 7",
-      thumbnail: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=200&h=280&fit=crop",
-    },
-  ],
-  showreels: [
-    {
-      id: "s1",
-      title: "2024 Actor Showreel",
-      duration: "3:15",
-      thumbnail: "https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=400&h=225&fit=crop",
-    },
-    {
-      id: "s2",
-      title: "2024 Actor Showreel",
-      duration: "3:15",
-      thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=225&fit=crop",
-    },
-  ],
-};
-
+// ===== 유틸리티 =====
 function groupFilmographyByYear(filmography: FilmographyItem[]) {
   const grouped: Record<number, FilmographyItem[]> = {};
   filmography.forEach((item) => {
-    if (!grouped[item.year]) {
-      grouped[item.year] = [];
+    const year = item.year ?? 0;
+    if (!grouped[year]) {
+      grouped[year] = [];
     }
-    grouped[item.year].push(item);
+    grouped[year].push(item);
   });
   return Object.entries(grouped)
     .sort(([a], [b]) => Number(b) - Number(a))
     .map(([year, items]) => ({ year: Number(year), items }));
 }
 
+// ===== 스켈레톤 컴포넌트 =====
+function ProfileSkeleton() {
+  return (
+    <section className="relative h-[420px] bg-gray-200 animate-pulse">
+      <div className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-6 text-center">
+        <div className="h-8 bg-gray-300 rounded w-32 mx-auto mb-2" />
+        <div className="h-4 bg-gray-300 rounded w-48 mx-auto mb-2" />
+        <div className="h-4 bg-gray-300 rounded w-64 mx-auto" />
+      </div>
+    </section>
+  );
+}
+
+function FilmographySkeleton() {
+  return (
+    <div className="space-y-4">
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="flex gap-4 animate-pulse">
+          <div className="w-16 h-22 bg-gray-200 rounded-lg" />
+          <div className="flex-1">
+            <div className="h-3 bg-gray-200 rounded w-12 mb-2" />
+            <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
+            <div className="h-3 bg-gray-200 rounded w-1/2" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ShowreelSkeleton() {
+  return (
+    <div className="space-y-4">
+      {[1, 2].map((i) => (
+        <div key={i} className="animate-pulse">
+          <div className="aspect-video bg-gray-200 rounded-xl mb-2" />
+          <div className="h-4 bg-gray-200 rounded w-3/4 mb-1" />
+          <div className="h-3 bg-gray-200 rounded w-12" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ===== 하단 네비게이션 =====
+function BottomNav() {
+  const pathname = usePathname();
+  const navItems = [
+    { href: "/", icon: HomeIcon, label: "홈" },
+    { href: "/recommend", icon: SparklesIcon, label: "AI매칭" },
+    { href: "/favorites", icon: BookmarkIcon, label: "찜목록" },
+    { href: "/mypage", icon: UserIcon, label: "마이페이지" },
+  ];
+
+  return (
+    <nav className="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-100">
+      <div className="max-w-lg mx-auto flex justify-around items-center py-2">
+        {navItems.map(({ href, icon: Icon, label }) => {
+          const isActive = pathname === href || (href !== "/" && pathname.startsWith(href));
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`flex flex-col items-center gap-1 px-4 py-2 ${isActive ? "text-gray-900" : "text-gray-400"}`}
+            >
+              <Icon className="w-6 h-6" />
+              <span className={`text-xs ${isActive ? "font-medium" : ""}`}>{label}</span>
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
+// ===== 메인 페이지 =====
 export default function MyPage() {
-  const actor = myActorData;
-  const groupedFilmography = groupFilmographyByYear(actor.filmography);
+  // 1. 내 프로필 조회
+  const { data: profileData, isLoading: profileLoading } = useGetMyProfile();
+  const profile = profileData?.data;
+  const actorId = profile?.id;
+
+  // 2. 필모그래피 조회 (actorId가 있을 때만)
+  const { data: filmographyData, isLoading: filmographyLoading } = useGetActorFilmography(
+    actorId ?? "",
+    undefined,
+    { query: { enabled: !!actorId } }
+  );
+  const filmography = filmographyData?.data?.filmography ?? [];
+  const groupedFilmography = groupFilmographyByYear(filmography);
+
+  // 3. 쇼릴 조회 (actorId가 있을 때만)
+  const { data: showreelsData, isLoading: showreelsLoading } = useGetActorShowreels(actorId ?? "", {
+    query: { enabled: !!actorId },
+  });
+  const showreels = showreelsData?.data?.showreels ?? [];
+
+  // 스킬 (API에 없어서 임시 데이터)
+  const skills = ["영어(원어민 수준)", "피아노", "검술", "승마", "와이어 액션", "현대 무용"];
+
+  const defaultImage = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=1000&fit=crop&crop=face";
+
   return (
     <div className="min-h-screen bg-white flex justify-center">
       <div className="relative w-full max-w-lg bg-white min-h-screen pb-24">
+        {/* 헤더 */}
         <header className="absolute top-0 left-0 right-0 z-20 flex justify-between items-center px-5 pt-12 pb-4">
           <h1 className="text-lg font-semibold text-white">마이페이지</h1>
-          <button className="w-10 h-10 flex items-center justify-center">
+          <Link href="/mypage/settings" className="w-10 h-10 flex items-center justify-center">
             <SettingsIcon className="w-6 h-6 text-white" />
-          </button>
+          </Link>
         </header>
 
-        <section className="relative h-[420px]">
-          <div className="absolute inset-0">
-            <Image src={actor.profileImage} alt={actor.name} fill className="object-cover" priority />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
-          </div>
-
-          <div className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-6 text-center">
-            <h2 className="text-3xl font-bold text-white mb-2">{actor.name}</h2>
-            <p className="text-white/80 text-sm mb-2">
-              {actor.birthYear}년생 · 필모 {actor.filmographyCount}편
-            </p>
-            <p className="text-teal-300 text-sm mb-5">{actor.description}</p>
-
-            <div className="flex gap-3 justify-center">
-              <button className="flex items-center gap-2 px-5 py-2.5 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium hover:bg-white/30 transition-colors">
-                <PencilIcon className="w-4 h-4" />
-                <span>수정하기</span>
-              </button>
-              <button className="flex items-center gap-2 px-5 py-2.5 bg-rose-500 rounded-full text-white text-sm font-medium hover:bg-rose-600 transition-colors">
-                <HeartIcon className="w-4 h-4" />
-                <span>팬에게 후원받기</span>
-              </button>
+        {/* 프로필 섹션 */}
+        {profileLoading ? (
+          <ProfileSkeleton />
+        ) : (
+          <section className="relative h-[420px]">
+            <div className="absolute inset-0">
+              <Image
+                src={profile?.profileImage || defaultImage}
+                alt={profile?.name || "프로필"}
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
             </div>
-          </div>
-        </section>
 
+            <div className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-6 text-center">
+              <h2 className="text-3xl font-bold text-white mb-2">{profile?.name || "이름 없음"}</h2>
+              <p className="text-white/80 text-sm mb-2">
+                {profile?.position || "배우"}
+                {profile?.agency && ` · ${profile.agency}`}
+              </p>
+              <p className="text-teal-300 text-sm mb-5">{profile?.bio || "한 줄 소개를 입력해주세요"}</p>
+
+              <div className="flex gap-3 justify-center">
+                <Link
+                  href="/mypage/settings/profile"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium hover:bg-white/30 transition-colors"
+                >
+                  <PencilIcon className="w-4 h-4" />
+                  <span>수정하기</span>
+                </Link>
+                <button className="flex items-center gap-2 px-5 py-2.5 bg-rose-500 rounded-full text-white text-sm font-medium hover:bg-rose-600 transition-colors">
+                  <HeartIcon className="w-4 h-4" />
+                  <span>팬에게 후원받기</span>
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 필모그래피 섹션 */}
         <section className="px-5 py-8">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-bold text-gray-900">필모그래피</h2>
-            <Link
-              href="/mypage/filmography"
-              className="flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600"
-            >
+            <Link href="/mypage/filmography" className="flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600">
               <PencilIcon className="w-4 h-4" />
               <span>수정하기</span>
             </Link>
           </div>
 
-          {groupedFilmography.map(({ year, items }) => (
-            <div key={year} className="mb-8">
-              <h3 className="text-base font-semibold text-gray-900 mb-4">{year}</h3>
-              <div className="space-y-4">
-                {items.map((item) => (
-                  <div key={item.id} className="flex gap-4">
-                    <div className="w-16 h-22 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
-                      <Image
-                        src={item.thumbnail}
-                        alt={item.title}
-                        width={64}
-                        height={88}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <span className="text-xs text-gray-400 mb-1 block">{item.type}</span>
-                      <h4 className="text-sm font-medium text-gray-900 leading-snug mb-1 line-clamp-2">{item.title}</h4>
-                      <p className="text-xs text-gray-500">
-                        {item.role} · {item.character}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          {filmographyLoading || !actorId ? (
+            <FilmographySkeleton />
+          ) : filmography.length === 0 ? (
+            <div className="text-center py-8 text-gray-400">
+              <p>등록된 필모그래피가 없습니다.</p>
+              <Link href="/mypage/filmography" className="text-teal-500 text-sm mt-2 inline-block">
+                + 필모그래피 추가하기
+              </Link>
             </div>
-          ))}
+          ) : (
+            groupedFilmography.map(({ year, items }) => (
+              <div key={year} className="mb-8">
+                <h3 className="text-base font-semibold text-gray-900 mb-4">{year}</h3>
+                <div className="space-y-4">
+                  {items.map((item) => (
+                    <div key={item.id} className="flex gap-4">
+                      <div className="w-16 h-22 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
+                        {item.thumbnail ? (
+                          <Image src={item.thumbnail} alt={item.title ?? ""} width={64} height={88} className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-gray-200" />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <span className="text-xs text-gray-400 mb-1 block">{item.type}</span>
+                        <h4 className="text-sm font-medium text-gray-900 leading-snug mb-1 line-clamp-2">{item.title}</h4>
+                        <p className="text-xs text-gray-500">
+                          {item.roleType} · {item.role}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))
+          )}
         </section>
 
+        {/* 스킬 섹션 */}
         <section className="px-5 py-6 border-t border-gray-100">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-bold text-gray-900">스킬 및 특기</h2>
-            <button className="flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600">
+            <Link href="/mypage/settings/profile" className="flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600">
               <PencilIcon className="w-4 h-4" />
               <span>수정하기</span>
-            </button>
+            </Link>
           </div>
           <div className="flex flex-wrap gap-2">
-            {actor.skills.map((skill, index) => (
+            {skills.map((skill, index) => (
               <span key={index} className="px-3 py-1.5 text-sm text-gray-600 bg-gray-100 rounded-full">
                 {skill}
               </span>
@@ -276,6 +333,7 @@ export default function MyPage() {
           </div>
         </section>
 
+        {/* 대표 영상 섹션 */}
         <section className="px-5 py-6 border-t border-gray-100">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-bold text-gray-900">대표 영상</h2>
@@ -284,29 +342,46 @@ export default function MyPage() {
               <span>수정하기</span>
             </Link>
           </div>
-          <div className="space-y-4">
-            {actor.showreels.map((showreel) => (
-              <div key={showreel.id} className="group cursor-pointer">
-                <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100 mb-2">
-                  <Image
-                    src={showreel.thumbnail}
-                    alt={showreel.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                      <PlayIcon className="w-6 h-6 text-gray-800 ml-1" />
+
+          {showreelsLoading || !actorId ? (
+            <ShowreelSkeleton />
+          ) : showreels.length === 0 ? (
+            <div className="text-center py-8 text-gray-400">
+              <p>등록된 대표 영상이 없습니다.</p>
+              <Link href="/mypage/showreel" className="text-teal-500 text-sm mt-2 inline-block">
+                + 대표 영상 추가하기
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {showreels.map((showreel) => (
+                <div key={showreel.id} className="group cursor-pointer">
+                  <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100 mb-2">
+                    {showreel.thumbnail ? (
+                      <Image
+                        src={showreel.thumbnail}
+                        alt={showreel.title ?? "쇼릴"}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200" />
+                    )}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                        <PlayIcon className="w-6 h-6 text-gray-800 ml-1" />
+                      </div>
                     </div>
                   </div>
+                  <h3 className="text-sm font-medium text-gray-900">{showreel.title}</h3>
+                  <p className="text-xs text-gray-400">{showreel.duration}</p>
                 </div>
-                <h3 className="text-sm font-medium text-gray-900">{showreel.title}</h3>
-                <p className="text-xs text-gray-400">{showreel.duration}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </section>
 
+        {/* 프로모션 섹션 */}
         <section className="px-5 py-6 border-t border-gray-100 space-y-3">
           <Link href="#" className="block p-5 bg-[#F9FAFB] rounded-xl hover:bg-gray-100 transition-colors">
             <div className="mb-4">
@@ -337,32 +412,11 @@ export default function MyPage() {
               </svg>
             </div>
             <h3 className="text-sm font-bold text-[#191F28] mb-1">프로필 상단 노출</h3>
-            <p className="text-xs text-[#4E5968] leading-relaxed">
-              광고를 통해 캐스팅 디렉터에게 나를 먼저 보여 보세요
-            </p>
+            <p className="text-xs text-[#4E5968] leading-relaxed">광고를 통해 캐스팅 디렉터에게 나를 먼저 보여 보세요</p>
           </Link>
         </section>
 
-        <nav className="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-100">
-          <div className="max-w-lg mx-auto flex justify-around items-center py-2">
-            <Link href="/" className="flex flex-col items-center gap-1 px-4 py-2 text-gray-400">
-              <HomeIcon className="w-6 h-6" />
-              <span className="text-xs">홈</span>
-            </Link>
-            <Link href="/recommend" className="flex flex-col items-center gap-1 px-4 py-2 text-gray-400">
-              <SparklesIcon className="w-6 h-6" />
-              <span className="text-xs">AI매칭</span>
-            </Link>
-            <Link href="#" className="flex flex-col items-center gap-1 px-4 py-2 text-gray-400">
-              <BookmarkIcon className="w-6 h-6" />
-              <span className="text-xs">찜목록</span>
-            </Link>
-            <Link href="/mypage" className="flex flex-col items-center gap-1 px-4 py-2 text-gray-900">
-              <UserIcon className="w-6 h-6" />
-              <span className="text-xs font-medium">마이페이지</span>
-            </Link>
-          </div>
-        </nav>
+        <BottomNav />
       </div>
     </div>
   );
