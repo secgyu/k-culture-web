@@ -58,6 +58,7 @@ app/[feature]/
   - useGetMyProfile (actorId 조회)
   - useCreateShowreel (쇼릴 생성)
 - `_components/Icons.tsx` - 공통 아이콘
+- ⚠️ **미구현**: useGetActorShowreels, useDeleteShowreel (목록 관리 페이지 없음)
 
 ### 5. `/mypage/projects` 프로젝트 관리
 
@@ -82,8 +83,8 @@ app/[feature]/
 ### 8. `/recommend` 추천 페이지
 
 - `_components/RecommendContent.tsx`
-  - useGetActors (배우 목록 조회)
-  - 필터 기반 검색
+  - useRecommendActors (AI 배우 추천)
+  - 필터 기반 검색 (성별, 나이대, 역할유형)
 
 ### 9. `/actors/[id]` 배우 상세 페이지
 
@@ -92,10 +93,22 @@ app/[feature]/
   - useContactActor (배우 연락)
   - useDownloadActorPortfolio (포트폴리오 다운로드)
 - `_components/Icons.tsx` - 공통 아이콘
+- ⚠️ **미구현**: useAddFavorite, useRemoveFavorite (UI에 즐겨찾기 버튼 없음)
 
 ### 10. `/` 메인 페이지
 
-- `_components/OnboardingContent.tsx` - 온보딩 UI
+- `_components/OnboardingContent.tsx` - 온보딩/랜딩 UI (정적 페이지)
+- ℹ️ **참고**: 배우 목록(useGetActors)은 사용 안 함 - 현재 디자인이 온보딩 페이지
+
+---
+
+## 📋 추후 작업 가능 항목
+
+| 항목 | 설명 |
+|------|------|
+| 쇼릴 목록 관리 | `/mypage/showreel`에 목록 조회/삭제 기능 추가시 useGetActorShowreels, useDeleteShowreel 연동 |
+| 즐겨찾기 기능 | `/actors/[id]`에 즐겨찾기 버튼 추가시 useAddFavorite, useRemoveFavorite 연동 |
+| 홈 배우 목록 | 메인 페이지에 배우 목록 섹션 추가시 useGetActors 연동 |
 
 ---
 
