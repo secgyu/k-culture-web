@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ChevronLeftIcon } from "@/app/components/Icons";
+import { BackHeader } from "@/app/components/BackHeader";
 import { Button } from "@/components/ui/button";
 import AgeSelectModal from "./AgeSelectModal";
 import { COLORS } from "@/lib/constants";
@@ -52,20 +52,7 @@ export default function ActorSignupPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center">
       <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col border-x border-gray-200 overflow-hidden">
-        <header className="sticky top-0 z-50 bg-white">
-          <div className="px-4 h-14 flex items-center">
-            <button
-              onClick={() => router.back()}
-              className="w-10 h-10 flex items-center justify-center -ml-2 rounded-full hover:bg-gray-100 transition-colors"
-              aria-label="뒤로가기"
-            >
-              <ChevronLeftIcon className="w-6 h-6" style={{ color: COLORS.text.primary }} />
-            </button>
-            <h1 className="ml-2 text-base font-semibold" style={{ color: COLORS.text.primary }}>
-              배우 프로필 등록
-            </h1>
-          </div>
-        </header>
+        <BackHeader href="/" title="배우 프로필 등록" showBorder={false} />
         <main className="flex-1 w-full px-5 py-6">
           <div className="space-y-6">
             <div className="relative w-[100px] h-[100px]">

@@ -2,7 +2,8 @@
 
 import { useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ChevronLeftIcon, EyeIcon, EyeOffIcon } from "@/app/components/Icons";
+import { EyeIcon, EyeOffIcon } from "@/app/components/Icons";
+import { BackHeader } from "@/app/components/BackHeader";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import TermsModal from "./TermsModal";
@@ -91,18 +92,7 @@ function SignupContent() {
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center">
       <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col border-x border-gray-200 overflow-hidden">
-        <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
-          <div className="px-4 h-14 flex items-center">
-            <button
-              onClick={() => router.back()}
-              className="w-10 h-10 flex items-center justify-center -ml-2 rounded-full hover:bg-gray-100 transition-colors"
-              aria-label="뒤로가기"
-            >
-              <ChevronLeftIcon className="w-6 h-6 text-gray-800" />
-            </button>
-            <h1 className="flex-1 text-center text-lg font-semibold text-gray-900 -ml-10">회원가입</h1>
-          </div>
-        </header>
+        <BackHeader href="/" title="회원가입" centered />
         <main className="flex-1 w-full px-5 py-6">
           <div className="space-y-6">
             <div className="space-y-2">
