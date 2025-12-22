@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useGetMyProfile } from "@/src/users/users";
 import { useGetActorShowreels } from "@/src/showreels/showreels";
-import { PencilIcon, PlayIcon } from "./Icons";
+import { PencilIcon, PlayIcon } from "@/app/components/Icons";
 
 function ShowreelSkeleton() {
   return (

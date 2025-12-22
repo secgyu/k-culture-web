@@ -8,7 +8,7 @@ import {
   getGetProjectCharactersQueryKey,
 } from "@/src/characters/characters";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronLeftIcon, PencilIcon, XMarkIcon, XCircleIcon } from "./Icons";
+import { ChevronLeftIcon, PencilIcon, XMarkIcon, XCircleIcon } from "@/app/components/Icons";
 
 function CharactersSkeleton() {
   return (

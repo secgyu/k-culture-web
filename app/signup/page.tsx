@@ -2,7 +2,7 @@
 
 import { useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ChevronLeftIcon, EyeIcon, EyeOffIcon } from "./icons";
+import { ChevronLeftIcon, EyeIcon, EyeOffIcon } from "@/app/components/Icons";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import TermsModal from "./TermsModal";

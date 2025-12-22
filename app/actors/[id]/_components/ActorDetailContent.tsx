@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useGetActorDetail, useContactActor, useDownloadActorPortfolio } from "@/src/actors/actors";
-import { ChevronLeftIcon, ShareIcon, PlayIcon, DownloadIcon, PhoneIcon } from "./Icons";
+import { ChevronLeftIcon, ShareIcon, PlayIcon, DownloadIcon, PhoneIcon } from "@/app/components/Icons";
 import type { FilmographyItem } from "@/src/model";
 
 function ActorDetailSkeleton() {

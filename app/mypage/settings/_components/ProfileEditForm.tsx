@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useGetMyProfile, useUpdateMyProfile, getGetMyProfileQueryKey } from "@/src/users/users";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronLeftIcon, ChevronDownIcon, PencilIcon, XCircleIcon } from "./Icons";
+import { ChevronLeftIcon, ChevronDownIcon, PencilIcon, XCircleIcon } from "@/app/components/Icons";
 
 const positionOptions = ["배우", "모델", "가수", "MC", "기타"];
 const feeOptions = ["협의", "100만원 이하", "100~300만원", "300~500만원", "500만원 이상"];

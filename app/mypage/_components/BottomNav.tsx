@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HomeIcon, SparklesIcon, BookmarkIcon, UserIcon } from "./Icons";
+import { HomeIcon, SparklesIcon, BookmarkIcon, UserIcon } from "@/app/components/Icons";
 
 const navItems = [
   { href: "/", icon: HomeIcon, label: "홈" },

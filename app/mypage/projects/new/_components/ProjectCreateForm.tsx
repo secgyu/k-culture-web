@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCreateProject, getGetProjectsQueryKey } from "@/src/projects/projects";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronLeftIcon, ChevronDownIcon } from "../../_components/Icons";
+import { ChevronLeftIcon, ChevronDownIcon } from "@/app/components/Icons";
 
 const projectTypes = ["영화", "드라마", "웹드라마", "OTT 시리즈", "뮤직비디오", "광고", "기타"];
 const genres = ["액션", "로맨스", "코미디", "드라마", "스릴러", "공포", "SF", "판타지", "사극", "기타"];

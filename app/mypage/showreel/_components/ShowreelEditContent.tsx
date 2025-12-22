@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useGetMyProfile } from "@/src/users/users";
 import { useCreateShowreel, getGetActorShowreelsQueryKey } from "@/src/showreels/showreels";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronLeftIcon, ChevronDownIcon, UploadIcon, XMarkIcon } from "./Icons";
+import { ChevronLeftIcon, ChevronDownIcon, UploadIcon, XMarkIcon } from "@/app/components/Icons";
 
 interface UploadedFile {
   id: string;

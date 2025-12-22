@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useGetMyProfile } from "@/src/users/users";
 import { useGetActorFilmography } from "@/src/filmography/filmography";
-import { PencilIcon } from "./Icons";
+import { PencilIcon } from "@/app/components/Icons";
 import type { FilmographyItem } from "@/src/model";
 
 function FilmographySkeleton() {

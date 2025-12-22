@@ -11,7 +11,7 @@ import {
   getGetNotificationSettingsQueryKey,
 } from "@/src/users/users";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronLeftIcon, ChevronRightIcon, PencilIcon } from "./Icons";
+import { ChevronLeftIcon, ChevronRightIcon, PencilIcon } from "@/app/components/Icons";
 
 function ToggleSwitch({ enabled, onToggle, disabled }: { enabled: boolean; onToggle: () => void; disabled?: boolean }) {
   return (

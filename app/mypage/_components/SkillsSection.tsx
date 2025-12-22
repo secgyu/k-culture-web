@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { PencilIcon } from "./Icons";
+import { PencilIcon } from "@/app/components/Icons";
 
 // TODO: API에 skills 필드 추가되면 useGetMyProfile에서 가져오기
 const TEMP_SKILLS = ["영어(원어민 수준)", "피아노", "검술", "승마", "와이어 액션", "현대 무용"];

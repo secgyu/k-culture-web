@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronRightIcon } from "./icons";
+import { ChevronRightIcon } from "@/app/components/Icons";
 
 interface TermsModalProps {
   open: boolean;

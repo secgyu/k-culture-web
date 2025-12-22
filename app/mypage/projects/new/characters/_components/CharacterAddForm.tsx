@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCreateCharacter, getGetProjectCharactersQueryKey } from "@/src/characters/characters";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronLeftIcon, ChevronDownIcon, XCircleIcon, PlusIcon } from "./Icons";
+import { ChevronLeftIcon, ChevronDownIcon, XCircleIcon, PlusIcon } from "@/app/components/Icons";
 
 const ageRangeOptions = ["10대", "20대", "30대", "40대", "50대", "60대 이상"];
 const genderOptions = ["남성", "여성", "무관"];

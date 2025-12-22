@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useGetMyProfile } from "@/src/users/users";
-import { PencilIcon, HeartIcon, SettingsIcon } from "./Icons";
+import { PencilIcon, HeartIcon, SettingsIcon } from "@/app/components/Icons";
 
 function ProfileSkeleton() {
   return (

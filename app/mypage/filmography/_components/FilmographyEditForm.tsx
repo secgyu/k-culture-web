@@ -9,7 +9,7 @@ import {
 } from "@/src/filmography/filmography";
 import { useGetMyProfile } from "@/src/users/users";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronLeftIcon, ChevronDownIcon, XCircleIcon } from "./Icons";
+import { ChevronLeftIcon, ChevronDownIcon, XCircleIcon } from "@/app/components/Icons";
 import { FilmographyItemType } from "@/src/model/filmographyItemType";
 import { FilmographyItemRoleType } from "@/src/model/filmographyItemRoleType";
 

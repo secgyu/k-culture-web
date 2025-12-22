@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useGetProjects } from "@/src/projects/projects";
-import { ChevronLeftIcon, PlusIcon } from "./Icons";
+import { ChevronLeftIcon, PlusIcon } from "@/app/components/Icons";
 import type { ProjectStatus } from "@/src/model/projectStatus";
 
 type TabType = "all" | "ongoing" | "planning" | "completed";

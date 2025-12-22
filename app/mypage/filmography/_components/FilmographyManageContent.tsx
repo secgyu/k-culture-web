@@ -9,7 +9,7 @@ import {
   getGetActorFilmographyQueryKey,
 } from "@/src/filmography/filmography";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronLeftIcon, PencilIcon, XMarkIcon } from "./Icons";
+import { ChevronLeftIcon, PencilIcon, XMarkIcon } from "@/app/components/Icons";
 import type { FilmographyItem } from "@/src/model";
 
 function FilmographySkeleton() {
