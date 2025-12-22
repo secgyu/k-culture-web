@@ -7,6 +7,7 @@ import FilterModal from "../../components/FilterModal";
 import EmptyState from "../../components/EmptyState";
 import ActorCarousel from "../../components/ActorCarousel";
 import { useRecommendActors } from "@/src/actors/actors";
+import { GENDER_OPTIONS, AGE_RANGE_OPTIONS, ROLE_TYPE_OPTIONS } from "@/lib/constants";
 
 const filterOptions = [
   { id: "gender", label: "성별" },
@@ -15,26 +16,9 @@ const filterOptions = [
 ];
 
 const filterOptionsData: Record<string, { value: string; label: string }[]> = {
-  gender: [
-    { value: "남성", label: "남성" },
-    { value: "여성", label: "여성" },
-    { value: "무관", label: "무관" },
-  ],
-  ageRange: [
-    { value: "10대", label: "10대" },
-    { value: "20대", label: "20대" },
-    { value: "30대", label: "30대" },
-    { value: "40대", label: "40대" },
-    { value: "50대", label: "50대" },
-    { value: "60대 이상", label: "60대 이상" },
-  ],
-  roleType: [
-    { value: "주연", label: "주연" },
-    { value: "조연", label: "조연" },
-    { value: "단역", label: "단역" },
-    { value: "엑스트라", label: "엑스트라" },
-    { value: "특별출연", label: "특별출연" },
-  ],
+  gender: [...GENDER_OPTIONS, "무관" as const].map((v) => ({ value: v, label: v })),
+  ageRange: AGE_RANGE_OPTIONS.map((v) => ({ value: v, label: v })),
+  roleType: ROLE_TYPE_OPTIONS.map((v) => ({ value: v, label: v })),
 };
 
 const filterTitles: Record<string, string> = {

@@ -7,29 +7,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ChevronLeftIcon, ChevronDownIcon } from "@/app/components/Icons";
 import type { ProjectCreateRequestGenre } from "@/src/model/projectCreateRequestGenre";
 import type { ProjectCreateRequestProjectType } from "@/src/model/projectCreateRequestProjectType";
-import { COLORS } from "@/lib/constants";
+import { COLORS, PROJECT_TYPE_OPTIONS, PROJECT_GENRE_OPTIONS } from "@/lib/constants";
 
-const projectTypes: ProjectCreateRequestProjectType[] = [
-  "영화",
-  "드라마",
-  "웹드라마",
-  "OTT 시리즈",
-  "뮤직비디오",
-  "광고",
-  "기타",
-];
-const genres: ProjectCreateRequestGenre[] = [
-  "액션",
-  "로맨스",
-  "코미디",
-  "드라마",
-  "스릴러",
-  "공포",
-  "SF",
-  "판타지",
-  "사극",
-  "기타",
-];
+const projectTypes = PROJECT_TYPE_OPTIONS as unknown as ProjectCreateRequestProjectType[];
+const genres = PROJECT_GENRE_OPTIONS as unknown as ProjectCreateRequestGenre[];
 
 export function ProjectCreateForm() {
   const router = useRouter();

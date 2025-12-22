@@ -7,10 +7,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ChevronLeftIcon, ChevronDownIcon, XCircleIcon, PlusIcon } from "@/app/components/Icons";
 import type { CharacterCreateRequestGender } from "@/src/model/characterCreateRequestGender";
 import type { CharacterCreateRequestRoleType } from "@/src/model/characterCreateRequestRoleType";
-import { COLORS, AGE_RANGE_OPTIONS } from "@/lib/constants";
+import { COLORS, AGE_RANGE_OPTIONS, GENDER_OPTIONS, ROLE_TYPE_OPTIONS } from "@/lib/constants";
 
-const genderOptions: CharacterCreateRequestGender[] = ["남성", "여성", "기타"];
-const roleTypeOptions: CharacterCreateRequestRoleType[] = ["주연", "조연", "단역", "특별출연"];
+const genderOptions = GENDER_OPTIONS as unknown as CharacterCreateRequestGender[];
+const roleTypeOptions = ROLE_TYPE_OPTIONS.filter(
+  (r) => r !== "엑스트라"
+) as unknown as CharacterCreateRequestRoleType[];
 const specialTags = ["주연", "조연", "신인", "기타"];
 
 export function CharacterAddForm() {

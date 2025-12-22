@@ -22,6 +22,12 @@ export const FEE_OPTIONS = ["협의", "100만원 이하", "100~300만원", "300~
 // 에이전시 전문분야 옵션
 export const SPECIALTY_OPTIONS = ["드라마", "영화제작", "광고/CF", "뮤직비디오", "웹드라마", "SF", "스릴러배우전문"] as const;
 
+// 프로젝트 타입 옵션
+export const PROJECT_TYPE_OPTIONS = ["영화", "드라마", "웹드라마", "OTT 시리즈", "뮤직비디오", "광고", "기타"] as const;
+
+// 프로젝트 장르 옵션
+export const PROJECT_GENRE_OPTIONS = ["액션", "로맨스", "코미디", "드라마", "스릴러", "공포", "SF", "판타지", "사극", "기타"] as const;
+
 // 년도 생성 함수
 export const generateYears = (count: number = 30, startYear: number = new Date().getFullYear()) =>
   Array.from({ length: count }, (_, i) => startYear - i);
