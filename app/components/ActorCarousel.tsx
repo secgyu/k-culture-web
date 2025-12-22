@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { COLORS } from "@/lib/constants";
 
 export interface Actor {
   id: string;
@@ -191,21 +192,22 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
       <div className="flex flex-col items-center px-5 py-4 gap-8">
         <div className="flex flex-col items-center gap-3">
           <h2
-            className="font-bold text-[#191F28]"
-            style={{ fontSize: "24px", lineHeight: "28px", letterSpacing: "-0.022em" }}
+            className="font-bold"
+            style={{ fontSize: "24px", lineHeight: "28px", letterSpacing: "-0.022em", color: COLORS.text.primary }}
           >
             {activeActor.name}
           </h2>
-          <p className="text-base text-[#4E5968]" style={{ letterSpacing: "-0.02em" }}>
+          <p className="text-base" style={{ letterSpacing: "-0.02em", color: COLORS.text.secondary }}>
             {activeActor.age} · 필모 {activeActor.filmography}편
           </p>
           <div className="flex flex-wrap justify-center gap-1.5">
             {activeActor.tags.map((tag, index) => (
               <span
                 key={index}
-                className="px-2 py-1 text-sm font-medium text-[#4E5968] rounded"
+                className="px-2 py-1 text-sm font-medium rounded"
                 style={{
-                  background: "rgba(78, 89, 104, 0.1)",
+                  background: COLORS.status.planning.bg,
+                  color: COLORS.text.secondary,
                   letterSpacing: "-0.02em",
                 }}
               >
@@ -220,14 +222,14 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
               key={index}
               className="flex items-center gap-1.5 px-3 py-1.5 shrink-0"
               style={{
-                border: "1px solid #E5E8EB",
+                border: `1px solid ${COLORS.border.default}`,
                 borderRadius: "999px",
               }}
             >
               <div className="w-6 h-6 rounded-full overflow-hidden bg-gray-200">
                 <Image src={work.thumbnail} alt={work.name} width={24} height={24} className="object-cover" />
               </div>
-              <span className="text-xs font-medium text-[#4E5968]" style={{ letterSpacing: "-0.02em" }}>
+              <span className="text-xs font-medium" style={{ letterSpacing: "-0.02em", color: COLORS.text.secondary }}>
                 {work.name}
               </span>
             </div>

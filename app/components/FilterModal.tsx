@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { COLORS } from "@/lib/constants";
 
 export interface FilterModalOption {
   value: string;
@@ -164,21 +165,22 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
         }`}
       >
         <div className="flex justify-center pt-3 pb-4">
-          <div className="w-10 h-1 bg-[#E5E8EB] rounded-full" />
+          <div className="w-10 h-1 rounded-full" style={{ backgroundColor: COLORS.border.default }} />
         </div>
 
         <div className="px-5 pb-4">
-          <h2 className="text-xl font-bold text-[#191F28]" style={{ letterSpacing: "-0.02em" }}>
+          <h2 className="text-xl font-bold" style={{ letterSpacing: "-0.02em", color: COLORS.text.primary }}>
             {title}
           </h2>
         </div>
 
         <div className="relative" style={{ height: `${ITEM_HEIGHT * 5}px` }}>
           <div
-            className="absolute left-5 right-5 bg-[#F2F4F6] rounded-lg pointer-events-none z-0"
+            className="absolute left-5 right-5 rounded-lg pointer-events-none z-0"
             style={{
               top: `${ITEM_HEIGHT * 2}px`,
               height: `${ITEM_HEIGHT}px`,
+              backgroundColor: COLORS.background.secondary,
             }}
           />
 
@@ -223,10 +225,11 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
                   }}
                 >
                   <span
-                    className={`text-lg font-medium transition-colors ${
-                      isOptionSelected ? "text-[#191F28]" : "text-[#8B95A1]"
-                    }`}
-                    style={{ letterSpacing: "-0.02em" }}
+                    className="text-lg font-medium transition-colors"
+                    style={{
+                      letterSpacing: "-0.02em",
+                      color: isOptionSelected ? COLORS.text.primary : COLORS.text.muted,
+                    }}
                   >
                     {option.label}
                   </span>
@@ -244,10 +247,12 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
           <button
             onClick={handleConfirm}
             disabled={!localSelected}
-            className={`w-full h-12 rounded-lg font-medium text-base transition-colors ${
-              localSelected ? "bg-[#191F28] text-white" : "bg-[#F2F4F6] text-[#D1D6DB]"
-            }`}
-            style={{ letterSpacing: "-0.02em" }}
+            className="w-full h-12 rounded-lg font-medium text-base transition-colors"
+            style={{
+              letterSpacing: "-0.02em",
+              backgroundColor: localSelected ? COLORS.text.primary : COLORS.background.secondary,
+              color: localSelected ? "#FFFFFF" : COLORS.text.disabled,
+            }}
           >
             배우 선택 완료
           </button>
