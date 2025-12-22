@@ -70,8 +70,8 @@ export function CharacterAddForm() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex justify-center">
-      <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex justify-center">
+      <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col border-x border-gray-200">
         <header className="sticky top-0 z-20 bg-white">
           <div className="flex items-center gap-3 px-4 py-4">
             <button onClick={() => router.back()} className="w-10 h-10 flex items-center justify-center -ml-2">

@@ -89,8 +89,8 @@ export function RecommendContent() {
   const hasResults = hasSearched && actors.length > 0;
 
   return (
-    <div className="min-h-screen bg-white flex justify-center">
-      <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col overflow-hidden">
+    <div className="min-h-screen bg-gray-50 flex justify-center">
+      <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col border-x border-gray-200 overflow-hidden">
         <Header title="역 추천 배우" highlightedName="서은우" />
 
         <FilterBar

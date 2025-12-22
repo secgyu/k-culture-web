@@ -89,8 +89,8 @@ export function FilmographyManageContent() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex justify-center">
-      <div className="relative w-full max-w-lg bg-white min-h-screen">
+    <div className="min-h-screen bg-gray-50 flex justify-center">
+      <div className="relative w-full max-w-lg bg-white min-h-screen border-x border-gray-200">
         <header className="sticky top-0 z-20 bg-white border-b border-gray-100">
           <div className="flex items-center gap-3 px-4 py-4">
             <button onClick={() => router.back()} className="w-10 h-10 flex items-center justify-center -ml-2">

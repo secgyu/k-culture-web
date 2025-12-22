@@ -10,8 +10,8 @@ import { COLORS } from "@/lib/constants";
 
 function ActorDetailSkeleton() {
   return (
-    <div className="min-h-screen bg-white flex justify-center">
-      <div className="relative w-full max-w-lg bg-white min-h-screen pb-24 animate-pulse">
+    <div className="min-h-screen bg-gray-50 flex justify-center">
+      <div className="relative w-full max-w-lg bg-white min-h-screen pb-24 border-x border-gray-200 animate-pulse">
         <div className="h-[480px] bg-gray-200" />
         <section className="px-5 py-8">
           <div className="h-6 w-32 bg-gray-200 rounded mb-6" />
@@ -94,7 +94,7 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
 
   if (!actor) {
     return (
-      <div className="min-h-screen bg-white flex justify-center items-center">
+      <div className="min-h-screen bg-gray-50 flex justify-center items-center">
         <div className="text-center">
           <p style={{ color: COLORS.text.tertiary }}>배우 정보를 찾을 수 없습니다.</p>
           <Link href="/recommend" className="mt-4 underline" style={{ color: COLORS.accent.teal }}>
@@ -108,8 +108,8 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
   const groupedFilmography = groupFilmographyByYear(actor.filmography ?? []);
 
   return (
-    <div className="min-h-screen bg-white flex justify-center">
-      <div className="relative w-full max-w-lg bg-white min-h-screen pb-24">
+    <div className="min-h-screen bg-gray-50 flex justify-center">
+      <div className="relative w-full max-w-lg bg-white min-h-screen pb-24 border-x border-gray-200">
         <section className="relative h-[480px]">
           <div className="absolute inset-0">
             {actor.profileImage ? (
