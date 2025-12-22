@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ChevronLeftIcon } from "../icons";
+import { ChevronLeftIcon } from "@/app/components/Icons";
 import { Button } from "@/components/ui/button";
 import AgeSelectModal from "./AgeSelectModal";
 

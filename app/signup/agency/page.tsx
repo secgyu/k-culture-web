@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronLeftIcon } from "../icons";
+import { ChevronLeftIcon } from "@/app/components/Icons";
 import { Button } from "@/components/ui/button";
 
 const specialtyOptions = ["드라마", "영화제작", "광고/CF", "뮤직비디오", "웹드라마", "SF", "스릴러배우전문"];
