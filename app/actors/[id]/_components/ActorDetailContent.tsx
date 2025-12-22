@@ -136,7 +136,7 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
             <p className="text-white/80 text-sm mb-3">
               {actor.birthYear}년생 · 필모 {actor.filmographyCount ?? 0}편
             </p>
-            <p className="text-teal-300 text-sm">{actor.introduction}</p>
+            <p className="text-teal-300 text-sm">{actor.description}</p>
           </div>
         </section>
 
