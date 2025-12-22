@@ -99,7 +99,10 @@ export function FilmographySection() {
                     <span className="text-xs mb-1 block" style={{ color: COLORS.text.disabled }}>
                       {item.type}
                     </span>
-                    <h4 className="text-sm font-medium leading-snug mb-1 line-clamp-2" style={{ color: COLORS.text.primary }}>
+                    <h4
+                      className="text-sm font-medium leading-snug mb-1 line-clamp-2"
+                      style={{ color: COLORS.text.primary }}
+                    >
                       {item.title}
                     </h4>
                     <p className="text-xs" style={{ color: COLORS.text.tertiary }}>

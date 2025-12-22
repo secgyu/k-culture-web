@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useGetActorDetail, useContactActor, useDownloadActorPortfolio } from "@/src/actors/actors";
 import { ChevronLeftIcon, ShareIcon, PlayIcon, DownloadIcon, PhoneIcon } from "@/app/components/Icons";
 import type { FilmographyItem } from "@/src/model";
+import { COLORS } from "@/lib/constants";
 
 function ActorDetailSkeleton() {
   return (
@@ -95,8 +96,8 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
     return (
       <div className="min-h-screen bg-white flex justify-center items-center">
         <div className="text-center">
-          <p className="text-gray-500">배우 정보를 찾을 수 없습니다.</p>
-          <Link href="/recommend" className="mt-4 text-teal-500 underline">
+          <p style={{ color: COLORS.text.tertiary }}>배우 정보를 찾을 수 없습니다.</p>
+          <Link href="/recommend" className="mt-4 underline" style={{ color: COLORS.accent.teal }}>
             돌아가기
           </Link>
         </div>
@@ -124,31 +125,41 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
               onClick={() => router.back()}
               className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm"
             >
-              <ChevronLeftIcon className="w-6 h-6 text-white" />
+              <ChevronLeftIcon className="w-6 h-6" style={{ color: COLORS.background.primary }} />
             </button>
             <button className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-              <ShareIcon className="w-5 h-5 text-white" />
+              <ShareIcon className="w-5 h-5" style={{ color: COLORS.background.primary }} />
             </button>
           </div>
 
           <div className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-8 text-center">
-            <h1 className="text-3xl font-bold text-white mb-2">{actor.name}</h1>
+            <h1 className="text-3xl font-bold mb-2" style={{ color: COLORS.background.primary }}>
+              {actor.name}
+            </h1>
             <p className="text-white/80 text-sm mb-3">
               {actor.birthYear}년생 · 필모 {actor.filmographyCount ?? 0}편
             </p>
-            <p className="text-teal-300 text-sm">{actor.description}</p>
+            <p className="text-sm" style={{ color: COLORS.accent.teal }}>
+              {actor.description}
+            </p>
           </div>
         </section>
 
         <section className="px-5 py-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-6">필모그래피</h2>
+          <h2 className="text-lg font-bold mb-6" style={{ color: COLORS.text.primary }}>
+            필모그래피
+          </h2>
 
           {groupedFilmography.length === 0 ? (
-            <p className="text-gray-400 text-center py-8">등록된 필모그래피가 없습니다.</p>
+            <p className="text-center py-8" style={{ color: COLORS.text.disabled }}>
+              등록된 필모그래피가 없습니다.
+            </p>
           ) : (
             groupedFilmography.map(({ year, items }) => (
               <div key={year} className="mb-8">
-                <h3 className="text-base font-semibold text-gray-900 mb-4">{year}</h3>
+                <h3 className="text-base font-semibold mb-4" style={{ color: COLORS.text.primary }}>
+                  {year}
+                </h3>
                 <div className="space-y-4">
                   {items.map((item) => (
                     <div key={item.id} className="flex gap-4">
@@ -166,11 +177,16 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <span className="text-xs text-gray-400 mb-1 block">{item.type}</span>
-                        <h4 className="text-sm font-medium text-gray-900 leading-snug mb-1 line-clamp-2">
+                        <span className="text-xs mb-1 block" style={{ color: COLORS.text.disabled }}>
+                          {item.type}
+                        </span>
+                        <h4
+                          className="text-sm font-medium leading-snug mb-1 line-clamp-2"
+                          style={{ color: COLORS.text.primary }}
+                        >
                           {item.title}
                         </h4>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs" style={{ color: COLORS.text.tertiary }}>
                           {item.roleType} · {item.role}
                         </p>
                       </div>
@@ -183,13 +199,19 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
         </section>
 
         <section className="px-5 py-6 border-t border-gray-100">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">스킬 및 특기</h2>
+          <h2 className="text-lg font-bold mb-4" style={{ color: COLORS.text.primary }}>
+            스킬 및 특기
+          </h2>
           <div className="flex flex-wrap gap-2">
             {(actor.skills ?? []).length === 0 ? (
-              <p className="text-gray-400">등록된 스킬이 없습니다.</p>
+              <p style={{ color: COLORS.text.disabled }}>등록된 스킬이 없습니다.</p>
             ) : (
               (actor.skills ?? []).map((skill, index) => (
-                <span key={index} className="px-3 py-1.5 text-sm text-gray-600 bg-gray-100 rounded-full">
+                <span
+                  key={index}
+                  className="px-3 py-1.5 text-sm rounded-full"
+                  style={{ color: COLORS.text.tertiary, backgroundColor: COLORS.background.secondary }}
+                >
                   {skill}
                 </span>
               ))
@@ -198,10 +220,12 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
         </section>
 
         <section className="px-5 py-6 border-t border-gray-100">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">대표 영상</h2>
+          <h2 className="text-lg font-bold mb-4" style={{ color: COLORS.text.primary }}>
+            대표 영상
+          </h2>
           <div className="space-y-4">
             {(actor.showreels ?? []).length === 0 ? (
-              <p className="text-gray-400">등록된 대표 영상이 없습니다.</p>
+              <p style={{ color: COLORS.text.disabled }}>등록된 대표 영상이 없습니다.</p>
             ) : (
               (actor.showreels ?? []).map((showreel) => (
                 <div key={showreel.id} className="group cursor-pointer">
@@ -218,12 +242,16 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
                     )}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                        <PlayIcon className="w-6 h-6 text-gray-800 ml-1" />
+                        <PlayIcon className="w-6 h-6 ml-1" style={{ color: COLORS.text.primary }} />
                       </div>
                     </div>
                   </div>
-                  <h3 className="text-sm font-medium text-gray-900">{showreel.title}</h3>
-                  <p className="text-xs text-gray-400">{showreel.duration}</p>
+                  <h3 className="text-sm font-medium" style={{ color: COLORS.text.primary }}>
+                    {showreel.title}
+                  </h3>
+                  <p className="text-xs" style={{ color: COLORS.text.disabled }}>
+                    {showreel.duration}
+                  </p>
                 </div>
               ))
             )}
@@ -235,7 +263,8 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
             <button
               onClick={handleDownloadPortfolio}
               disabled={isDownloading}
-              className="flex-1 flex items-center justify-center gap-2 py-3.5 border border-gray-200 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors disabled:opacity-50"
+              className="flex-1 flex items-center justify-center gap-2 py-3.5 border rounded-xl font-medium hover:bg-gray-50 transition-colors disabled:opacity-50"
+              style={{ borderColor: COLORS.border.default, color: COLORS.text.tertiary }}
             >
               <DownloadIcon className="w-5 h-5" />
               <span>{isDownloading ? "다운로드중..." : "포트폴리오"}</span>
@@ -243,7 +272,8 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
             <button
               onClick={handleContact}
               disabled={isContacting}
-              className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-teal-400 rounded-xl text-white font-medium hover:bg-teal-500 transition-colors disabled:opacity-50"
+              className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl font-medium hover:opacity-90 transition-colors disabled:opacity-50"
+              style={{ backgroundColor: COLORS.accent.teal, color: COLORS.background.primary }}
             >
               <PhoneIcon className="w-5 h-5" />
               <span>{isContacting ? "전송중..." : "연락하기"}</span>

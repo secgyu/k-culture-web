@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useGetMyProfile, useUpdateMyProfile, getGetMyProfileQueryKey } from "@/src/users/users";
 import { useQueryClient } from "@tanstack/react-query";
 import { ChevronLeftIcon, ChevronDownIcon, PencilIcon, XCircleIcon } from "@/app/components/Icons";
+import { COLORS } from "@/lib/constants";
 
 const positionOptions = ["배우", "모델", "가수", "MC", "기타"];
 const feeOptions = ["협의", "100만원 이하", "100~300만원", "300~500만원", "500만원 이상"];
@@ -95,9 +96,9 @@ export function ProfileEditForm() {
         <header className="sticky top-0 z-20 bg-white">
           <div className="flex items-center gap-3 px-4 py-4">
             <button onClick={() => router.back()} className="w-10 h-10 flex items-center justify-center -ml-2">
-              <ChevronLeftIcon className="w-6 h-6" style={{ color: "#191F28" }} />
+              <ChevronLeftIcon className="w-6 h-6" style={{ color: COLORS.text.primary }} />
             </button>
-            <h1 className="text-lg font-semibold" style={{ color: "#191F28" }}>
+            <h1 className="text-lg font-semibold" style={{ color: COLORS.text.primary }}>
               프로필 편집 페이지
             </h1>
           </div>
@@ -111,7 +112,7 @@ export function ProfileEditForm() {
               <div className="relative w-[100px] h-[100px]">
                 <div
                   className="w-full h-full rounded-full overflow-hidden flex items-center justify-center"
-                  style={{ backgroundColor: "#8B95A1" }}
+                  style={{ backgroundColor: COLORS.text.muted }}
                 >
                   {profile?.profileImage ? (
                     <Image
@@ -127,15 +128,15 @@ export function ProfileEditForm() {
                 </div>
                 <button
                   className="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-white border flex items-center justify-center"
-                  style={{ borderColor: "#E5E8EB" }}
+                  style={{ borderColor: COLORS.border.default }}
                 >
-                  <PencilIcon className="w-5 h-5" style={{ color: "#8B95A1" }} />
+                  <PencilIcon className="w-5 h-5" style={{ color: COLORS.text.muted }} />
                 </button>
               </div>
             </section>
 
             <section className="px-5 py-4">
-              <label className="block text-sm font-medium mb-2" style={{ color: "#4E5968" }}>
+              <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
                 이름 및 닉네임
               </label>
               <div className="relative">
@@ -145,19 +146,19 @@ export function ProfileEditForm() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="이름을 입력해주세요"
                   className="w-full px-4 py-3 rounded-xl border text-base outline-none"
-                  style={{ borderColor: "#E5E8EB", color: "#191F28" }}
+                  style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
                 />
                 {name && (
                   <button onClick={() => setName("")} className="absolute right-3 top-1/2 -translate-y-1/2">
-                    <XCircleIcon className="w-5 h-5" style={{ color: "#B0B8C1" }} />
+                    <XCircleIcon className="w-5 h-5" style={{ color: COLORS.text.disabled }} />
                   </button>
                 )}
               </div>
             </section>
 
-            <section className="px-5 py-4 border-b" style={{ borderColor: "#E5E8EB" }}>
+            <section className="px-5 py-4 border-b" style={{ borderColor: COLORS.border.default }}>
               <div className="relative">
-                <label className="block text-sm font-medium mb-2" style={{ color: "#4E5968" }}>
+                <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
                   포지션
                 </label>
                 <button
@@ -167,18 +168,18 @@ export function ProfileEditForm() {
                     setIsFeeOpen(false);
                   }}
                   className="w-full px-4 py-3 rounded-xl border text-left flex items-center justify-between text-base"
-                  style={{ borderColor: "#E5E8EB", color: "#191F28" }}
+                  style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
                 >
                   {position}
                   <ChevronDownIcon
                     className={`w-5 h-5 transition-transform ${isPositionOpen ? "rotate-180" : ""}`}
-                    style={{ color: "#6B7684" }}
+                    style={{ color: COLORS.text.tertiary }}
                   />
                 </button>
                 {isPositionOpen && (
                   <div
                     className="absolute z-10 w-full bg-white border rounded-xl shadow-lg mt-1 max-h-60 overflow-y-auto"
-                    style={{ borderColor: "#E5E8EB" }}
+                    style={{ borderColor: COLORS.border.default }}
                   >
                     {positionOptions.map((option) => (
                       <button
@@ -187,8 +188,8 @@ export function ProfileEditForm() {
                           setPosition(option);
                           setIsPositionOpen(false);
                         }}
-                        className="block w-full text-left px-4 py-3 text-base hover:bg-[#F2F4F6]"
-                        style={{ color: "#191F28" }}
+                        className="block w-full text-left px-4 py-3 text-base"
+                        style={{ color: COLORS.text.primary }}
                       >
                         {option}
                       </button>
@@ -199,7 +200,7 @@ export function ProfileEditForm() {
             </section>
 
             <section className="px-5 py-4">
-              <label className="block text-sm font-medium mb-2" style={{ color: "#4E5968" }}>
+              <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
                 소속사
               </label>
               <input
@@ -208,12 +209,12 @@ export function ProfileEditForm() {
                 onChange={(e) => setAgency(e.target.value)}
                 placeholder="소속사를 입력해주세요"
                 className="w-full px-4 py-3 rounded-xl border text-base outline-none"
-                style={{ borderColor: "#E5E8EB", color: "#191F28" }}
+                style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
               />
             </section>
 
             <section className="px-5 py-4">
-              <label className="block text-sm font-medium mb-2" style={{ color: "#4E5968" }}>
+              <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
                 이메일
               </label>
               <input
@@ -221,12 +222,12 @@ export function ProfileEditForm() {
                 value={profile?.email ?? ""}
                 disabled
                 className="w-full px-4 py-3 rounded-xl border text-base outline-none bg-gray-50"
-                style={{ borderColor: "#E5E8EB", color: "#8B95A1" }}
+                style={{ borderColor: COLORS.border.default, color: COLORS.text.muted }}
               />
             </section>
 
             <section className="px-5 py-4">
-              <label className="block text-sm font-medium mb-2" style={{ color: "#4E5968" }}>
+              <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
                 연락처
               </label>
               <input
@@ -235,21 +236,21 @@ export function ProfileEditForm() {
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="연락처를 입력해주세요"
                 className="w-full px-4 py-3 rounded-xl border text-base outline-none"
-                style={{ borderColor: "#E5E8EB", color: "#191F28" }}
+                style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
               />
             </section>
 
-            <section className="px-5 py-4 border-b" style={{ borderColor: "#E5E8EB" }}>
+            <section className="px-5 py-4 border-b" style={{ borderColor: COLORS.border.default }}>
               <button
                 onClick={() => setIsBioOpen(!isBioOpen)}
                 className="w-full flex items-center justify-between py-2"
               >
-                <span className="text-sm font-medium" style={{ color: "#4E5968" }}>
+                <span className="text-sm font-medium" style={{ color: COLORS.text.secondary }}>
                   자기소개
                 </span>
                 <ChevronDownIcon
                   className={`w-5 h-5 transition-transform ${isBioOpen ? "rotate-180" : ""}`}
-                  style={{ color: "#6B7684" }}
+                  style={{ color: COLORS.text.tertiary }}
                 />
               </button>
               {isBioOpen && (
@@ -259,30 +260,30 @@ export function ProfileEditForm() {
                   placeholder="자기소개를 입력해주세요"
                   rows={4}
                   className="w-full px-4 py-3 rounded-xl border text-base outline-none resize-none mt-2"
-                  style={{ borderColor: "#E5E8EB", color: "#191F28" }}
+                  style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
                 />
               )}
             </section>
 
             <section className="px-5 py-4">
-              <div className="rounded-xl border p-4" style={{ borderColor: "#E5E8EB" }}>
+              <div className="rounded-xl border p-4" style={{ borderColor: COLORS.border.default }}>
                 <button
                   onClick={() => setIsBasicInfoOpen(!isBasicInfoOpen)}
                   className="w-full flex items-center justify-between"
                 >
-                  <span className="text-base font-semibold" style={{ color: "#191F28" }}>
+                  <span className="text-base font-semibold" style={{ color: COLORS.text.primary }}>
                     기본 인적사항
                   </span>
                   <ChevronDownIcon
                     className={`w-5 h-5 transition-transform ${isBasicInfoOpen ? "rotate-180" : ""}`}
-                    style={{ color: "#6B7684" }}
+                    style={{ color: COLORS.text.tertiary }}
                   />
                 </button>
 
                 {isBasicInfoOpen && (
                   <div className="mt-4 space-y-4">
                     <div className="relative">
-                      <label className="block text-sm font-medium mb-2" style={{ color: "#4E5968" }}>
+                      <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
                         출연료
                       </label>
                       <button
@@ -292,18 +293,18 @@ export function ProfileEditForm() {
                           setIsPositionOpen(false);
                         }}
                         className="w-full px-4 py-3 rounded-xl border text-left flex items-center justify-between text-base"
-                        style={{ borderColor: "#E5E8EB", color: "#191F28" }}
+                        style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
                       >
                         {fee}
                         <ChevronDownIcon
                           className={`w-5 h-5 transition-transform ${isFeeOpen ? "rotate-180" : ""}`}
-                          style={{ color: "#6B7684" }}
+                          style={{ color: COLORS.text.tertiary }}
                         />
                       </button>
                       {isFeeOpen && (
                         <div
                           className="absolute z-10 w-full bg-white border rounded-xl shadow-lg mt-1 max-h-60 overflow-y-auto"
-                          style={{ borderColor: "#E5E8EB" }}
+                          style={{ borderColor: COLORS.border.default }}
                         >
                           {feeOptions.map((option) => (
                             <button
@@ -312,8 +313,8 @@ export function ProfileEditForm() {
                                 setFee(option);
                                 setIsFeeOpen(false);
                               }}
-                              className="block w-full text-left px-4 py-3 text-base hover:bg-[#F2F4F6]"
-                              style={{ color: "#191F28" }}
+                              className="block w-full text-left px-4 py-3 text-base"
+                              style={{ color: COLORS.text.primary }}
                             >
                               {option}
                             </button>
@@ -323,7 +324,7 @@ export function ProfileEditForm() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2" style={{ color: "#4E5968" }}>
+                      <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
                         키 (cm)
                       </label>
                       <input
@@ -332,12 +333,12 @@ export function ProfileEditForm() {
                         onChange={(e) => setHeight(e.target.value)}
                         placeholder="키를 입력해주세요"
                         className="w-full px-4 py-3 rounded-xl border text-base outline-none"
-                        style={{ borderColor: "#E5E8EB", color: "#191F28" }}
+                        style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2" style={{ color: "#4E5968" }}>
+                      <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
                         몸무게 (kg)
                       </label>
                       <input
@@ -346,7 +347,7 @@ export function ProfileEditForm() {
                         onChange={(e) => setWeight(e.target.value)}
                         placeholder="몸무게를 입력해주세요"
                         className="w-full px-4 py-3 rounded-xl border text-base outline-none"
-                        style={{ borderColor: "#E5E8EB", color: "#191F28" }}
+                        style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
                       />
                     </div>
                   </div>
@@ -360,8 +361,8 @@ export function ProfileEditForm() {
           <button
             onClick={handleSave}
             disabled={isUpdating || isLoading}
-            className="w-full py-4 rounded-xl font-medium text-white disabled:opacity-50"
-            style={{ backgroundColor: "#191F28" }}
+            className="w-full py-4 rounded-xl font-medium disabled:opacity-50"
+            style={{ backgroundColor: COLORS.text.primary, color: COLORS.background.primary }}
           >
             {isUpdating ? "저장중..." : "프로필 업데이트"}
           </button>
