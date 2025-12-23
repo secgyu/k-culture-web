@@ -33,7 +33,8 @@ export default function ResetPasswordPage() {
       <StickyHeader href="/login" title="비밀번호 재설정" />
       <main className="flex-1 px-5 pt-8">
         <p className="text-sm mb-8" style={{ color: COLORS.text.secondary }}>
-          이메일로 전송된 인증 코드와 새 비밀번호를<br />
+          이메일로 전송된 인증 코드와 새 비밀번호를
+          <br />
           입력해 주세요.
         </p>
 
@@ -110,4 +111,3 @@ export default function ResetPasswordPage() {
     </PageLayout>
   );
 }
-
