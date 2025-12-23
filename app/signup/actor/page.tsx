@@ -114,6 +114,7 @@ export default function ActorSignupPage() {
               value={introduction}
               onChange={(e) => setIntroduction(e.target.value)}
               rows={5}
+              className="focus:border-gray-400"
             />
           </div>
           <div className="space-y-2 pt-2">
