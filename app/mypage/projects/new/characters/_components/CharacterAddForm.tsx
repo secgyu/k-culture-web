@@ -83,7 +83,7 @@ export function CharacterAddForm() {
         <div>
           <FormLabel className="block mb-2">캐릭터명</FormLabel>
           <div className="relative">
-              <TextInput
+            <TextInput
               value={characterName}
               onChange={(e) => setCharacterName(e.target.value)}
               placeholder="캐릭터명을 입력해주세요"

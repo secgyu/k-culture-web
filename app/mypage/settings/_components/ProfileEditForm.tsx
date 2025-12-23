@@ -188,7 +188,7 @@ export function ProfileEditForm() {
 
           <section className="px-5 py-4">
             <FormLabel className="block mb-2">소속사</FormLabel>
-              <TextInput
+            <TextInput
               value={agency}
               onChange={(e) => setAgency(e.target.value)}
               placeholder="소속사를 입력해주세요"
