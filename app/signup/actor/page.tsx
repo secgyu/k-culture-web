@@ -8,6 +8,7 @@ import { PageLayout } from "@/app/components/PageLayout";
 import { Button } from "@/components/ui/button";
 import { ClearButton } from "@/app/components/ClearButton";
 import { FormLabel } from "@/app/components/FormLabel";
+import { TextArea } from "@/app/components/TextArea";
 import { AgeSelectModal } from "../_components";
 import { COLORS } from "@/lib/constants";
 
@@ -108,16 +109,11 @@ export default function ActorSignupPage() {
           </div>
           <div className="space-y-2 pt-2">
             <FormLabel>한 줄 소개</FormLabel>
-            <textarea
+            <TextArea
               placeholder="캐릭터를 잘 나타내는 한 줄 소개를 작성해 보세요"
               value={introduction}
               onChange={(e) => setIntroduction(e.target.value)}
               rows={5}
-              className="w-full p-4 text-base border rounded-xl focus:border-gray-400 focus:outline-none resize-none"
-              style={{
-                color: COLORS.text.primary,
-                borderColor: COLORS.border.default,
-              }}
             />
           </div>
           <div className="space-y-2 pt-2">

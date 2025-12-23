@@ -12,6 +12,7 @@ import { FixedBottomArea } from "@/app/components/FixedBottomArea";
 import { PrimaryButton } from "@/app/components/PrimaryButton";
 import { FormLabel } from "@/app/components/FormLabel";
 import { TextInput } from "@/app/components/TextInput";
+import { TextArea } from "@/app/components/TextArea";
 import { COLORS, POSITION_OPTIONS, FEE_OPTIONS } from "@/lib/constants";
 
 function FormSkeleton() {
@@ -230,13 +231,12 @@ export function ProfileEditForm() {
               />
             </button>
             {isBioOpen && (
-              <textarea
+              <TextArea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="자기소개를 입력해주세요"
                 rows={4}
-                className="w-full px-4 py-3 rounded-xl border text-base outline-none resize-none mt-2"
-                style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
+                className="mt-2"
               />
             )}
           </section>

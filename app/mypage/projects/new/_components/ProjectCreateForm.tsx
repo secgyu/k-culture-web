@@ -11,6 +11,7 @@ import { FixedBottomArea } from "@/app/components/FixedBottomArea";
 import { PrimaryButton } from "@/app/components/PrimaryButton";
 import { FormSection } from "@/app/components/FormSection";
 import { TextInput } from "@/app/components/TextInput";
+import { TextArea } from "@/app/components/TextArea";
 import type { ProjectCreateRequestGenre } from "@/src/model/projectCreateRequestGenre";
 import type { ProjectCreateRequestProjectType } from "@/src/model/projectCreateRequestProjectType";
 import { COLORS, PROJECT_TYPE_OPTIONS, PROJECT_GENRE_OPTIONS } from "@/lib/constants";

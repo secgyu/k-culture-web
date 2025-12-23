@@ -11,6 +11,7 @@ import { FixedBottomArea } from "@/app/components/FixedBottomArea";
 import { PrimaryButton } from "@/app/components/PrimaryButton";
 import { FormLabel } from "@/app/components/FormLabel";
 import { TextInput } from "@/app/components/TextInput";
+import { TextArea } from "@/app/components/TextArea";
 import type { CharacterCreateRequestGender } from "@/src/model/characterCreateRequestGender";
 import type { CharacterCreateRequestRoleType } from "@/src/model/characterCreateRequestRoleType";
 import { COLORS, AGE_RANGE_OPTIONS, GENDER_OPTIONS, ROLE_TYPE_OPTIONS } from "@/lib/constants";
@@ -223,13 +224,11 @@ export function CharacterAddForm() {
 
         <div>
           <FormLabel className="block mb-2">상세 설명</FormLabel>
-          <textarea
+          <TextArea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="캐릭터에 대한 상세 설명을 입력해주세요"
             rows={4}
-            className="w-full px-4 py-3 rounded-xl border text-base outline-none resize-none"
-            style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
           />
         </div>
 
