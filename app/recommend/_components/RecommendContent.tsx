@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Header from "../../components/Header";
+import { PageLayout } from "../../components/PageLayout";
 import FilterBar from "../../components/FilterBar";
 import FilterModal from "../../components/FilterModal";
 import EmptyState from "../../components/EmptyState";
@@ -89,50 +90,48 @@ export function RecommendContent() {
   const hasResults = hasSearched && actors.length > 0;
 
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center">
-      <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col border-x border-gray-200 overflow-hidden">
-        <Header title="역 추천 배우" highlightedName="서은우" />
+    <PageLayout>
+      <Header title="역 추천 배우" highlightedName="서은우" />
 
-        <FilterBar
-          filters={filterOptions}
-          selectedFilters={Object.fromEntries(
-            Object.entries(selectedFilters).map(([key, value]) => {
-              const option = filterOptionsData[key]?.find((opt) => opt.value === value);
-              return [key, option?.label ?? value];
-            })
-          )}
-          onFilterClick={handleFilterClick}
-        />
+      <FilterBar
+        filters={filterOptions}
+        selectedFilters={Object.fromEntries(
+          Object.entries(selectedFilters).map(([key, value]) => {
+            const option = filterOptionsData[key]?.find((opt) => opt.value === value);
+            return [key, option?.label ?? value];
+          })
+        )}
+        onFilterClick={handleFilterClick}
+      />
 
-        <main className="flex-1 flex flex-col justify-between pb-5">
-          {isPending ? (
-            <div className="flex-1 flex items-center justify-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
-            </div>
-          ) : hasResults ? (
-            <ActorCarousel actors={actors} />
-          ) : (
-            <EmptyState
-              message={
-                hasSearched
-                  ? `검색조건에 해당되는 배우를\n찾을 수 없습니다`
-                  : `조건을 선택하면\nAI가 배우를 추천해드립니다`
-              }
-              buttonLabel="조건 선택하기"
-              onButtonClick={handleEmptyButtonClick}
-            />
-          )}
-        </main>
+      <main className="flex-1 flex flex-col justify-between pb-5">
+        {isPending ? (
+          <div className="flex-1 flex items-center justify-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
+          </div>
+        ) : hasResults ? (
+          <ActorCarousel actors={actors} />
+        ) : (
+          <EmptyState
+            message={
+              hasSearched
+                ? `검색조건에 해당되는 배우를\n찾을 수 없습니다`
+                : `조건을 선택하면\nAI가 배우를 추천해드립니다`
+            }
+            buttonLabel="조건 선택하기"
+            onButtonClick={handleEmptyButtonClick}
+          />
+        )}
+      </main>
 
-        <FilterModal
-          isOpen={activeFilterId !== null}
-          onClose={handleCloseModal}
-          title={activeFilterId ? filterTitles[activeFilterId] : ""}
-          options={activeFilterId ? filterOptionsData[activeFilterId] || [] : []}
-          selectedValue={activeFilterId ? selectedFilters[activeFilterId] : undefined}
-          onSelect={handleFilterSelect}
-        />
-      </div>
-    </div>
+      <FilterModal
+        isOpen={activeFilterId !== null}
+        onClose={handleCloseModal}
+        title={activeFilterId ? filterTitles[activeFilterId] : ""}
+        options={activeFilterId ? filterOptionsData[activeFilterId] || [] : []}
+        selectedValue={activeFilterId ? selectedFilters[activeFilterId] : undefined}
+        onSelect={handleFilterSelect}
+      />
+    </PageLayout>
   );
 }

@@ -4,6 +4,7 @@ import { useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { EyeIcon, EyeOffIcon } from "@/app/components/Icons";
 import { BackHeader } from "@/app/components/BackHeader";
+import { PageLayout } from "@/app/components/PageLayout";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { TermsModal } from "./_components";
@@ -90,90 +91,86 @@ function SignupContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center">
-      <div className="relative w-full max-w-lg bg-white min-h-screen flex flex-col border-x border-gray-200 overflow-hidden">
-        <BackHeader href="/" title="회원가입" centered />
-        <main className="flex-1 w-full px-5 py-6">
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">이메일 주소</label>
-              <Input
-                type="email"
-                placeholder="이메일 주소 입력"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onBlur={() => handleBlur("email")}
-                aria-invalid={!!computedErrors.email}
-                className="h-12 text-base border-gray-200 focus:border-gray-400"
-              />
-              {computedErrors.email && <p className="text-sm text-red-500">{computedErrors.email}</p>}
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">비밀번호</label>
-              <div className="relative">
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="비밀번호 입력"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onBlur={() => handleBlur("password")}
-                  aria-invalid={!!computedErrors.password}
-                  className="h-12 text-base border-gray-200 focus:border-gray-400 pr-12"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
-                >
-                  {showPassword ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
-                </button>
-              </div>
-              {computedErrors.password && <p className="text-sm text-red-500">{computedErrors.password}</p>}
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">비밀번호 확인</label>
-              <div className="relative">
-                <Input
-                  type={showPasswordConfirm ? "text" : "password"}
-                  placeholder="비밀번호 다시 입력"
-                  value={passwordConfirm}
-                  onChange={(e) => setPasswordConfirm(e.target.value)}
-                  onBlur={() => handleBlur("passwordConfirm")}
-                  aria-invalid={!!computedErrors.passwordConfirm}
-                  className="h-12 text-base border-gray-200 focus:border-gray-400 pr-12"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  aria-label={showPasswordConfirm ? "비밀번호 숨기기" : "비밀번호 보기"}
-                >
-                  {showPasswordConfirm ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
-                </button>
-              </div>
-              {computedErrors.passwordConfirm && (
-                <p className="text-sm text-red-500">{computedErrors.passwordConfirm}</p>
-              )}
-            </div>
+    <PageLayout>
+      <BackHeader href="/" title="회원가입" centered />
+      <main className="flex-1 w-full px-5 py-6">
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700">이메일 주소</label>
+            <Input
+              type="email"
+              placeholder="이메일 주소 입력"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => handleBlur("email")}
+              aria-invalid={!!computedErrors.email}
+              className="h-12 text-base border-gray-200 focus:border-gray-400"
+            />
+            {computedErrors.email && <p className="text-sm text-red-500">{computedErrors.email}</p>}
           </div>
-        </main>
-        <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4 w-full">
-          <Button
-            onClick={handleSubmit}
-            disabled={!computedIsValid}
-            className={`w-full h-14 text-base font-semibold rounded-xl transition-all ${
-              computedIsValid
-                ? "bg-gray-900 hover:bg-gray-800 text-white"
-                : "bg-gray-100 text-gray-400 cursor-not-allowed"
-            }`}
-          >
-            다음
-          </Button>
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700">비밀번호</label>
+            <div className="relative">
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="비밀번호 입력"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onBlur={() => handleBlur("password")}
+                aria-invalid={!!computedErrors.password}
+                className="h-12 text-base border-gray-200 focus:border-gray-400 pr-12"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
+              >
+                {showPassword ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+              </button>
+            </div>
+            {computedErrors.password && <p className="text-sm text-red-500">{computedErrors.password}</p>}
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700">비밀번호 확인</label>
+            <div className="relative">
+              <Input
+                type={showPasswordConfirm ? "text" : "password"}
+                placeholder="비밀번호 다시 입력"
+                value={passwordConfirm}
+                onChange={(e) => setPasswordConfirm(e.target.value)}
+                onBlur={() => handleBlur("passwordConfirm")}
+                aria-invalid={!!computedErrors.passwordConfirm}
+                className="h-12 text-base border-gray-200 focus:border-gray-400 pr-12"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                aria-label={showPasswordConfirm ? "비밀번호 숨기기" : "비밀번호 보기"}
+              >
+                {showPasswordConfirm ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+              </button>
+            </div>
+            {computedErrors.passwordConfirm && <p className="text-sm text-red-500">{computedErrors.passwordConfirm}</p>}
+          </div>
         </div>
-        <TermsModal open={showTermsModal} onOpenChange={setShowTermsModal} onAgree={handleTermsAgree} />
+      </main>
+      <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4 w-full">
+        <Button
+          onClick={handleSubmit}
+          disabled={!computedIsValid}
+          className={`w-full h-14 text-base font-semibold rounded-xl transition-all ${
+            computedIsValid
+              ? "bg-gray-900 hover:bg-gray-800 text-white"
+              : "bg-gray-100 text-gray-400 cursor-not-allowed"
+          }`}
+        >
+          다음
+        </Button>
       </div>
-    </div>
+      <TermsModal open={showTermsModal} onOpenChange={setShowTermsModal} onAgree={handleTermsAgree} />
+    </PageLayout>
   );
 }
 
