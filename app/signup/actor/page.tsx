@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { BackHeader } from "@/app/components/BackHeader";
 import { Button } from "@/components/ui/button";
+import { XMarkIcon } from "@/app/components/Icons";
 import { AgeSelectModal } from "../_components";
 import { COLORS } from "@/lib/constants";
 
@@ -110,15 +111,7 @@ export default function ActorSignupPage() {
                     className="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center"
                     style={{ backgroundColor: COLORS.text.muted }}
                   >
-                    <svg
-                      className="w-3 h-3 text-white"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={3}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    <XMarkIcon className="w-3 h-3 text-white" strokeWidth={3} />
                   </button>
                 )}
               </div>

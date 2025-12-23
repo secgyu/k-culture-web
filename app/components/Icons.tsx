@@ -1,6 +1,7 @@
 export interface IconProps {
   className?: string;
   style?: React.CSSProperties;
+  strokeWidth?: number;
 }
 
 export function ChevronLeftIcon({ className, style }: IconProps) {
@@ -47,9 +48,16 @@ export function PlusIcon({ className, style }: IconProps) {
   );
 }
 
-export function XMarkIcon({ className, style }: IconProps) {
+export function XMarkIcon({ className, style, strokeWidth = 1.5 }: IconProps) {
   return (
-    <svg className={className} style={style} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+    <svg
+      className={className}
+      style={style}
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={strokeWidth}
+      stroke="currentColor"
+    >
       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
   );
