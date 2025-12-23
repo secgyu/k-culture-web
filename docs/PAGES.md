@@ -11,6 +11,7 @@
 | 비밀번호 찾기   | http://localhost:3000/forgot-password |
 | 비밀번호 재설정 | http://localhost:3000/reset-password  |
 | 추천            | http://localhost:3000/recommend       |
+| 알림            | http://localhost:3000/notifications   |
 | API 문서        | http://localhost:3000/api-docs        |
 
 ## 회원가입
