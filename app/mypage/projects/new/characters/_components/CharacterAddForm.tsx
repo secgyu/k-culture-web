@@ -9,6 +9,7 @@ import { PageLayout } from "@/app/components/PageLayout";
 import { StickyHeader } from "@/app/components/StickyHeader";
 import { FixedBottomArea } from "@/app/components/FixedBottomArea";
 import { PrimaryButton } from "@/app/components/PrimaryButton";
+import { FormLabel } from "@/app/components/FormLabel";
 import type { CharacterCreateRequestGender } from "@/src/model/characterCreateRequestGender";
 import type { CharacterCreateRequestRoleType } from "@/src/model/characterCreateRequestRoleType";
 import { COLORS, AGE_RANGE_OPTIONS, GENDER_OPTIONS, ROLE_TYPE_OPTIONS } from "@/lib/constants";
@@ -79,9 +80,7 @@ export function CharacterAddForm() {
 
       <main className="flex-1 px-5 py-4 pb-32 space-y-6">
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-            캐릭터명
-          </label>
+          <FormLabel className="block mb-2">캐릭터명</FormLabel>
           <div className="relative">
             <input
               type="text"
@@ -100,9 +99,7 @@ export function CharacterAddForm() {
         </div>
 
         <div className="relative">
-          <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-            나이
-          </label>
+          <FormLabel className="block mb-2">나이</FormLabel>
           <button
             type="button"
             onClick={() => {
@@ -144,9 +141,7 @@ export function CharacterAddForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-            성별
-          </label>
+          <FormLabel className="block mb-2">성별</FormLabel>
           <div className="flex gap-2">
             {genderOptions.map((option) => (
               <button
@@ -165,9 +160,7 @@ export function CharacterAddForm() {
         </div>
 
         <div className="relative">
-          <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-            역할 유형
-          </label>
+          <FormLabel className="block mb-2">역할 유형</FormLabel>
           <button
             type="button"
             onClick={() => {
@@ -209,9 +202,7 @@ export function CharacterAddForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-            특이사항
-          </label>
+          <FormLabel className="block mb-2">특이사항</FormLabel>
           <div className="flex flex-wrap gap-2">
             {specialTags.map((tag) => (
               <button
@@ -232,9 +223,7 @@ export function CharacterAddForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-            상세 설명
-          </label>
+          <FormLabel className="block mb-2">상세 설명</FormLabel>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -246,9 +235,7 @@ export function CharacterAddForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-            키워드 추가
-          </label>
+          <FormLabel className="block mb-2">키워드 추가</FormLabel>
 
           {keywords.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-3">

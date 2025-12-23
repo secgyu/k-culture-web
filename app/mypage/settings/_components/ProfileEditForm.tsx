@@ -10,6 +10,7 @@ import { PageLayout } from "@/app/components/PageLayout";
 import { StickyHeader } from "@/app/components/StickyHeader";
 import { FixedBottomArea } from "@/app/components/FixedBottomArea";
 import { PrimaryButton } from "@/app/components/PrimaryButton";
+import { FormLabel } from "@/app/components/FormLabel";
 import { COLORS, POSITION_OPTIONS, FEE_OPTIONS } from "@/lib/constants";
 
 function FormSkeleton() {
@@ -127,9 +128,7 @@ export function ProfileEditForm() {
           </section>
 
           <section className="px-5 py-4">
-            <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-              이름 및 닉네임
-            </label>
+            <FormLabel className="block mb-2">이름 및 닉네임</FormLabel>
             <div className="relative">
               <input
                 type="text"
@@ -149,9 +148,7 @@ export function ProfileEditForm() {
 
           <section className="px-5 py-4 border-b" style={{ borderColor: COLORS.border.default }}>
             <div className="relative">
-              <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-                포지션
-              </label>
+              <FormLabel className="block mb-2">포지션</FormLabel>
               <button
                 type="button"
                 onClick={() => {
@@ -191,9 +188,7 @@ export function ProfileEditForm() {
           </section>
 
           <section className="px-5 py-4">
-            <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-              소속사
-            </label>
+            <FormLabel className="block mb-2">소속사</FormLabel>
             <input
               type="text"
               value={agency}
@@ -205,9 +200,7 @@ export function ProfileEditForm() {
           </section>
 
           <section className="px-5 py-4">
-            <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-              이메일
-            </label>
+            <FormLabel className="block mb-2">이메일</FormLabel>
             <input
               type="email"
               value={profile?.email ?? ""}
@@ -218,9 +211,7 @@ export function ProfileEditForm() {
           </section>
 
           <section className="px-5 py-4">
-            <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-              연락처
-            </label>
+            <FormLabel className="block mb-2">연락처</FormLabel>
             <input
               type="tel"
               value={phone}

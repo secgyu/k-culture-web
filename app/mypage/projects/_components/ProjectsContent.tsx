@@ -179,7 +179,10 @@ export function ProjectsContent() {
       </main>
 
       <FixedBottomArea>
-        <PrimaryButton onClick={() => router.push("/mypage/projects/new")} className="flex items-center justify-center gap-2">
+        <PrimaryButton
+          onClick={() => router.push("/mypage/projects/new")}
+          className="flex items-center justify-center gap-2"
+        >
           <PlusIcon className="w-5 h-5" />
           <span>새 프로젝트 추가하기</span>
         </PrimaryButton>

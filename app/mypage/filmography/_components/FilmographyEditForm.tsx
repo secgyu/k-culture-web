@@ -15,6 +15,7 @@ import { StickyHeader } from "@/app/components/StickyHeader";
 import { FilmographyItemType } from "@/src/model/filmographyItemType";
 import { FilmographyItemRoleType } from "@/src/model/filmographyItemRoleType";
 import { COLORS, generateYears } from "@/lib/constants";
+import { FormLabel } from "@/app/components/FormLabel";
 
 const roleTypes = Object.values(FilmographyItemRoleType);
 const years = generateYears(30);
@@ -115,9 +116,7 @@ export function FilmographyEditForm({ filmographyId }: FilmographyEditFormProps)
       ) : (
         <main className="flex-1 px-5 py-6 space-y-6">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-              작품명
-            </label>
+            <FormLabel className="block mb-2">작품명</FormLabel>
             <div
               className="relative flex items-center border rounded-xl px-4 py-3"
               style={{ borderColor: COLORS.border.default }}
@@ -139,9 +138,7 @@ export function FilmographyEditForm({ filmographyId }: FilmographyEditFormProps)
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-              연도
-            </label>
+            <FormLabel className="block mb-2">연도</FormLabel>
             <div className="relative">
               <button
                 onClick={() => {
@@ -178,9 +175,7 @@ export function FilmographyEditForm({ filmographyId }: FilmographyEditFormProps)
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-              장르
-            </label>
+            <FormLabel className="block mb-2">장르</FormLabel>
             <div className="relative">
               <button
                 onClick={() => {
@@ -217,9 +212,7 @@ export function FilmographyEditForm({ filmographyId }: FilmographyEditFormProps)
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-              역할 배역
-            </label>
+            <FormLabel className="block mb-2">역할 배역</FormLabel>
             <div
               className="relative flex items-center border rounded-xl px-4 py-3"
               style={{ borderColor: COLORS.border.default }}
@@ -241,9 +234,7 @@ export function FilmographyEditForm({ filmographyId }: FilmographyEditFormProps)
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: COLORS.text.secondary }}>
-              역할 타입
-            </label>
+            <FormLabel className="block mb-2">역할 타입</FormLabel>
             <div className="flex flex-wrap gap-2">
               {roleTypes.map((type) => (
                 <button
