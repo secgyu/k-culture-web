@@ -10,6 +10,7 @@ import { StickyHeader } from "@/app/components/StickyHeader";
 import { FixedBottomArea } from "@/app/components/FixedBottomArea";
 import { PrimaryButton } from "@/app/components/PrimaryButton";
 import { FormLabel } from "@/app/components/FormLabel";
+import { TextInput } from "@/app/components/TextInput";
 import type { CharacterCreateRequestGender } from "@/src/model/characterCreateRequestGender";
 import type { CharacterCreateRequestRoleType } from "@/src/model/characterCreateRequestRoleType";
 import { COLORS, AGE_RANGE_OPTIONS, GENDER_OPTIONS, ROLE_TYPE_OPTIONS } from "@/lib/constants";
@@ -82,13 +83,11 @@ export function CharacterAddForm() {
         <div>
           <FormLabel className="block mb-2">캐릭터명</FormLabel>
           <div className="relative">
-            <input
-              type="text"
+              <TextInput
               value={characterName}
               onChange={(e) => setCharacterName(e.target.value)}
               placeholder="캐릭터명을 입력해주세요"
-              className="w-full px-4 py-3 rounded-xl border text-base outline-none"
-              style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
+              variant="box"
             />
             {characterName && (
               <button onClick={() => setCharacterName("")} className="absolute right-3 top-1/2 -translate-y-1/2">

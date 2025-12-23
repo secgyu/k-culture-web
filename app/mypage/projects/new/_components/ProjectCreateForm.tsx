@@ -10,6 +10,7 @@ import { StickyHeader } from "@/app/components/StickyHeader";
 import { FixedBottomArea } from "@/app/components/FixedBottomArea";
 import { PrimaryButton } from "@/app/components/PrimaryButton";
 import { FormSection } from "@/app/components/FormSection";
+import { TextInput } from "@/app/components/TextInput";
 import type { ProjectCreateRequestGenre } from "@/src/model/projectCreateRequestGenre";
 import type { ProjectCreateRequestProjectType } from "@/src/model/projectCreateRequestProjectType";
 import { COLORS, PROJECT_TYPE_OPTIONS, PROJECT_GENRE_OPTIONS } from "@/lib/constants";
@@ -71,13 +72,10 @@ export function ProjectCreateForm() {
           <label className="block text-sm mb-2" style={{ color: COLORS.text.muted }}>
             프로젝트명
           </label>
-          <input
-            type="text"
+          <TextInput
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
             placeholder="프로젝트명을 입력해주세요"
-            className="w-full text-base outline-none"
-            style={{ color: COLORS.text.primary }}
           />
         </FormSection>
 
@@ -85,14 +83,7 @@ export function ProjectCreateForm() {
           <label className="block text-sm mb-2" style={{ color: COLORS.text.muted }}>
             제작사
           </label>
-          <input
-            type="text"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-            placeholder="제작사를 입력해주세요"
-            className="w-full text-base outline-none"
-            style={{ color: COLORS.text.primary }}
-          />
+          <TextInput value={company} onChange={(e) => setCompany(e.target.value)} placeholder="제작사를 입력해주세요" />
         </FormSection>
 
         <FormSection className="relative">
@@ -177,13 +168,10 @@ export function ProjectCreateForm() {
           <label className="block text-sm mb-2" style={{ color: COLORS.text.muted }}>
             촬영 기간
           </label>
-          <input
-            type="text"
+          <TextInput
             value={shootingPeriod}
             onChange={(e) => setShootingPeriod(e.target.value)}
             placeholder="예: 2024.03 ~ 2024.06"
-            className="w-full text-base outline-none"
-            style={{ color: COLORS.text.primary }}
           />
         </FormSection>
 

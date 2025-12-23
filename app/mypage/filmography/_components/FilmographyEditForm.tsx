@@ -16,6 +16,7 @@ import { FilmographyItemType } from "@/src/model/filmographyItemType";
 import { FilmographyItemRoleType } from "@/src/model/filmographyItemRoleType";
 import { COLORS, generateYears } from "@/lib/constants";
 import { FormLabel } from "@/app/components/FormLabel";
+import { TextInput } from "@/app/components/TextInput";
 
 const roleTypes = Object.values(FilmographyItemRoleType);
 const years = generateYears(30);
@@ -121,13 +122,11 @@ export function FilmographyEditForm({ filmographyId }: FilmographyEditFormProps)
               className="relative flex items-center border rounded-xl px-4 py-3"
               style={{ borderColor: COLORS.border.default }}
             >
-              <input
-                type="text"
+              <TextInput
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="작품명을 입력하세요"
-                className="flex-1 text-base outline-none bg-transparent"
-                style={{ color: COLORS.text.primary }}
+                className="flex-1 bg-transparent"
               />
               {title && (
                 <button onClick={() => setTitle("")} className="ml-2">
@@ -217,13 +216,11 @@ export function FilmographyEditForm({ filmographyId }: FilmographyEditFormProps)
               className="relative flex items-center border rounded-xl px-4 py-3"
               style={{ borderColor: COLORS.border.default }}
             >
-              <input
-                type="text"
+              <TextInput
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
                 placeholder="배역 이름을 입력하세요"
-                className="flex-1 text-base outline-none bg-transparent"
-                style={{ color: COLORS.text.primary }}
+                className="flex-1 bg-transparent"
               />
               {role && (
                 <button onClick={() => setRole("")} className="ml-2">

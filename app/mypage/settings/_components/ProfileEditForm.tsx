@@ -11,6 +11,7 @@ import { StickyHeader } from "@/app/components/StickyHeader";
 import { FixedBottomArea } from "@/app/components/FixedBottomArea";
 import { PrimaryButton } from "@/app/components/PrimaryButton";
 import { FormLabel } from "@/app/components/FormLabel";
+import { TextInput } from "@/app/components/TextInput";
 import { COLORS, POSITION_OPTIONS, FEE_OPTIONS } from "@/lib/constants";
 
 function FormSkeleton() {
@@ -130,13 +131,11 @@ export function ProfileEditForm() {
           <section className="px-5 py-4">
             <FormLabel className="block mb-2">이름 및 닉네임</FormLabel>
             <div className="relative">
-              <input
-                type="text"
+              <TextInput
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="이름을 입력해주세요"
-                className="w-full px-4 py-3 rounded-xl border text-base outline-none"
-                style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
+                variant="box"
               />
               {name && (
                 <button onClick={() => setName("")} className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -189,13 +188,11 @@ export function ProfileEditForm() {
 
           <section className="px-5 py-4">
             <FormLabel className="block mb-2">소속사</FormLabel>
-            <input
-              type="text"
+              <TextInput
               value={agency}
               onChange={(e) => setAgency(e.target.value)}
               placeholder="소속사를 입력해주세요"
-              className="w-full px-4 py-3 rounded-xl border text-base outline-none"
-              style={{ borderColor: COLORS.border.default, color: COLORS.text.primary }}
+              variant="box"
             />
           </section>
 
