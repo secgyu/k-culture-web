@@ -291,56 +291,97 @@ function IntroSection() {
   );
 }
 
-// 기능 섹션 1: 배우 검색
-function FeatureSearchSection() {
+// 기능 섹션 1: 등록 폼 미리보기
+function FeatureRegistrationSection() {
+  const formFields = [
+    { num: 1, label: "구분", required: true },
+    { num: 2, label: "이름(또는 활동명)", required: true },
+    { num: 16, label: "스타일 키워드 (복수 선택 - 최대 10개)", required: true },
+    { num: 17, label: "구사언어 (복수 선택 가능)", required: false },
+    { num: 18, label: "사투리 (복수 선택 가능)", required: false },
+  ];
+
+  const styleKeywords = [
+    { label: "귀여운", selected: false },
+    { label: "강아지상", selected: true },
+    { label: "평온한", selected: false },
+    { label: "부드러운", selected: false },
+    { label: "사랑스러운", selected: true },
+  ];
+
+  const languages = [
+    { label: "한국어", selected: true },
+    { label: "영어", selected: false },
+    { label: "일본어", selected: false },
+    { label: "스페인어", selected: false },
+  ];
+
   return (
     <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
-            <span className="text-purple-600 text-sm font-medium tracking-wider uppercase">Actor Search</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              원하는 배우를
-              <br />
-              <span className="text-purple-600">쉽고 빠르게</span> 검색하세요
-            </h2>
-            <p className="text-gray-600 leading-relaxed">
-              성별, 나이, 역할 유형 등 다양한 필터를 통해 원하는 조건의 배우를 빠르게 찾을 수 있습니다. 직관적인 UI로
-              누구나 쉽게 사용할 수 있어요.
-            </p>
-            <ul className="space-y-4">
-              {["다양한 필터 옵션 제공", "실시간 검색 결과", "상세 프로필 확인"].map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span className="text-gray-700">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <div className="max-w-3xl mx-auto px-6">
+        {/* 제목 */}
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12">
+          등록 한 번으로 편하게 기다리세요!
+        </h2>
 
-          {/* 스크린샷 */}
-          <div className="relative">
-            <div className="bg-gray-100 rounded-3xl p-8">
-              <div className="bg-white rounded-2xl shadow-xl p-6 space-y-4">
-                <div className="flex gap-3">
-                  {["성별", "나이대", "역할유형"].map((filter) => (
-                    <div key={filter} className="px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-600">
-                      {filter}
-                    </div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-3 gap-4">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="aspect-[3/4] bg-gray-200 rounded-xl" />
-                  ))}
-                </div>
+        {/* 폼 필드 스택 */}
+        <div className="space-y-3 mb-8">
+          {formFields.map((field, index) => (
+            <div
+              key={field.num}
+              className="bg-zinc-800 rounded-xl px-6 py-5 transition-opacity"
+              style={{ opacity: 1 - index * 0.15 }}
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-purple-400 font-bold">{field.num}.</span>
+                <span className="text-white font-medium">{field.label}</span>
+                {field.required && <span className="text-red-400 text-sm">*필수</span>}
               </div>
             </div>
-          </div>
+          ))}
+        </div>
+
+        {/* 페이지 인디케이터 */}
+        <div className="flex justify-center gap-2 mb-16">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className={`w-2 h-2 rounded-full ${i === 0 ? "bg-gray-800" : "bg-gray-300"}`} />
+          ))}
+        </div>
+
+        {/* 등록 후 혜택 */}
+        <h3 className="text-2xl md:text-3xl text-gray-600 text-center mb-8">
+          나만의 프로필을 <span className="font-bold text-gray-900">등록</span>했다면?
+        </h3>
+
+        {/* 키워드 태그들 */}
+        <div className="flex flex-wrap justify-center gap-3 mb-4">
+          {styleKeywords.map((keyword) => (
+            <span
+              key={keyword.label}
+              className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
+                keyword.selected
+                  ? "bg-purple-600 text-white"
+                  : "bg-white text-gray-600 border border-gray-300"
+              }`}
+            >
+              {keyword.label}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-3">
+          {languages.map((lang) => (
+            <span
+              key={lang.label}
+              className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
+                lang.selected
+                  ? "bg-purple-600 text-white"
+                  : "bg-white text-gray-600 border border-gray-300"
+              }`}
+            >
+              {lang.label}
+            </span>
+          ))}
         </div>
       </div>
     </section>
@@ -588,7 +629,7 @@ export function ActorProfileLanding() {
     <div className="min-h-screen">
       <HeroSection />
       <IntroSection />
-      <FeatureSearchSection />
+      <FeatureRegistrationSection />
       <FeatureAISection />
       <FeatureProfileSection />
       <FeaturePDFSection />
