@@ -23,13 +23,16 @@ function HeroSection() {
 
         {/* 네비게이션 */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/ai-matching" className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium">
+          <Link
+            href="/ai-matching"
+            className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
+          >
             AI 매칭추천
           </Link>
           <Link href="/actor-search" className="text-zinc-300 hover:text-white transition-colors text-sm">
             배우&모델 찾기
           </Link>
-          <Link href="#" className="text-zinc-300 hover:text-white transition-colors text-sm">
+          <Link href="/jobs" className="text-zinc-300 hover:text-white transition-colors text-sm">
             작품구인
           </Link>
           <Link href="#" className="text-zinc-300 hover:text-white transition-colors text-sm">
@@ -103,8 +106,7 @@ function HeroSection() {
                 안녕하세요~! 꿈꾸는 배우 이하나입니다.
                 <br />
                 따뜻한 미소와 자연스러운 연기로 사람들의 마음을 움직이고 싶은 신인 배우입니다.
-                <br />
-                매 순간을 소중히 여기며, 다양한 경험을 통해 성장하고 싶은 마음으로 가득 차 있어요.
+                <br />매 순간을 소중히 여기며, 다양한 경험을 통해 성장하고 싶은 마음으로 가득 차 있어요.
               </p>
 
               {/* 대표정보 라벨 */}
@@ -147,13 +149,11 @@ function HeroSection() {
               <div className="flex items-start gap-3 mb-4 p-3 bg-gray-50 rounded-lg">
                 <span className="text-xs text-gray-500 shrink-0">키워드</span>
                 <div className="flex flex-wrap gap-2">
-                  {["고양이상", "도도한", "청순한", "귀여운", "사랑스러운", "순수한", "우아한", "밝은한"].map(
-                    (tag) => (
-                      <span key={tag} className="px-2 py-1 bg-white border border-gray-200 text-xs text-gray-700 rounded">
-                        {tag}
-                      </span>
-                    )
-                  )}
+                  {["고양이상", "도도한", "청순한", "귀여운", "사랑스러운", "순수한", "우아한", "밝은한"].map((tag) => (
+                    <span key={tag} className="px-2 py-1 bg-white border border-gray-200 text-xs text-gray-700 rounded">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
 
@@ -214,12 +214,7 @@ function IntroSection() {
           {/* 이미지를 2번 반복하여 무한 스크롤 효과 */}
           {[...actorImages, ...actorImages].map((src, i) => (
             <div key={i} className="flex-shrink-0 w-48 md:w-56 lg:w-64 aspect-[3/4] mx-1 relative">
-              <Image
-                src={src}
-                alt={`배우 ${i + 1}`}
-                fill
-                className="object-cover"
-              />
+              <Image src={src} alt={`배우 ${i + 1}`} fill className="object-cover" />
             </div>
           ))}
         </div>
@@ -359,9 +354,7 @@ function FeatureRegistrationSection() {
             <span
               key={keyword.label}
               className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
-                keyword.selected
-                  ? "bg-purple-600 text-white"
-                  : "bg-white text-gray-600 border border-gray-300"
+                keyword.selected ? "bg-purple-600 text-white" : "bg-white text-gray-600 border border-gray-300"
               }`}
             >
               {keyword.label}
@@ -374,9 +367,7 @@ function FeatureRegistrationSection() {
             <span
               key={lang.label}
               className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
-                lang.selected
-                  ? "bg-purple-600 text-white"
-                  : "bg-white text-gray-600 border border-gray-300"
+                lang.selected ? "bg-purple-600 text-white" : "bg-white text-gray-600 border border-gray-300"
               }`}
             >
               {lang.label}
@@ -395,9 +386,7 @@ function FeatureRegistrationSection() {
             <span
               key={dialect.label}
               className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
-                dialect.selected
-                  ? "bg-purple-600 text-white"
-                  : "bg-white text-gray-600 border border-gray-300"
+                dialect.selected ? "bg-purple-600 text-white" : "bg-white text-gray-600 border border-gray-300"
               }`}
             >
               {dialect.label}
@@ -415,9 +404,7 @@ function FeatureRegistrationSection() {
             <span
               key={skill.label}
               className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
-                skill.selected
-                  ? "bg-purple-600 text-white"
-                  : "bg-white text-gray-600 border border-gray-300"
+                skill.selected ? "bg-purple-600 text-white" : "bg-white text-gray-600 border border-gray-300"
               }`}
             >
               {skill.label}
@@ -436,9 +423,7 @@ function FeatureRegistrationSection() {
             <span
               key={sport.label}
               className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
-                sport.selected
-                  ? "bg-purple-600 text-white"
-                  : "bg-white text-gray-600 border border-gray-300"
+                sport.selected ? "bg-purple-600 text-white" : "bg-white text-gray-600 border border-gray-300"
               }`}
             >
               {sport.label}
@@ -703,8 +688,7 @@ function FeaturePDFSection() {
               <span className="text-purple-400">PDF로 자동 변환</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed">
-              등록된 프로필 정보를 깔끔한 PDF 문서로 자동 변환해드립니다. 오디션이나 미팅에서 바로 활용할 수
-              있어요.
+              등록된 프로필 정보를 깔끔한 PDF 문서로 자동 변환해드립니다. 오디션이나 미팅에서 바로 활용할 수 있어요.
             </p>
             <ul className="space-y-4">
               {["원클릭 PDF 생성", "전문적인 레이아웃", "언제든 다운로드"].map((item, i) => (
@@ -731,9 +715,7 @@ function CTASection() {
     <section className="py-24 bg-zinc-900">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <div className="bg-gradient-to-r from-purple-600/10 via-purple-600/5 to-purple-600/10 rounded-3xl p-12 border border-zinc-800">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            지금 바로 시작하세요
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">지금 바로 시작하세요</h2>
           <p className="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">
             토이드에서 당신의 프로필을 등록하고,
             <br />
@@ -805,7 +787,8 @@ export function ActorProfileLanding() {
       {/* 커스텀 애니메이션 스타일 */}
       <style jsx global>{`
         @keyframes bounce-slow {
-          0%, 100% {
+          0%,
+          100% {
             transform: translateY(0);
           }
           50% {
@@ -815,7 +798,7 @@ export function ActorProfileLanding() {
         .animate-bounce-slow {
           animation: bounce-slow 3s ease-in-out infinite;
         }
-        
+
         @keyframes scroll-left {
           0% {
             transform: translateX(0);
@@ -831,4 +814,3 @@ export function ActorProfileLanding() {
     </div>
   );
 }
-

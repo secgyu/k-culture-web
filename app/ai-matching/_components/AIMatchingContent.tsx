@@ -24,13 +24,16 @@ export function AIMatchingContent() {
 
         {/* 네비게이션 */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/ai-matching" className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium">
+          <Link
+            href="/ai-matching"
+            className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
+          >
             AI 매칭추천
           </Link>
           <Link href="/actor-search" className="text-zinc-300 hover:text-white transition-colors text-sm">
             배우&모델 찾기
           </Link>
-          <Link href="#" className="text-zinc-300 hover:text-white transition-colors text-sm">
+          <Link href="/jobs" className="text-zinc-300 hover:text-white transition-colors text-sm">
             작품구인
           </Link>
           <Link href="#" className="text-zinc-300 hover:text-white transition-colors text-sm">
@@ -171,4 +174,3 @@ export function AIMatchingContent() {
     </div>
   );
 }
-

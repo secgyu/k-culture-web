@@ -57,15 +57,7 @@ const generateActors = (page: number) => {
 };
 
 // 필터 옵션 버튼
-function FilterButton({
-  label,
-  selected,
-  onClick,
-}: {
-  label: string;
-  selected: boolean;
-  onClick: () => void;
-}) {
+function FilterButton({ label, selected, onClick }: { label: string; selected: boolean; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
@@ -221,13 +213,16 @@ export function ActorSearchContent() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/ai-matching" className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium">
+          <Link
+            href="/ai-matching"
+            className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
+          >
             AI 매칭추천
           </Link>
           <Link href="/actor-search" className="text-white text-sm font-medium">
             배우&모델 찾기
           </Link>
-          <Link href="#" className="text-zinc-300 hover:text-white transition-colors text-sm">
+          <Link href="/jobs" className="text-zinc-300 hover:text-white transition-colors text-sm">
             작품구인
           </Link>
           <Link href="#" className="text-zinc-300 hover:text-white transition-colors text-sm">
@@ -442,12 +437,9 @@ export function ActorSearchContent() {
               <span className="text-sm">로딩 중...</span>
             </div>
           )}
-          {!hasMore && actors.length > 0 && (
-            <p className="text-zinc-500 text-sm">더 이상 결과가 없습니다.</p>
-          )}
+          {!hasMore && actors.length > 0 && <p className="text-zinc-500 text-sm">더 이상 결과가 없습니다.</p>}
         </div>
       </main>
     </div>
   );
 }
-
