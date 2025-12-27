@@ -567,63 +567,50 @@ function FeatureRegistrationSection() {
   );
 }
 
-// 기능 섹션 2: AI 추천
-function FeatureAISection() {
+// 기능 섹션 2: 링크 공유
+function FeatureLinkShareSection() {
   return (
-    <section className="py-24 bg-zinc-950">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* 스크린샷 */}
-          <div className="relative order-2 md:order-1">
-            <div className="bg-gradient-to-br from-purple-600/30 to-indigo-600/30 rounded-3xl p-8">
-              <div className="bg-zinc-900 rounded-2xl shadow-xl p-6 space-y-4">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
-                    <span className="text-white">🤖</span>
-                  </div>
-                  <span className="text-white font-medium">AI 추천 시스템</span>
-                </div>
-                <div className="space-y-3">
-                  {[98, 95, 92].map((score, i) => (
-                    <div key={i} className="flex items-center gap-4 bg-zinc-800 rounded-xl p-4">
-                      <div className="w-12 h-12 bg-zinc-700 rounded-full" />
-                      <div className="flex-1">
-                        <div className="h-3 bg-zinc-700 rounded w-24 mb-2" />
-                        <div className="h-2 bg-zinc-700 rounded w-16" />
-                      </div>
-                      <div className="text-purple-400 font-bold">{score}%</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-6 order-1 md:order-2">
-            <span className="text-purple-400 text-sm font-medium tracking-wider uppercase">AI Recommendation</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
-              AI가 추천하는
-              <br />
-              <span className="text-purple-400">최적의 배우</span>
-            </h2>
-            <p className="text-zinc-400 leading-relaxed">
-              시놉시스와 캐릭터 정보를 입력하면 AI가 가장 적합한 배우를 추천해드립니다. 매칭 점수와 추천 이유를
-              함께 확인할 수 있어요.
-            </p>
-            <ul className="space-y-4">
-              {["시놉시스 기반 매칭", "캐릭터 분석", "매칭 점수 제공"].map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-purple-600/20 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span className="text-zinc-300">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+    <section className="py-24 bg-white">
+      <div className="max-w-3xl mx-auto px-6 text-center">
+        {/* 공유 아이콘 */}
+        <div className="mb-8">
+          <svg
+            className="w-16 h-16 mx-auto text-gray-800"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"
+            />
+          </svg>
         </div>
+
+        {/* 복사 알림 카드 */}
+        <div className="inline-block bg-gray-100 rounded-xl px-8 py-4 mb-8 relative">
+          {/* 말풍선 꼬리 */}
+          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-gray-100 rotate-45" />
+          <p className="text-gray-600">프로필 주소를 복사했습니다.</p>
+        </div>
+
+        {/* 설명 텍스트 */}
+        <p className="text-xl md:text-2xl text-gray-600 mb-32">
+          링크 공유를 통해 쉽게 <span className="font-bold text-gray-900">프로필을 전송</span>해 보세요!
+        </p>
+
+        {/* 구분 */}
+        <div className="border-t border-gray-200 my-16" />
+
+        {/* 생각하는 이모지 */}
+        <div className="text-6xl mb-8">🤔</div>
+
+        {/* FAQ 제목 */}
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
+          &quot;왜 프로필을 새로 만들어주나요?&quot;
+        </h2>
       </div>
     </section>
   );
@@ -809,7 +796,7 @@ export function ActorProfileLanding() {
       <HeroSection />
       <IntroSection />
       <FeatureRegistrationSection />
-      <FeatureAISection />
+      <FeatureLinkShareSection />
       <FeatureProfileSection />
       <FeaturePDFSection />
       <CTASection />
