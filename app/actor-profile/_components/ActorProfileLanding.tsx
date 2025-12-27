@@ -6,9 +6,12 @@ import Image from "next/image";
 // 히어로 섹션
 function HeroSection() {
   return (
-    <section className="relative min-h-screen bg-zinc-950 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-950 overflow-hidden">
+      {/* 상단 보라색 그라데이션 */}
+      <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-purple-900/30 to-transparent" />
+
       {/* 헤더 */}
-      <header className="relative z-20 w-full px-6 py-4 flex items-center justify-between bg-zinc-900/80 backdrop-blur-sm">
+      <header className="relative z-20 w-full px-6 py-4 flex items-center justify-between">
         {/* 로고 */}
         <Link href="/" className="flex items-center gap-1 text-white">
           <span className="font-bold text-xl tracking-tight">T</span>
@@ -49,149 +52,141 @@ function HeroSection() {
       </header>
 
       {/* 히어로 컨텐츠 */}
-      <div className="relative z-10 grid md:grid-cols-2 min-h-[calc(100vh-72px)]">
-        {/* 왼쪽: 배우 이미지 */}
-        <div className="relative hidden md:block">
-          <Image
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=1200&fit=crop"
-            alt="배우 프로필"
-            fill
-            className="object-cover object-center"
-          />
-          {/* 그라데이션 오버레이 */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-zinc-950" />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+      <div className="relative z-10 flex flex-col items-center px-6 py-12">
+        {/* 배지 */}
+        <div className="inline-block px-6 py-2 bg-white rounded-full mb-6">
+          <span className="text-zinc-900 font-medium text-sm">배우&모델</span>
         </div>
 
-        {/* 오른쪽: 앱 UI 프리뷰 */}
-        <div className="flex flex-col justify-center items-center px-8 py-12">
-          {/* 모바일 앱 프레임 */}
-          <div className="relative w-full max-w-xs">
-            {/* 폰 프레임 */}
-            <div className="bg-zinc-900 rounded-[3rem] p-3 shadow-2xl border border-zinc-800">
-              <div className="bg-white rounded-[2.5rem] overflow-hidden">
-                {/* 앱 헤더 */}
-                <div className="bg-white px-4 py-3 border-b border-gray-100">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
-                        <span className="text-white text-xs font-bold">T</span>
-                      </div>
-                      <span className="font-semibold text-gray-900 text-sm">토이드</span>
-                    </div>
-                    <div className="flex gap-2">
-                      <div className="w-6 h-6 bg-gray-100 rounded-full" />
-                      <div className="w-6 h-6 bg-gray-100 rounded-full" />
-                    </div>
+        {/* 제목 */}
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center mb-12">
+          프로필 관리·탐색 플랫폼
+        </h1>
+
+        {/* 프로필 카드 섹션 */}
+        <div className="w-full max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden shadow-2xl">
+            {/* 왼쪽: 배우 이미지 */}
+            <div className="relative w-full md:w-2/5 aspect-[3/4] md:aspect-auto">
+              <Image
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop"
+                alt="배우 프로필"
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* 오른쪽: 프로필 정보 */}
+            <div className="flex-1 p-6 md:p-8">
+              {/* 헤더 */}
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h2 className="text-2xl font-bold text-gray-900">이하나</h2>
+                    <span className="px-2 py-0.5 bg-purple-600 text-white text-xs rounded">여자</span>
                   </div>
+                  <p className="text-gray-500 text-sm">Lee Hana</p>
                 </div>
-
-                {/* 프로필 카드 */}
-                <div className="p-4">
-                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-4">
-                    <Image
-                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop"
-                      alt="프로필"
-                      fill
-                      className="object-cover"
-                    />
-                    {/* 프로필 정보 오버레이 */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                      <div className="flex items-end justify-between">
-                        <div>
-                          <h3 className="text-white font-bold text-lg">김서연</h3>
-                          <p className="text-white/70 text-sm">28세 · 여 · 168cm</p>
-                        </div>
-                        <div className="bg-purple-600 px-3 py-1 rounded-full">
-                          <span className="text-white text-xs font-medium">98% 매칭</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 태그 */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="px-3 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">드라마</span>
-                    <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">영화</span>
-                    <span className="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">뮤지컬</span>
-                  </div>
-
-                  {/* 필모그래피 미리보기 */}
-                  <div className="bg-gray-50 rounded-xl p-3">
-                    <p className="text-xs text-gray-500 mb-2">최근 필모그래피</p>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-gray-200 rounded" />
-                        <div className="flex-1">
-                          <p className="text-xs font-medium text-gray-900">사랑의 불시착</p>
-                          <p className="text-xs text-gray-500">주연 · 2024</p>
-                        </div>
-                      </div>
-                    </div>
+                {/* QR 코드 플레이스홀더 */}
+                <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gray-200 rounded grid grid-cols-3 gap-0.5 p-1">
+                    {[...Array(9)].map((_, i) => (
+                      <div key={i} className={`${i % 2 === 0 ? "bg-gray-800" : "bg-white"}`} />
+                    ))}
                   </div>
                 </div>
               </div>
-            </div>
+              <p className="text-xs text-gray-400 mb-4">2024-09-11 만료일정</p>
 
-            {/* 플로팅 요소들 */}
-            <div className="absolute -left-16 top-20 bg-white rounded-xl p-3 shadow-xl animate-bounce-slow hidden lg:block">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                  <span className="text-purple-600 text-sm">✨</span>
+              {/* 자기소개 */}
+              <p className="text-sm text-gray-600 leading-relaxed mb-6 text-center">
+                안녕하세요~! 꿈꾸는 배우 이하나입니다.
+                <br />
+                따뜻한 미소와 자연스러운 연기로 사람들의 마음을 움직이고 싶은 신인 배우입니다.
+                <br />
+                매 순간을 소중히 여기며, 다양한 경험을 통해 성장하고 싶은 마음으로 가득 차 있어요.
+              </p>
+
+              {/* 대표정보 라벨 */}
+              <p className="text-xs text-gray-400 text-center mb-4">대표정보</p>
+
+              {/* 기본 정보 그리드 */}
+              <div className="grid grid-cols-3 gap-3 mb-4">
+                <div className="text-center p-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-500 mb-1">생년월일</p>
+                  <p className="text-sm font-medium text-gray-900">2001-05-14</p>
                 </div>
-                <div>
-                  <p className="text-xs text-gray-500">AI 추천</p>
-                  <p className="text-sm font-semibold text-gray-900">실시간 매칭</p>
+                <div className="text-center p-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-500 mb-1">소속사</p>
+                  <p className="text-sm font-medium text-gray-900">핑크프로젝트</p>
+                </div>
+                <div className="text-center p-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-500 mb-1">학력</p>
+                  <p className="text-sm font-medium text-gray-900">한국대학교</p>
+                  <p className="text-xs text-gray-500">연기과</p>
                 </div>
               </div>
-            </div>
 
-            <div className="absolute -right-12 bottom-32 bg-white rounded-xl p-3 shadow-xl hidden lg:block">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 text-sm">📄</span>
+              {/* 신체 정보 */}
+              <div className="grid grid-cols-3 gap-3 mb-4">
+                <div className="text-center p-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-500 mb-1">키</p>
+                  <p className="text-sm font-medium text-gray-900">167</p>
                 </div>
-                <div>
-                  <p className="text-xs text-gray-500">PDF 변환</p>
-                  <p className="text-sm font-semibold text-gray-900">원클릭</p>
+                <div className="text-center p-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-500 mb-1">몸무게</p>
+                  <p className="text-sm font-medium text-gray-900">48</p>
+                </div>
+                <div className="text-center p-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-500 mb-1">발사이즈</p>
+                  <p className="text-sm font-medium text-gray-900">235</p>
+                </div>
+              </div>
+
+              {/* 키워드 */}
+              <div className="flex items-start gap-3 mb-4 p-3 bg-gray-50 rounded-lg">
+                <span className="text-xs text-gray-500 shrink-0">키워드</span>
+                <div className="flex flex-wrap gap-2">
+                  {["고양이상", "도도한", "청순한", "귀여운", "사랑스러운", "순수한", "우아한", "밝은한"].map(
+                    (tag) => (
+                      <span key={tag} className="px-2 py-1 bg-white border border-gray-200 text-xs text-gray-700 rounded">
+                        {tag}
+                      </span>
+                    )
+                  )}
+                </div>
+              </div>
+
+              {/* 대표작품 */}
+              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg mb-4">
+                <span className="text-xs text-gray-500 shrink-0">대표작품</span>
+                <p className="text-sm text-gray-700">단편영화,&lt;우리 사이&gt;, 지수역(주연)</p>
+              </div>
+
+              {/* TOID 로고 */}
+              <div className="flex justify-end">
+                <div className="flex items-center gap-1 text-gray-300">
+                  <span className="font-bold text-sm tracking-tight">T</span>
+                  <div className="w-4 h-4 rounded-full border border-current flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-current" />
+                  </div>
+                  <span className="font-bold text-sm tracking-tight">ID</span>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* CTA 버튼 */}
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 w-full max-w-xs">
-            <Link
-              href="/signup?type=actor"
-              className="flex-1 px-6 py-3 bg-purple-600 text-white font-semibold rounded-xl hover:bg-purple-700 transition-all text-center text-sm"
-            >
-              시작하기
-            </Link>
-            <Link
-              href="/recommend"
-              className="flex-1 px-6 py-3 border border-zinc-700 text-white font-semibold rounded-xl hover:bg-zinc-800 transition-all text-center text-sm"
-            >
-              둘러보기
-            </Link>
-          </div>
         </div>
-      </div>
 
-      {/* 모바일용 배경 이미지 */}
-      <div className="absolute inset-0 md:hidden">
-        <Image
-          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=1200&fit=crop"
-          alt="배우 프로필"
-          fill
-          className="object-cover object-center opacity-30"
-        />
-      </div>
+        {/* PDF 자동 완성 안내 */}
+        <p className="text-zinc-500 text-sm mt-12 mb-8">- 프로필 PDF파일 자동 완성 기능 -</p>
 
-      {/* 스크롤 인디케이터 */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-20">
-        <svg className="w-6 h-6 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
+        {/* CTA 버튼 */}
+        <Link
+          href="/signup?type=actor"
+          className="px-16 py-4 bg-purple-600 text-white font-semibold rounded-xl hover:bg-purple-700 transition-all text-lg"
+        >
+          프로필 등록하기
+        </Link>
       </div>
     </section>
   );
