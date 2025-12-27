@@ -26,7 +26,7 @@ function HeroSection() {
           <Link href="/ai-matching" className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium">
             AI 매칭추천
           </Link>
-          <Link href="/recommend" className="text-zinc-300 hover:text-white transition-colors text-sm">
+          <Link href="/actor-search" className="text-zinc-300 hover:text-white transition-colors text-sm">
             배우&모델 찾기
           </Link>
           <Link href="#" className="text-zinc-300 hover:text-white transition-colors text-sm">
