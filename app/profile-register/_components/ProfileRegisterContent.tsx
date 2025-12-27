@@ -8,20 +8,25 @@ function FormSection({
   number,
   title,
   required,
+  description,
   children,
 }: {
   number: number;
   title: string;
   required?: boolean;
+  description?: string;
   children: React.ReactNode;
 }) {
   return (
     <div className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800">
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-3 mb-2">
         <span className="text-purple-400 font-bold">{number}.</span>
         <h3 className="text-white font-medium">{title}</h3>
         {required && <span className="text-red-400 text-sm">*필수</span>}
       </div>
+      {description && (
+        <p className="text-zinc-500 text-sm mb-4 whitespace-pre-line">{description}</p>
+      )}
       {children}
     </div>
   );
@@ -44,7 +49,9 @@ function SelectButtonGroup({
           key={option}
           onClick={() => onChange(option)}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-            selected === option ? "bg-purple-600 text-white" : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
+            selected === option
+              ? "bg-purple-600 text-white"
+              : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
           }`}
         >
           {option}
@@ -59,15 +66,18 @@ function MultiSelectButtonGroup({
   options,
   selected,
   onChange,
+  maxSelect,
 }: {
   options: string[];
   selected: string[];
   onChange: (values: string[]) => void;
+  maxSelect?: number;
 }) {
   const toggleOption = (option: string) => {
     if (selected.includes(option)) {
       onChange(selected.filter((s) => s !== option));
     } else {
+      if (maxSelect && selected.length >= maxSelect) return;
       onChange([...selected, option]);
     }
   };
@@ -79,7 +89,9 @@ function MultiSelectButtonGroup({
           key={option}
           onClick={() => toggleOption(option)}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-            selected.includes(option) ? "bg-purple-600 text-white" : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
+            selected.includes(option)
+              ? "bg-purple-600 text-white"
+              : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
           }`}
         >
           {option}
@@ -92,91 +104,99 @@ function MultiSelectButtonGroup({
 export function ProfileRegisterContent() {
   // 폼 상태
   const [formData, setFormData] = useState({
-    category: "배우",
+    // 필수
+    category: "",
     name: "",
     gender: "",
-    birthYear: "",
-    birthMonth: "",
-    birthDay: "",
-    phone: "",
-    email: "",
+    birthdate: "",
     height: "",
     weight: "",
-    shoeSize: "",
-    agency: "",
-    education: "",
+    affiliation: "",
+    affiliationName: "",
     styleKeywords: [] as string[],
+    movieFee: "",
+    movieFeeConfidential: false,
+    adFee: "",
+    adFeeConfidential: false,
+    freeWork: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    agreePrivacy: false,
+    agreeContact: false,
+    // 선택
+    englishName: "",
+    shoeSize: "",
+    race: "",
+    selfIntroduction: "",
+    education: "",
+    mainFilmography: "",
+    filmography: "",
+    hairStyle: "",
     languages: [] as string[],
     dialects: [] as string[],
-    skills: [] as string[],
-    introduction: "",
-    filmography: "",
-    license: "없음",
-    pumasi: "가능",
-    movieBudget: "",
-    adBudget: "",
-    // 24~35 추가 필드
-    instagram: "",
-    youtube: "",
-    portfolioLink: "",
-    videoLink: "",
-    awards: "",
-    certificates: "",
-    military: "해당없음",
-    marriage: "미혼",
-    tattoo: "없음",
-    eyeColor: "",
-    skinTone: "",
-    features: [] as string[],
-    agreeTerms: false,
-    agreePrivacy: false,
-    agreeMarketing: false,
+    talents: [] as string[],
+    sports: [] as string[],
+    drivingLicense: [] as string[],
+    monologueLinks: [""],
+    snsYoutube: "",
+    snsVimeo: "",
+    snsInstagram: "",
+    snsTwitter: "",
+    email: "",
+    agreeMarketing: "",
   });
 
+  // 옵션들
   const styleKeywordOptions = [
-    "고양이상",
-    "강아지상",
-    "도도한",
-    "청순한",
-    "귀여운",
-    "사랑스러운",
-    "순수한",
-    "우아한",
-    "밝은",
-    "부드러운",
-    "성숙한",
-    "시크한",
-    "신비로운",
-    "아기상",
+    "강아지상", "고양이상", "공룡상", "여우상", "곰상", "토끼상", "사슴상", "호랑이상",
+    "섹시한", "청순한", "귀여운", "사랑스러운", "도도한", "카리스마 있는", "엉뚱한", "몽환적인",
+    "힙한", "화려한", "우아한", "강렬한", "내추럴한", "쾌활한", "당당한", "시크한",
+    "우직한", "대담한", "냉철한", "솔직한", "순수한", "내성적인", "중후한", "개구진",
+    "민첩한", "편안한", "차가운", "따뜻한", "중성적인", "지적인", "유머러스한", "과감한",
+    "명량한", "청량한", "고혹적인", "로맨틱한", "모던한", "상큼한", "차분한", "평온한",
+    "아련한", "고독한", "부드러운", "서늘한", "기묘한", "섬세한", "침착한", "그윽한",
   ];
 
-  const languageOptions = ["한국어", "영어", "일본어", "중국어", "스페인어", "프랑스어", "독일어"];
-
-  const dialectOptions = ["서울", "경기", "충청도", "전라도", "경상도", "강원도", "제주도"];
-
-  const skillOptions = [
-    "노래",
-    "피아노",
-    "기타",
-    "바이올린",
-    "드럼",
-    "댄스",
-    "수영",
-    "요가",
-    "필라테스",
-    "골프",
-    "헬스",
-    "농구",
-    "축구",
-    "검도",
-    "태권도",
+  const languageOptions = [
+    "한국어", "영어", "일본어", "중국어", "스페인어", "프랑스어", "독일어",
+    "아랍어", "러시아어", "이탈리아어", "포르투갈어", "힌디어", "태국어", "베트남어",
   ];
 
-  const featureOptions = ["쌍꺼풀", "무쌍", "속쌍", "보조개", "주근깨", "점", "흉터", "광대뼈", "턱선", "이마"];
+  const dialectOptions = [
+    "불가", "경상도사투리", "전라도사투리", "충청도사투리", "강원도사투리",
+    "제주도사투리", "북한말투", "조선족말투", "옛서울사투리",
+  ];
 
-  const militaryOptions = ["해당없음", "미필", "군필", "면제", "복무중"];
+  const talentOptions = [
+    "없음", "노래", "피아노", "기타", "바이올린", "드럼", "플루트", "장구", "첼로",
+    "춤(방송 댄스)", "그림", "운동", "지식", "요리", "메이크업", "스타일링", "무용",
+  ];
 
-  const marriageOptions = ["미혼", "기혼", "비공개"];
+  const sportOptions = [
+    "없음", "승마", "스키・스노우보드", "클라이밍", "사이클링", "축구", "농구", "수영",
+    "태권도", "요가", "테니스", "체조", "복싱", "마라톤", "서핑", "사격", "유도",
+    "레슬링", "펜싱", "골프", "배드민턴", "스쿼시", "카누・카약", "스케이팅(빙상)",
+    "스케이트보드", "킥복싱", "파쿠르", "런닝", "체스복싱", "웨이트리프팅(역도)", "아크로바틱",
+  ];
+
+  const licenseOptions = ["없음", "1종", "2종", "대형"];
+
+  const addMonologueLink = () => {
+    if (formData.monologueLinks.length < 4) {
+      setFormData((prev) => ({
+        ...prev,
+        monologueLinks: [...prev.monologueLinks, ""],
+      }));
+    }
+  };
+
+  const removeMonologueLink = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      monologueLinks: prev.monologueLinks.filter((_, i) => i !== index),
+    }));
+  };
 
   return (
     <div className="min-h-screen bg-zinc-950">
@@ -226,18 +246,25 @@ export function ProfileRegisterContent() {
         {/* 타이틀 */}
         <div className="text-center mb-8">
           <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">프로필 등록하기</h1>
-          <p className="text-zinc-400 text-sm">* 표시된 항목을 제외하고는 미작성 가능합니다</p>
         </div>
 
         {/* 안내 박스 */}
         <div className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800 mb-6">
-          <p className="text-zinc-400 text-sm leading-relaxed">
-            1. 회원 1명당 1개의 프로필만 작성하실 수 있습니다. (1인 1프로필)
+          <h3 className="text-white font-medium mb-3">토이드 사이트 프로필 등록 안내</h3>
+          <div className="text-zinc-400 text-sm leading-relaxed">
+            <p>토이드는 &apos;프로필 관리 및 탐색 플랫폼&apos;입니다.</p>
+            <p>소속사가 아니며, 배우 등록 비용은 없습니다.</p>
             <br />
-            2. 타인의 프로필 사진을 도용할 경우 법적인 제재를 받을 수 있습니다.
+            <p>- 토이드에 배우&모델 등록을 하면?</p>
+            <p>1. 웹 프로필 제공</p>
+            <p>2. PDF 파일 자동 변환 제공</p>
+            <p>3. 토이드 내 &apos;작품구인&apos; 지원 가능</p>
+            <p>4. PD 대시보드 배우&모델 추가 가능</p>
+            <p>5. 등록된 배우 및 모델 대리 공고 지원</p>
             <br />
-            3. 프로필 내용 중 개인 정보가 포함되지 않도록 주의해주세요.
-          </p>
+            <p>이와 관련하여 자세한 내용은 홈페이지를 참고 드립니다.</p>
+            <p>궁금하신 사항은 &apos;자주 묻는 질문&apos;과 1:1챗봇을 이용해 주세요.</p>
+          </div>
         </div>
 
         {/* 폼 섹션들 */}
@@ -245,7 +272,7 @@ export function ProfileRegisterContent() {
           {/* 1. 구분 */}
           <FormSection number={1} title="구분" required>
             <SelectButtonGroup
-              options={["배우", "모델"]}
+              options={["배우", "모델", "배우 & 모델"]}
               selected={formData.category}
               onChange={(value) => setFormData((prev) => ({ ...prev, category: value }))}
             />
@@ -255,7 +282,7 @@ export function ProfileRegisterContent() {
           <FormSection number={2} title="이름(또는 활동명)" required>
             <input
               type="text"
-              placeholder="이름을 입력해주세요"
+              placeholder="이름을 입력해 주세요."
               className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
               value={formData.name}
               onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
@@ -273,33 +300,159 @@ export function ProfileRegisterContent() {
 
           {/* 4. 생년월일 */}
           <FormSection number={4} title="생년월일" required>
-            <div className="flex gap-4">
+            <input
+              type="date"
+              className="bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white"
+              value={formData.birthdate}
+              onChange={(e) => setFormData((prev) => ({ ...prev, birthdate: e.target.value }))}
+            />
+          </FormSection>
+
+          {/* 5. 키 */}
+          <FormSection number={5} title="키(cm)" required>
+            <input
+              type="number"
+              placeholder="키를 입력해 주세요."
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+              value={formData.height}
+              onChange={(e) => setFormData((prev) => ({ ...prev, height: e.target.value }))}
+            />
+          </FormSection>
+
+          {/* 6. 체중 */}
+          <FormSection number={6} title="체중(kg)" required>
+            <input
+              type="number"
+              placeholder="체중을 입력해 주세요."
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+              value={formData.weight}
+              onChange={(e) => setFormData((prev) => ({ ...prev, weight: e.target.value }))}
+            />
+          </FormSection>
+
+          {/* 7. 소속사 */}
+          <FormSection number={7} title="소속사" required>
+            <SelectButtonGroup
+              options={["없음", "있음"]}
+              selected={formData.affiliation}
+              onChange={(value) => setFormData((prev) => ({ ...prev, affiliation: value }))}
+            />
+            {formData.affiliation === "있음" && (
               <input
                 type="text"
-                placeholder="년도"
-                className="w-24 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-                value={formData.birthYear}
-                onChange={(e) => setFormData((prev) => ({ ...prev, birthYear: e.target.value }))}
+                placeholder="소속사명을 입력해 주세요."
+                className="mt-3 w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+                value={formData.affiliationName}
+                onChange={(e) => setFormData((prev) => ({ ...prev, affiliationName: e.target.value }))}
               />
+            )}
+          </FormSection>
+
+          {/* 8. 스타일 키워드 */}
+          <FormSection number={8} title="스타일 키워드 (복수 선택 - 최대 10개)" required>
+            <MultiSelectButtonGroup
+              options={styleKeywordOptions}
+              selected={formData.styleKeywords}
+              onChange={(values) => setFormData((prev) => ({ ...prev, styleKeywords: values }))}
+              maxSelect={10}
+            />
+            <p className="text-zinc-500 text-sm mt-2">선택: {formData.styleKeywords.length}/10</p>
+          </FormSection>
+
+          {/* 9. 영화 개런티 */}
+          <FormSection
+            number={9}
+            title="영화 개런티 (최소 10만 원 이상)"
+            required
+            description="캐스팅담당자의 참고용으로 활용됩니다.
+모든 개런티는 협의이며, 회당의 최소 시작단위를 입력해주시면 됩니다."
+          >
+            <div className="flex gap-3">
               <input
                 type="text"
-                placeholder="월"
-                className="w-20 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-                value={formData.birthMonth}
-                onChange={(e) => setFormData((prev) => ({ ...prev, birthMonth: e.target.value }))}
+                placeholder="100,000"
+                className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+                value={formData.movieFee}
+                onChange={(e) => setFormData((prev) => ({ ...prev, movieFee: e.target.value }))}
+                disabled={formData.movieFeeConfidential}
               />
-              <input
-                type="text"
-                placeholder="일"
-                className="w-20 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-                value={formData.birthDay}
-                onChange={(e) => setFormData((prev) => ({ ...prev, birthDay: e.target.value }))}
-              />
+              <button
+                onClick={() => setFormData((prev) => ({ ...prev, movieFeeConfidential: !prev.movieFeeConfidential, movieFee: "" }))}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  formData.movieFeeConfidential ? "bg-purple-600 text-white" : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
+                }`}
+              >
+                비공개(협의)
+              </button>
             </div>
           </FormSection>
 
-          {/* 5. 연락처 */}
-          <FormSection number={5} title="연락처" required>
+          {/* 10. 광고 개런티 */}
+          <FormSection
+            number={10}
+            title="광고 개런티 (최소 10만 원 이상)"
+            required
+            description="캐스팅담당자의 참고용으로 활용됩니다.
+모든 개런티는 협의이며, 회당의 최소 시작단위를 입력해주시면 됩니다."
+          >
+            <div className="flex gap-3">
+              <input
+                type="text"
+                placeholder="100,000"
+                className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+                value={formData.adFee}
+                onChange={(e) => setFormData((prev) => ({ ...prev, adFee: e.target.value }))}
+                disabled={formData.adFeeConfidential}
+              />
+              <button
+                onClick={() => setFormData((prev) => ({ ...prev, adFeeConfidential: !prev.adFeeConfidential, adFee: "" }))}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  formData.adFeeConfidential ? "bg-purple-600 text-white" : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
+                }`}
+              >
+                비공개(협의)
+              </button>
+            </div>
+          </FormSection>
+
+          {/* 11. 품앗이 가능 여부 */}
+          <FormSection
+            number={11}
+            title="품앗이 가능 여부"
+            required
+            description="무페이로 출연이 가능한지 표시됩니다.
+품앗이의 경우에도 출연료를 제외한 교통비, 식비 숙박비는 기본으로 합니다."
+          >
+            <SelectButtonGroup
+              options={["가능", "불가능"]}
+              selected={formData.freeWork}
+              onChange={(value) => setFormData((prev) => ({ ...prev, freeWork: value }))}
+            />
+          </FormSection>
+
+          {/* 12. 표지 대표 이미지 */}
+          <FormSection
+            number={12}
+            title="표지 대표 이미지"
+            required
+            description="가장 먼저 보이는 이미지입니다.
+TIP. 본인을 가장 잘 설명할 수 있는 이미지로 넣어주세요."
+          >
+            <div className="border-2 border-dashed border-zinc-700 rounded-xl p-8 text-center hover:border-zinc-500 transition-colors cursor-pointer">
+              <div className="text-4xl mb-4">📷</div>
+              <p className="text-purple-400 font-medium">이미지 추가하기</p>
+              <p className="text-zinc-500 text-sm mt-2">JPG, PNG 형식</p>
+            </div>
+          </FormSection>
+
+          {/* 13. 수신 전화번호 */}
+          <FormSection
+            number={13}
+            title="수신 전화번호"
+            required
+            description="개인정보 보호를 위해 전화번호는 TOID에서만 보관되며,
+아래 정보는 추후 캐스팅 담당자께서 연락 요청 시, 전달될 예정입니다."
+          >
             <input
               type="tel"
               placeholder="010-0000-0000"
@@ -309,83 +462,196 @@ export function ProfileRegisterContent() {
             />
           </FormSection>
 
-          {/* 6. 이메일 */}
-          <FormSection number={6} title="이메일">
+          {/* 14. 비밀번호 확인 */}
+          <FormSection
+            number={14}
+            title="비밀번호 확인"
+            required
+            description="8자 이상을 입력해 주세요.
+TIP. '프로필 관리'와 '구인구직'에서 작품지원 할 때 본인인증 용도로 사용 됩니다."
+          >
+            <div className="space-y-3">
+              <input
+                type="password"
+                placeholder="비밀번호 입력"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+                value={formData.password}
+                onChange={(e) => setFormData((prev) => ({ ...prev, password: e.target.value }))}
+              />
+              <input
+                type="password"
+                placeholder="비밀번호 확인"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+                value={formData.confirmPassword}
+                onChange={(e) => setFormData((prev) => ({ ...prev, confirmPassword: e.target.value }))}
+              />
+            </div>
+          </FormSection>
+
+          {/* 15. 정보 수집 및 활용 동의 */}
+          <FormSection number={15} title="정보 수집 및 활용 동의" required>
+            <div className="bg-zinc-800 rounded-lg p-4 max-h-48 overflow-y-auto text-zinc-400 text-sm mb-4">
+              <p><strong className="text-white">[토이드(TOID)]</strong>는 서비스 이용자에게 보다 나은 서비스를 제공하기 위해 다음과 같은 개인 정보를 수집·이용하고자 합니다.</p>
+              <br />
+              <p><strong className="text-white">1. 수집하는 개인정보 항목</strong></p>
+              <p>- 필수정보: 구분(배우/모델), 이름(또는 활동명), 성별, 생년월일, 키, 체중, 발사이즈, 인종, 소속사, 대표 필모그래피, 필모그래피, 간단한 자기소개, 현재 머리형태, 스타일 키워드, 구사언어, 사투리, 특기, 가능한 스포츠, 최소 영화 개런티, 최소 광고 개런티, 품앗이 가능여부, 표지 대표 이미지, 프로필 이미지, 출연 작품 캡처 이미지, 수신 전화번호, 수신 이메일.</p>
+              <p>- 선택정보: 영문이름, 최종학력, 운전면허, 출연(독백)영상 주소, 개인SNS주소.</p>
+              <br />
+              <p><strong className="text-white">2. 수집 및 이용 목적</strong></p>
+              <p>- 배우 및 모델 프로필 생성, 저장 및 공개</p>
+              <p>- 배우 및 모델의 프로필을 활용한 캐스팅 정보 제공</p>
+              <p>- 서비스 개선 및 고객 지원</p>
+              <br />
+              <p><strong className="text-white">3. 보유 및 이용기간</strong></p>
+              <p>- 회원 탈퇴 시까지 또는 정보 수집 및 이용 목적이 달성될 때까지 보유합니다.</p>
+              <br />
+              <p><strong className="text-white">4. 동의 거부 권리 및 거부 시 불이익</strong></p>
+              <p>- 이용자는 개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있으며, 동의를 거부할 경우 서비스 이용이 제한될 수 있습니다.</p>
+            </div>
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={formData.agreePrivacy}
+                onChange={(e) => setFormData((prev) => ({ ...prev, agreePrivacy: e.target.checked }))}
+                className="w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-purple-600"
+              />
+              <span className="text-white">동의</span>
+            </label>
+          </FormSection>
+
+          {/* 16. 섭외요청 이메일 문자 수신 동의 */}
+          <FormSection number={16} title="섭외요청 이메일 문자 수신 동의" required>
+            <div className="bg-zinc-800 rounded-lg p-4 max-h-48 overflow-y-auto text-zinc-400 text-sm mb-4">
+              <p><strong className="text-white">[토이드(TOID)]</strong>는 배우 및 모델에게 작품 관련 섭외 요청과 관련된 정보를 제공하기 위해 이메일 및 문자 메시지를 발송할 수 있습니다.</p>
+              <br />
+              <p>1. 수집 항목: 수신 전화번호, 수신 이메일</p>
+              <p>2. 이용 목적: 작품 섭외 요청 및 관련 정보 전달</p>
+              <p>3. 보유 및 이용기간: 회원 탈퇴 시까지 또는 동의 철회 시까지</p>
+            </div>
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={formData.agreeContact}
+                onChange={(e) => setFormData((prev) => ({ ...prev, agreeContact: e.target.checked }))}
+                className="w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-purple-600"
+              />
+              <span className="text-white">동의</span>
+            </label>
+          </FormSection>
+
+          {/* 선택 문항 구분선 */}
+          <div className="py-6 text-center">
+            <p className="text-white font-semibold">이하 선택 문항입니다.</p>
+          </div>
+
+          {/* 17. 영문이름 */}
+          <FormSection
+            number={17}
+            title="영문이름"
+            description="본인의 이름 또는 활동명을 영문으로 변환하여 작성해 주시길 바랍니다.
+예시) Hong Gildong"
+          >
             <input
-              type="email"
-              placeholder="example@email.com"
+              type="text"
+              placeholder="영문이름을 입력해 주세요."
               className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-              value={formData.email}
-              onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+              value={formData.englishName}
+              onChange={(e) => setFormData((prev) => ({ ...prev, englishName: e.target.value }))}
             />
           </FormSection>
 
-          {/* 7. 키 */}
-          <FormSection number={7} title="키 (cm)" required>
+          {/* 18. 발사이즈 */}
+          <FormSection number={18} title="발사이즈(mm)">
             <input
               type="number"
-              placeholder="167"
-              className="w-32 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-              value={formData.height}
-              onChange={(e) => setFormData((prev) => ({ ...prev, height: e.target.value }))}
-            />
-          </FormSection>
-
-          {/* 8. 몸무게 */}
-          <FormSection number={8} title="몸무게 (kg)" required>
-            <input
-              type="number"
-              placeholder="55"
-              className="w-32 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-              value={formData.weight}
-              onChange={(e) => setFormData((prev) => ({ ...prev, weight: e.target.value }))}
-            />
-          </FormSection>
-
-          {/* 9. 발사이즈 */}
-          <FormSection number={9} title="발사이즈 (mm)">
-            <input
-              type="number"
-              placeholder="235"
-              className="w-32 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+              placeholder="발사이즈를 입력해 주세요."
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
               value={formData.shoeSize}
               onChange={(e) => setFormData((prev) => ({ ...prev, shoeSize: e.target.value }))}
             />
           </FormSection>
 
-          {/* 10. 소속사 */}
-          <FormSection number={10} title="소속사">
-            <input
-              type="text"
-              placeholder="소속사명 (없으면 '프리랜서' 입력)"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-              value={formData.agency}
-              onChange={(e) => setFormData((prev) => ({ ...prev, agency: e.target.value }))}
+          {/* 19. 인종 */}
+          <FormSection number={19} title="인종">
+            <SelectButtonGroup
+              options={["황인", "흑인", "백인"]}
+              selected={formData.race}
+              onChange={(value) => setFormData((prev) => ({ ...prev, race: value }))}
             />
           </FormSection>
 
-          {/* 11. 학력 */}
-          <FormSection number={11} title="학력">
+          {/* 20. 간단한 자기소개 */}
+          <FormSection number={20} title="간단한 자기소개 (최대 200자)">
+            <textarea
+              placeholder="간단한 자기소개를 입력해 주세요."
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 h-24 resize-none"
+              maxLength={200}
+              value={formData.selfIntroduction}
+              onChange={(e) => setFormData((prev) => ({ ...prev, selfIntroduction: e.target.value }))}
+            />
+            <p className="text-right text-zinc-500 text-sm mt-2">{formData.selfIntroduction.length}/200</p>
+          </FormSection>
+
+          {/* 21. 최종학력 */}
+          <FormSection number={21} title="최종학력">
             <input
               type="text"
-              placeholder="학교명 / 전공"
+              placeholder="최종학력을 입력해 주세요."
               className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
               value={formData.education}
               onChange={(e) => setFormData((prev) => ({ ...prev, education: e.target.value }))}
             />
           </FormSection>
 
-          {/* 12. 스타일 키워드 */}
-          <FormSection number={12} title="스타일 키워드 (복수 선택 - 최대 10개)" required>
-            <MultiSelectButtonGroup
-              options={styleKeywordOptions}
-              selected={formData.styleKeywords}
-              onChange={(values) => setFormData((prev) => ({ ...prev, styleKeywords: values.slice(0, 10) }))}
+          {/* 22. 대표 필모그래피 */}
+          <FormSection
+            number={22}
+            title="대표 필모그래피 (1개)"
+            description="제작연도, 작품제목, 역할, 제작 순서로 입력해주세요.
+*콤마(,) 사이에 띄어쓰기는 생략 부탁드립니다.
+콤마가 잘못 기입될 시 PDF 파일 생성에 문제가 생길 수 있습니다.
+
+예시) 장편영화,2000,행복합니다,민서역(주연),푸른필름"
+          >
+            <input
+              type="text"
+              placeholder="장편영화,2000,행복합니다,민서역(주연),푸른필름"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+              value={formData.mainFilmography}
+              onChange={(e) => setFormData((prev) => ({ ...prev, mainFilmography: e.target.value }))}
             />
           </FormSection>
 
-          {/* 13. 구사언어 */}
-          <FormSection number={13} title="구사언어 (복수 선택 가능)">
+          {/* 23. 필모그래피 */}
+          <FormSection
+            number={23}
+            title="필모그래피"
+            description="구분, 제작연도, 작품제목, 역할, 제작 순서로 입력해주세요.
+*콤마(,) 사이에 띄어쓰기는 생략 부탁드립니다.
+콤마가 잘못 기입될 시 PDF 파일 생성에 문제가 생길 수 있습니다.
+
+아래로 누적하며 작성해 주세요.
+예시) 장편영화,2000,행복합니다,민서역(주연),푸른필름"
+          >
+            <textarea
+              placeholder="장편영화,2000,행복합니다,민서역(주연),푸른필름"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 h-32 resize-none"
+              value={formData.filmography}
+              onChange={(e) => setFormData((prev) => ({ ...prev, filmography: e.target.value }))}
+            />
+          </FormSection>
+
+          {/* 24. 현재 머리형태 */}
+          <FormSection number={24} title="현재 머리형태">
+            <SelectButtonGroup
+              options={["숏컷", "단발", "중단발", "장발", "삭발"]}
+              selected={formData.hairStyle}
+              onChange={(value) => setFormData((prev) => ({ ...prev, hairStyle: value }))}
+            />
+          </FormSection>
+
+          {/* 25. 구사언어 */}
+          <FormSection number={25} title="구사언어 (복수 선택 가능)">
             <MultiSelectButtonGroup
               options={languageOptions}
               selected={formData.languages}
@@ -393,8 +659,8 @@ export function ProfileRegisterContent() {
             />
           </FormSection>
 
-          {/* 14. 사투리 */}
-          <FormSection number={14} title="사투리 (복수 선택 가능)">
+          {/* 26. 사투리 */}
+          <FormSection number={26} title="사투리 (복수 선택 가능)">
             <MultiSelectButtonGroup
               options={dialectOptions}
               selected={formData.dialects}
@@ -402,88 +668,35 @@ export function ProfileRegisterContent() {
             />
           </FormSection>
 
-          {/* 15. 특기 */}
-          <FormSection number={15} title="특기 (복수 선택 가능)">
+          {/* 27. 특기 */}
+          <FormSection number={27} title="특기 (복수 선택 가능)">
             <MultiSelectButtonGroup
-              options={skillOptions}
-              selected={formData.skills}
-              onChange={(values) => setFormData((prev) => ({ ...prev, skills: values }))}
+              options={talentOptions}
+              selected={formData.talents}
+              onChange={(values) => setFormData((prev) => ({ ...prev, talents: values }))}
             />
           </FormSection>
 
-          {/* 16. 자기소개 */}
-          <FormSection number={16} title="자기소개" required>
-            <textarea
-              placeholder="자신을 소개해주세요 (최대 500자)"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 h-32 resize-none"
-              value={formData.introduction}
-              onChange={(e) => setFormData((prev) => ({ ...prev, introduction: e.target.value }))}
-              maxLength={500}
-            />
-            <p className="text-right text-zinc-500 text-sm mt-2">{formData.introduction.length}/500</p>
-          </FormSection>
-
-          {/* 17. 필모그래피 */}
-          <FormSection number={17} title="필모그래피">
-            <textarea
-              placeholder="작품명, 역할, 년도 순으로 작성해주세요"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 h-32 resize-none"
-              value={formData.filmography}
-              onChange={(e) => setFormData((prev) => ({ ...prev, filmography: e.target.value }))}
+          {/* 28. 가능한 스포츠 */}
+          <FormSection number={28} title="가능한 스포츠 (복수 선택 가능)">
+            <MultiSelectButtonGroup
+              options={sportOptions}
+              selected={formData.sports}
+              onChange={(values) => setFormData((prev) => ({ ...prev, sports: values }))}
             />
           </FormSection>
 
-          {/* 18. 운전면허 */}
-          <FormSection number={18} title="운전면허">
-            <SelectButtonGroup
-              options={["없음", "1종", "2종"]}
-              selected={formData.license}
-              onChange={(value) => setFormData((prev) => ({ ...prev, license: value }))}
+          {/* 29. 운전면허 */}
+          <FormSection number={29} title="운전면허 (복수 선택 가능)">
+            <MultiSelectButtonGroup
+              options={licenseOptions}
+              selected={formData.drivingLicense}
+              onChange={(values) => setFormData((prev) => ({ ...prev, drivingLicense: values }))}
             />
           </FormSection>
 
-          {/* 19. 품앗이 */}
-          <FormSection number={19} title="품앗이 가능 여부">
-            <SelectButtonGroup
-              options={["가능", "불가능"]}
-              selected={formData.pumasi}
-              onChange={(value) => setFormData((prev) => ({ ...prev, pumasi: value }))}
-            />
-          </FormSection>
-
-          {/* 20. 영화 예산 */}
-          <FormSection number={20} title="영화 희망 예산 (원)">
-            <input
-              type="text"
-              placeholder="100,000"
-              className="w-40 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-              value={formData.movieBudget}
-              onChange={(e) => setFormData((prev) => ({ ...prev, movieBudget: e.target.value }))}
-            />
-          </FormSection>
-
-          {/* 21. 광고 예산 */}
-          <FormSection number={21} title="광고 희망 예산 (원)">
-            <input
-              type="text"
-              placeholder="100,000"
-              className="w-40 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-              value={formData.adBudget}
-              onChange={(e) => setFormData((prev) => ({ ...prev, adBudget: e.target.value }))}
-            />
-          </FormSection>
-
-          {/* 22. 프로필 사진 */}
-          <FormSection number={22} title="프로필 사진" required>
-            <div className="border-2 border-dashed border-zinc-700 rounded-xl p-8 text-center">
-              <div className="text-4xl mb-4">📷</div>
-              <p className="text-zinc-400 mb-2">클릭하여 사진을 업로드하세요</p>
-              <p className="text-zinc-500 text-sm">JPG, PNG 형식 (최대 10MB)</p>
-            </div>
-          </FormSection>
-
-          {/* 23. 추가 사진 */}
-          <FormSection number={23} title="추가 사진 (최대 10장)">
+          {/* 30. 프로필 이미지 */}
+          <FormSection number={30} title="프로필 이미지 (최대 10장)">
             <div className="grid grid-cols-5 gap-4">
               {[...Array(5)].map((_, i) => (
                 <div
@@ -494,178 +707,153 @@ export function ProfileRegisterContent() {
                 </div>
               ))}
             </div>
+            <button className="mt-3 text-purple-400 text-sm hover:text-purple-300">이미지 추가하기</button>
           </FormSection>
 
-          {/* 24. 인스타그램 */}
-          <FormSection number={24} title="인스타그램 아이디">
-            <div className="flex items-center gap-2">
-              <span className="text-zinc-400">@</span>
-              <input
-                type="text"
-                placeholder="instagram_id"
-                className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-                value={formData.instagram}
-                onChange={(e) => setFormData((prev) => ({ ...prev, instagram: e.target.value }))}
-              />
+          {/* 31. 출연 작품 캡처 이미지 */}
+          <FormSection number={31} title="출연 작품 캡처 이미지 (최대 10장)">
+            <div className="grid grid-cols-5 gap-4">
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={i}
+                  className="aspect-square border-2 border-dashed border-zinc-700 rounded-lg flex items-center justify-center text-zinc-600 hover:border-zinc-500 transition-colors cursor-pointer"
+                >
+                  <span className="text-2xl">+</span>
+                </div>
+              ))}
+            </div>
+            <button className="mt-3 text-purple-400 text-sm hover:text-purple-300">이미지 추가하기</button>
+          </FormSection>
+
+          {/* 32. 출연(독백)영상 주소 */}
+          <FormSection
+            number={32}
+            title="출연(독백)영상 주소"
+            description="최대 4개의 링크를 추가할 수 있습니다.
+유튜브 채널이 아닌 영상 링크를 입력해 주세요."
+          >
+            <div className="space-y-3">
+              {formData.monologueLinks.map((link, index) => (
+                <div key={index} className="flex gap-3">
+                  <input
+                    type="text"
+                    placeholder="http://youtu.be/"
+                    className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+                    value={link}
+                    onChange={(e) => {
+                      const newLinks = [...formData.monologueLinks];
+                      newLinks[index] = e.target.value;
+                      setFormData((prev) => ({ ...prev, monologueLinks: newLinks }));
+                    }}
+                  />
+                  {formData.monologueLinks.length > 1 && (
+                    <button
+                      onClick={() => removeMonologueLink(index)}
+                      className="px-4 py-2 bg-zinc-800 text-zinc-400 rounded-lg hover:bg-zinc-700"
+                    >
+                      −
+                    </button>
+                  )}
+                </div>
+              ))}
+              {formData.monologueLinks.length < 4 && (
+                <button
+                  onClick={addMonologueLink}
+                  className="px-4 py-2 bg-zinc-800 text-zinc-400 rounded-lg hover:bg-zinc-700"
+                >
+                  +
+                </button>
+              )}
             </div>
           </FormSection>
 
-          {/* 25. 유튜브 */}
-          <FormSection number={25} title="유튜브 채널">
-            <input
-              type="text"
-              placeholder="https://youtube.com/@채널명"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-              value={formData.youtube}
-              onChange={(e) => setFormData((prev) => ({ ...prev, youtube: e.target.value }))}
-            />
-          </FormSection>
-
-          {/* 26. 포트폴리오 링크 */}
-          <FormSection number={26} title="포트폴리오 링크">
-            <input
-              type="url"
-              placeholder="https://..."
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-              value={formData.portfolioLink}
-              onChange={(e) => setFormData((prev) => ({ ...prev, portfolioLink: e.target.value }))}
-            />
-            <p className="text-zinc-500 text-sm mt-2">개인 포트폴리오 사이트, 노션, 블로그 등</p>
-          </FormSection>
-
-          {/* 27. 영상 링크 */}
-          <FormSection number={27} title="영상 링크 (유튜브, 비메오 등)">
-            <input
-              type="url"
-              placeholder="https://youtube.com/watch?v=..."
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-              value={formData.videoLink}
-              onChange={(e) => setFormData((prev) => ({ ...prev, videoLink: e.target.value }))}
-            />
-            <p className="text-zinc-500 text-sm mt-2">자기소개 영상, 연기 영상, 오디션 영상 등</p>
-          </FormSection>
-
-          {/* 28. 수상경력 */}
-          <FormSection number={28} title="수상경력">
-            <textarea
-              placeholder="수상명 / 수상년도 / 주최기관"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 h-24 resize-none"
-              value={formData.awards}
-              onChange={(e) => setFormData((prev) => ({ ...prev, awards: e.target.value }))}
-            />
-          </FormSection>
-
-          {/* 29. 자격증 */}
-          <FormSection number={29} title="자격증">
-            <textarea
-              placeholder="자격증명 / 취득년도"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 h-24 resize-none"
-              value={formData.certificates}
-              onChange={(e) => setFormData((prev) => ({ ...prev, certificates: e.target.value }))}
-            />
-          </FormSection>
-
-          {/* 30. 병역사항 */}
-          <FormSection number={30} title="병역사항">
-            <SelectButtonGroup
-              options={militaryOptions}
-              selected={formData.military}
-              onChange={(value) => setFormData((prev) => ({ ...prev, military: value }))}
-            />
-          </FormSection>
-
-          {/* 31. 결혼 여부 */}
-          <FormSection number={31} title="결혼 여부">
-            <SelectButtonGroup
-              options={marriageOptions}
-              selected={formData.marriage}
-              onChange={(value) => setFormData((prev) => ({ ...prev, marriage: value }))}
-            />
-          </FormSection>
-
-          {/* 32. 문신/피어싱 */}
-          <FormSection number={32} title="문신/피어싱 여부">
-            <SelectButtonGroup
-              options={["없음", "피어싱", "문신", "둘 다"]}
-              selected={formData.tattoo}
-              onChange={(value) => setFormData((prev) => ({ ...prev, tattoo: value }))}
-            />
-          </FormSection>
-
-          {/* 33. 눈 색상 */}
-          <FormSection number={33} title="눈 색상">
-            <input
-              type="text"
-              placeholder="검정, 갈색, 헤이즐 등"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
-              value={formData.eyeColor}
-              onChange={(e) => setFormData((prev) => ({ ...prev, eyeColor: e.target.value }))}
-            />
-          </FormSection>
-
-          {/* 34. 이목구비 특징 */}
-          <FormSection number={34} title="이목구비 특징 (복수 선택 가능)">
-            <MultiSelectButtonGroup
-              options={featureOptions}
-              selected={formData.features}
-              onChange={(values) => setFormData((prev) => ({ ...prev, features: values }))}
-            />
-          </FormSection>
-
-          {/* 35. 동의 사항 */}
-          <FormSection number={35} title="동의 사항" required>
-            <div className="space-y-4">
-              <label className="flex items-start gap-3 cursor-pointer">
+          {/* 33. 개인 SNS 주소 */}
+          <FormSection
+            number={33}
+            title="개인 SNS 주소"
+            description="아이디가 아닌 링크를 입력해 주세요."
+          >
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <span className="w-24 text-zinc-400 text-sm">Youtube</span>
                 <input
-                  type="checkbox"
-                  checked={formData.agreeTerms}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, agreeTerms: e.target.checked }))}
-                  className="mt-1 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-purple-600 focus:ring-purple-500"
+                  type="text"
+                  placeholder="https://youtube.com/@..."
+                  className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+                  value={formData.snsYoutube}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, snsYoutube: e.target.value }))}
                 />
-                <div>
-                  <span className="text-white">[필수] 이용약관에 동의합니다</span>
-                  <p className="text-zinc-500 text-sm mt-1">서비스 이용을 위한 기본 약관입니다.</p>
-                </div>
-              </label>
-
-              <label className="flex items-start gap-3 cursor-pointer">
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-24 text-zinc-400 text-sm">Vimeo</span>
                 <input
-                  type="checkbox"
-                  checked={formData.agreePrivacy}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, agreePrivacy: e.target.checked }))}
-                  className="mt-1 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-purple-600 focus:ring-purple-500"
+                  type="text"
+                  placeholder="https://vimeo.com/..."
+                  className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+                  value={formData.snsVimeo}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, snsVimeo: e.target.value }))}
                 />
-                <div>
-                  <span className="text-white">[필수] 개인정보 수집 및 이용에 동의합니다</span>
-                  <p className="text-zinc-500 text-sm mt-1">프로필 등록 및 서비스 이용을 위해 필요합니다.</p>
-                </div>
-              </label>
-
-              <label className="flex items-start gap-3 cursor-pointer">
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-24 text-zinc-400 text-sm">Instagram</span>
                 <input
-                  type="checkbox"
-                  checked={formData.agreeMarketing}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, agreeMarketing: e.target.checked }))}
-                  className="mt-1 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-purple-600 focus:ring-purple-500"
+                  type="text"
+                  placeholder="https://instagram.com/..."
+                  className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+                  value={formData.snsInstagram}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, snsInstagram: e.target.value }))}
                 />
-                <div>
-                  <span className="text-white">[선택] 마케팅 정보 수신에 동의합니다</span>
-                  <p className="text-zinc-500 text-sm mt-1">
-                    새로운 작품 공고, 이벤트 등의 정보를 받아보실 수 있습니다.
-                  </p>
-                </div>
-              </label>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-24 text-zinc-400 text-sm">Twitter</span>
+                <input
+                  type="text"
+                  placeholder="https://twitter.com/..."
+                  className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+                  value={formData.snsTwitter}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, snsTwitter: e.target.value }))}
+                />
+              </div>
             </div>
+          </FormSection>
+
+          {/* 34. 수신 이메일 */}
+          <FormSection
+            number={34}
+            title="수신 이메일"
+            description="개인정보 보호를 위해 이메일은 TOID에서만 보관되며,
+아래 정보는 추후 캐스팅 담당자께서 연락 요청 시, 전달될 예정입니다."
+          >
+            <input
+              type="email"
+              placeholder="sample@toid.kr"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
+              value={formData.email}
+              onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+            />
+          </FormSection>
+
+          {/* 35. 마케팅 정보 수신 동의 */}
+          <FormSection number={35} title="마케팅 정보 수신 동의">
+            <div className="bg-zinc-800 rounded-lg p-4 max-h-48 overflow-y-auto text-zinc-400 text-sm mb-4">
+              <p><strong className="text-white">[토이드(TOID)]</strong>는 서비스 이용자에게 서비스 관련 마케팅 정보를 제공하기 위해 이메일 및 문자 메시지를 발송할 수 있습니다.</p>
+              <br />
+              <p>1. 수집 항목: 수신 전화번호, 수신 이메일</p>
+              <p>2. 이용 목적: 마케팅 및 프로모션 정보 전달, 서비스 안내</p>
+              <p>3. 보유 및 이용기간: 회원 탈퇴 시까지 또는 동의 철회 시까지</p>
+            </div>
+            <SelectButtonGroup
+              options={["동의", "거절"]}
+              selected={formData.agreeMarketing}
+              onChange={(value) => setFormData((prev) => ({ ...prev, agreeMarketing: value }))}
+            />
           </FormSection>
         </div>
 
         {/* 제출 버튼 */}
-        <div className="mt-8 space-y-4">
-          <button className="w-full py-4 bg-purple-600 text-white font-semibold rounded-xl hover:bg-purple-700 transition-all">
-            프로필 등록하기
-          </button>
-          <button className="w-full py-4 bg-zinc-800 text-zinc-300 font-semibold rounded-xl hover:bg-zinc-700 transition-all">
-            임시 저장
+        <div className="mt-8">
+          <button className="w-full py-4 bg-purple-600 text-white font-semibold rounded-xl hover:bg-purple-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+            등록하기
           </button>
         </div>
       </main>
