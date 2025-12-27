@@ -1,0 +1,2 @@
+export { NoticeContent } from "./NoticeContent";
+

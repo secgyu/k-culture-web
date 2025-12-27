@@ -35,11 +35,11 @@ function HeroSection() {
           <Link href="/jobs" className="text-zinc-300 hover:text-white transition-colors text-sm">
             작품구인
           </Link>
-          <Link href="#" className="text-zinc-300 hover:text-white transition-colors text-sm">
+          <Link href="/notice" className="text-zinc-300 hover:text-white transition-colors text-sm">
             공지사항
           </Link>
           <Link
-            href="/signup?type=actor"
+            href="/profile-register"
             className="px-4 py-2 border border-zinc-600 text-white text-sm rounded-lg hover:bg-zinc-800 transition-all"
           >
             프로필 등록하기
