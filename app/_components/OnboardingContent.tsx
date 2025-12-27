@@ -259,7 +259,7 @@ export function OnboardingContent() {
           <Link href="#" className="text-zinc-400 hover:text-white transition-colors text-sm">
             스태프 포트폴리오
           </Link>
-          <Link href="/recommend" className="text-zinc-400 hover:text-white transition-colors text-sm">
+          <Link href="/actor-profile" className="text-zinc-400 hover:text-white transition-colors text-sm">
             배우 프로필
           </Link>
           <Link href="#" className="text-zinc-400 hover:text-white transition-colors text-sm">
