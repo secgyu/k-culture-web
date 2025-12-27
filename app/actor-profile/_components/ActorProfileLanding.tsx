@@ -192,36 +192,96 @@ function HeroSection() {
   );
 }
 
+// 배우 이미지 슬라이더
+const actorImages = [
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=400&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300&h=400&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=400&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=300&h=400&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=400&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&h=400&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=300&h=400&fit=crop&crop=face",
+];
+
 // 토이드 소개 섹션
 function IntroSection() {
   return (
-    <section className="py-24 bg-zinc-950">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <span className="text-purple-400 text-sm font-medium tracking-wider uppercase">About Toid</span>
-          <h2 className="mt-4 text-3xl md:text-4xl font-bold text-white">
-            작품 그 이상의 <span className="text-purple-400">가능성을</span>
-          </h2>
-          <p className="mt-4 text-zinc-400 max-w-2xl mx-auto">
-            토이드는 배우와 제작사를 연결하는 혁신적인 플랫폼입니다.
-            <br />
-            당신의 재능을 세상에 알리고, 새로운 기회를 만나보세요.
-          </p>
+    <section className="bg-white overflow-hidden">
+      {/* 자동 슬라이드 이미지 */}
+      <div className="relative w-full overflow-hidden bg-zinc-900 py-4">
+        <div className="flex animate-scroll-left">
+          {/* 이미지를 2번 반복하여 무한 스크롤 효과 */}
+          {[...actorImages, ...actorImages].map((src, i) => (
+            <div key={i} className="flex-shrink-0 w-48 md:w-56 lg:w-64 aspect-[3/4] mx-1 relative">
+              <Image
+                src={src}
+                alt={`배우 ${i + 1}`}
+                fill
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 콘텐츠 */}
+      <div className="max-w-4xl mx-auto px-6 py-20 text-center">
+        {/* 배지 */}
+        <div className="inline-block px-6 py-2 bg-purple-600 rounded-full mb-8">
+          <span className="text-white font-medium text-sm">배우&모델</span>
         </div>
 
-        {/* 스크린샷 */}
-        <div className="relative max-w-4xl mx-auto">
-          <div className="bg-gradient-to-b from-purple-600/20 to-transparent rounded-3xl p-1">
-            <div className="bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl">
-              <div className="aspect-video bg-zinc-800 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto">
-                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                  <p className="text-zinc-400">서비스 소개 영상</p>
-                </div>
+        {/* 메인 타이틀 */}
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-12">
+          &quot;작품 준비하기에도 벅차요!&quot;
+        </h2>
+
+        {/* 구분선 */}
+        <div className="w-px h-24 bg-gray-300 mx-auto mb-12" />
+
+        {/* 보라색 서브 타이틀 */}
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-purple-600 mb-6">
+          &quot;작품과 연습에만 집중하고 싶으신가요?&quot;
+        </h3>
+
+        {/* 설명 */}
+        <p className="text-gray-600 text-lg mb-12">등록 한 번으로 편하게 기다리세요!</p>
+
+        {/* 기능 리스트 */}
+        <div className="max-w-2xl mx-auto bg-zinc-900 rounded-2xl p-6 text-left">
+          <div className="space-y-4">
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0 w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                1
+              </span>
+              <div>
+                <h4 className="text-white font-semibold mb-1">
+                  구분 <span className="text-purple-400">없이</span>
+                </h4>
+                <p className="text-zinc-400 text-sm">배우, 모델, 가수 등 누구나 등록 가능</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0 w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                2
+              </span>
+              <div>
+                <h4 className="text-white font-semibold mb-1">
+                  직접 찾아다니지 <span className="text-purple-400">않아도</span>
+                </h4>
+                <p className="text-zinc-400 text-sm">제작사에서 먼저 연락이 옵니다</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0 w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                3
+              </span>
+              <div>
+                <h4 className="text-white font-semibold mb-1">
+                  프로필 PDF <span className="text-purple-400">자동 생성</span>
+                </h4>
+                <p className="text-zinc-400 text-sm">깔끔한 프로필 파일을 바로 다운로드</p>
               </div>
             </div>
           </div>
@@ -547,6 +607,18 @@ export function ActorProfileLanding() {
         }
         .animate-bounce-slow {
           animation: bounce-slow 3s ease-in-out infinite;
+        }
+        
+        @keyframes scroll-left {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-scroll-left {
+          animation: scroll-left 30s linear infinite;
         }
       `}</style>
     </div>
