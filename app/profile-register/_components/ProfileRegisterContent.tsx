@@ -250,15 +250,15 @@ export function ProfileRegisterContent() {
 
         {/* 안내 박스 */}
         <div className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800 mb-6">
-          <h3 className="text-white font-medium mb-3">토이드 사이트 프로필 등록 안내</h3>
+          <h3 className="text-white font-medium mb-3">두드림 사이트 프로필 등록 안내</h3>
           <div className="text-zinc-400 text-sm leading-relaxed">
-            <p>토이드는 &apos;프로필 관리 및 탐색 플랫폼&apos;입니다.</p>
+            <p>두드림은 &apos;프로필 관리 및 탐색 플랫폼&apos;입니다.</p>
             <p>소속사가 아니며, 배우 등록 비용은 없습니다.</p>
             <br />
-            <p>- 토이드에 배우&모델 등록을 하면?</p>
+            <p>- 두드림에 배우&모델 등록을 하면?</p>
             <p>1. 웹 프로필 제공</p>
             <p>2. PDF 파일 자동 변환 제공</p>
-            <p>3. 토이드 내 &apos;작품구인&apos; 지원 가능</p>
+            <p>3. 두드림 내 &apos;작품구인&apos; 지원 가능</p>
             <p>4. PD 대시보드 배우&모델 추가 가능</p>
             <p>5. 등록된 배우 및 모델 대리 공고 지원</p>
             <br />
@@ -450,7 +450,7 @@ TIP. 본인을 가장 잘 설명할 수 있는 이미지로 넣어주세요."
             number={13}
             title="수신 전화번호"
             required
-            description="개인정보 보호를 위해 전화번호는 TOID에서만 보관되며,
+            description="개인정보 보호를 위해 전화번호는 DODREAM에서만 보관되며,
 아래 정보는 추후 캐스팅 담당자께서 연락 요청 시, 전달될 예정입니다."
           >
             <input
@@ -491,7 +491,7 @@ TIP. '프로필 관리'와 '구인구직'에서 작품지원 할 때 본인인�
           {/* 15. 정보 수집 및 활용 동의 */}
           <FormSection number={15} title="정보 수집 및 활용 동의" required>
             <div className="bg-zinc-800 rounded-lg p-4 max-h-48 overflow-y-auto text-zinc-400 text-sm mb-4">
-              <p><strong className="text-white">[토이드(TOID)]</strong>는 서비스 이용자에게 보다 나은 서비스를 제공하기 위해 다음과 같은 개인 정보를 수집·이용하고자 합니다.</p>
+              <p><strong className="text-white">[두드림(DoDreamEAM)]</strong>은 서비스 이용자에게 보다 나은 서비스를 제공하기 위해 다음과 같은 개인 정보를 수집·이용하고자 합니다.</p>
               <br />
               <p><strong className="text-white">1. 수집하는 개인정보 항목</strong></p>
               <p>- 필수정보: 구분(배우/모델), 이름(또는 활동명), 성별, 생년월일, 키, 체중, 발사이즈, 인종, 소속사, 대표 필모그래피, 필모그래피, 간단한 자기소개, 현재 머리형태, 스타일 키워드, 구사언어, 사투리, 특기, 가능한 스포츠, 최소 영화 개런티, 최소 광고 개런티, 품앗이 가능여부, 표지 대표 이미지, 프로필 이미지, 출연 작품 캡처 이미지, 수신 전화번호, 수신 이메일.</p>
@@ -522,7 +522,7 @@ TIP. '프로필 관리'와 '구인구직'에서 작품지원 할 때 본인인�
           {/* 16. 섭외요청 이메일 문자 수신 동의 */}
           <FormSection number={16} title="섭외요청 이메일 문자 수신 동의" required>
             <div className="bg-zinc-800 rounded-lg p-4 max-h-48 overflow-y-auto text-zinc-400 text-sm mb-4">
-              <p><strong className="text-white">[토이드(TOID)]</strong>는 배우 및 모델에게 작품 관련 섭외 요청과 관련된 정보를 제공하기 위해 이메일 및 문자 메시지를 발송할 수 있습니다.</p>
+              <p><strong className="text-white">[두드림(DoDreamEAM)]</strong>은 배우 및 모델에게 작품 관련 섭외 요청과 관련된 정보를 제공하기 위해 이메일 및 문자 메시지를 발송할 수 있습니다.</p>
               <br />
               <p>1. 수집 항목: 수신 전화번호, 수신 이메일</p>
               <p>2. 이용 목적: 작품 섭외 요청 및 관련 정보 전달</p>
@@ -821,12 +821,12 @@ TIP. '프로필 관리'와 '구인구직'에서 작품지원 할 때 본인인�
           <FormSection
             number={34}
             title="수신 이메일"
-            description="개인정보 보호를 위해 이메일은 TOID에서만 보관되며,
+            description="개인정보 보호를 위해 이메일은 DoDreamEAM에서만 보관되며,
 아래 정보는 추후 캐스팅 담당자께서 연락 요청 시, 전달될 예정입니다."
           >
             <input
               type="email"
-              placeholder="sample@toid.kr"
+              placeholder="sample@DoDreameam.kr"
               className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500"
               value={formData.email}
               onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
@@ -836,7 +836,7 @@ TIP. '프로필 관리'와 '구인구직'에서 작품지원 할 때 본인인�
           {/* 35. 마케팅 정보 수신 동의 */}
           <FormSection number={35} title="마케팅 정보 수신 동의">
             <div className="bg-zinc-800 rounded-lg p-4 max-h-48 overflow-y-auto text-zinc-400 text-sm mb-4">
-              <p><strong className="text-white">[토이드(TOID)]</strong>는 서비스 이용자에게 서비스 관련 마케팅 정보를 제공하기 위해 이메일 및 문자 메시지를 발송할 수 있습니다.</p>
+              <p><strong className="text-white">[두드림(DoDreamEAM)]</strong>은 서비스 이용자에게 서비스 관련 마케팅 정보를 제공하기 위해 이메일 및 문자 메시지를 발송할 수 있습니다.</p>
               <br />
               <p>1. 수집 항목: 수신 전화번호, 수신 이메일</p>
               <p>2. 이용 목적: 마케팅 및 프로모션 정보 전달, 서비스 안내</p>

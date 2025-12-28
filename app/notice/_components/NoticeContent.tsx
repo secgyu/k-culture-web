@@ -7,37 +7,37 @@ const noticeData = [
   {
     id: 1,
     type: "일반공지",
-    title: "[TOID ver.1.2.3] 업데이트 안내",
+    title: "[DODREAM ver.1.2.3] 업데이트 안내",
     date: "2024. 10. 14.",
   },
   {
     id: 2,
     type: "일반공지",
-    title: "[TOID ver.1.2.2] 업데이트 안내",
+    title: "[DoDreamEAM ver.1.2.2] 업데이트 안내",
     date: "2024. 10. 10.",
   },
   {
     id: 3,
     type: "일반공지",
-    title: "[TOID ver.1.2.1] 업데이트 안내",
+    title: "[DoDreamEAM ver.1.2.1] 업데이트 안내",
     date: "2024. 10. 2.",
   },
   {
     id: 4,
     type: "일반공지",
-    title: "[TOID ver.1.2.0] 업데이트 안내",
+    title: "[DoDreamEAM ver.1.2.0] 업데이트 안내",
     date: "2024. 9. 30.",
   },
   {
     id: 5,
     type: "일반공지",
-    title: "[TOID ver.1.1.0] 업데이트 안내",
+    title: "[DoDreamEAM ver.1.1.0] 업데이트 안내",
     date: "2024. 9. 28.",
   },
   {
     id: 6,
     type: "일반공지",
-    title: "2024년 9월 27일 토이드 서비스 정식 런칭!",
+    title: "2024년 9월 27일 두드림 서비스 정식 런칭!",
     date: "2024. 9. 27.",
   },
 ];

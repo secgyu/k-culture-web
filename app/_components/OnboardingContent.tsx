@@ -279,7 +279,7 @@ export function OnboardingContent() {
       <main className="flex-1 flex flex-col items-center px-6 py-12">
         {/* 환영 메시지 */}
         <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16">
-          토이드에 오신 것을 환영합니다!
+          두드림에 오신 것을 환영합니다!
         </h1>
 
         {/* 서비스 카드 그리드 */}
@@ -313,7 +313,7 @@ export function OnboardingContent() {
       <footer className="w-full px-6 py-8 text-center">
         <div className="text-zinc-600 text-xs sm:text-sm space-y-2">
           <p className="flex flex-wrap justify-center gap-2">
-            <span>주식회사 토이드</span>
+            <span>주식회사 두드림</span>
             <span className="hidden sm:inline">|</span>
             <span>대표이사 양승철</span>
             <span className="hidden sm:inline">|</span>

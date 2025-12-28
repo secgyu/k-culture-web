@@ -182,7 +182,7 @@ function HeroSection() {
                   <p className="text-sm text-gray-700">단편영화,&lt;우리 사이&gt;, 지수역(주연)</p>
                 </div>
 
-                {/* TOID 로고 */}
+                {/* DODREAM 로고 */}
                 <div className="flex justify-end">
                   <div className="flex items-center gap-1 text-gray-300">
                     <span className="font-bold text-sm tracking-tight">T</span>
@@ -522,7 +522,7 @@ const actorImages = [
   "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=300&h=400&fit=crop&crop=face",
 ];
 
-// 토이드 소개 섹션
+// 두드림 소개 섹션
 function IntroSection() {
   return (
     <section className="bg-white overflow-hidden">
@@ -997,7 +997,7 @@ function FeatureLinkShareSection() {
         {/* 구분선 */}
         <div className="w-px h-24 bg-purple-400 mx-auto mb-24" />
 
-        {/* 토이드 프로필 비교 */}
+        {/* 두드림 프로필 비교 */}
         <div className="flex justify-center gap-6 mb-16">
           {/* 왼쪽: PDF 프로필 */}
           <div className="w-80 bg-zinc-900 rounded-xl overflow-hidden shadow-2xl">
@@ -1225,7 +1225,7 @@ function FeatureLinkShareSection() {
           PDF 버튼을 눌러서 <span className="text-purple-600">출력</span>해보세요!
         </h3>
 
-        {/* TOID와 함께 */}
+        {/* DoDreamEAM과 함께 */}
         <p className="text-gray-600 text-lg mb-2">보다 효과적인 프로필 제작</p>
         <h3 className="text-3xl font-bold text-gray-900 mb-16">
           <span className="inline-flex items-center gap-1">
@@ -1582,7 +1582,7 @@ function DirectorSection() {
         </div>
       </div>
 
-      {/* 작품구인 TOID */}
+      {/* 작품구인 DoDreamEAM */}
       <div className="bg-zinc-900 py-24">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-yellow-400 mb-16">
@@ -1897,12 +1897,12 @@ function Footer() {
 
         {/* 회사 정보 */}
         <div className="text-zinc-500 text-sm space-y-1">
-          <p>토이드(TOID) | 충남 아산시 순천향로 22 미디어랩스관 702호</p>
-          <p>대표 : 양승철 | 문의 : toidfilm@gmail.com</p>
+          <p>두드림(DoDreamEAM) | 충남 아산시 순천향로 22 미디어랩스관 702호</p>
+          <p>대표 : 양승철 | 문의 : DoDreameamfilm@gmail.com</p>
         </div>
 
         <div className="mt-8 pt-8 border-t border-zinc-800 text-zinc-600 text-sm">
-          © 2024. TOID. all rights reserved.
+          © 2024. DoDreamEAM. all rights reserved.
         </div>
       </div>
     </footer>
