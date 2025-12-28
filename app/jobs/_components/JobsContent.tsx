@@ -92,7 +92,7 @@ const getCategoryColor = (category: string) => {
     case "웹드라마":
       return "text-blue-400";
     case "장편영화":
-      return "text-purple-400";
+      return "text-gold";
     default:
       return "text-zinc-400";
   }
@@ -101,7 +101,7 @@ const getCategoryColor = (category: string) => {
 // 작품 카드 컴포넌트
 function JobCard({ job }: { job: (typeof jobsData)[0] }) {
   return (
-    <div className="bg-zinc-900/80 rounded-xl p-6 border border-zinc-800 hover:border-zinc-600 transition-all">
+    <div className="bg-luxury-black/80 rounded-xl p-6 border border-zinc-800 hover:border-zinc-600 transition-all">
       <div className="flex justify-between items-start">
         {/* 왼쪽 콘텐츠 */}
         <div className="flex-1">
@@ -109,7 +109,7 @@ function JobCard({ job }: { job: (typeof jobsData)[0] }) {
           <div className="flex items-center gap-3 mb-3">
             <span className={`text-sm font-medium ${getCategoryColor(job.category)}`}>| {job.category}</span>
             {job.isPumasi ? (
-              <span className="flex items-center gap-1 text-purple-400 text-sm">
+              <span className="flex items-center gap-1 text-gold text-sm">
                 <span>💜</span> 품앗이
               </span>
             ) : (
@@ -157,7 +157,7 @@ export function JobsContent() {
         <nav className="hidden md:flex items-center gap-8">
           <Link
             href="/ai-matching"
-            className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
+            className="text-gold hover:text-gold-light transition-colors text-sm font-medium"
           >
             AI 매칭추천
           </Link>
@@ -190,13 +190,13 @@ export function JobsContent() {
         {/* 타이틀 & 구인하기 버튼 */}
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-2xl md:text-3xl font-bold text-white">작품과 배우·모델의 만남</h1>
-          <button className="px-4 py-2 border border-purple-500 text-purple-400 text-sm rounded-lg hover:bg-purple-500/10 transition-all">
+          <button className="px-4 py-2 border border-purple-500 text-gold text-sm rounded-lg hover:bg-gold/10 transition-all">
             구인하기
           </button>
         </div>
 
         {/* 필터 섹션 */}
-        <div className="bg-zinc-900/50 rounded-2xl p-6 mb-8 border border-zinc-800">
+        <div className="bg-luxury-black/50 rounded-2xl p-6 mb-8 border border-zinc-800">
           {/* 검색 */}
           <div className="mb-6">
             <input
@@ -283,13 +283,13 @@ export function JobsContent() {
         {/* 페이지네이션 */}
         <div className="flex justify-center">
           <div className="flex items-center gap-2">
-            <button className="w-10 h-10 bg-purple-600 text-white rounded-full font-medium">1</button>
+            <button className="w-10 h-10 bg-gold text-white rounded-full font-medium">1</button>
           </div>
         </div>
       </main>
 
       {/* 하단 그라데이션 */}
-      <div className="h-32 bg-gradient-to-t from-purple-900/20 to-transparent" />
+      <div className="h-32 bg-gradient-to-t from-gold/20 to-transparent" />
     </div>
   );
 }

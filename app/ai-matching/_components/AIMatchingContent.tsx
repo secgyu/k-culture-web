@@ -8,7 +8,7 @@ export function AIMatchingContent() {
     <div className="min-h-screen bg-zinc-950 relative overflow-hidden">
       {/* 배경 그라데이션 */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/20 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-900/20 rounded-full blur-3xl" />
       </div>
 
@@ -21,7 +21,7 @@ export function AIMatchingContent() {
         <nav className="hidden md:flex items-center gap-8">
           <Link
             href="/ai-matching"
-            className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
+            className="text-gold hover:text-gold-light transition-colors text-sm font-medium"
           >
             AI 매칭추천
           </Link>
@@ -55,7 +55,7 @@ export function AIMatchingContent() {
         {/* 타이틀 */}
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-gold via-champagne to-gold bg-clip-text text-transparent">
               AI 매칭 기술을 통해
             </span>
           </h1>
@@ -67,7 +67,7 @@ export function AIMatchingContent() {
         {/* 폼 영역 */}
         <div className="w-full max-w-3xl mx-auto">
           {/* 입력 폼 (비활성화 상태) */}
-          <div className="bg-zinc-900/50 backdrop-blur-sm rounded-2xl p-8 mb-6 border border-zinc-800">
+          <div className="bg-luxury-black/50 backdrop-blur-sm rounded-2xl p-8 mb-6 border border-zinc-800">
             {/* 작품 정보 입력 */}
             <div className="grid md:grid-cols-3 gap-4 mb-6">
               <div>
@@ -134,7 +134,7 @@ export function AIMatchingContent() {
 
           {/* 추가 입력 필드 (비활성화) */}
           <div className="space-y-4 mb-8">
-            <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg px-4 py-3">
+            <div className="bg-luxury-black/50 border border-zinc-800 rounded-lg px-4 py-3">
               <p className="text-zinc-600 text-sm">원하는 캐릭터를 설명해주세요. 시놉시스와 캐릭터...</p>
             </div>
           </div>
@@ -165,7 +165,7 @@ export function AIMatchingContent() {
       </div>
 
       {/* 하단 그라데이션 */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-900/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gold/20 to-transparent" />
     </div>
   );
 }

@@ -127,15 +127,15 @@ export function FeatureLinkShareSection() {
         </div>
 
         {/* 구분선 */}
-        <div className="w-px h-24 bg-purple-400 mx-auto mb-24" />
+        <div className="w-px h-24 bg-gold mx-auto mb-24" />
 
         {/* 두드림 프로필 비교 */}
         <div className="flex justify-center gap-6 mb-16">
           {/* 왼쪽: PDF 프로필 */}
-          <div className="w-80 bg-zinc-900 rounded-xl overflow-hidden shadow-2xl">
-            <div className="bg-zinc-800 px-4 py-3 text-center">
+          <div className="w-80 bg-luxury-secondary rounded-xl overflow-hidden shadow-2xl">
+            <div className="bg-luxury-tertiary px-4 py-3 text-center">
               <p className="text-white text-sm font-medium">이하나 프로필 PDF</p>
-              <button className="mt-2 px-4 py-1 bg-zinc-700 text-zinc-300 text-xs rounded">PDF 다운로드</button>
+              <button className="mt-2 px-4 py-1 bg-luxury-tertiary text-ivory text-xs rounded">PDF 다운로드</button>
             </div>
             <div className="flex">
               <div className="w-2/5 aspect-[3/4] relative">
@@ -149,7 +149,7 @@ export function FeatureLinkShareSection() {
               <div className="flex-1 p-3 bg-white">
                 <div className="flex items-center gap-2 mb-2">
                   <h4 className="text-sm font-bold text-gray-900">이하나</h4>
-                  <span className="px-1.5 py-0.5 bg-purple-600 text-white text-[8px] rounded">여자</span>
+                  <span className="px-1.5 py-0.5 bg-gold text-luxury-black font-medium text-[8px] rounded">여자</span>
                 </div>
                 <p className="text-[8px] text-gray-500 mb-3">Lee Hana</p>
                 <p className="text-[7px] text-gray-600 leading-relaxed mb-3">
@@ -211,7 +211,7 @@ export function FeatureLinkShareSection() {
                   <div>
                     <div className="flex items-center gap-2">
                       <h4 className="text-lg font-bold text-gray-900">이하나</h4>
-                      <span className="px-2 py-0.5 bg-purple-600 text-white text-[8px] rounded">여자</span>
+                      <span className="px-2 py-0.5 bg-gold text-luxury-black font-medium text-[8px] rounded">여자</span>
                     </div>
                     <p className="text-xs text-gray-500">Lee Hana</p>
                   </div>
@@ -277,11 +277,11 @@ export function FeatureLinkShareSection() {
         {/* 가독성 UP */}
         <p className="text-gray-600 text-lg mb-2">필요한 정보만 깔끔하게 담아</p>
         <h3 className="text-3xl font-bold text-gray-900 mb-24">
-          가독성 <span className="text-purple-600">UP!</span>
+          가독성 <span className="text-gold">UP!</span>
         </h3>
 
         {/* 키워드 박스 */}
-        <div className="bg-gray-50 rounded-2xl p-6 mb-16 max-w-lg mx-auto border-b-4 border-purple-400">
+        <div className="bg-gray-50 rounded-2xl p-6 mb-16 max-w-lg mx-auto border-b-4 border-gold">
           <div className="flex items-start gap-4">
             <span className="text-gray-500 text-sm shrink-0">키워드</span>
             <div className="flex flex-wrap gap-2">
@@ -311,7 +311,7 @@ export function FeatureLinkShareSection() {
         {/* 특색있는 키워드 */}
         <p className="text-gray-600 text-lg mb-2">내가 직접 택한</p>
         <h3 className="text-3xl font-bold text-gray-900 mb-16">
-          특색있는 <span className="text-purple-600">키워드</span>
+          특색있는 <span className="text-gold">키워드</span>
         </h3>
 
         {/* 출연 사진 그리드 */}
@@ -336,7 +336,7 @@ export function FeatureLinkShareSection() {
         {/* 스틸컷 */}
         <p className="text-gray-600 text-lg mb-2">프로필 사진과 함께</p>
         <h3 className="text-3xl font-bold text-gray-900 mb-24">
-          내가 출연한 <span className="text-purple-600">스틸컷</span>까지!
+          내가 출연한 <span className="text-gold">스틸컷</span>까지!
         </h3>
 
         {/* PDF 아이콘 */}
@@ -348,16 +348,16 @@ export function FeatureLinkShareSection() {
 
         {/* PDF 출력 */}
         <h3 className="text-2xl font-bold text-gray-900 mb-24">
-          PDF 버튼을 눌러서 <span className="text-purple-600">출력</span>해보세요!
+          PDF 버튼을 눌러서 <span className="text-gold">출력</span>해보세요!
         </h3>
 
         {/* DoDream과 함께 */}
         <p className="text-gray-600 text-lg mb-2">보다 효과적인 프로필 제작</p>
         <h3 className="text-3xl font-bold text-gray-900 mb-16">
           <DoDreamInlineLogo
-            doorFillColor="fill-purple-50"
-            doorHandleColor="fill-purple-500"
-            accentColor="text-purple-600"
+            doorFillColor="fill-gold/10"
+            doorHandleColor="fill-gold"
+            accentColor="text-gold"
           />
           과 바로 함께해 보세요!
         </h3>
@@ -365,7 +365,7 @@ export function FeatureLinkShareSection() {
         {/* 3개 카드 */}
         <div className="grid grid-cols-3 gap-4 max-w-3xl mx-auto">
           <div className="bg-gray-50 rounded-2xl p-8 text-center">
-            <div className="w-12 h-12 mx-auto mb-4 text-purple-500">
+            <div className="w-12 h-12 mx-auto mb-4 text-gold">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path
                   strokeLinecap="round"
@@ -375,27 +375,27 @@ export function FeatureLinkShareSection() {
               </svg>
             </div>
             <h4 className="font-bold text-gray-900 mb-3">개인정보 보호</h4>
-            <p className="text-purple-500 text-sm leading-relaxed">
+            <p className="text-gold text-sm leading-relaxed">
               개인정보 노출 없이
               <br />
               캐스팅 가능
             </p>
           </div>
           <div className="bg-gray-50 rounded-2xl p-8 text-center">
-            <div className="w-12 h-12 mx-auto mb-4 text-purple-500">
+            <div className="w-12 h-12 mx-auto mb-4 text-gold">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
             <h4 className="font-bold text-gray-900 mb-3">시간 절약</h4>
-            <p className="text-purple-500 text-sm leading-relaxed">
+            <p className="text-gold text-sm leading-relaxed">
               프로필 등록 시,
               <br />
               바로 PDF 변환 가능
             </p>
           </div>
           <div className="bg-gray-50 rounded-2xl p-8 text-center">
-            <div className="w-12 h-12 mx-auto mb-4 text-purple-500">
+            <div className="w-12 h-12 mx-auto mb-4 text-gold">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path
                   strokeLinecap="round"
@@ -405,7 +405,7 @@ export function FeatureLinkShareSection() {
               </svg>
             </div>
             <h4 className="font-bold text-gray-900 mb-3">언제나 누구든지</h4>
-            <p className="text-purple-500 text-sm leading-relaxed">
+            <p className="text-gold text-sm leading-relaxed">
               다른 제한 없이
               <br />
               프로필 등록 가능

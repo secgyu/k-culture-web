@@ -46,7 +46,7 @@ const noticeData = [
 // 공지 항목 컴포넌트
 function NoticeItem({ notice }: { notice: (typeof noticeData)[0] }) {
   return (
-    <div className="flex items-center gap-4 py-5 border-b border-zinc-800 hover:bg-zinc-900/50 transition-colors cursor-pointer px-4 -mx-4">
+    <div className="flex items-center gap-4 py-5 border-b border-zinc-800 hover:bg-luxury-black/50 transition-colors cursor-pointer px-4 -mx-4">
       {/* 태그 */}
       <span className="shrink-0 px-4 py-1.5 border border-orange-500 text-orange-500 text-sm rounded-full">
         {notice.type}
@@ -71,7 +71,7 @@ export function NoticeContent() {
         <nav className="hidden md:flex items-center gap-8">
           <Link
             href="/ai-matching"
-            className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
+            className="text-gold hover:text-gold-light transition-colors text-sm font-medium"
           >
             AI 매칭추천
           </Link>
@@ -113,7 +113,7 @@ export function NoticeContent() {
         </div>
 
         {/* 공지 리스트 */}
-        <div className="bg-zinc-900/30 rounded-2xl p-6 border border-zinc-800">
+        <div className="bg-luxury-black/30 rounded-2xl p-6 border border-zinc-800">
           {noticeData.map((notice) => (
             <NoticeItem key={notice.id} notice={notice} />
           ))}
@@ -121,7 +121,7 @@ export function NoticeContent() {
       </main>
 
       {/* 하단 그라데이션 */}
-      <div className="h-32 bg-gradient-to-t from-purple-900/20 to-transparent" />
+      <div className="h-32 bg-gradient-to-t from-gold/20 to-transparent" />
     </div>
   );
 }

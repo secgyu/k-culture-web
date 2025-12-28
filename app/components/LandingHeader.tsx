@@ -58,7 +58,7 @@ export function LandingHeader({ currentPath = "", transparent = false, className
     <>
       <header
         className={`sticky top-0 z-50 w-full px-6 py-4 flex items-center justify-between transition-all duration-300 ${
-          showBackground ? "bg-zinc-900/95 backdrop-blur-sm border-b border-zinc-800" : "bg-transparent"
+          showBackground ? "bg-luxury-black/95 backdrop-blur-sm border-b border-gold/20" : "bg-transparent"
         } ${className}`}
       >
         {/* 로고 */}
@@ -72,10 +72,10 @@ export function LandingHeader({ currentPath = "", transparent = false, className
               href={item.href}
               className={`transition-colors text-sm ${
                 currentPath === item.href
-                  ? "text-white font-medium"
+                  ? "text-ivory font-medium"
                   : item.highlight
-                  ? "text-purple-400 hover:text-purple-300 font-medium"
-                  : "text-zinc-300 hover:text-white"
+                  ? "text-gold hover:text-gold-light font-medium"
+                  : "text-warm-gray hover:text-ivory"
               }`}
             >
               {item.label}
@@ -83,8 +83,8 @@ export function LandingHeader({ currentPath = "", transparent = false, className
           ))}
           <Link
             href="/profile-register"
-            className={`px-4 py-2 text-white text-sm rounded-lg transition-all ${
-              currentPath === "/profile-register" ? "bg-purple-600" : "border border-zinc-600 hover:bg-zinc-800"
+            className={`px-4 py-2 text-luxury-black text-sm rounded-lg transition-all ${
+              currentPath === "/profile-register" ? "bg-gold" : "bg-gold hover:bg-gold-light"
             }`}
           >
             프로필 등록하기
@@ -104,7 +104,7 @@ export function LandingHeader({ currentPath = "", transparent = false, className
 
       {/* 모바일 메뉴 드로어 */}
       <div
-        className={`fixed top-0 right-0 h-full w-72 bg-zinc-900 z-50 transform transition-transform duration-300 ease-out md:hidden ${
+        className={`fixed top-0 right-0 h-full w-72 bg-luxury-black z-50 transform transition-transform duration-300 ease-out md:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -126,10 +126,10 @@ export function LandingHeader({ currentPath = "", transparent = false, className
               onClick={() => setIsMenuOpen(false)}
               className={`block py-3 px-4 rounded-lg transition-colors ${
                 currentPath === item.href
-                  ? "bg-purple-600 text-white"
+                  ? "bg-gold text-luxury-black"
                   : item.highlight
-                  ? "text-purple-400 hover:bg-zinc-800"
-                  : "text-zinc-300 hover:bg-zinc-800"
+                  ? "text-gold hover:bg-luxury-secondary"
+                  : "text-warm-gray hover:bg-luxury-secondary"
               }`}
             >
               {item.label}
@@ -137,7 +137,7 @@ export function LandingHeader({ currentPath = "", transparent = false, className
           ))}
 
           {/* 구분선 */}
-          <div className="border-t border-zinc-700 my-4" />
+          <div className="border-t border-gold/20 my-4" />
 
           {/* CTA 버튼 */}
           <Link
@@ -145,8 +145,8 @@ export function LandingHeader({ currentPath = "", transparent = false, className
             onClick={() => setIsMenuOpen(false)}
             className={`block py-3 px-4 rounded-lg text-center font-medium transition-colors ${
               currentPath === "/profile-register"
-                ? "bg-purple-600 text-white"
-                : "bg-purple-600 text-white hover:bg-purple-700"
+                ? "bg-gold text-luxury-black"
+                : "bg-gold text-luxury-black hover:bg-gold-light"
             }`}
           >
             프로필 등록하기
@@ -157,14 +157,14 @@ export function LandingHeader({ currentPath = "", transparent = false, className
             <Link
               href="/login"
               onClick={() => setIsMenuOpen(false)}
-              className="block py-3 px-4 text-zinc-400 hover:text-white transition-colors"
+              className="block py-3 px-4 text-warm-gray hover:text-ivory transition-colors"
             >
               로그인
             </Link>
             <Link
               href="/signup"
               onClick={() => setIsMenuOpen(false)}
-              className="block py-3 px-4 text-zinc-400 hover:text-white transition-colors"
+              className="block py-3 px-4 text-warm-gray hover:text-ivory transition-colors"
             >
               회원가입
             </Link>
@@ -173,7 +173,7 @@ export function LandingHeader({ currentPath = "", transparent = false, className
 
         {/* 하단 로고 */}
         <div className="absolute bottom-8 left-0 right-0 px-6">
-          <DoDreamLogo size="sm" className="text-zinc-600" />
+          <DoDreamLogo size="sm" className="text-muted-gray" />
         </div>
       </div>
     </>

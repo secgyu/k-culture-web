@@ -95,10 +95,7 @@ export function OnboardingContent() {
       <header className="relative z-10 w-full px-6 py-6 flex items-center justify-between">
         <DoDreamLogo href="/" size="md" className="text-ivory" />
 
-        <Link
-          href="/login"
-          className="text-warm-gray hover:text-ivory transition-colors text-sm font-medium"
-        >
+        <Link href="/login" className="text-warm-gray hover:text-ivory transition-colors text-sm font-medium">
           로그인
         </Link>
       </header>
@@ -107,9 +104,7 @@ export function OnboardingContent() {
       <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-12">
         {/* 환영 메시지 */}
         <div className="text-center mb-12 md:mb-16">
-          <h1 className="text-ivory text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            두드림에 오신 것을 환영합니다
-          </h1>
+          <h1 className="text-ivory text-3xl sm:text-4xl md:text-5xl font-bold mb-4">두드림에 오신 것을 환영합니다</h1>
           <p className="text-warm-gray text-base sm:text-lg max-w-xl mx-auto">
             배우와 캐스팅 담당자를 연결하는 프로필 관리 플랫폼
           </p>
