@@ -2,12 +2,128 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useGetActorDetail, useContactActor, useDownloadActorPortfolio } from "@/src/actors/actors";
-import { ChevronLeftIcon, ShareIcon, PlayIcon, DownloadIcon, PhoneIcon } from "@/app/components/Icons";
+import { useGetActorDetail, useContactActor } from "@/src/actors/actors";
+import { ChevronLeftIcon, ShareIcon, PlayIcon, PhoneIcon } from "@/app/components/Icons";
 import { PageLayout } from "@/app/components/PageLayout";
 import type { FilmographyItem } from "@/src/model";
 import { COLORS } from "@/lib/constants";
+
+// 연락처 표시 모달
+function ContactInfoModal({
+  isOpen,
+  onClose,
+  phone,
+  email,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  phone?: string;
+  email?: string;
+}) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
+      <div className="relative bg-white rounded-2xl p-6 w-full max-w-sm mx-4 shadow-xl">
+        <h3 className="text-lg font-bold text-gray-900 mb-4">연락처 정보</h3>
+        
+        <div className="space-y-4 mb-6">
+          <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+              <PhoneIcon className="w-5 h-5 text-blue-600" />
+            </div>
+            <div>
+              <p className="text-xs text-gray-500">전화번호</p>
+              <p className="font-medium text-gray-900">{phone || "010-****-****"}</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+            <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+              <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-xs text-gray-500">이메일</p>
+              <p className="font-medium text-gray-900">{email || "actor@example.com"}</p>
+            </div>
+          </div>
+        </div>
+
+        <button
+          onClick={onClose}
+          className="w-full py-3 bg-gray-900 text-white font-medium rounded-xl hover:bg-gray-800 transition-colors"
+        >
+          확인
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// 섭외 요청 모달
+function CastingRequestModal({
+  isOpen,
+  onClose,
+  onSubmit,
+  actorName,
+  isSubmitting,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (message: string) => void;
+  actorName: string;
+  isSubmitting: boolean;
+}) {
+  const [message, setMessage] = useState("");
+
+  if (!isOpen) return null;
+
+  const handleSubmit = () => {
+    if (!message.trim()) return;
+    onSubmit(message);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
+      <div className="relative bg-white rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl">
+        <h3 className="text-lg font-bold text-gray-900 mb-2">섭외 요청</h3>
+        <p className="text-sm text-gray-500 mb-4">{actorName}님에게 섭외 요청을 보냅니다</p>
+        
+        <div className="mb-4">
+          <label className="text-sm font-medium text-gray-700 mb-2 block">메시지</label>
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="프로젝트 소개와 함께 섭외 의사를 전달해주세요"
+            className="w-full h-32 px-4 py-3 border border-gray-200 rounded-xl text-base resize-none focus:outline-none focus:border-gray-400"
+          />
+        </div>
+
+        <div className="flex gap-3">
+          <button
+            onClick={onClose}
+            className="flex-1 py-3 border border-gray-200 text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-colors"
+          >
+            취소
+          </button>
+          <button
+            onClick={handleSubmit}
+            disabled={!message.trim() || isSubmitting}
+            className="flex-1 py-3 bg-gray-900 text-white font-medium rounded-xl hover:bg-gray-800 transition-colors disabled:opacity-50"
+          >
+            {isSubmitting ? "전송 중..." : "요청 보내기"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function ActorDetailSkeleton() {
   return (
@@ -50,42 +166,46 @@ interface ActorDetailContentProps {
 
 export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
   const router = useRouter();
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [showCastingModal, setShowCastingModal] = useState(false);
 
   const { data, isLoading } = useGetActorDetail(actorId, {
     query: { enabled: !!actorId },
   });
 
   const { mutate: contactActor, isPending: isContacting } = useContactActor();
-  const { refetch: downloadPortfolio, isFetching: isDownloading } = useDownloadActorPortfolio(actorId, {
-    query: { enabled: false },
-  });
 
   const actor = data?.data;
 
   const handleContact = () => {
-    if (!actor) return;
-    contactActor({
-      actorId: actor.id,
-      data: {
-        projectId: "",
-        message: "캐스팅 제안드립니다.",
-      },
-    });
+    // 로그인 체크 (간단히 localStorage로 확인)
+    const isLoggedIn = localStorage.getItem("onboarding_step1");
+    if (!isLoggedIn) {
+      router.push("/login");
+      return;
+    }
+    setShowContactModal(true);
   };
 
-  const handleDownloadPortfolio = async () => {
-    const result = await downloadPortfolio();
-    if (result.data) {
-      const url = window.URL.createObjectURL(result.data);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${actor?.name ?? "actor"}_portfolio.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    }
+  const handleCastingRequest = (message: string) => {
+    if (!actor) return;
+    contactActor(
+      {
+        actorId: actor.id,
+        data: {
+          projectId: "",
+          message,
+        },
+      },
+      {
+        onSuccess: () => {
+          setShowCastingModal(false);
+          alert("섭외 요청이 전송되었습니다!");
+        },
+      }
+    );
   };
+
 
   if (isLoading) {
     return <ActorDetailSkeleton />;
@@ -259,25 +379,49 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
       <div className="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-100">
         <div className="max-w-lg mx-auto px-5 py-4 flex gap-3">
           <button
-            onClick={handleDownloadPortfolio}
-            disabled={isDownloading}
-            className="flex-1 flex items-center justify-center gap-2 py-3.5 border rounded-xl font-medium hover:bg-gray-50 transition-colors disabled:opacity-50"
+            onClick={handleContact}
+            className="flex-1 flex items-center justify-center gap-2 py-3.5 border rounded-xl font-medium hover:bg-gray-50 transition-colors"
             style={{ borderColor: COLORS.border.default, color: COLORS.text.tertiary }}
           >
-            <DownloadIcon className="w-5 h-5" />
-            <span>{isDownloading ? "다운로드중..." : "포트폴리오"}</span>
+            <PhoneIcon className="w-5 h-5" />
+            <span>연락처 보기</span>
           </button>
           <button
-            onClick={handleContact}
-            disabled={isContacting}
-            className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl font-medium hover:opacity-90 transition-colors disabled:opacity-50"
+            onClick={() => {
+              const isLoggedIn = localStorage.getItem("onboarding_step1");
+              if (!isLoggedIn) {
+                router.push("/login");
+                return;
+              }
+              setShowCastingModal(true);
+            }}
+            className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl font-medium hover:opacity-90 transition-colors"
             style={{ backgroundColor: COLORS.accent.teal, color: COLORS.background.primary }}
           >
-            <PhoneIcon className="w-5 h-5" />
-            <span>{isContacting ? "전송중..." : "연락하기"}</span>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span>섭외 요청</span>
           </button>
         </div>
       </div>
+
+      {/* 연락처 모달 */}
+      <ContactInfoModal
+        isOpen={showContactModal}
+        onClose={() => setShowContactModal(false)}
+        phone="010-1234-5678"
+        email="actor@example.com"
+      />
+
+      {/* 섭외 요청 모달 */}
+      <CastingRequestModal
+        isOpen={showCastingModal}
+        onClose={() => setShowCastingModal(false)}
+        onSubmit={handleCastingRequest}
+        actorName={actor?.name ?? ""}
+        isSubmitting={isContacting}
+      />
     </PageLayout>
   );
 }
