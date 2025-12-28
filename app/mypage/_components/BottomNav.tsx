@@ -6,8 +6,8 @@ import { HomeIcon, SparklesIcon, BookmarkIcon, UserIcon } from "@/app/components
 import { COLORS } from "@/lib/constants";
 
 const navItems = [
-  { href: "/", icon: HomeIcon, label: "홈" },
-  { href: "/recommend", icon: SparklesIcon, label: "AI매칭" },
+  { href: "/dashboard", icon: HomeIcon, label: "홈" },
+  { href: "/actor-search", icon: SparklesIcon, label: "배우찾기" },
   { href: "/favorites", icon: BookmarkIcon, label: "찜목록" },
   { href: "/mypage", icon: UserIcon, label: "마이페이지" },
 ];
@@ -19,7 +19,7 @@ export function BottomNav() {
     <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 z-20 w-full max-w-lg bg-white border-t border-x border-gray-200">
       <div className="flex justify-around items-center py-2">
         {navItems.map(({ href, icon: Icon, label }) => {
-          const isActive = pathname === href || (href !== "/" && pathname.startsWith(href));
+          const isActive = pathname === href || pathname.startsWith(href);
           return (
             <Link
               key={href}
