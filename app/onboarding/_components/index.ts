@@ -1,3 +1,2 @@
-// 온보딩 공통 컴포넌트 - 추후 구현 예정
-export {};
-
+export { ProgressBar } from "./ProgressBar";
+export { OnboardingLayout } from "./OnboardingLayout";
