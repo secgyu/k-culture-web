@@ -19,3 +19,4 @@ export { default as FilterBar } from "./FilterBar";
 export { default as FilterModal } from "./FilterModal";
 
 export { DoDreamLogo, DoDreamTextLogo, DoDreamInlineLogo } from "./DoDreamLogo";
+export { LandingHeader } from "./LandingHeader";

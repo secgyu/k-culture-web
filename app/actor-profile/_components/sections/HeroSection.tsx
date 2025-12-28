@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { DoDreamLogo } from "@/app/components";
+import { DoDreamLogo, LandingHeader } from "@/app/components";
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -11,7 +11,7 @@ export function HeroSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % 4);
-    }, 2000);
+    }, 5000); // 5초로 변경
     return () => clearInterval(interval);
   }, []);
 
@@ -20,43 +20,8 @@ export function HeroSection() {
       {/* 상단 보라색 그라데이션 */}
       <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-purple-900/30 to-transparent" />
 
-      {/* 헤더 */}
-      <header className="relative z-20 w-full px-6 py-4 flex items-center justify-between">
-        {/* 로고 */}
-        <DoDreamLogo href="/" size="md" className="text-white" />
-
-        {/* 네비게이션 */}
-        <nav className="hidden md:flex items-center gap-8">
-          <Link
-            href="/ai-matching"
-            className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
-          >
-            AI 매칭추천
-          </Link>
-          <Link href="/actor-search" className="text-zinc-300 hover:text-white transition-colors text-sm">
-            배우&모델 찾기
-          </Link>
-          <Link href="/jobs" className="text-zinc-300 hover:text-white transition-colors text-sm">
-            작품구인
-          </Link>
-          <Link href="/notice" className="text-zinc-300 hover:text-white transition-colors text-sm">
-            공지사항
-          </Link>
-          <Link
-            href="/profile-register"
-            className="px-4 py-2 border border-zinc-600 text-white text-sm rounded-lg hover:bg-zinc-800 transition-all"
-          >
-            프로필 등록하기
-          </Link>
-        </nav>
-
-        {/* 모바일 메뉴 버튼 */}
-        <button className="md:hidden text-white">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </header>
+      {/* 스티키 헤더 */}
+      <LandingHeader transparent currentPath="/actor-profile" />
 
       {/* 히어로 컨텐츠 */}
       <div className="relative z-10 flex flex-col items-center px-6 py-12">

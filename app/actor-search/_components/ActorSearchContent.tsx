@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useCallback, useRef } from "react";
-import { DoDreamLogo } from "@/app/components";
+import { LandingHeader } from "@/app/components";
 
 // 더미 배우 데이터 생성
 const generateActors = (page: number) => {
@@ -203,40 +202,8 @@ export function ActorSearchContent() {
 
   return (
     <div className="min-h-screen bg-zinc-950">
-      {/* 헤더 */}
-      <header className="w-full px-6 py-4 flex items-center justify-between border-b border-zinc-800">
-        <DoDreamLogo href="/" size="md" className="text-white" />
-
-        <nav className="hidden md:flex items-center gap-8">
-          <Link
-            href="/ai-matching"
-            className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
-          >
-            AI 매칭추천
-          </Link>
-          <Link href="/actor-search" className="text-white text-sm font-medium">
-            배우&모델 찾기
-          </Link>
-          <Link href="/jobs" className="text-zinc-300 hover:text-white transition-colors text-sm">
-            작품구인
-          </Link>
-          <Link href="/notice" className="text-zinc-300 hover:text-white transition-colors text-sm">
-            공지사항
-          </Link>
-          <Link
-            href="/profile-register"
-            className="px-4 py-2 border border-zinc-600 text-white text-sm rounded-lg hover:bg-zinc-800 transition-all"
-          >
-            프로필 등록하기
-          </Link>
-        </nav>
-
-        <button className="md:hidden text-white">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </header>
+      {/* 스티키 헤더 */}
+      <LandingHeader currentPath="/actor-search" />
 
       {/* 메인 */}
       <main className="max-w-7xl mx-auto px-6 py-8">
