@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { LandingHeader } from "@/app/components";
 
@@ -73,6 +74,7 @@ function FilterButton({ label, selected, onClick }: { label: string; selected: b
 // 배우 카드 컴포넌트
 function ActorCard({
   actor,
+  isBlurred = false,
 }: {
   actor: {
     id: number;
@@ -84,25 +86,39 @@ function ActorCard({
     work: string;
     image: string;
   };
+  isBlurred?: boolean;
 }) {
   const genderColor = actor.gender === "남자" ? "bg-blue-600" : "bg-orange-500";
 
-  return (
-    <div className="bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-600 transition-all">
+  const cardContent = (
+    <div className="bg-luxury-black rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-600 transition-all cursor-pointer">
       {/* 이미지 */}
       <div className="relative aspect-[3/4] bg-zinc-800">
         <Image
           src={`https://images.unsplash.com/photo-${1507003211169 + actor.id}?w=300&h=400&fit=crop&crop=face`}
           alt={actor.name}
           fill
-          className="object-cover"
+          className={`object-cover ${isBlurred ? "blur-sm" : ""}`}
         />
+        {/* 비회원 blur 오버레이 */}
+        {isBlurred && (
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <div className="text-center">
+              <svg className="w-8 h-8 text-white/80 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <p className="text-white/80 text-xs">로그인하고 보기</p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 정보 */}
       <div className="p-4">
         <div className="flex items-center gap-2 mb-2">
-          <h3 className="text-white font-bold">{actor.name}</h3>
+          <h3 className={`text-white font-bold ${isBlurred ? "blur-sm" : ""}`}>
+            {isBlurred ? "***" : actor.name}
+          </h3>
           <span className={`px-2 py-0.5 ${genderColor} text-white text-xs rounded`}>{actor.gender}</span>
         </div>
 
@@ -134,6 +150,22 @@ function ActorCard({
       </div>
     </div>
   );
+
+  // 비회원일 경우 로그인 페이지로 이동
+  if (isBlurred) {
+    return (
+      <Link href="/login">
+        {cardContent}
+      </Link>
+    );
+  }
+
+  // 회원일 경우 상세 페이지로 이동
+  return (
+    <Link href={`/actors/${actor.id}`}>
+      {cardContent}
+    </Link>
+  );
 }
 
 export function ActorSearchContent() {
@@ -141,6 +173,7 @@ export function ActorSearchContent() {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const observerRef = useRef<HTMLDivElement>(null);
 
   // 필터 상태
@@ -150,6 +183,12 @@ export function ActorSearchContent() {
     license: "무관",
     品앗이: "무관",
   });
+
+  // 로그인 상태 체크 (간단히 localStorage 체크)
+  useEffect(() => {
+    const hasOnboardingData = localStorage.getItem("onboarding_step1");
+    setIsLoggedIn(!!hasOnboardingData);
+  }, []);
 
   // 초기 데이터 로드
   useEffect(() => {
@@ -212,8 +251,33 @@ export function ActorSearchContent() {
           오늘보다 내일이 더 빛날 배우·모델분들을 만나보세요.
         </h1>
 
+        {/* 비회원 안내 배너 */}
+        {!isLoggedIn && (
+          <div className="bg-gradient-to-r from-gold/20 to-gold/10 rounded-2xl p-4 mb-8 border border-gold/30">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-ivory font-medium">로그인하면 더 많은 정보를 볼 수 있어요</p>
+                  <p className="text-warm-gray text-sm">배우 프로필 전체, 연락처, 포트폴리오까지!</p>
+                </div>
+              </div>
+              <Link
+                href="/login"
+                className="px-4 py-2 bg-gold text-luxury-black font-medium text-sm rounded-lg hover:bg-gold-light transition-colors"
+              >
+                로그인
+              </Link>
+            </div>
+          </div>
+        )}
+
         {/* 필터 섹션 */}
-        <div className="bg-zinc-900/50 rounded-2xl p-6 mb-8 border border-zinc-800">
+        <div className="bg-luxury-black/50 rounded-2xl p-6 mb-8 border border-zinc-800">
           <div className="grid md:grid-cols-2 gap-8">
             {/* 왼쪽 필터 */}
             <div className="space-y-4">
@@ -386,8 +450,13 @@ export function ActorSearchContent() {
 
         {/* 배우 그리드 */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4">
-          {actors.map((actor) => (
-            <ActorCard key={actor.id} actor={actor} />
+          {actors.map((actor, index) => (
+            <ActorCard
+              key={actor.id}
+              actor={actor}
+              // 비회원일 경우 처음 4개만 보여주고 나머지는 blur
+              isBlurred={!isLoggedIn && index >= 4}
+            />
           ))}
         </div>
 
@@ -395,7 +464,7 @@ export function ActorSearchContent() {
         <div ref={observerRef} className="h-20 flex items-center justify-center">
           {loading && (
             <div className="flex items-center gap-2 text-zinc-400">
-              <div className="w-5 h-5 border-2 border-zinc-600 border-t-purple-500 rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-zinc-600 border-t-gold rounded-full animate-spin" />
               <span className="text-sm">로딩 중...</span>
             </div>
           )}
