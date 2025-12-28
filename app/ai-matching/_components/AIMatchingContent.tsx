@@ -1,5 +1,6 @@
 "use client";
 
+import { DoDreamLogo } from "@/app/components";
 import Link from "next/link";
 
 export function AIMatchingContent() {
@@ -14,13 +15,7 @@ export function AIMatchingContent() {
       {/* 헤더 */}
       <header className="relative z-20 w-full px-6 py-4 flex items-center justify-between border-b border-zinc-800">
         {/* 로고 */}
-        <Link href="/" className="flex items-center gap-1 text-white">
-          <span className="font-bold text-xl tracking-tight">T</span>
-          <div className="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center">
-            <div className="w-3 h-3 rounded-full bg-white" />
-          </div>
-          <span className="font-bold text-xl tracking-tight">ID</span>
-        </Link>
+        <DoDreamLogo href="/" size="md" className="text-white" />
 
         {/* 네비게이션 */}
         <nav className="hidden md:flex items-center gap-8">
