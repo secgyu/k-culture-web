@@ -50,7 +50,8 @@ export default function ActorSignupPage() {
 
   const handleSubmit = () => {
     if (!isValid) return;
-    router.push("/signup/complete?type=actor");
+    // 기존 signup/complete 대신 온보딩으로 이동
+    router.push("/onboarding/actor/step1");
   };
 
   return (
