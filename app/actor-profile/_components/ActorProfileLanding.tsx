@@ -23,12 +23,19 @@ function HeroSection() {
       {/* 헤더 */}
       <header className="relative z-20 w-full px-6 py-4 flex items-center justify-between">
         {/* 로고 */}
-        <Link href="/" className="flex items-center gap-1 text-white">
-          <span className="font-bold text-xl tracking-tight">T</span>
-          <div className="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center">
-            <div className="w-3 h-3 rounded-full bg-white" />
+        <Link href="/" className="flex items-center gap-2 text-white">
+          <div className="relative w-8 h-10 flex items-center justify-center">
+            <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <rect x="2" y="2" width="20" height="26" rx="2" className="fill-purple-500/10" />
+              <rect x="2" y="2" width="20" height="26" rx="2" />
+              <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
+              <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
+              <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
+            </svg>
           </div>
-          <span className="font-bold text-xl tracking-tight">ID</span>
+          <span className="font-serif text-xl font-medium tracking-tight">
+            Do <span className="text-purple-400">×</span> Dream
+          </span>
         </Link>
 
         {/* 네비게이션 */}
@@ -182,14 +189,27 @@ function HeroSection() {
                   <p className="text-sm text-gray-700">단편영화,&lt;우리 사이&gt;, 지수역(주연)</p>
                 </div>
 
-                {/* DODREAM 로고 */}
+                {/* DoDream 로고 */}
                 <div className="flex justify-end">
-                  <div className="flex items-center gap-1 text-gray-300">
-                    <span className="font-bold text-sm tracking-tight">T</span>
-                    <div className="w-4 h-4 rounded-full border border-current flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-current" />
+                  <div className="flex items-center gap-1.5 text-gray-400">
+                    <div className="relative w-5 h-6 flex items-center justify-center">
+                      <svg
+                        viewBox="0 0 24 30"
+                        className="w-full h-full"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <rect x="2" y="2" width="20" height="26" rx="2" className="fill-gray-100" />
+                        <rect x="2" y="2" width="20" height="26" rx="2" />
+                        <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
+                        <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
+                        <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
+                      </svg>
                     </div>
-                    <span className="font-bold text-sm tracking-tight">ID</span>
+                    <span className="font-serif text-xs font-medium tracking-tight">
+                      Do<span className="text-purple-400">×</span>Dream
+                    </span>
                   </div>
                 </div>
               </div>
@@ -1136,11 +1156,20 @@ function FeatureLinkShareSection() {
                 </div>
                 <div className="flex justify-end mt-2">
                   <div className="flex items-center gap-0.5 text-gray-300 text-[8px]">
-                    <span className="font-bold">T</span>
-                    <div className="w-2 h-2 rounded-full border border-current flex items-center justify-center">
-                      <div className="w-1 h-1 rounded-full bg-current" />
+                    <div className="relative w-3 h-4 flex items-center justify-center">
+                      <svg
+                        viewBox="0 0 24 30"
+                        className="w-full h-full"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <rect x="2" y="2" width="20" height="26" rx="2" className="fill-gray-100" />
+                        <rect x="2" y="2" width="20" height="26" rx="2" />
+                        <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
+                      </svg>
                     </div>
-                    <span className="font-bold">ID</span>
+                    <span className="font-serif font-medium">Do×Dream</span>
                   </div>
                 </div>
               </div>
@@ -1225,17 +1254,24 @@ function FeatureLinkShareSection() {
           PDF 버튼을 눌러서 <span className="text-purple-600">출력</span>해보세요!
         </h3>
 
-        {/* DoDreamEAM과 함께 */}
+        {/* DoDream과 함께 */}
         <p className="text-gray-600 text-lg mb-2">보다 효과적인 프로필 제작</p>
         <h3 className="text-3xl font-bold text-gray-900 mb-16">
-          <span className="inline-flex items-center gap-1">
-            <span className="font-bold">T</span>
-            <span className="w-5 h-5 rounded-full border-2 border-current flex items-center justify-center">
-              <span className="w-2.5 h-2.5 rounded-full bg-current" />
+          <span className="inline-flex items-center gap-2">
+            <span className="relative w-8 h-10 flex items-center justify-center">
+              <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="2" y="2" width="20" height="26" rx="2" className="fill-purple-50" />
+                <rect x="2" y="2" width="20" height="26" rx="2" />
+                <circle cx="17" cy="15" r="1.5" className="fill-purple-500" />
+                <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
+                <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
+              </svg>
             </span>
-            <span className="font-bold">ID</span>
+            <span className="font-serif">
+              Do<span className="text-purple-600">×</span>Dream
+            </span>
           </span>
-          와 바로 함께해 보세요!
+          과 바로 함께해 보세요!
         </h3>
 
         {/* 3개 카드 */}
@@ -1568,31 +1604,51 @@ function DirectorSection() {
               <p className="text-yellow-400 text-xl font-bold mb-8">지속적으로 느끼는 불편함</p>
 
               <h3 className="text-white text-3xl font-bold">
-                <span className="inline-flex items-center gap-1">
-                  <span className="font-bold">T</span>
-                  <span className="w-5 h-5 rounded-full border-2 border-current flex items-center justify-center">
-                    <span className="w-2.5 h-2.5 rounded-full bg-current" />
+                <span className="inline-flex items-center gap-2 align-middle">
+                  <span className="relative w-7 h-9 flex items-center justify-center">
+                    <svg
+                      viewBox="0 0 24 30"
+                      className="w-full h-full"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    >
+                      <rect x="2" y="2" width="20" height="26" rx="2" className="fill-white/10" />
+                      <rect x="2" y="2" width="20" height="26" rx="2" />
+                      <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
+                      <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
+                      <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
+                    </svg>
                   </span>
-                  <span className="font-bold">ID</span>
+                  <span className="font-serif">
+                    Do<span className="text-purple-400">×</span>Dream
+                  </span>
                 </span>
-                로 쉽게 해결!
+                으로 쉽게 해결!
               </h3>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 작품구인 DoDreamEAM */}
+      {/* 작품구인 DoDream */}
       <div className="bg-zinc-900 py-24">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-yellow-400 mb-16">
             작품구인도{" "}
-            <span className="inline-flex items-center gap-1 text-white">
-              <span className="font-bold">T</span>
-              <span className="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center">
-                <span className="w-3 h-3 rounded-full bg-current" />
+            <span className="inline-flex items-center gap-2 text-white align-middle">
+              <span className="relative w-8 h-10 flex items-center justify-center">
+                <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="2" y="2" width="20" height="26" rx="2" className="fill-white/10" />
+                  <rect x="2" y="2" width="20" height="26" rx="2" />
+                  <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
+                  <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
+                  <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
+                </svg>
               </span>
-              <span className="font-bold">ID</span>
+              <span className="font-serif">
+                Do<span className="text-purple-400">×</span>Dream
+              </span>
             </span>
             에서 한 번에!
           </h2>
@@ -1780,14 +1836,21 @@ function DirectorSection() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-yellow-400 text-xl font-bold mb-2">THE 효율적인 플랫폼</p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">
-            <span className="inline-flex items-center gap-1">
-              <span className="font-bold">T</span>
-              <span className="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center">
-                <span className="w-3 h-3 rounded-full bg-current" />
+            <span className="inline-flex items-center gap-2 align-middle">
+              <span className="relative w-8 h-10 flex items-center justify-center">
+                <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="2" y="2" width="20" height="26" rx="2" className="fill-white/10" />
+                  <rect x="2" y="2" width="20" height="26" rx="2" />
+                  <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
+                  <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
+                  <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
+                </svg>
               </span>
-              <span className="font-bold">ID</span>
+              <span className="font-serif">
+                Do<span className="text-purple-400">×</span>Dream
+              </span>
             </span>
-            와 지금 바로 함께해 보세요!
+            과 지금 바로 함께해 보세요!
           </h2>
 
           {/* 3개 카드 */}
@@ -1861,14 +1924,21 @@ function CTASection() {
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
           지금 바로
-          <span className="inline-flex items-center gap-1 mx-2">
-            <span className="font-bold">T</span>
-            <span className="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center">
-              <span className="w-3 h-3 rounded-full bg-current" />
+          <span className="inline-flex items-center gap-2 mx-2 align-middle">
+            <span className="relative w-8 h-10 flex items-center justify-center">
+              <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="2" y="2" width="20" height="26" rx="2" className="fill-white/10" />
+                <rect x="2" y="2" width="20" height="26" rx="2" />
+                <circle cx="17" cy="15" r="1.5" className="fill-yellow-400" />
+                <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
+                <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
+              </svg>
             </span>
-            <span className="font-bold">ID</span>
+            <span className="font-serif">
+              Do<span className="text-yellow-300">×</span>Dream
+            </span>
           </span>
-          를 이용해 보세요!
+          을 이용해 보세요!
         </h2>
         <Link
           href="/actor-search"
@@ -1897,12 +1967,12 @@ function Footer() {
 
         {/* 회사 정보 */}
         <div className="text-zinc-500 text-sm space-y-1">
-          <p>두드림(DoDreamEAM) | 충남 아산시 순천향로 22 미디어랩스관 702호</p>
-          <p>대표 : 양승철 | 문의 : DoDreameamfilm@gmail.com</p>
+          <p>두드림(DoDream) | 충남 아산시 순천향로 22 미디어랩스관 702호</p>
+          <p>대표 : 양승철 | 문의 : dodreamfilm@gmail.com</p>
         </div>
 
         <div className="mt-8 pt-8 border-t border-zinc-800 text-zinc-600 text-sm">
-          © 2024. DoDreamEAM. all rights reserved.
+          © 2024. DoDream. all rights reserved.
         </div>
       </div>
     </footer>

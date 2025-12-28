@@ -7,31 +7,31 @@ const noticeData = [
   {
     id: 1,
     type: "일반공지",
-    title: "[DODREAM ver.1.2.3] 업데이트 안내",
+    title: "[DoDream ver.1.2.3] 업데이트 안내",
     date: "2024. 10. 14.",
   },
   {
     id: 2,
     type: "일반공지",
-    title: "[DoDreamEAM ver.1.2.2] 업데이트 안내",
+    title: "[DoDream ver.1.2.2] 업데이트 안내",
     date: "2024. 10. 10.",
   },
   {
     id: 3,
     type: "일반공지",
-    title: "[DoDreamEAM ver.1.2.1] 업데이트 안내",
+    title: "[DoDream ver.1.2.1] 업데이트 안내",
     date: "2024. 10. 2.",
   },
   {
     id: 4,
     type: "일반공지",
-    title: "[DoDreamEAM ver.1.2.0] 업데이트 안내",
+    title: "[DoDream ver.1.2.0] 업데이트 안내",
     date: "2024. 9. 30.",
   },
   {
     id: 5,
     type: "일반공지",
-    title: "[DoDreamEAM ver.1.1.0] 업데이트 안내",
+    title: "[DoDream ver.1.1.0] 업데이트 안내",
     date: "2024. 9. 28.",
   },
   {
@@ -130,4 +130,3 @@ export function NoticeContent() {
     </div>
   );
 }
-

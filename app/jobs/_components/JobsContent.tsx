@@ -70,7 +70,7 @@ const jobsData = [
     category: "장편영화",
     isPumasi: false,
     price: 300000,
-    title: "DODRE두드림두드림에 오신 것을 환영합니다. 체험용 공고입니다.",
+    title: "DoDream 두드림에 오신 것을 환영합니다. 체험용 공고입니다.",
     gender: "성별무관",
     production: "두드림",
     workTitle: "두드림",
@@ -160,7 +160,10 @@ export function JobsContent() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/ai-matching" className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium">
+          <Link
+            href="/ai-matching"
+            className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
+          >
             AI 매칭추천
           </Link>
           <Link href="/actor-search" className="text-zinc-300 hover:text-white transition-colors text-sm">
@@ -295,4 +298,3 @@ export function JobsContent() {
     </div>
   );
 }
-
