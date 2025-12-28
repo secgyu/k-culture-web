@@ -16,9 +16,9 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-950 overflow-hidden">
-      {/* 상단 보라색 그라데이션 */}
-      <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-purple-900/30 to-transparent" />
+    <section className="relative min-h-screen bg-gradient-to-b from-luxury-black via-luxury-black to-luxury-secondary overflow-hidden">
+      {/* 상단 골드 그라데이션 */}
+      <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-gold/20 to-transparent" />
 
       {/* 스티키 헤더 */}
       <LandingHeader transparent currentPath="/actor-profile" />
@@ -26,12 +26,12 @@ export function HeroSection() {
       {/* 히어로 컨텐츠 */}
       <div className="relative z-10 flex flex-col items-center px-6 py-12">
         {/* 배지 */}
-        <div className="inline-block px-6 py-2 bg-white rounded-full mb-6">
-          <span className="text-zinc-900 font-medium text-sm">배우&모델</span>
+        <div className="inline-block px-6 py-2 bg-gold rounded-full mb-6">
+          <span className="text-luxury-black font-medium text-sm">배우&모델</span>
         </div>
 
         {/* 제목 */}
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center mb-12">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-ivory text-center mb-12">
           프로필 관리·탐색 플랫폼
         </h1>
 
@@ -61,7 +61,7 @@ export function HeroSection() {
                   <div>
                     <div className="flex items-center gap-2 mb-1">
                       <h2 className="text-2xl font-bold text-gray-900">이하나</h2>
-                      <span className="px-2 py-0.5 bg-purple-600 text-white text-xs rounded">여자</span>
+                      <span className="px-2 py-0.5 bg-gold text-luxury-black text-xs rounded">여자</span>
                     </div>
                     <p className="text-gray-500 text-sm">Lee Hana</p>
                   </div>
@@ -159,41 +159,41 @@ export function HeroSection() {
                 : "opacity-0 translate-x-full"
             }`}
           >
-            <div className="bg-zinc-900 rounded-2xl overflow-hidden shadow-2xl p-6 max-w-5xl mx-auto">
+            <div className="bg-luxury-secondary rounded-2xl overflow-hidden shadow-2xl p-6 max-w-5xl mx-auto border border-gold/10">
               {/* 검색 헤더 */}
-              <p className="text-white text-center text-lg mb-6">오늘보다 내일이 더 빛날 배우분들을 만나보세요.</p>
+              <p className="text-ivory text-center text-lg mb-6">오늘보다 내일이 더 빛날 배우분들을 만나보세요.</p>
 
               {/* 필터 영역 */}
               <div className="grid grid-cols-2 gap-4 mb-6">
                 {/* 왼쪽 필터 */}
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-zinc-400 text-sm w-16">구분</span>
+                    <span className="text-warm-gray text-sm w-16">구분</span>
                     <div className="flex gap-2">
                       {["무관", "배우", "모델"].map((opt) => (
-                        <span key={opt} className="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs rounded">
+                        <span key={opt} className="px-3 py-1 bg-luxury-tertiary text-ivory text-xs rounded">
                           {opt}
                         </span>
                       ))}
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-zinc-400 text-sm w-16">성별</span>
+                    <span className="text-warm-gray text-sm w-16">성별</span>
                     <div className="flex gap-2">
                       {["무관", "남자", "여자"].map((opt) => (
-                        <span key={opt} className="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs rounded">
+                        <span key={opt} className="px-3 py-1 bg-luxury-tertiary text-ivory text-xs rounded">
                           {opt}
                         </span>
                       ))}
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-zinc-400 text-sm w-16">나이</span>
+                    <span className="text-warm-gray text-sm w-16">나이</span>
                     <div className="flex gap-2 items-center">
-                      <span className="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs rounded">최소</span>
-                      <span className="text-zinc-500">~</span>
-                      <span className="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs rounded">최대</span>
-                      <span className="text-zinc-400 text-xs">세</span>
+                      <span className="px-3 py-1 bg-luxury-tertiary text-ivory text-xs rounded">최소</span>
+                      <span className="text-muted-gray">~</span>
+                      <span className="px-3 py-1 bg-luxury-tertiary text-ivory text-xs rounded">최대</span>
+                      <span className="text-warm-gray text-xs">세</span>
                     </div>
                   </div>
                 </div>
@@ -201,37 +201,37 @@ export function HeroSection() {
                 {/* 오른쪽 필터 */}
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-zinc-400 text-sm w-16">운전면허</span>
+                    <span className="text-warm-gray text-sm w-16">운전면허</span>
                     <div className="flex gap-2">
                       {["무관", "1종", "2종"].map((opt) => (
-                        <span key={opt} className="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs rounded">
+                        <span key={opt} className="px-3 py-1 bg-luxury-tertiary text-ivory text-xs rounded">
                           {opt}
                         </span>
                       ))}
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-zinc-400 text-sm w-16">품앗이</span>
+                    <span className="text-warm-gray text-sm w-16">품앗이</span>
                     <div className="flex gap-2">
                       {["무관", "가능", "불가능"].map((opt) => (
-                        <span key={opt} className="px-3 py-1 bg-zinc-800 text-zinc-300 text-xs rounded">
+                        <span key={opt} className="px-3 py-1 bg-luxury-tertiary text-ivory text-xs rounded">
                           {opt}
                         </span>
                       ))}
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-zinc-400 text-sm w-16">영화예산</span>
+                    <span className="text-warm-gray text-sm w-16">영화예산</span>
                     <div className="flex gap-2 items-center">
-                      <span className="text-zinc-400 text-xs">최대</span>
-                      <span className="px-4 py-1 bg-zinc-800 text-zinc-300 text-xs rounded">100,000</span>
-                      <span className="text-zinc-400 text-xs">원</span>
+                      <span className="text-warm-gray text-xs">최대</span>
+                      <span className="px-4 py-1 bg-luxury-tertiary text-ivory text-xs rounded">100,000</span>
+                      <span className="text-warm-gray text-xs">원</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <p className="text-zinc-500 text-center text-xs mb-4">필터 초기화</p>
+              <p className="text-muted-gray text-center text-xs mb-4">필터 초기화</p>
 
               {/* 배우 그리드 */}
               <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
@@ -248,7 +248,7 @@ export function HeroSection() {
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-2">
                       <p className="text-white text-xs font-medium">배우{i}</p>
                       <div className="flex gap-1 mt-1">
-                        <span className="px-1 py-0.5 bg-purple-600 text-white text-[8px] rounded">배우</span>
+                        <span className="px-1 py-0.5 bg-gold text-white text-[8px] rounded">배우</span>
                       </div>
                     </div>
                   </div>
@@ -267,28 +267,28 @@ export function HeroSection() {
                 : "opacity-0 translate-x-full"
             }`}
           >
-            <div className="bg-zinc-900 rounded-2xl overflow-hidden shadow-2xl p-8 max-w-3xl mx-auto">
+            <div className="bg-luxury-secondary rounded-2xl overflow-hidden shadow-2xl p-8 max-w-3xl mx-auto">
               {/* AI 매칭 타이틀 */}
               <h3 className="text-2xl font-bold text-white text-center mb-2">AI 매칭 기술을 통해</h3>
-              <p className="text-lg text-zinc-300 text-center mb-8">시놉시스와 캐릭터 정보로 배우를 찾아보세요.</p>
+              <p className="text-lg text-ivory text-center mb-8">시놉시스와 캐릭터 정보로 배우를 찾아보세요.</p>
 
               {/* 시놉시스 입력 */}
-              <div className="bg-zinc-800 rounded-xl p-4 mb-4">
-                <p className="text-zinc-500 text-sm">시놉시스를 입력해 주세요. (500자 이내)</p>
+              <div className="bg-luxury-tertiary rounded-xl p-4 mb-4">
+                <p className="text-muted-gray text-sm">시놉시스를 입력해 주세요. (500자 이내)</p>
               </div>
-              <p className="text-right text-zinc-500 text-xs mb-4">0/500</p>
+              <p className="text-right text-muted-gray text-xs mb-4">0/500</p>
 
               {/* 캐릭터 입력 */}
-              <div className="bg-zinc-800 rounded-xl px-4 py-3 mb-4">
-                <p className="text-zinc-500 text-sm">캐릭터 정보를 입력해 주세요. (100자 이내)</p>
+              <div className="bg-luxury-tertiary rounded-xl px-4 py-3 mb-4">
+                <p className="text-muted-gray text-sm">캐릭터 정보를 입력해 주세요. (100자 이내)</p>
               </div>
-              <p className="text-right text-zinc-500 text-xs mb-6">0/100</p>
+              <p className="text-right text-muted-gray text-xs mb-6">0/100</p>
 
               {/* 버튼들 */}
-              <button className="w-full py-4 bg-gradient-to-r from-red-500 via-yellow-500 to-purple-500 text-white font-semibold rounded-xl mb-3">
+              <button className="w-full py-4 btn-gold text-luxury-black font-semibold rounded-xl mb-3">
                 AI 추천 찾기
               </button>
-              <button className="w-full py-4 border border-zinc-700 text-zinc-300 font-semibold rounded-xl">
+              <button className="w-full py-4 border border-gold/30 text-ivory font-semibold rounded-xl">
                 필터를 통해 찾기
               </button>
             </div>
@@ -300,30 +300,30 @@ export function HeroSection() {
               currentSlide === 3 ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
             }`}
           >
-            <div className="bg-gradient-to-br from-amber-100 to-amber-50 rounded-2xl overflow-hidden shadow-2xl max-w-5xl mx-auto">
+            <div className="bg-gradient-to-br from-champagne to-ivory rounded-2xl overflow-hidden shadow-2xl max-w-5xl mx-auto">
               <div className="flex">
                 {/* 왼쪽: 프로필 정보 */}
                 <div className="flex-1 p-6">
                   {/* 헤더 */}
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-amber-800 text-lg">←</span>
+                    <span className="text-gold-dark text-lg">←</span>
                     <div className="flex items-center gap-3">
-                      <span className="text-amber-600 text-sm">좋아요 0</span>
-                      <span className="text-amber-600">♡</span>
-                      <span className="text-amber-600">🔗</span>
-                      <span className="text-amber-600">📄</span>
+                      <span className="text-gold text-sm">좋아요 0</span>
+                      <span className="text-gold">♡</span>
+                      <span className="text-gold">🔗</span>
+                      <span className="text-gold">📄</span>
                     </div>
                   </div>
 
                   {/* 이름 */}
                   <div className="flex items-center gap-2 mb-2">
                     <h2 className="text-2xl font-bold text-gray-900">이하나</h2>
-                    <span className="px-2 py-0.5 bg-purple-600 text-white text-xs rounded">배우&모델</span>
+                    <span className="px-2 py-0.5 bg-gold text-white text-xs rounded">배우&모델</span>
                   </div>
                   <p className="text-gray-500 text-sm mb-4">Lee Hana</p>
 
                   {/* 배지 */}
-                  <span className="inline-block px-3 py-1 bg-purple-600 text-white text-xs rounded-full mb-4">
+                  <span className="inline-block px-3 py-1 bg-gold text-luxury-black text-xs rounded-full mb-4 font-medium">
                     여자
                   </span>
 
@@ -338,26 +338,26 @@ export function HeroSection() {
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center gap-4">
                       <span className="text-sm text-gray-600 w-24">24세 (2001)</span>
-                      <div className="flex-1 h-2 bg-amber-200 rounded-full overflow-hidden">
-                        <div className="h-full w-3/4 bg-amber-400 rounded-full" />
+                      <div className="flex-1 h-2 bg-champagne rounded-full overflow-hidden">
+                        <div className="h-full w-3/4 bg-gold rounded-full" />
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
                       <span className="text-sm text-gray-600 w-24">167 cm</span>
-                      <div className="flex-1 h-2 bg-amber-200 rounded-full overflow-hidden">
-                        <div className="h-full w-4/5 bg-amber-400 rounded-full" />
+                      <div className="flex-1 h-2 bg-champagne rounded-full overflow-hidden">
+                        <div className="h-full w-4/5 bg-gold rounded-full" />
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
                       <span className="text-sm text-gray-600 w-24">48 kg</span>
-                      <div className="flex-1 h-2 bg-amber-200 rounded-full overflow-hidden">
-                        <div className="h-full w-1/2 bg-amber-400 rounded-full" />
+                      <div className="flex-1 h-2 bg-champagne rounded-full overflow-hidden">
+                        <div className="h-full w-1/2 bg-gold rounded-full" />
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
                       <span className="text-sm text-gray-600 w-24">235 mm</span>
-                      <div className="flex-1 h-2 bg-amber-200 rounded-full overflow-hidden">
-                        <div className="h-full w-2/3 bg-amber-400 rounded-full" />
+                      <div className="flex-1 h-2 bg-champagne rounded-full overflow-hidden">
+                        <div className="h-full w-2/3 bg-gold rounded-full" />
                       </div>
                     </div>
                   </div>
@@ -372,7 +372,7 @@ export function HeroSection() {
                   <div className="flex flex-wrap gap-2 mb-2">
                     {["고양이상", "도도한", "청순한", "귀여운", "사랑스러운", "순수한", "우아한", "밝은한"].map(
                       (tag) => (
-                        <span key={tag} className="px-2 py-1 bg-purple-600/20 text-purple-700 text-xs rounded">
+                        <span key={tag} className="px-2 py-1 bg-gold/20 text-gold-dark text-xs rounded">
                           {tag}
                         </span>
                       )
@@ -442,19 +442,19 @@ export function HeroSection() {
               key={i}
               onClick={() => setCurrentSlide(i)}
               className={`w-3 h-3 rounded-full transition-all ${
-                currentSlide === i ? "bg-purple-600 w-8" : "bg-zinc-600"
+                currentSlide === i ? "bg-gold w-8" : "bg-warm-gray/30"
               }`}
             />
           ))}
         </div>
 
         {/* PDF 자동 완성 안내 */}
-        <p className="text-zinc-500 text-sm mt-12 mb-8">- 프로필 PDF파일 자동 완성 기능 -</p>
+        <p className="text-muted-gray text-sm mt-12 mb-8">- 프로필 PDF파일 자동 완성 기능 -</p>
 
         {/* CTA 버튼 */}
         <Link
           href="/signup?type=actor"
-          className="px-16 py-4 bg-purple-600 text-white font-semibold rounded-xl hover:bg-purple-700 transition-all text-lg"
+          className="px-16 py-4 bg-gold text-luxury-black font-semibold rounded-xl hover:bg-gold-light transition-all text-lg"
         >
           프로필 등록하기
         </Link>

@@ -4,47 +4,73 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --card-bg: #ffffff;
-  --border-color: #e5e7eb;
-  --text-secondary: #6b7280;
-  --text-tertiary: #9ca3af;
-  --primary: oklch(0.205 0 0);
-  --tag-bg: #f3f4f6;
-  --tag-text: #374151;
+  /* 골드 럭셔리 팔레트 */
+  --gold: #D4AF37;
+  --gold-light: #E8C547;
+  --gold-dark: #B8962E;
+  --champagne: #F7E7CE;
+  --luxury-black: #0A0A0A;
+  --luxury-secondary: #141414;
+  --luxury-tertiary: #1F1F1F;
+  --ivory: #FFFEF2;
+  --warm-gray: #C9C5B8;
+  --muted-gray: #8A8679;
+
+  /* 기존 시스템 변수 - 골드 럭셔리 적용 */
+  --card-bg: #141414;
+  --border-color: #2A2A2A;
+  --text-secondary: #C9C5B8;
+  --text-tertiary: #8A8679;
+  --primary: #D4AF37;
+  --tag-bg: #1F1F1F;
+  --tag-text: #C9C5B8;
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: #0A0A0A;
+  --foreground: #FFFEF2;
+  --card: #141414;
+  --card-foreground: #FFFEF2;
+  --popover: #141414;
+  --popover-foreground: #FFFEF2;
+  --primary-foreground: #0A0A0A;
+  --secondary: #1F1F1F;
+  --secondary-foreground: #FFFEF2;
+  --muted: #1F1F1F;
+  --muted-foreground: #8A8679;
+  --accent: #D4AF37;
+  --accent-foreground: #0A0A0A;
+  --destructive: #EF4444;
+  --border: #2A2A2A;
+  --input: #1F1F1F;
+  --ring: #D4AF37;
+  --chart-1: #D4AF37;
+  --chart-2: #E8C547;
+  --chart-3: #B8962E;
+  --chart-4: #F7E7CE;
+  --chart-5: #C9C5B8;
+  --sidebar: #0A0A0A;
+  --sidebar-foreground: #FFFEF2;
+  --sidebar-primary: #D4AF37;
+  --sidebar-primary-foreground: #0A0A0A;
+  --sidebar-accent: #1F1F1F;
+  --sidebar-accent-foreground: #FFFEF2;
+  --sidebar-border: #2A2A2A;
+  --sidebar-ring: #D4AF37;
 }
 
 @theme inline {
+  /* 골드 럭셔리 커스텀 컬러 */
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-champagne: var(--champagne);
+  --color-luxury-black: var(--luxury-black);
+  --color-luxury-secondary: var(--luxury-secondary);
+  --color-luxury-tertiary: var(--luxury-tertiary);
+  --color-ivory: var(--ivory);
+  --color-warm-gray: var(--warm-gray);
+  --color-muted-gray: var(--muted-gray);
+
+  /* 기존 시스템 변수 매핑 */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -110,9 +136,9 @@ body {
   transform: scale(1.02);
 }
 
-/* Active card styles */
+/* Active card styles - 골드 그림자 */
 .actor-card-active {
-  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 40px -12px rgba(212, 175, 55, 0.25);
 }
 
 /* Slide up animation for modals */
@@ -129,38 +155,39 @@ body {
   animation: slide-up 0.3s ease-out;
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+/* 골드 그라데이션 텍스트 */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #F7E7CE 50%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 골드 글로우 효과 */
+.gold-glow {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+/* 골드 버튼 호버 효과 */
+.btn-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #E8C547 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #E8C547 0%, #D4AF37 100%);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+}
+
+/* 다크 모드 (이미 기본이 다크이므로 라이트 섹션용) */
+.light-section {
+  --background: #FFFEF2;
+  --foreground: #0A0A0A;
+  --card: #FFFFFF;
+  --card-foreground: #0A0A0A;
+  --muted: #F7E7CE;
+  --muted-foreground: #6B665C;
+  --border: #E8E4DF;
 }
 
 @layer base {

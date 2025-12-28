@@ -53,9 +53,9 @@ function DoorIcon({
   return (
     <span className={`relative inline-flex items-center justify-center ${className}`}>
       <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="2" y="2" width="20" height="26" rx="2" className={fillColor || "fill-purple-500/10"} />
+        <rect x="2" y="2" width="20" height="26" rx="2" className={fillColor || "fill-gold/10"} />
         <rect x="2" y="2" width="20" height="26" rx="2" />
-        <circle cx="17" cy="15" r="1.5" className={handleColor || "fill-purple-400"} />
+        <circle cx="17" cy="15" r="1.5" className={handleColor || "fill-gold"} />
         <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
         <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
       </svg>
@@ -65,7 +65,7 @@ function DoorIcon({
 
 export function DoDreamLogo({
   size = "md",
-  accentColor = "text-purple-400",
+  accentColor = "text-gold",
   doorFillColor,
   doorHandleColor,
   href,
@@ -94,7 +94,7 @@ export function DoDreamLogo({
 
 /** × 기호를 포함한 텍스트 로고 (아이콘 없이) */
 export function DoDreamTextLogo({
-  accentColor = "text-purple-400",
+  accentColor = "text-gold",
   className = "",
 }: Pick<DoDreamLogoProps, "accentColor" | "className">) {
   return (
@@ -107,8 +107,8 @@ export function DoDreamTextLogo({
 /** 인라인 로고 - h2, h3 등 텍스트 흐름 안에서 사용 */
 export function DoDreamInlineLogo({
   doorFillColor = "fill-white/10",
-  doorHandleColor = "fill-purple-400",
-  accentColor = "text-purple-400",
+  doorHandleColor = "fill-gold",
+  accentColor = "text-gold",
   className = "",
 }: Pick<DoDreamLogoProps, "doorFillColor" | "doorHandleColor" | "accentColor" | "className">) {
   return (
