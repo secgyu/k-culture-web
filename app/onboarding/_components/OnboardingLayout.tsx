@@ -11,13 +11,7 @@ interface OnboardingLayoutProps {
   subtitle?: string;
 }
 
-export function OnboardingLayout({
-  children,
-  currentStep,
-  totalSteps,
-  title,
-  subtitle,
-}: OnboardingLayoutProps) {
+export function OnboardingLayout({ children, currentStep, totalSteps, title, subtitle }: OnboardingLayoutProps) {
   const progress = (currentStep / totalSteps) * 100;
 
   return (
@@ -35,10 +29,7 @@ export function OnboardingLayout({
       {/* 프로그레스 바 */}
       <div className="px-6">
         <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-gold transition-all duration-500"
-            style={{ width: `${progress}%` }}
-          />
+          <div className="h-full bg-gold transition-all duration-500" style={{ width: `${progress}%` }} />
         </div>
       </div>
 
@@ -52,12 +43,9 @@ export function OnboardingLayout({
           </div>
 
           {/* 폼 영역 */}
-          <div className="bg-luxury-secondary rounded-2xl p-8 border border-zinc-800">
-            {children}
-          </div>
+          <div className="bg-luxury-secondary rounded-2xl p-8 border border-zinc-800">{children}</div>
         </div>
       </main>
     </div>
   );
 }
-
