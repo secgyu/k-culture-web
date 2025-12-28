@@ -17,3 +17,5 @@ export { default as ActorCarousel } from "./ActorCarousel";
 export { default as EmptyState } from "./EmptyState";
 export { default as FilterBar } from "./FilterBar";
 export { default as FilterModal } from "./FilterModal";
+
+export { DoDreamLogo, DoDreamTextLogo, DoDreamInlineLogo } from "./DoDreamLogo";

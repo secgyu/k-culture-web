@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { DoDreamLogo, DoDreamInlineLogo } from "@/app/components";
 
 // 히어로 섹션
 function HeroSection() {
@@ -23,20 +24,7 @@ function HeroSection() {
       {/* 헤더 */}
       <header className="relative z-20 w-full px-6 py-4 flex items-center justify-between">
         {/* 로고 */}
-        <Link href="/" className="flex items-center gap-2 text-white">
-          <div className="relative w-8 h-10 flex items-center justify-center">
-            <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <rect x="2" y="2" width="20" height="26" rx="2" className="fill-purple-500/10" />
-              <rect x="2" y="2" width="20" height="26" rx="2" />
-              <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
-              <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
-              <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
-            </svg>
-          </div>
-          <span className="font-serif text-xl font-medium tracking-tight">
-            Do <span className="text-purple-400">×</span> Dream
-          </span>
-        </Link>
+        <DoDreamLogo href="/" size="md" className="text-white" />
 
         {/* 네비게이션 */}
         <nav className="hidden md:flex items-center gap-8">
@@ -191,26 +179,7 @@ function HeroSection() {
 
                 {/* DoDream 로고 */}
                 <div className="flex justify-end">
-                  <div className="flex items-center gap-1.5 text-gray-400">
-                    <div className="relative w-5 h-6 flex items-center justify-center">
-                      <svg
-                        viewBox="0 0 24 30"
-                        className="w-full h-full"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                      >
-                        <rect x="2" y="2" width="20" height="26" rx="2" className="fill-gray-100" />
-                        <rect x="2" y="2" width="20" height="26" rx="2" />
-                        <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
-                        <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
-                        <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
-                      </svg>
-                    </div>
-                    <span className="font-serif text-xs font-medium tracking-tight">
-                      Do<span className="text-purple-400">×</span>Dream
-                    </span>
-                  </div>
+                  <DoDreamLogo size="sm" className="text-gray-400" doorFillColor="fill-gray-100" />
                 </div>
               </div>
             </div>
@@ -1155,22 +1124,7 @@ function FeatureLinkShareSection() {
                   <p className="text-[8px] text-gray-600">단편영화,&lt;우리 사이&gt;, 지수역(주연)</p>
                 </div>
                 <div className="flex justify-end mt-2">
-                  <div className="flex items-center gap-0.5 text-gray-300 text-[8px]">
-                    <div className="relative w-3 h-4 flex items-center justify-center">
-                      <svg
-                        viewBox="0 0 24 30"
-                        className="w-full h-full"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                      >
-                        <rect x="2" y="2" width="20" height="26" rx="2" className="fill-gray-100" />
-                        <rect x="2" y="2" width="20" height="26" rx="2" />
-                        <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
-                      </svg>
-                    </div>
-                    <span className="font-serif font-medium">Do×Dream</span>
-                  </div>
+                  <DoDreamLogo size="xs" className="text-gray-300" doorFillColor="fill-gray-100" />
                 </div>
               </div>
             </div>
@@ -1257,20 +1211,11 @@ function FeatureLinkShareSection() {
         {/* DoDream과 함께 */}
         <p className="text-gray-600 text-lg mb-2">보다 효과적인 프로필 제작</p>
         <h3 className="text-3xl font-bold text-gray-900 mb-16">
-          <span className="inline-flex items-center gap-2">
-            <span className="relative w-8 h-10 flex items-center justify-center">
-              <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="2" y="2" width="20" height="26" rx="2" className="fill-purple-50" />
-                <rect x="2" y="2" width="20" height="26" rx="2" />
-                <circle cx="17" cy="15" r="1.5" className="fill-purple-500" />
-                <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
-                <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
-              </svg>
-            </span>
-            <span className="font-serif">
-              Do<span className="text-purple-600">×</span>Dream
-            </span>
-          </span>
+          <DoDreamInlineLogo
+            doorFillColor="fill-purple-50"
+            doorHandleColor="fill-purple-500"
+            accentColor="text-purple-600"
+          />
           과 바로 함께해 보세요!
         </h3>
 
@@ -1604,26 +1549,7 @@ function DirectorSection() {
               <p className="text-yellow-400 text-xl font-bold mb-8">지속적으로 느끼는 불편함</p>
 
               <h3 className="text-white text-3xl font-bold">
-                <span className="inline-flex items-center gap-2 align-middle">
-                  <span className="relative w-7 h-9 flex items-center justify-center">
-                    <svg
-                      viewBox="0 0 24 30"
-                      className="w-full h-full"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    >
-                      <rect x="2" y="2" width="20" height="26" rx="2" className="fill-white/10" />
-                      <rect x="2" y="2" width="20" height="26" rx="2" />
-                      <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
-                      <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
-                      <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
-                    </svg>
-                  </span>
-                  <span className="font-serif">
-                    Do<span className="text-purple-400">×</span>Dream
-                  </span>
-                </span>
+                <DoDreamInlineLogo />
                 으로 쉽게 해결!
               </h3>
             </div>
@@ -1635,21 +1561,7 @@ function DirectorSection() {
       <div className="bg-zinc-900 py-24">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-yellow-400 mb-16">
-            작품구인도{" "}
-            <span className="inline-flex items-center gap-2 text-white align-middle">
-              <span className="relative w-8 h-10 flex items-center justify-center">
-                <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <rect x="2" y="2" width="20" height="26" rx="2" className="fill-white/10" />
-                  <rect x="2" y="2" width="20" height="26" rx="2" />
-                  <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
-                  <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
-                  <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
-                </svg>
-              </span>
-              <span className="font-serif">
-                Do<span className="text-purple-400">×</span>Dream
-              </span>
-            </span>
+            작품구인도 <DoDreamInlineLogo className="text-white" />
             에서 한 번에!
           </h2>
 
@@ -1836,21 +1748,7 @@ function DirectorSection() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-yellow-400 text-xl font-bold mb-2">THE 효율적인 플랫폼</p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">
-            <span className="inline-flex items-center gap-2 align-middle">
-              <span className="relative w-8 h-10 flex items-center justify-center">
-                <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <rect x="2" y="2" width="20" height="26" rx="2" className="fill-white/10" />
-                  <rect x="2" y="2" width="20" height="26" rx="2" />
-                  <circle cx="17" cy="15" r="1.5" className="fill-purple-400" />
-                  <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
-                  <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
-                </svg>
-              </span>
-              <span className="font-serif">
-                Do<span className="text-purple-400">×</span>Dream
-              </span>
-            </span>
-            과 지금 바로 함께해 보세요!
+            <DoDreamInlineLogo />과 지금 바로 함께해 보세요!
           </h2>
 
           {/* 3개 카드 */}
@@ -1924,21 +1822,8 @@ function CTASection() {
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
           지금 바로
-          <span className="inline-flex items-center gap-2 mx-2 align-middle">
-            <span className="relative w-8 h-10 flex items-center justify-center">
-              <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="2" y="2" width="20" height="26" rx="2" className="fill-white/10" />
-                <rect x="2" y="2" width="20" height="26" rx="2" />
-                <circle cx="17" cy="15" r="1.5" className="fill-yellow-400" />
-                <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1" opacity="0.3" />
-                <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1" opacity="0.3" />
-              </svg>
-            </span>
-            <span className="font-serif">
-              Do<span className="text-yellow-300">×</span>Dream
-            </span>
-          </span>
-          을 이용해 보세요!
+          <DoDreamInlineLogo className="mx-2" doorHandleColor="fill-yellow-400" accentColor="text-yellow-300" />을
+          이용해 보세요!
         </h2>
         <Link
           href="/actor-search"
