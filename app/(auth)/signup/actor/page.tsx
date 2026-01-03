@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { AuthLayout } from "@/app/components";
 import { CheckIcon } from "@/app/components/Icons";
 import { Button, FormField, Input, PasswordInput } from "@/components/ui";
+import { useSignup } from "@/src/auth/auth";
 
 export default function ActorSignupPage() {
   const router = useRouter();
@@ -15,8 +16,9 @@ export default function ActorSignupPage() {
   const [termsAgreed, setTermsAgreed] = useState(false);
   const [privacyAgreed, setPrivacyAgreed] = useState(false);
   const [marketingAgreed, setMarketingAgreed] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const signupMutation = useSignup();
 
   const allAgreed = termsAgreed && privacyAgreed;
 
@@ -58,17 +60,33 @@ export default function ActorSignupPage() {
     e.preventDefault();
     if (!validate()) return;
 
-    setLoading(true);
-
-    try {
-      // TODO: API 연동
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      router.push("/onboarding/actor/step1");
-    } catch {
-      setErrors({ email: "회원가입에 실패했습니다" });
-    } finally {
-      setLoading(false);
-    }
+    signupMutation.mutate(
+      {
+        data: {
+          email,
+          password,
+          passwordConfirm,
+          type: "actor",
+          termsAgreed,
+          privacyAgreed,
+          marketingAgreed,
+        },
+      },
+      {
+        onSuccess: () => {
+          router.push("/onboarding/actor/step1");
+        },
+        onError: (error) => {
+          // API 에러 처리
+          const errorMessage = error?.message || "회원가입에 실패했습니다";
+          if (errorMessage.includes("이미 사용 중")) {
+            setErrors({ email: "이미 사용 중인 이메일입니다" });
+          } else {
+            setErrors({ email: errorMessage });
+          }
+        },
+      }
+    );
   };
 
   const isValid = email && password.length >= 8 && password === passwordConfirm && allAgreed;
@@ -169,7 +187,7 @@ export default function ActorSignupPage() {
           {errors.terms && <p className="text-sm text-red-400">{errors.terms}</p>}
         </div>
 
-        <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={loading}>
+        <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={signupMutation.isPending}>
           회원가입
         </Button>
 
@@ -183,4 +201,3 @@ export default function ActorSignupPage() {
     </AuthLayout>
   );
 }
-

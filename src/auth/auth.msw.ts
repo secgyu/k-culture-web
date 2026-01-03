@@ -37,6 +37,7 @@ import type {
   Login200,
   Logout200,
   RefreshToken200,
+  ResetPassword200,
   Signup201
 } from '.././model';
 
@@ -46,6 +47,8 @@ export const getLoginResponseMock = (overrideResponse: Partial< Login200 > = {})
 export const getSignupResponseMock = (overrideResponse: Partial< Signup201 > = {}): Signup201 => ({success: faker.helpers.arrayElement([true, undefined]), data: faker.helpers.arrayElement([{userId: faker.helpers.arrayElement([faker.string.uuid(), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(UserType)), undefined])}, undefined]), ...overrideResponse})
 
 export const getForgotPasswordResponseMock = (overrideResponse: Partial< ForgotPassword200 > = {}): ForgotPassword200 => ({success: faker.helpers.arrayElement([true, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+
+export const getResetPasswordResponseMock = (overrideResponse: Partial< ResetPassword200 > = {}): ResetPassword200 => ({success: faker.helpers.arrayElement([true, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
 export const getLogoutResponseMock = (overrideResponse: Partial< Logout200 > = {}): Logout200 => ({success: faker.helpers.arrayElement([true, undefined]), ...overrideResponse})
 
@@ -84,6 +87,18 @@ export const getForgotPasswordMockHandler = (overrideResponse?: ForgotPassword20
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined
     ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
     : getForgotPasswordResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  }, options)
+}
+
+export const getResetPasswordMockHandler = (overrideResponse?: ResetPassword200 | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ResetPassword200> | ResetPassword200), options?: RequestHandlerOptions) => {
+  return http.post('*/api/auth/reset-password', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getResetPasswordResponseMock()),
       { status: 200,
         headers: { 'Content-Type': 'application/json' }
       })
@@ -129,6 +144,7 @@ export const getAuthMock = () => [
   getLoginMockHandler(),
   getSignupMockHandler(),
   getForgotPasswordMockHandler(),
+  getResetPasswordMockHandler(),
   getLogoutMockHandler(),
   getDeleteAccountMockHandler(),
   getRefreshTokenMockHandler()
