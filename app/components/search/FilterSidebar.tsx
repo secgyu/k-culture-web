@@ -60,24 +60,24 @@ function RangeInput({
 }) {
   return (
     <div className="space-y-2">
-      <label className="text-caption text-muted-gray">{label}</label>
-      <div className="flex items-center gap-2">
+      {label && <label className="text-caption text-muted-gray">{label}</label>}
+      <div className="flex items-center gap-1.5">
         <input
           type="number"
           placeholder="최소"
           value={minValue}
           onChange={(e) => onMinChange(e.target.value)}
-          className="flex-1 bg-luxury-tertiary border border-zinc-700 rounded-lg px-3 py-2 text-ivory text-body-sm placeholder-muted-gray focus:outline-none focus:border-gold transition-colors"
+          className="flex-1 min-w-0 bg-luxury-tertiary border border-zinc-700 rounded-lg px-2 py-2 text-ivory text-body-sm placeholder-muted-gray focus:outline-none focus:border-gold transition-colors"
         />
-        <span className="text-muted-gray">~</span>
+        <span className="text-muted-gray shrink-0">~</span>
         <input
           type="number"
           placeholder="최대"
           value={maxValue}
           onChange={(e) => onMaxChange(e.target.value)}
-          className="flex-1 bg-luxury-tertiary border border-zinc-700 rounded-lg px-3 py-2 text-ivory text-body-sm placeholder-muted-gray focus:outline-none focus:border-gold transition-colors"
+          className="flex-1 min-w-0 bg-luxury-tertiary border border-zinc-700 rounded-lg px-2 py-2 text-ivory text-body-sm placeholder-muted-gray focus:outline-none focus:border-gold transition-colors"
         />
-        <span className="text-caption text-muted-gray w-8">{unit}</span>
+        <span className="text-caption text-muted-gray shrink-0">{unit}</span>
       </div>
     </div>
   );
