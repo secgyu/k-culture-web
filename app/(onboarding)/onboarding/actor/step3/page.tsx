@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { OnboardingLayout } from "@/app/onboarding/_components";
+import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
 import { GoldButton } from "@/app/components";
 import { XMarkIcon } from "@/app/components/Icons";
 import { useOnboardingStore } from "@/stores/useOnboardingStore";

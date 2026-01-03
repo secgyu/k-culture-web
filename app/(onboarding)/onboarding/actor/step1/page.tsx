@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { OnboardingLayout } from "@/app/onboarding/_components";
+import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
 import { GoldButton, DarkInput, DarkSelect } from "@/app/components";
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
 

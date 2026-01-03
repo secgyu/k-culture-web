@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { OnboardingLayout } from "@/app/onboarding/_components";
+import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
 import { GoldButton, DarkTextarea } from "@/app/components";
 import { CameraIcon } from "@/app/components/Icons";
 import { ImageUploadGuide } from "@/app/components/profile";

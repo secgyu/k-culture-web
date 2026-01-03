@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { OnboardingLayout } from "@/app/onboarding/_components";
+import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
 import { GoldButton, DarkInput, DarkSelect } from "@/app/components";
 
 const SPECIALTY_OPTIONS = [
@@ -31,10 +31,7 @@ export default function AgencyOnboardingStep1() {
   const [specialty, setSpecialty] = useState("");
 
   const isValid =
-    agencyName.trim() !== "" &&
-    representativeName.trim() !== "" &&
-    foundedYear !== "" &&
-    specialty !== "";
+    agencyName.trim() !== "" && representativeName.trim() !== "" && foundedYear !== "" && specialty !== "";
 
   const handleComplete = () => {
     if (!isValid) return;
@@ -89,4 +86,3 @@ export default function AgencyOnboardingStep1() {
     </OnboardingLayout>
   );
 }
-

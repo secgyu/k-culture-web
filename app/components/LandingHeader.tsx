@@ -75,9 +75,9 @@ export function LandingHeader({ currentPath = "", transparent = false, className
             </Link>
           ))}
           <Link
-            href="/profile-register"
+            href="/profile/edit"
             className={`px-4 py-2 text-luxury-black text-sm rounded-lg transition-all ${
-              currentPath === "/profile-register" ? "bg-gold" : "bg-gold hover:bg-gold-light"
+              currentPath === "/profile/edit" ? "bg-gold" : "bg-gold hover:bg-gold-light"
             }`}
           >
             프로필 등록하기
@@ -127,10 +127,10 @@ export function LandingHeader({ currentPath = "", transparent = false, className
           <div className="border-t border-gold/20 my-4" />
 
           <Link
-            href="/profile-register"
+            href="/profile/edit"
             onClick={() => setIsMenuOpen(false)}
             className={`block py-3 px-4 rounded-lg text-center font-medium transition-colors ${
-              currentPath === "/profile-register"
+              currentPath === "/profile/edit"
                 ? "bg-gold text-luxury-black"
                 : "bg-gold text-luxury-black hover:bg-gold-light"
             }`}
