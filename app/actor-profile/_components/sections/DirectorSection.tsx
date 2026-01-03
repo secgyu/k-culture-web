@@ -11,36 +11,36 @@ export function DirectorSection() {
         <div className="w-16 h-16 bg-luxury-black mx-auto" />
       </div>
 
-      {/* 아이보리 영역 */}
-      <div className="bg-ivory py-24">
+      {/* 다크 영역 */}
+      <div className="bg-luxury-black py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
           {/* 배지 */}
-          <div className="inline-block px-6 py-2 bg-gold border-2 border-luxury-black rounded-full mb-8">
+          <div className="inline-block px-6 py-2 bg-gold rounded-full mb-8">
             <span className="text-luxury-black font-medium text-sm">감독&PD</span>
           </div>
 
           {/* 메인 타이틀 */}
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-12">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-12">
             &quot;작품 구인도 이렇게 쉽게 하면 좋겠어요!&quot;
           </h2>
 
           {/* 구분선 */}
-          <div className="w-px h-24 bg-gray-300 mx-auto" />
+          <div className="w-px h-24 bg-zinc-700 mx-auto" />
         </div>
       </div>
 
       {/* 어두운 영역: 문제점 */}
-      <div className="bg-luxury-black py-24">
+      <div className="bg-luxury-secondary py-24">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex gap-12 items-start">
             {/* 왼쪽: 구인글 이미지 */}
-            <div className="w-80 bg-white rounded-xl p-4 shadow-xl">
+            <div className="w-80 bg-luxury-tertiary rounded-xl p-4 shadow-xl border border-zinc-700">
               <div className="space-y-2 text-left">
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 bg-gray-200 rounded-full" />
+                  <div className="w-8 h-8 bg-zinc-600 rounded-full" />
                   <div>
-                    <p className="text-xs font-medium text-gray-900">구인글</p>
-                    <p className="text-[8px] text-gray-500">단편/졸작(졸업작품) 모집합니다...</p>
+                    <p className="text-xs font-medium text-ivory">구인글</p>
+                    <p className="text-[8px] text-zinc-400">단편/졸작(졸업작품) 모집합니다...</p>
                   </div>
                 </div>
                 {[
@@ -58,8 +58,8 @@ export function DirectorSection() {
                   { label: "12. 마감일자", value: "2000년 00월 00일" },
                 ].map((item, i) => (
                   <div key={i} className="flex text-[7px]">
-                    <span className="text-gray-400 w-16">{item.label}</span>
-                    <span className="text-gray-600">{item.value}</span>
+                    <span className="text-zinc-500 w-16">{item.label}</span>
+                    <span className="text-zinc-300">{item.value}</span>
                   </div>
                 ))}
               </div>
@@ -287,7 +287,7 @@ export function DirectorSection() {
 
           {/* 3개 카드 */}
           <div className="grid grid-cols-3 gap-4">
-            <div className="bg-white rounded-2xl p-8 text-center">
+            <div className="bg-luxury-secondary rounded-2xl p-8 text-center border border-gold/20">
               <div className="w-12 h-12 mx-auto mb-4 text-gold">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path
@@ -297,14 +297,14 @@ export function DirectorSection() {
                   />
                 </svg>
               </div>
-              <h4 className="font-bold text-gray-900 mb-3">개인정보 보호</h4>
-              <p className="text-gray-500 text-sm leading-relaxed">
+              <h4 className="font-bold text-ivory mb-3">개인정보 보호</h4>
+              <p className="text-zinc-400 text-sm leading-relaxed">
                 개인정보 노출 없이
                 <br />
                 작품 구인 가능
               </p>
             </div>
-            <div className="bg-white rounded-2xl p-8 text-center">
+            <div className="bg-luxury-secondary rounded-2xl p-8 text-center border border-gold/20">
               <div className="w-12 h-12 mx-auto mb-4 text-gold">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path
@@ -314,8 +314,8 @@ export function DirectorSection() {
                   />
                 </svg>
               </div>
-              <h4 className="font-bold text-gray-900 mb-3">시간 절약</h4>
-              <p className="text-gray-500 text-sm leading-relaxed">
+              <h4 className="font-bold text-ivory mb-3">시간 절약</h4>
+              <p className="text-zinc-400 text-sm leading-relaxed">
                 한 곳에서 지원자 확인과
                 <br />
                 지원 결과 공유까지
@@ -323,7 +323,7 @@ export function DirectorSection() {
                 모두 가능
               </p>
             </div>
-            <div className="bg-white rounded-2xl p-8 text-center">
+            <div className="bg-luxury-secondary rounded-2xl p-8 text-center border border-gold/20">
               <div className="w-12 h-12 mx-auto mb-4 text-gold">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path
@@ -333,8 +333,8 @@ export function DirectorSection() {
                   />
                 </svg>
               </div>
-              <h4 className="font-bold text-gray-900 mb-3">쉽고 빠른 배우 찾기</h4>
-              <p className="text-gray-500 text-sm leading-relaxed">
+              <h4 className="font-bold text-ivory mb-3">쉽고 빠른 배우 찾기</h4>
+              <p className="text-zinc-400 text-sm leading-relaxed">
                 필요한 조건만
                 <br />
                 간결하게 입력 후,
@@ -348,4 +348,3 @@ export function DirectorSection() {
     </section>
   );
 }
-

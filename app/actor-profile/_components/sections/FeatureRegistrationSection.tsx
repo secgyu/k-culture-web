@@ -27,10 +27,10 @@ export function FeatureRegistrationSection() {
   ];
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-luxury-black">
       <div className="max-w-3xl mx-auto px-6">
         {/* 제목 */}
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12">
+        <h2 className="text-2xl md:text-3xl font-bold text-ivory text-center mb-12">
           등록 한 번으로 편하게 기다리세요!
         </h2>
 
@@ -54,13 +54,13 @@ export function FeatureRegistrationSection() {
         {/* 페이지 인디케이터 (세로) */}
         <div className="flex flex-col items-center gap-2 mb-16">
           {[0, 1, 2].map((i) => (
-            <div key={i} className={`w-2 h-2 rounded-full ${i === 0 ? "bg-gray-800" : "bg-gray-300"}`} />
+            <div key={i} className={`w-2 h-2 rounded-full ${i === 0 ? "bg-gold" : "bg-zinc-700"}`} />
           ))}
         </div>
 
         {/* 등록 후 혜택 */}
-        <h3 className="text-2xl md:text-3xl text-gray-600 text-center mb-8">
-          나만의 프로필을 <span className="font-bold text-gray-900">등록</span>했다면?
+        <h3 className="text-2xl md:text-3xl text-zinc-400 text-center mb-8">
+          나만의 프로필을 <span className="font-bold text-ivory">등록</span>했다면?
         </h3>
 
         {/* 키워드 태그들 */}
@@ -71,7 +71,7 @@ export function FeatureRegistrationSection() {
               className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
                 keyword.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-white text-gray-600 border border-gray-300"
+                  : "bg-luxury-tertiary text-zinc-400 border border-zinc-700"
               }`}
             >
               {keyword.label}
@@ -86,7 +86,7 @@ export function FeatureRegistrationSection() {
               className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
                 lang.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-white text-gray-600 border border-gray-300"
+                  : "bg-luxury-tertiary text-zinc-400 border border-zinc-700"
               }`}
             >
               {lang.label}
@@ -107,7 +107,7 @@ export function FeatureRegistrationSection() {
               className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
                 dialect.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-white text-gray-600 border border-gray-300"
+                  : "bg-luxury-tertiary text-zinc-400 border border-zinc-700"
               }`}
             >
               {dialect.label}
@@ -127,7 +127,7 @@ export function FeatureRegistrationSection() {
               className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
                 skill.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-white text-gray-600 border border-gray-300"
+                  : "bg-luxury-tertiary text-zinc-400 border border-zinc-700"
               }`}
             >
               {skill.label}
@@ -148,7 +148,7 @@ export function FeatureRegistrationSection() {
               className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
                 sport.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-white text-gray-600 border border-gray-300"
+                  : "bg-luxury-tertiary text-zinc-400 border border-zinc-700"
               }`}
             >
               {sport.label}
@@ -157,7 +157,7 @@ export function FeatureRegistrationSection() {
         </div>
 
         {/* 웹 프로필 완성 타이틀 */}
-        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12">
+        <h3 className="text-2xl md:text-3xl font-bold text-ivory text-center mb-12">
           나를 대표하는 <span className="text-gold">키워드</span>로 웹 프로필 완성!
         </h3>
 

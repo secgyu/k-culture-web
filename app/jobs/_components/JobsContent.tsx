@@ -155,10 +155,7 @@ export function JobsContent() {
         <DoDreamLogo href="/" size="md" className="text-white" />
 
         <nav className="hidden md:flex items-center gap-8">
-          <Link
-            href="/ai-matching"
-            className="text-gold hover:text-gold-light transition-colors text-sm font-medium"
-          >
+          <Link href="/ai-matching" className="text-gold hover:text-gold-light transition-colors text-sm font-medium">
             AI 매칭추천
           </Link>
           <Link href="/actor-search" className="text-zinc-300 hover:text-white transition-colors text-sm">

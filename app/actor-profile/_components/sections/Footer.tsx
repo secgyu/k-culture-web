@@ -4,7 +4,6 @@ export function Footer() {
   return (
     <footer className="bg-gradient-to-b from-luxury-black to-luxury-secondary py-12">
       <div className="max-w-4xl mx-auto px-6 text-center">
-        {/* 인스타그램 아이콘 */}
         <div className="mb-8">
           <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-gold via-gold-light to-champagne flex items-center justify-center">
             <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -13,7 +12,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* 회사 정보 */}
         <div className="text-muted-gray text-sm space-y-1">
           <p>두드림(DoDream) | 충남 아산시 순천향로 22 미디어랩스관 702호</p>
           <p>대표 : 양승철 | 문의 : dodreamfilm@gmail.com</p>
@@ -26,4 +24,3 @@ export function Footer() {
     </footer>
   );
 }
-

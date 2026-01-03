@@ -5,9 +5,9 @@ import { ACTOR_IMAGES } from "../constants";
 
 export function IntroSection() {
   return (
-    <section className="bg-ivory overflow-hidden">
+    <section className="bg-luxury-black overflow-hidden">
       {/* 자동 슬라이드 이미지 */}
-      <div className="relative w-full overflow-hidden bg-luxury-black py-4">
+      <div className="relative w-full overflow-hidden bg-luxury-secondary py-4">
         <div className="flex animate-scroll-left">
           {/* 이미지를 2번 반복하여 무한 스크롤 효과 */}
           {[...ACTOR_IMAGES, ...ACTOR_IMAGES].map((src, i) => (
@@ -26,12 +26,12 @@ export function IntroSection() {
         </div>
 
         {/* 메인 타이틀 */}
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-luxury-black mb-12">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-12">
           &quot;작품 준비하기에도 벅차요!&quot;
         </h2>
 
         {/* 구분선 */}
-        <div className="w-px h-24 bg-gray-300 mx-auto mb-12" />
+        <div className="w-px h-24 bg-zinc-700 mx-auto mb-12" />
 
         {/* 골드 서브 타이틀 */}
         <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gold mb-6">

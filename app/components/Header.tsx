@@ -10,7 +10,7 @@ interface HeaderProps {
 
 export default function Header({ title, highlightedName }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 bg-white" style={{ height: "48px" }}>
+    <header className="sticky top-0 z-50 bg-luxury-black border-b border-zinc-800" style={{ height: "48px" }}>
       <div
         className="max-w-lg mx-auto h-full flex items-center justify-between"
         style={{ padding: "0px 20px", gap: "1px" }}

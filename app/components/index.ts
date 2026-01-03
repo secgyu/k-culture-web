@@ -10,11 +10,10 @@ export { default as FilterModal } from "./FilterModal";
 export { DoDreamLogo, DoDreamTextLogo, DoDreamInlineLogo } from "./DoDreamLogo";
 export { LandingHeader } from "./LandingHeader";
 
-// Desktop Layout Components
 export { AuthLayout } from "./AuthLayout";
 export { DashboardLayout } from "./DashboardLayout";
+export { PageLayout } from "./PageLayout";
 
-// Desktop Form Components
 export { GoldButton } from "./GoldButton";
 export { DarkInput } from "./DarkInput";
 export { DarkSelect } from "./DarkSelect";

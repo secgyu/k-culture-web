@@ -160,7 +160,7 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
       />
 
       <div
-        className={`relative w-full max-w-lg bg-white rounded-t-3xl transition-transform duration-300 ease-out ${
+        className={`relative w-full max-w-lg bg-luxury-secondary rounded-t-3xl transition-transform duration-300 ease-out ${
           isAnimating ? "translate-y-0" : "translate-y-full"
         }`}
       >
@@ -188,7 +188,7 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
             className="absolute top-0 left-0 right-0 pointer-events-none z-10"
             style={{
               height: `${ITEM_HEIGHT * 2}px`,
-              background: "linear-gradient(to bottom, white 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%)",
+              background: "linear-gradient(to bottom, #141414 0%, rgba(20,20,20,0.8) 50%, rgba(20,20,20,0) 100%)",
             }}
           />
 
@@ -196,7 +196,7 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
             className="absolute bottom-0 left-0 right-0 pointer-events-none z-10"
             style={{
               height: `${ITEM_HEIGHT * 2}px`,
-              background: "linear-gradient(to top, white 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%)",
+              background: "linear-gradient(to top, #141414 0%, rgba(20,20,20,0.8) 50%, rgba(20,20,20,0) 100%)",
             }}
           />
 
@@ -243,15 +243,15 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
           </div>
         </div>
 
-        <div className="p-5 bg-white">
+        <div className="p-5 bg-luxury-secondary">
           <button
             onClick={handleConfirm}
             disabled={!localSelected}
             className="w-full h-12 rounded-lg font-medium text-base transition-colors"
             style={{
               letterSpacing: "-0.02em",
-              backgroundColor: localSelected ? COLORS.text.primary : COLORS.background.secondary,
-              color: localSelected ? "#FFFFFF" : COLORS.text.disabled,
+              backgroundColor: localSelected ? "#D4AF37" : COLORS.background.tertiary,
+              color: localSelected ? "#0A0A0A" : COLORS.text.disabled,
             }}
           >
             배우 선택 완료

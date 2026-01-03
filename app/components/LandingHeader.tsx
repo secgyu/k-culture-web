@@ -11,11 +11,8 @@ interface NavItem {
 }
 
 interface LandingHeaderProps {
-  /** 현재 활성화된 페이지 경로 */
   currentPath?: string;
-  /** 투명 배경 모드 (히어로 섹션 위에서 사용 시) */
   transparent?: boolean;
-  /** 클래스 오버라이드 */
   className?: string;
 }
 
@@ -30,7 +27,6 @@ export function LandingHeader({ currentPath = "", transparent = false, className
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // 스크롤 감지
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -40,7 +36,6 @@ export function LandingHeader({ currentPath = "", transparent = false, className
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 메뉴 열렸을 때 스크롤 방지
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -61,10 +56,8 @@ export function LandingHeader({ currentPath = "", transparent = false, className
           showBackground ? "bg-luxury-black/95 backdrop-blur-sm border-b border-gold/20" : "bg-transparent"
         } ${className}`}
       >
-        {/* 로고 */}
         <DoDreamLogo href="/" size="md" className="text-white" />
 
-        {/* 데스크톱 네비게이션 */}
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <Link
@@ -91,7 +84,6 @@ export function LandingHeader({ currentPath = "", transparent = false, className
           </Link>
         </nav>
 
-        {/* 모바일 메뉴 버튼 */}
         <button className="md:hidden text-white p-2 -mr-2" onClick={() => setIsMenuOpen(true)} aria-label="메뉴 열기">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -99,16 +91,13 @@ export function LandingHeader({ currentPath = "", transparent = false, className
         </button>
       </header>
 
-      {/* 모바일 메뉴 오버레이 */}
       {isMenuOpen && <div className="fixed inset-0 bg-black/60 z-50 md:hidden" onClick={() => setIsMenuOpen(false)} />}
 
-      {/* 모바일 메뉴 드로어 */}
       <div
         className={`fixed top-0 right-0 h-full w-72 bg-luxury-black z-50 transform transition-transform duration-300 ease-out md:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* 닫기 버튼 */}
         <div className="flex justify-end p-4">
           <button onClick={() => setIsMenuOpen(false)} className="text-white p-2" aria-label="메뉴 닫기">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,7 +106,6 @@ export function LandingHeader({ currentPath = "", transparent = false, className
           </button>
         </div>
 
-        {/* 메뉴 아이템들 */}
         <nav className="px-6 py-4 space-y-2">
           {navItems.map((item) => (
             <Link
@@ -136,10 +124,8 @@ export function LandingHeader({ currentPath = "", transparent = false, className
             </Link>
           ))}
 
-          {/* 구분선 */}
           <div className="border-t border-gold/20 my-4" />
 
-          {/* CTA 버튼 */}
           <Link
             href="/profile-register"
             onClick={() => setIsMenuOpen(false)}
@@ -152,7 +138,6 @@ export function LandingHeader({ currentPath = "", transparent = false, className
             프로필 등록하기
           </Link>
 
-          {/* 추가 링크들 */}
           <div className="pt-4 space-y-2">
             <Link
               href="/login"
@@ -171,7 +156,6 @@ export function LandingHeader({ currentPath = "", transparent = false, className
           </div>
         </nav>
 
-        {/* 하단 로고 */}
         <div className="absolute bottom-8 left-0 right-0 px-6">
           <DoDreamLogo size="sm" className="text-muted-gray" />
         </div>
