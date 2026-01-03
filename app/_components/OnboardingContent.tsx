@@ -47,7 +47,7 @@ function RoleCard({
       {/* 제목 */}
       <h3
         className={`
-          text-xl sm:text-2xl font-bold mb-3
+          text-heading-xl mb-3
           ${isPrimary ? "text-luxury-black" : "text-ivory"}
         `}
       >
@@ -57,8 +57,8 @@ function RoleCard({
       {/* 설명 */}
       <p
         className={`
-          text-sm sm:text-base leading-relaxed
-          ${isPrimary ? "text-luxury-black/70" : "text-warm-gray"}
+          text-body-md leading-relaxed
+          ${isPrimary ? "text-luxury-black/70" : "text-muted-accessible"}
         `}
       >
         {description}
@@ -101,11 +101,13 @@ export function OnboardingContent() {
       </header>
 
       {/* 메인 콘텐츠 */}
-      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-12">
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 section-spacing-md">
         {/* 환영 메시지 */}
-        <div className="text-center mb-12 md:mb-16">
-          <h1 className="text-ivory text-3xl sm:text-4xl md:text-5xl font-bold mb-4">두드림에 오신 것을 환영합니다</h1>
-          <p className="text-warm-gray text-base sm:text-lg max-w-xl mx-auto">
+        <div className="text-center title-margin-xl">
+          <h1 className="font-display text-display-lg lg:text-display-xl text-ivory title-margin-md">
+            두드림에 오신 것을 환영합니다
+          </h1>
+          <p className="text-muted-accessible text-body-lg max-w-xl mx-auto">
             배우와 캐스팅 담당자를 연결하는 프로필 관리 플랫폼
           </p>
         </div>

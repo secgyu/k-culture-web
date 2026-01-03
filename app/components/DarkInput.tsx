@@ -16,14 +16,12 @@ export const DarkInput = forwardRef<HTMLInputElement, DarkInputProps>(
 
     return (
       <div className="space-y-2">
-        {label && (
-          <label className="block text-sm font-medium text-zinc-300">{label}</label>
-        )}
+        {label && <label className="block text-sm font-medium text-zinc-300">{label}</label>}
         <div className="relative">
           <input
             ref={ref}
             type={isPassword && showPassword ? "text" : type}
-            className={`w-full px-4 py-3 bg-zinc-800 border rounded-xl text-ivory placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all ${
+            className={`w-full px-5 py-4 min-h-[52px] bg-zinc-800 border rounded-xl text-ivory text-base placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all ${
               error ? "border-red-500" : "border-zinc-700"
             } ${isPassword ? "pr-12" : ""} ${className}`}
             {...props}
@@ -34,11 +32,7 @@ export const DarkInput = forwardRef<HTMLInputElement, DarkInputProps>(
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-300"
             >
-              {showPassword ? (
-                <EyeOffIcon className="w-5 h-5" />
-              ) : (
-                <EyeIcon className="w-5 h-5" />
-              )}
+              {showPassword ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
             </button>
           )}
         </div>
@@ -50,4 +44,3 @@ export const DarkInput = forwardRef<HTMLInputElement, DarkInputProps>(
 );
 
 DarkInput.displayName = "DarkInput";
-

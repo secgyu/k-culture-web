@@ -11,40 +11,32 @@ export function HeroSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % 4);
-    }, 5000); // 5초로 변경
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="relative min-h-screen bg-gradient-to-b from-luxury-black via-luxury-black to-luxury-secondary overflow-hidden">
-      {/* 상단 골드 그라데이션 */}
       <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-gold/20 to-transparent" />
 
-      {/* 스티키 헤더 */}
       <LandingHeader transparent currentPath="/actor-profile" />
 
-      {/* 히어로 컨텐츠 */}
-      <div className="relative z-10 flex flex-col items-center px-6 py-12">
-        {/* 배지 */}
-        <div className="inline-block px-6 py-2 bg-gold rounded-full mb-6">
-          <span className="text-luxury-black font-medium text-sm">배우&모델</span>
+      <div className="relative z-10 flex flex-col items-center px-6 section-spacing-md">
+        <div className="inline-block px-7 py-2.5 bg-gold rounded-full title-margin-md">
+          <span className="text-luxury-black font-semibold text-body-sm">배우&모델</span>
         </div>
 
-        {/* 제목 */}
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-ivory text-center mb-12">
+        <h1 className="font-display text-display-lg lg:text-display-xl text-ivory text-center title-margin-lg">
           프로필 관리·탐색 플랫폼
         </h1>
 
-        {/* 슬라이드 컨테이너 */}
         <div className="w-full max-w-5xl mx-auto relative h-[600px] overflow-hidden">
-          {/* 슬라이드 1: 프로필 카드 (PDF) */}
           <div
             className={`absolute inset-0 transition-all duration-700 ${
               currentSlide === 0 ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
             }`}
           >
             <div className="flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto">
-              {/* 왼쪽: 배우 이미지 */}
               <div className="relative w-full md:w-2/5 aspect-[3/4] md:aspect-auto min-h-[400px]">
                 <Image
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop"
@@ -54,9 +46,7 @@ export function HeroSection() {
                 />
               </div>
 
-              {/* 오른쪽: 프로필 정보 */}
               <div className="flex-1 p-6 md:p-8">
-                {/* 헤더 */}
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
@@ -65,7 +55,6 @@ export function HeroSection() {
                     </div>
                     <p className="text-gray-500 text-sm">Lee Hana</p>
                   </div>
-                  {/* QR 코드 */}
                   <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
                     <div className="w-12 h-12 bg-gray-200 rounded grid grid-cols-3 gap-0.5 p-1">
                       {[...Array(9)].map((_, i) => (
@@ -76,7 +65,6 @@ export function HeroSection() {
                 </div>
                 <p className="text-xs text-gray-400 mb-4">2024-09-11 만료일정</p>
 
-                {/* 자기소개 */}
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 text-center">
                   안녕하세요~! 꿈꾸는 배우 이하나입니다.
                   <br />
@@ -85,7 +73,6 @@ export function HeroSection() {
 
                 <p className="text-xs text-gray-400 text-center mb-4">대표정보</p>
 
-                {/* 기본 정보 그리드 */}
                 <div className="grid grid-cols-3 gap-3 mb-4">
                   <div className="text-center p-3 bg-gray-50 rounded-lg">
                     <p className="text-xs text-gray-500 mb-1">생년월일</p>
@@ -102,7 +89,6 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* 신체 정보 */}
                 <div className="grid grid-cols-3 gap-3 mb-4">
                   <div className="text-center p-3 bg-gray-50 rounded-lg">
                     <p className="text-xs text-gray-500 mb-1">키</p>
@@ -118,7 +104,6 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* 키워드 */}
                 <div className="flex items-start gap-3 mb-4 p-3 bg-gray-50 rounded-lg">
                   <span className="text-xs text-gray-500 shrink-0">키워드</span>
                   <div className="flex flex-wrap gap-2">
@@ -135,13 +120,11 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* 대표작품 */}
                 <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg mb-4">
                   <span className="text-xs text-gray-500 shrink-0">대표작품</span>
                   <p className="text-sm text-gray-700">단편영화,&lt;우리 사이&gt;, 지수역(주연)</p>
                 </div>
 
-                {/* DoDream 로고 */}
                 <div className="flex justify-end">
                   <DoDreamLogo size="sm" className="text-gray-400" doorFillColor="fill-gray-100" />
                 </div>
@@ -149,7 +132,6 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* 슬라이드 2: 배우 검색 목록 */}
           <div
             className={`absolute inset-0 transition-all duration-700 ${
               currentSlide === 1
@@ -160,12 +142,9 @@ export function HeroSection() {
             }`}
           >
             <div className="bg-luxury-secondary rounded-2xl overflow-hidden shadow-2xl p-6 max-w-5xl mx-auto border border-gold/10">
-              {/* 검색 헤더 */}
               <p className="text-ivory text-center text-lg mb-6">오늘보다 내일이 더 빛날 배우분들을 만나보세요.</p>
 
-              {/* 필터 영역 */}
               <div className="grid grid-cols-2 gap-4 mb-6">
-                {/* 왼쪽 필터 */}
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="text-warm-gray text-sm w-16">구분</span>
@@ -198,7 +177,6 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* 오른쪽 필터 */}
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="text-warm-gray text-sm w-16">운전면허</span>
@@ -233,7 +211,6 @@ export function HeroSection() {
 
               <p className="text-muted-gray text-center text-xs mb-4">필터 초기화</p>
 
-              {/* 배우 그리드 */}
               <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
                   <div key={i} className="relative aspect-[3/4] rounded-lg overflow-hidden">
@@ -257,7 +234,6 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* 슬라이드 3: AI 매칭 */}
           <div
             className={`absolute inset-0 transition-all duration-700 ${
               currentSlide === 2
@@ -268,23 +244,19 @@ export function HeroSection() {
             }`}
           >
             <div className="bg-luxury-secondary rounded-2xl overflow-hidden shadow-2xl p-8 max-w-3xl mx-auto">
-              {/* AI 매칭 타이틀 */}
               <h3 className="text-2xl font-bold text-white text-center mb-2">AI 매칭 기술을 통해</h3>
               <p className="text-lg text-ivory text-center mb-8">시놉시스와 캐릭터 정보로 배우를 찾아보세요.</p>
 
-              {/* 시놉시스 입력 */}
               <div className="bg-luxury-tertiary rounded-xl p-4 mb-4">
                 <p className="text-muted-gray text-sm">시놉시스를 입력해 주세요. (500자 이내)</p>
               </div>
               <p className="text-right text-muted-gray text-xs mb-4">0/500</p>
 
-              {/* 캐릭터 입력 */}
               <div className="bg-luxury-tertiary rounded-xl px-4 py-3 mb-4">
                 <p className="text-muted-gray text-sm">캐릭터 정보를 입력해 주세요. (100자 이내)</p>
               </div>
               <p className="text-right text-muted-gray text-xs mb-6">0/100</p>
 
-              {/* 버튼들 */}
               <button className="w-full py-4 btn-gold text-luxury-black font-semibold rounded-xl mb-3">
                 AI 추천 찾기
               </button>
@@ -294,7 +266,6 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* 슬라이드 4: 상세 프로필 */}
           <div
             className={`absolute inset-0 transition-all duration-700 ${
               currentSlide === 3 ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
@@ -302,9 +273,7 @@ export function HeroSection() {
           >
             <div className="bg-gradient-to-br from-champagne to-ivory rounded-2xl overflow-hidden shadow-2xl max-w-5xl mx-auto">
               <div className="flex">
-                {/* 왼쪽: 프로필 정보 */}
                 <div className="flex-1 p-6">
-                  {/* 헤더 */}
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-gold-dark text-lg">←</span>
                     <div className="flex items-center gap-3">
@@ -315,19 +284,16 @@ export function HeroSection() {
                     </div>
                   </div>
 
-                  {/* 이름 */}
                   <div className="flex items-center gap-2 mb-2">
                     <h2 className="text-2xl font-bold text-gray-900">이하나</h2>
                     <span className="px-2 py-0.5 bg-gold text-white text-xs rounded">배우&모델</span>
                   </div>
                   <p className="text-gray-500 text-sm mb-4">Lee Hana</p>
 
-                  {/* 배지 */}
                   <span className="inline-block px-3 py-1 bg-gold text-luxury-black text-xs rounded-full mb-4 font-medium">
                     여자
                   </span>
 
-                  {/* 정보 */}
                   <div className="space-y-2 text-sm text-gray-600 mb-4">
                     <p>🏢 핑크프로젝트</p>
                     <p>🎓 한국대학교 연기과</p>
@@ -435,7 +401,6 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* 슬라이드 인디케이터 */}
         <div className="flex justify-center gap-2 mt-8">
           {[0, 1, 2, 3].map((i) => (
             <button
@@ -448,10 +413,8 @@ export function HeroSection() {
           ))}
         </div>
 
-        {/* PDF 자동 완성 안내 */}
         <p className="text-muted-gray text-sm mt-12 mb-8">- 프로필 PDF파일 자동 완성 기능 -</p>
 
-        {/* CTA 버튼 */}
         <Link
           href="/signup?type=actor"
           className="px-16 py-4 bg-gold text-luxury-black font-semibold rounded-xl hover:bg-gold-light transition-all text-lg"

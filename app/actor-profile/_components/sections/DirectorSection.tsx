@@ -12,20 +12,20 @@ export function DirectorSection() {
       </div>
 
       {/* 다크 영역 */}
-      <div className="bg-luxury-black py-24">
+      <div className="bg-luxury-black section-spacing-md">
         <div className="max-w-4xl mx-auto px-6 text-center">
           {/* 배지 */}
-          <div className="inline-block px-6 py-2 bg-gold rounded-full mb-8">
-            <span className="text-luxury-black font-medium text-sm">감독&PD</span>
+          <div className="inline-block px-7 py-2.5 bg-gold rounded-full title-margin-lg">
+            <span className="text-luxury-black font-semibold text-body-sm">감독&PD</span>
           </div>
 
           {/* 메인 타이틀 */}
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-12">
+          <h2 className="font-display text-display-md lg:text-display-lg text-ivory title-margin-lg">
             &quot;작품 구인도 이렇게 쉽게 하면 좋겠어요!&quot;
           </h2>
 
           {/* 구분선 */}
-          <div className="w-px h-24 bg-zinc-700 mx-auto" />
+          <div className="w-px h-20 bg-zinc-700 mx-auto" />
         </div>
       </div>
 
