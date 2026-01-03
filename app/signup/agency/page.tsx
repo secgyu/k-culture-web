@@ -103,7 +103,6 @@ export default function AgencySignupPage() {
           error={errors.passwordConfirm}
         />
 
-        {/* 약관 동의 */}
         <div className="space-y-3 pt-2">
           <label className="flex items-center gap-3 cursor-pointer group">
             <button
@@ -112,30 +111,26 @@ export default function AgencySignupPage() {
               className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
                 termsAgreed && privacyAgreed && marketingAgreed
                   ? "bg-gold border-gold"
-                  : "border-zinc-600 group-hover:border-zinc-500"
+                  : "border-muted-gray group-hover:border-warm-gray"
               }`}
             >
-              {termsAgreed && privacyAgreed && marketingAgreed && (
-                <CheckIcon className="w-3 h-3 text-luxury-black" />
-              )}
+              {termsAgreed && privacyAgreed && marketingAgreed && <CheckIcon className="w-3 h-3 text-luxury-black" />}
             </button>
             <span className="text-ivory font-medium">전체 동의</span>
           </label>
 
-          <div className="border-t border-zinc-700 pt-3 space-y-2">
+          <div className="border-t border-border pt-3 space-y-2">
             <label className="flex items-center gap-3 cursor-pointer group">
               <button
                 type="button"
                 onClick={() => setTermsAgreed(!termsAgreed)}
                 className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
-                  termsAgreed
-                    ? "bg-gold border-gold"
-                    : "border-zinc-600 group-hover:border-zinc-500"
+                  termsAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
                 }`}
               >
                 {termsAgreed && <CheckIcon className="w-3 h-3 text-luxury-black" />}
               </button>
-              <span className="text-zinc-300 text-sm">
+              <span className="text-warm-gray text-sm">
                 <span className="text-gold">[필수]</span> 서비스 이용약관 동의
               </span>
             </label>
@@ -145,14 +140,12 @@ export default function AgencySignupPage() {
                 type="button"
                 onClick={() => setPrivacyAgreed(!privacyAgreed)}
                 className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
-                  privacyAgreed
-                    ? "bg-gold border-gold"
-                    : "border-zinc-600 group-hover:border-zinc-500"
+                  privacyAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
                 }`}
               >
                 {privacyAgreed && <CheckIcon className="w-3 h-3 text-luxury-black" />}
               </button>
-              <span className="text-zinc-300 text-sm">
+              <span className="text-warm-gray text-sm">
                 <span className="text-gold">[필수]</span> 개인정보 처리방침 동의
               </span>
             </label>
@@ -162,15 +155,13 @@ export default function AgencySignupPage() {
                 type="button"
                 onClick={() => setMarketingAgreed(!marketingAgreed)}
                 className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
-                  marketingAgreed
-                    ? "bg-gold border-gold"
-                    : "border-zinc-600 group-hover:border-zinc-500"
+                  marketingAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
                 }`}
               >
                 {marketingAgreed && <CheckIcon className="w-3 h-3 text-luxury-black" />}
               </button>
-              <span className="text-zinc-300 text-sm">
-                <span className="text-zinc-500">[선택]</span> 마케팅 정보 수신 동의
+              <span className="text-warm-gray text-sm">
+                <span className="text-muted-gray">[선택]</span> 마케팅 정보 수신 동의
               </span>
             </label>
           </div>
@@ -182,7 +173,7 @@ export default function AgencySignupPage() {
         </GoldButton>
 
         <div className="text-center">
-          <span className="text-zinc-400">이미 계정이 있으신가요? </span>
+          <span className="text-muted-gray">이미 계정이 있으신가요? </span>
           <Link href="/login" className="text-gold hover:text-gold-light transition-colors">
             로그인
           </Link>
@@ -191,4 +182,3 @@ export default function AgencySignupPage() {
     </AuthLayout>
   );
 }
-

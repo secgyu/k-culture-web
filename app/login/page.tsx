@@ -54,10 +54,7 @@ export default function LoginPage() {
         />
 
         <div className="flex justify-end">
-          <Link
-            href="/forgot-password"
-            className="text-sm text-zinc-400 hover:text-gold transition-colors"
-          >
+          <Link href="/forgot-password" className="text-sm text-muted-gray hover:text-gold transition-colors">
             비밀번호를 잊으셨나요?
           </Link>
         </div>
@@ -67,7 +64,7 @@ export default function LoginPage() {
         </GoldButton>
 
         <div className="text-center">
-          <span className="text-zinc-400">계정이 없으신가요? </span>
+          <span className="text-muted-gray">계정이 없으신가요? </span>
           <Link href="/signup" className="text-gold hover:text-gold-light transition-colors">
             회원가입
           </Link>
@@ -76,4 +73,3 @@ export default function LoginPage() {
     </AuthLayout>
   );
 }
-

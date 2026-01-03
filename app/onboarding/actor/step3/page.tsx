@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { OnboardingLayout } from "@/app/onboarding/_components";
 import { GoldButton } from "@/app/components";
 import { XMarkIcon } from "@/app/components/Icons";
+import { useOnboardingStore } from "@/stores/useOnboardingStore";
 
 const SKILL_CATEGORIES = [
   {
@@ -35,22 +35,18 @@ const SKILL_CATEGORIES = [
 
 export default function ActorOnboardingStep3() {
   const router = useRouter();
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const { data, updateData } = useOnboardingStore();
 
   const toggleSkill = (skill: string) => {
-    setSelectedSkills((prev) =>
-      prev.includes(skill)
-        ? prev.filter((s) => s !== skill)
-        : [...prev, skill]
-    );
+    const newSkills = data.skills.includes(skill) ? data.skills.filter((s) => s !== skill) : [...data.skills, skill];
+    updateData({ skills: newSkills });
   };
 
   const removeSkill = (skill: string) => {
-    setSelectedSkills((prev) => prev.filter((s) => s !== skill));
+    updateData({ skills: data.skills.filter((s) => s !== skill) });
   };
 
   const handleComplete = () => {
-    // TODO: 데이터 저장 후 완료 페이지로
     router.push("/onboarding/actor/complete");
   };
 
@@ -66,37 +62,34 @@ export default function ActorOnboardingStep3() {
       subtitle="보유한 스킬을 선택하면 매칭에 도움이 됩니다"
     >
       <div className="space-y-6">
-        {/* 선택된 스킬 */}
-        {selectedSkills.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {selectedSkills.map((skill) => (
-              <span
-                key={skill}
-                className="inline-flex items-center gap-1 px-3 py-1.5 bg-gold/10 border border-gold/30 rounded-full text-gold text-sm"
-              >
-                {skill}
-                <button
-                  type="button"
-                  onClick={() => removeSkill(skill)}
-                  className="hover:text-gold-light"
+        {/* 선택된 특기 */}
+        {data.skills.length > 0 && (
+          <div>
+            <p className="text-caption text-muted-gray mb-2">선택된 특기 ({data.skills.length}개)</p>
+            <div className="flex flex-wrap gap-2">
+              {data.skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-gold/10 border border-gold/30 rounded-full text-gold text-sm"
                 >
-                  <XMarkIcon className="w-4 h-4" />
-                </button>
-              </span>
-            ))}
+                  {skill}
+                  <button type="button" onClick={() => removeSkill(skill)} className="hover:text-gold-light">
+                    <XMarkIcon className="w-4 h-4" />
+                  </button>
+                </span>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* 스킬 카테고리 */}
-        <div className="space-y-4 max-h-64 overflow-y-auto pr-2">
+        {/* 특기 카테고리 */}
+        <div className="space-y-4 max-h-64 overflow-y-auto pr-2 hide-scrollbar">
           {SKILL_CATEGORIES.map((category) => (
             <div key={category.name}>
-              <h3 className="text-sm font-medium text-zinc-400 mb-2">
-                {category.name}
-              </h3>
+              <h3 className="text-body-sm font-medium text-muted-gray mb-2">{category.name}</h3>
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => {
-                  const isSelected = selectedSkills.includes(skill);
+                  const isSelected = data.skills.includes(skill);
                   return (
                     <button
                       key={skill}
@@ -104,8 +97,8 @@ export default function ActorOnboardingStep3() {
                       onClick={() => toggleSkill(skill)}
                       className={`px-3 py-1.5 rounded-full text-sm transition-all ${
                         isSelected
-                          ? "bg-gold text-luxury-black"
-                          : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                          ? "bg-gold text-luxury-black font-medium"
+                          : "bg-luxury-tertiary text-warm-gray hover:bg-zinc-700"
                       }`}
                     >
                       {skill}
@@ -129,4 +122,3 @@ export default function ActorOnboardingStep3() {
     </OnboardingLayout>
   );
 }
-

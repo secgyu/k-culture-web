@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { OnboardingLayout } from "@/app/onboarding/_components";
 import { GoldButton, DarkInput, DarkSelect } from "@/app/components";
+import { useOnboardingStore } from "@/stores/useOnboardingStore";
 
 const GENDER_OPTIONS = [
   { value: "남성", label: "남성" },
@@ -21,17 +22,19 @@ const generateYears = () => {
 
 export default function ActorOnboardingStep1() {
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [gender, setGender] = useState("");
-  const [birthYear, setBirthYear] = useState("");
+  const { data, updateData } = useOnboardingStore();
 
-  const isValid = name.trim() !== "" && gender !== "" && birthYear !== "";
+  const isValid = data.name.trim() !== "" && data.gender !== "" && data.birthYear !== "";
 
   const handleNext = () => {
     if (!isValid) return;
-    // TODO: 데이터 저장 (Context 또는 localStorage)
     router.push("/onboarding/actor/step2");
   };
+
+  // 페이지 로드 시 localStorage에 step 저장
+  useEffect(() => {
+    localStorage.setItem("onboarding_step1", "visited");
+  }, []);
 
   return (
     <OnboardingLayout
@@ -44,25 +47,43 @@ export default function ActorOnboardingStep1() {
         <DarkInput
           label="활동명"
           placeholder="활동명 또는 본명을 입력하세요"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={data.name}
+          onChange={(e) => updateData({ name: e.target.value })}
         />
 
         <DarkSelect
           label="성별"
           placeholder="성별을 선택하세요"
           options={GENDER_OPTIONS}
-          value={gender}
-          onChange={setGender}
+          value={data.gender}
+          onChange={(value) => updateData({ gender: value })}
         />
 
         <DarkSelect
           label="출생년도"
           placeholder="출생년도를 선택하세요"
           options={generateYears()}
-          value={birthYear}
-          onChange={setBirthYear}
+          value={data.birthYear}
+          onChange={(value) => updateData({ birthYear: value })}
         />
+
+        {/* 추가 정보 (선택) */}
+        <div className="grid grid-cols-2 gap-4">
+          <DarkInput
+            label="키 (선택)"
+            placeholder="cm"
+            type="number"
+            value={data.height}
+            onChange={(e) => updateData({ height: e.target.value })}
+          />
+          <DarkInput
+            label="몸무게 (선택)"
+            placeholder="kg"
+            type="number"
+            value={data.weight}
+            onChange={(e) => updateData({ weight: e.target.value })}
+          />
+        </div>
 
         <div className="pt-4">
           <GoldButton fullWidth disabled={!isValid} onClick={handleNext}>
@@ -73,4 +94,3 @@ export default function ActorOnboardingStep1() {
     </OnboardingLayout>
   );
 }
-

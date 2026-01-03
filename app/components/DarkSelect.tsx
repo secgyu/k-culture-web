@@ -20,17 +20,15 @@ export const DarkSelect = forwardRef<HTMLSelectElement, DarkSelectProps>(
   ({ label, error, options, placeholder, onChange, value, className = "", ...props }, ref) => {
     return (
       <div className="space-y-2">
-        {label && (
-          <label className="block text-sm font-medium text-zinc-300">{label}</label>
-        )}
+        {label && <label className="block text-body-sm font-medium text-warm-gray">{label}</label>}
         <div className="relative">
           <select
             ref={ref}
             value={value}
             onChange={(e) => onChange?.(e.target.value)}
-            className={`w-full px-4 py-3 bg-zinc-800 border rounded-xl text-ivory appearance-none focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all cursor-pointer ${
-              error ? "border-red-500" : "border-zinc-700"
-            } ${!value ? "text-zinc-500" : ""} ${className}`}
+            className={`w-full px-4 py-3 bg-luxury-secondary border rounded-xl text-ivory appearance-none focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 focus-visible:border-gold transition-all duration-200 cursor-pointer ${
+              error ? "border-red-500" : "border-border"
+            } ${!value ? "text-muted-gray" : ""} ${className}`}
             {...props}
           >
             {placeholder && (
@@ -39,18 +37,17 @@ export const DarkSelect = forwardRef<HTMLSelectElement, DarkSelectProps>(
               </option>
             )}
             {options.map((option) => (
-              <option key={option.value} value={option.value} className="bg-zinc-800">
+              <option key={option.value} value={option.value} className="bg-luxury-secondary">
                 {option.label}
               </option>
             ))}
           </select>
-          <ChevronDownIcon className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 pointer-events-none" />
+          <ChevronDownIcon className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-gray pointer-events-none" />
         </div>
-        {error && <p className="text-sm text-red-400">{error}</p>}
+        {error && <p className="text-body-sm text-red-400">{error}</p>}
       </div>
     );
   }
 );
 
 DarkSelect.displayName = "DarkSelect";
-

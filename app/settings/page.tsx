@@ -5,7 +5,6 @@ import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
 import { SettingsIcon, UserIcon, LogoutIcon } from "@/app/components/Icons";
 
 export default function SettingsPage() {
-  // 알림 설정 상태
   const [castingNotification, setCastingNotification] = useState(true);
   const [messageNotification, setMessageNotification] = useState(true);
   const [marketingNotification, setMarketingNotification] = useState(false);
@@ -40,13 +39,11 @@ export default function SettingsPage() {
   return (
     <DashboardLayout userType="actor">
       <div className="max-w-2xl mx-auto space-y-8">
-        {/* 헤더 */}
         <div>
           <h1 className="text-2xl font-bold text-ivory">설정</h1>
-          <p className="text-zinc-400 mt-1">계정 및 알림 설정을 관리하세요</p>
+          <p className="text-muted-gray mt-1">계정 및 알림 설정을 관리하세요</p>
         </div>
 
-        {/* 계정 정보 */}
         <DarkCard>
           <div className="flex items-center gap-4 mb-6">
             <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
@@ -54,22 +51,22 @@ export default function SettingsPage() {
             </div>
             <div>
               <h2 className="text-lg font-semibold text-ivory">계정 정보</h2>
-              <p className="text-sm text-zinc-400">로그인 및 계정 관리</p>
+              <p className="text-sm text-muted-gray">로그인 및 계정 관리</p>
             </div>
           </div>
 
           <div className="space-y-4">
-            <div className="flex items-center justify-between py-3 border-b border-zinc-800">
+            <div className="flex items-center justify-between py-3 border-b border-border">
               <div>
                 <p className="text-ivory">이메일</p>
-                <p className="text-sm text-zinc-400">actor@example.com</p>
+                <p className="text-sm text-muted-gray">actor@example.com</p>
               </div>
             </div>
 
-            <div className="flex items-center justify-between py-3 border-b border-zinc-800">
+            <div className="flex items-center justify-between py-3 border-b border-border">
               <div>
                 <p className="text-ivory">비밀번호</p>
-                <p className="text-sm text-zinc-400">••••••••</p>
+                <p className="text-sm text-muted-gray">••••••••</p>
               </div>
               <GoldButton variant="ghost" size="sm">
                 변경
@@ -79,13 +76,12 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between py-3">
               <div>
                 <p className="text-ivory">회원 유형</p>
-                <p className="text-sm text-zinc-400">배우</p>
+                <p className="text-sm text-muted-gray">배우</p>
               </div>
             </div>
           </div>
         </DarkCard>
 
-        {/* 알림 설정 */}
         <DarkCard>
           <div className="flex items-center gap-4 mb-6">
             <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
@@ -93,20 +89,20 @@ export default function SettingsPage() {
             </div>
             <div>
               <h2 className="text-lg font-semibold text-ivory">알림 설정</h2>
-              <p className="text-sm text-zinc-400">알림 수신 설정</p>
+              <p className="text-sm text-muted-gray">알림 수신 설정</p>
             </div>
           </div>
 
           <div className="space-y-4">
-            <div className="flex items-center justify-between py-3 border-b border-zinc-800">
+            <div className="flex items-center justify-between py-3 border-b border-border">
               <div>
                 <p className="text-ivory">캐스팅 알림</p>
-                <p className="text-sm text-zinc-400">섭외 요청 및 캐스팅 관련 알림</p>
+                <p className="text-sm text-muted-gray">섭외 요청 및 캐스팅 관련 알림</p>
               </div>
               <button
                 onClick={() => setCastingNotification(!castingNotification)}
                 className={`relative w-12 h-6 rounded-full transition-colors ${
-                  castingNotification ? "bg-gold" : "bg-zinc-700"
+                  castingNotification ? "bg-gold" : "bg-luxury-tertiary"
                 }`}
               >
                 <div
@@ -117,15 +113,15 @@ export default function SettingsPage() {
               </button>
             </div>
 
-            <div className="flex items-center justify-between py-3 border-b border-zinc-800">
+            <div className="flex items-center justify-between py-3 border-b border-border">
               <div>
                 <p className="text-ivory">메시지 알림</p>
-                <p className="text-sm text-zinc-400">새 메시지 수신 알림</p>
+                <p className="text-sm text-muted-gray">새 메시지 수신 알림</p>
               </div>
               <button
                 onClick={() => setMessageNotification(!messageNotification)}
                 className={`relative w-12 h-6 rounded-full transition-colors ${
-                  messageNotification ? "bg-gold" : "bg-zinc-700"
+                  messageNotification ? "bg-gold" : "bg-luxury-tertiary"
                 }`}
               >
                 <div
@@ -139,12 +135,12 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between py-3">
               <div>
                 <p className="text-ivory">마케팅 알림</p>
-                <p className="text-sm text-zinc-400">이벤트 및 프로모션 알림</p>
+                <p className="text-sm text-muted-gray">이벤트 및 프로모션 알림</p>
               </div>
               <button
                 onClick={() => setMarketingNotification(!marketingNotification)}
                 className={`relative w-12 h-6 rounded-full transition-colors ${
-                  marketingNotification ? "bg-gold" : "bg-zinc-700"
+                  marketingNotification ? "bg-gold" : "bg-luxury-tertiary"
                 }`}
               >
                 <div
@@ -163,7 +159,6 @@ export default function SettingsPage() {
           </div>
         </DarkCard>
 
-        {/* 위험 영역 */}
         <DarkCard className="border-red-500/30">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
@@ -171,14 +166,14 @@ export default function SettingsPage() {
             </div>
             <div>
               <h2 className="text-lg font-semibold text-ivory">계정 관리</h2>
-              <p className="text-sm text-zinc-400">로그아웃 및 계정 삭제</p>
+              <p className="text-sm text-muted-gray">로그아웃 및 계정 삭제</p>
             </div>
           </div>
 
           <div className="space-y-3">
             <button
               onClick={handleLogout}
-              className="w-full py-3 text-left text-zinc-300 hover:text-ivory transition-colors"
+              className="w-full py-3 text-left text-warm-gray hover:text-ivory transition-colors"
             >
               로그아웃
             </button>
@@ -194,4 +189,3 @@ export default function SettingsPage() {
     </DashboardLayout>
   );
 }
-

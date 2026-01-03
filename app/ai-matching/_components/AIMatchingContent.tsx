@@ -5,31 +5,31 @@ import Link from "next/link";
 
 export function AIMatchingContent() {
   return (
-    <div className="min-h-screen bg-zinc-950 relative overflow-hidden">
+    <div className="min-h-screen bg-luxury-black relative overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/20 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-900/20 rounded-full blur-3xl" />
       </div>
 
-      <header className="relative z-20 w-full px-6 py-4 flex items-center justify-between border-b border-zinc-800">
+      <header className="relative z-20 w-full px-6 py-4 flex items-center justify-between border-b border-border">
         <DoDreamLogo href="/" size="md" className="text-white" />
 
         <nav className="hidden md:flex items-center gap-8">
           <Link href="/ai-matching" className="text-gold hover:text-gold-light transition-colors text-sm font-medium">
             AI 매칭추천
           </Link>
-          <Link href="/actor-search" className="text-zinc-300 hover:text-white transition-colors text-sm">
+          <Link href="/actor-search" className="text-warm-gray hover:text-white transition-colors text-sm">
             배우&모델 찾기
           </Link>
-          <Link href="/jobs" className="text-zinc-300 hover:text-white transition-colors text-sm">
+          <Link href="/jobs" className="text-warm-gray hover:text-white transition-colors text-sm">
             작품구인
           </Link>
-          <Link href="/notice" className="text-zinc-300 hover:text-white transition-colors text-sm">
+          <Link href="/notice" className="text-warm-gray hover:text-white transition-colors text-sm">
             공지사항
           </Link>
           <Link
             href="/profile-register"
-            className="px-4 py-2 border border-zinc-600 text-white text-sm rounded-lg hover:bg-zinc-800 transition-all"
+            className="px-4 py-2 border border-muted-gray text-white text-sm rounded-lg hover:bg-luxury-secondary transition-all"
           >
             프로필 등록하기
           </Link>
@@ -55,62 +55,62 @@ export function AIMatchingContent() {
         </div>
 
         <div className="w-full max-w-3xl mx-auto">
-          <div className="bg-luxury-black/50 backdrop-blur-sm rounded-2xl p-8 mb-6 border border-zinc-800">
+          <div className="bg-luxury-black/50 backdrop-blur-sm rounded-2xl p-8 mb-6 border border-border">
             <div className="grid md:grid-cols-3 gap-4 mb-6">
               <div>
-                <label className="block text-zinc-500 text-sm mb-2">작품 이름</label>
+                <label className="block text-muted-foreground text-sm mb-2">작품 이름</label>
                 <input
                   type="text"
                   placeholder="작품 이름 입력"
-                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-zinc-400 placeholder-zinc-600"
+                  className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground"
                   disabled
                 />
               </div>
               <div>
-                <label className="block text-zinc-500 text-sm mb-2">장르</label>
+                <label className="block text-muted-foreground text-sm mb-2">장르</label>
                 <input
                   type="text"
                   placeholder="장르 선택"
-                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-zinc-400 placeholder-zinc-600"
+                  className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground"
                   disabled
                 />
               </div>
               <div>
-                <label className="block text-zinc-500 text-sm mb-2">제작 형태</label>
+                <label className="block text-muted-foreground text-sm mb-2">제작 형태</label>
                 <input
                   type="text"
                   placeholder="제작 형태 선택"
-                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-zinc-400 placeholder-zinc-600"
+                  className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground"
                   disabled
                 />
               </div>
             </div>
 
             <div className="mb-6">
-              <label className="block text-zinc-500 text-sm mb-2">시놉시스</label>
+              <label className="block text-muted-foreground text-sm mb-2">시놉시스</label>
               <textarea
                 placeholder="시놉시스를 입력해주세요..."
-                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-zinc-400 placeholder-zinc-600 h-32 resize-none"
+                className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground h-32 resize-none"
                 disabled
               />
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-zinc-500 text-sm mb-2">캐릭터 이름</label>
+                <label className="block text-muted-foreground text-sm mb-2">캐릭터 이름</label>
                 <input
                   type="text"
                   placeholder="캐릭터 이름"
-                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-zinc-400 placeholder-zinc-600"
+                  className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground"
                   disabled
                 />
               </div>
               <div>
-                <label className="block text-zinc-500 text-sm mb-2">캐릭터 설명</label>
+                <label className="block text-muted-foreground text-sm mb-2">캐릭터 설명</label>
                 <input
                   type="text"
                   placeholder="캐릭터에 대해 설명해주세요"
-                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-zinc-400 placeholder-zinc-600"
+                  className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground"
                   disabled
                 />
               </div>
@@ -118,8 +118,8 @@ export function AIMatchingContent() {
           </div>
 
           <div className="space-y-4 mb-8">
-            <div className="bg-luxury-black/50 border border-zinc-800 rounded-lg px-4 py-3">
-              <p className="text-zinc-600 text-sm">원하는 캐릭터를 설명해주세요. 시놉시스와 캐릭터...</p>
+            <div className="bg-luxury-black/50 border border-border rounded-lg px-4 py-3">
+              <p className="text-muted-foreground text-sm">원하는 캐릭터를 설명해주세요. 시놉시스와 캐릭터...</p>
             </div>
           </div>
 
@@ -131,7 +131,7 @@ export function AIMatchingContent() {
               AI 추천 받기
             </button>
             <button
-              className="w-full py-4 rounded-xl font-semibold bg-zinc-800 text-zinc-300 border border-zinc-700"
+              className="w-full py-4 rounded-xl font-semibold bg-luxury-secondary text-warm-gray border border-border"
               disabled
             >
               필터로 직접 찾기

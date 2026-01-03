@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { DoDreamLogo } from "../components";
 
-// 역할 카드 컴포넌트
 function RoleCard({
   title,
   description,
@@ -33,7 +32,6 @@ function RoleCard({
         }
       `}
     >
-      {/* 아이콘 */}
       <div
         className={`
           w-20 h-20 rounded-2xl flex items-center justify-center mb-6
@@ -44,7 +42,6 @@ function RoleCard({
         {icon}
       </div>
 
-      {/* 제목 */}
       <h3
         className={`
           text-heading-xl mb-3
@@ -54,7 +51,6 @@ function RoleCard({
         {title}
       </h3>
 
-      {/* 설명 */}
       <p
         className={`
           text-body-md leading-relaxed
@@ -64,7 +60,6 @@ function RoleCard({
         {description}
       </p>
 
-      {/* 화살표 */}
       <div
         className={`
           mt-6 w-10 h-10 rounded-full flex items-center justify-center
@@ -88,10 +83,8 @@ function RoleCard({
 export function OnboardingContent() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-luxury-black via-luxury-black to-luxury-secondary flex flex-col">
-      {/* 상단 장식 그라데이션 */}
       <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-gold/10 to-transparent pointer-events-none" />
 
-      {/* 헤더 */}
       <header className="relative z-10 w-full px-6 py-6 flex items-center justify-between">
         <DoDreamLogo href="/" size="md" className="text-ivory" />
 
@@ -100,9 +93,7 @@ export function OnboardingContent() {
         </Link>
       </header>
 
-      {/* 메인 콘텐츠 */}
       <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 section-spacing-md">
-        {/* 환영 메시지 */}
         <div className="text-center title-margin-xl">
           <h1 className="font-display text-display-lg lg:text-display-xl text-ivory title-margin-md">
             두드림에 오신 것을 환영합니다
@@ -112,9 +103,7 @@ export function OnboardingContent() {
           </p>
         </div>
 
-        {/* 역할 선택 카드 */}
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 w-full max-w-4xl justify-center items-center">
-          {/* 배우/모델 카드 */}
           <RoleCard
             title="배우로 시작하기"
             description="프로필을 등록하고 캐스팅 제안을 받아보세요"
@@ -132,7 +121,6 @@ export function OnboardingContent() {
             }
           />
 
-          {/* 캐스팅 담당자 카드 */}
           <RoleCard
             title="배우 찾아보기"
             description="조건에 맞는 배우를 검색하고 섭외 요청을 보내세요"
@@ -150,7 +138,6 @@ export function OnboardingContent() {
           />
         </div>
 
-        {/* 로그인 안내 */}
         <p className="mt-12 text-muted-gray text-sm">
           이미 계정이 있으신가요?{" "}
           <Link href="/login" className="text-gold hover:text-gold-light underline transition-colors">
@@ -159,9 +146,8 @@ export function OnboardingContent() {
         </p>
       </main>
 
-      {/* 푸터 */}
       <footer className="relative z-10 w-full px-6 py-8 text-center">
-        <div className="text-zinc-600 text-xs sm:text-sm space-y-2">
+        <div className="text-muted-gray text-xs sm:text-sm space-y-2">
           <p className="flex flex-wrap justify-center gap-2">
             <span>주식회사 두드림</span>
             <span className="hidden sm:inline">|</span>
@@ -172,9 +158,8 @@ export function OnboardingContent() {
           <p>서울특별시 마포구 와우산로 105, 5층 제이 293호</p>
         </div>
 
-        {/* 푸터 로고 */}
         <div className="mt-6 flex justify-center opacity-50">
-          <DoDreamLogo size="sm" className="text-zinc-600" />
+          <DoDreamLogo size="sm" className="text-muted-gray" />
         </div>
       </footer>
     </div>

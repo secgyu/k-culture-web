@@ -25,11 +25,11 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
             {subtitle && <p className="text-muted-accessible text-body-md">{subtitle}</p>}
           </div>
 
-          <div className="bg-luxury-secondary rounded-2xl p-8 border border-zinc-800">{children}</div>
+          <div className="bg-luxury-secondary rounded-2xl p-8 border border-border">{children}</div>
         </div>
       </main>
 
-      <footer className="p-6 text-center text-zinc-500 text-sm">© 2024 DoDream. All rights reserved.</footer>
+      <footer className="p-6 text-center text-muted-gray text-sm">© 2024 DoDream. All rights reserved.</footer>
     </div>
   );
 }

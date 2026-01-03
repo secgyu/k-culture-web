@@ -8,9 +8,7 @@ import { useGetActorDetail, useContactActor } from "@/src/actors/actors";
 import { ChevronLeftIcon, ShareIcon, PlayIcon, PhoneIcon } from "@/app/components/Icons";
 import { PageLayout } from "@/app/components/PageLayout";
 import type { FilmographyItem } from "@/src/model";
-import { COLORS } from "@/lib/constants";
 
-// 연락처 표시 모달
 function ContactInfoModal({
   isOpen,
   onClose,
@@ -27,8 +25,8 @@ function ContactInfoModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
-      <div className="relative bg-luxury-secondary rounded-2xl p-6 w-full max-w-sm mx-4 shadow-xl border border-zinc-800">
-        <h3 className="text-lg font-bold text-ivory mb-4">연락처 정보</h3>
+      <div className="relative bg-luxury-secondary rounded-2xl p-6 w-full max-w-sm mx-4 shadow-xl border border-border">
+        <h3 className="text-heading-md text-ivory mb-4">연락처 정보</h3>
 
         <div className="space-y-4 mb-6">
           <div className="flex items-center gap-3 p-3 bg-luxury-tertiary rounded-xl">
@@ -36,7 +34,7 @@ function ContactInfoModal({
               <PhoneIcon className="w-5 h-5 text-blue-400" />
             </div>
             <div>
-              <p className="text-xs text-zinc-500">전화번호</p>
+              <p className="text-caption text-muted-gray">전화번호</p>
               <p className="font-medium text-ivory">{phone || "010-****-****"}</p>
             </div>
           </div>
@@ -53,7 +51,7 @@ function ContactInfoModal({
               </svg>
             </div>
             <div>
-              <p className="text-xs text-zinc-500">이메일</p>
+              <p className="text-caption text-muted-gray">이메일</p>
               <p className="font-medium text-ivory">{email || "actor@example.com"}</p>
             </div>
           </div>
@@ -61,7 +59,7 @@ function ContactInfoModal({
 
         <button
           onClick={onClose}
-          className="w-full py-3 bg-gold text-luxury-black font-medium rounded-xl hover:bg-gold-light transition-colors"
+          className="w-full py-3 bg-gold text-luxury-black font-medium rounded-xl hover:bg-gold-light transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 active:scale-[0.98]"
         >
           확인
         </button>
@@ -70,7 +68,6 @@ function ContactInfoModal({
   );
 }
 
-// 섭외 요청 모달
 function CastingRequestModal({
   isOpen,
   onClose,
@@ -96,31 +93,31 @@ function CastingRequestModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
-      <div className="relative bg-luxury-secondary rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl border border-zinc-800">
-        <h3 className="text-lg font-bold text-ivory mb-2">섭외 요청</h3>
-        <p className="text-sm text-zinc-400 mb-4">{actorName}님에게 섭외 요청을 보냅니다</p>
+      <div className="relative bg-luxury-secondary rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl border border-border">
+        <h3 className="text-heading-md text-ivory mb-2">섭외 요청</h3>
+        <p className="text-body-sm text-muted-gray mb-4">{actorName}님에게 섭외 요청을 보냅니다</p>
 
         <div className="mb-4">
-          <label className="text-sm font-medium text-zinc-300 mb-2 block">메시지</label>
+          <label className="text-body-sm font-medium text-warm-gray mb-2 block">메시지</label>
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="프로젝트 소개와 함께 섭외 의사를 전달해주세요"
-            className="w-full h-32 px-4 py-3 bg-luxury-tertiary border border-zinc-700 rounded-xl text-base text-ivory placeholder-zinc-500 resize-none focus:outline-none focus:border-gold"
+            className="w-full h-32 px-4 py-3 bg-luxury-tertiary border border-border rounded-xl text-base text-ivory placeholder-muted-gray resize-none focus:outline-none focus:border-gold"
           />
         </div>
 
         <div className="flex gap-3">
           <button
             onClick={onClose}
-            className="flex-1 py-3 border border-zinc-700 text-zinc-300 font-medium rounded-xl hover:bg-zinc-800 transition-colors"
+            className="flex-1 py-3 border border-border text-warm-gray font-medium rounded-xl hover:bg-luxury-tertiary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 active:scale-[0.98]"
           >
             취소
           </button>
           <button
             onClick={handleSubmit}
             disabled={!message.trim() || isSubmitting}
-            className="flex-1 py-3 bg-gold text-luxury-black font-medium rounded-xl hover:bg-gold-light transition-colors disabled:opacity-50"
+            className="flex-1 py-3 bg-gold text-luxury-black font-medium rounded-xl hover:bg-gold-light transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 active:scale-[0.98]"
           >
             {isSubmitting ? "전송 중..." : "요청 보내기"}
           </button>
@@ -133,17 +130,17 @@ function CastingRequestModal({
 function ActorDetailSkeleton() {
   return (
     <PageLayout className="pb-24 animate-pulse">
-      <div className="h-[480px] bg-zinc-800" />
+      <div className="h-[480px] bg-luxury-secondary" />
       <section className="px-5 py-8">
-        <div className="h-6 w-32 bg-zinc-800 rounded mb-6" />
+        <div className="h-6 w-32 bg-luxury-secondary rounded mb-6" />
         <div className="space-y-4">
           {[1, 2, 3].map((i) => (
             <div key={i} className="flex gap-4">
-              <div className="w-16 h-22 bg-zinc-800 rounded-lg" />
+              <div className="w-16 h-22 bg-luxury-secondary rounded-lg" />
               <div className="flex-1">
-                <div className="h-3 w-12 bg-zinc-800 rounded mb-2" />
-                <div className="h-4 w-3/4 bg-zinc-800 rounded mb-2" />
-                <div className="h-3 w-1/2 bg-zinc-800 rounded" />
+                <div className="h-3 w-12 bg-luxury-secondary rounded mb-2" />
+                <div className="h-4 w-3/4 bg-luxury-secondary rounded mb-2" />
+                <div className="h-3 w-1/2 bg-luxury-secondary rounded" />
               </div>
             </div>
           ))}
@@ -183,7 +180,6 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
   const actor = data?.data;
 
   const handleContact = () => {
-    // 로그인 체크 (간단히 localStorage로 확인)
     const isLoggedIn = localStorage.getItem("onboarding_step1");
     if (!isLoggedIn) {
       router.push("/login");
@@ -219,7 +215,7 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
     return (
       <PageLayout className="items-center justify-center">
         <div className="text-center">
-          <p className="text-zinc-400">배우 정보를 찾을 수 없습니다.</p>
+          <p className="text-muted-gray">배우 정보를 찾을 수 없습니다.</p>
           <Link href="/actor-search" className="mt-4 underline text-gold hover:text-gold-light">
             돌아가기
           </Link>
@@ -237,7 +233,7 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
           {actor.profileImage ? (
             <Image src={actor.profileImage} alt={actor.name} fill className="object-cover" priority />
           ) : (
-            <div className="w-full h-full bg-gray-300" />
+            <div className="w-full h-full bg-luxury-tertiary" />
           )}
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
         </div>
@@ -245,41 +241,41 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
         <div className="absolute top-0 left-0 right-0 z-10 flex justify-between items-center px-4 pt-12 pb-4">
           <button
             onClick={() => router.back()}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm"
+            aria-label="뒤로 가기"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors duration-200 hover:bg-white/30 active:scale-[0.95]"
           >
-            <ChevronLeftIcon className="w-6 h-6" style={{ color: COLORS.background.primary }} />
+            <ChevronLeftIcon className="w-6 h-6 text-luxury-black" />
           </button>
-          <button className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-            <ShareIcon className="w-5 h-5" style={{ color: COLORS.background.primary }} />
+          <button
+            aria-label="공유하기"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors duration-200 hover:bg-white/30 active:scale-[0.95]"
+          >
+            <ShareIcon className="w-5 h-5 text-luxury-black" />
           </button>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-8 text-center">
-          <h1 className="text-3xl font-bold mb-2" style={{ color: COLORS.background.primary }}>
-            {actor.name}
-          </h1>
-          <p className="text-white/80 text-sm mb-3">
+          <h1 className="text-display-sm text-white mb-2">{actor.name}</h1>
+          <p className="text-white/80 text-body-sm mb-3">
             {actor.birthYear}년생 · 필모 {actor.filmographyCount ?? 0}편
           </p>
-          <p className="text-sm" style={{ color: COLORS.accent.teal }}>
-            {actor.description}
-          </p>
+          <p className="text-body-sm text-gold-light">{actor.description}</p>
         </div>
       </section>
 
       <section className="px-5 py-8">
-        <h2 className="text-lg font-bold mb-6 text-ivory">필모그래피</h2>
+        <h2 className="text-heading-md text-ivory mb-6">필모그래피</h2>
 
         {groupedFilmography.length === 0 ? (
-          <p className="text-center py-8 text-zinc-500">등록된 필모그래피가 없습니다.</p>
+          <p className="text-center py-8 text-muted-gray">등록된 필모그래피가 없습니다.</p>
         ) : (
           groupedFilmography.map(({ year, items }) => (
             <div key={year} className="mb-8">
-              <h3 className="text-base font-semibold mb-4 text-ivory">{year}</h3>
+              <h3 className="text-body-md font-semibold mb-4 text-ivory">{year}</h3>
               <div className="space-y-4">
                 {items.map((item) => (
                   <div key={item.id} className="flex gap-4 p-3 bg-luxury-secondary rounded-xl">
-                    <div className="w-16 h-22 flex-shrink-0 rounded-lg overflow-hidden bg-zinc-800">
+                    <div className="w-16 h-22 flex-shrink-0 rounded-lg overflow-hidden bg-luxury-secondary">
                       {item.thumbnail ? (
                         <Image
                           src={item.thumbnail}
@@ -289,13 +285,15 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full bg-zinc-700" />
+                        <div className="w-full h-full bg-luxury-tertiary" />
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <span className="text-xs mb-1 block text-gold">{item.type}</span>
-                      <h4 className="text-sm font-medium leading-snug mb-1 line-clamp-2 text-ivory">{item.title}</h4>
-                      <p className="text-xs text-zinc-400">
+                      <span className="text-caption mb-1 block text-gold">{item.type}</span>
+                      <h4 className="text-body-sm font-medium leading-snug mb-1 line-clamp-2 text-ivory">
+                        {item.title}
+                      </h4>
+                      <p className="text-caption text-muted-gray">
                         {item.roleType} · {item.role}
                       </p>
                     </div>
@@ -307,14 +305,17 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
         )}
       </section>
 
-      <section className="px-5 py-6 border-t border-zinc-800">
-        <h2 className="text-lg font-bold mb-4 text-ivory">스킬 및 특기</h2>
+      <section className="px-5 py-6 border-t border-border">
+        <h2 className="text-heading-md text-ivory mb-4">스킬 및 특기</h2>
         <div className="flex flex-wrap gap-2">
           {(actor.skills ?? []).length === 0 ? (
-            <p className="text-zinc-500">등록된 스킬이 없습니다.</p>
+            <p className="text-muted-gray">등록된 스킬이 없습니다.</p>
           ) : (
             (actor.skills ?? []).map((skill, index) => (
-              <span key={index} className="px-3 py-1.5 text-sm rounded-full bg-gold/10 border border-gold/30 text-gold">
+              <span
+                key={index}
+                className="px-3 py-1.5 text-body-sm rounded-full bg-gold/10 border border-gold/30 text-gold"
+              >
                 {skill}
               </span>
             ))
@@ -322,15 +323,15 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
         </div>
       </section>
 
-      <section className="px-5 py-6 border-t border-zinc-800">
-        <h2 className="text-lg font-bold mb-4 text-ivory">대표 영상</h2>
+      <section className="px-5 py-6 border-t border-border">
+        <h2 className="text-heading-md text-ivory mb-4">대표 영상</h2>
         <div className="space-y-4">
           {(actor.showreels ?? []).length === 0 ? (
-            <p className="text-zinc-500">등록된 대표 영상이 없습니다.</p>
+            <p className="text-muted-gray">등록된 대표 영상이 없습니다.</p>
           ) : (
             (actor.showreels ?? []).map((showreel) => (
               <div key={showreel.id} className="group cursor-pointer">
-                <div className="relative aspect-video rounded-xl overflow-hidden bg-zinc-800 mb-2">
+                <div className="relative aspect-video rounded-xl overflow-hidden bg-luxury-secondary mb-2">
                   {showreel.thumbnail ? (
                     <Image
                       src={showreel.thumbnail}
@@ -339,7 +340,7 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
-                    <div className="w-full h-full bg-zinc-700" />
+                    <div className="w-full h-full bg-luxury-tertiary" />
                   )}
                   <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                     <div className="w-14 h-14 rounded-full bg-gold flex items-center justify-center shadow-lg">
@@ -347,19 +348,19 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
                     </div>
                   </div>
                 </div>
-                <h3 className="text-sm font-medium text-ivory">{showreel.title}</h3>
-                <p className="text-xs text-zinc-500">{showreel.duration}</p>
+                <h3 className="text-body-sm font-medium text-ivory">{showreel.title}</h3>
+                <p className="text-caption text-muted-gray">{showreel.duration}</p>
               </div>
             ))
           )}
         </div>
       </section>
 
-      <div className="fixed bottom-0 left-0 right-0 z-20 bg-luxury-secondary border-t border-zinc-800">
+      <div className="fixed bottom-0 left-0 right-0 z-20 bg-luxury-secondary border-t border-border">
         <div className="max-w-lg mx-auto px-5 py-4 flex gap-3">
           <button
             onClick={handleContact}
-            className="flex-1 flex items-center justify-center gap-2 py-3.5 border border-zinc-700 rounded-xl font-medium text-zinc-300 hover:bg-zinc-800 transition-colors"
+            className="flex-1 flex items-center justify-center gap-2 py-3.5 border border-border rounded-xl font-medium text-warm-gray hover:bg-luxury-tertiary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 active:scale-[0.98]"
           >
             <PhoneIcon className="w-5 h-5" />
             <span>연락처 보기</span>
@@ -373,7 +374,7 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
               }
               setShowCastingModal(true);
             }}
-            className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl font-medium bg-gold text-luxury-black hover:bg-gold-light transition-colors"
+            className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl font-medium bg-gold text-luxury-black hover:bg-gold-light transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 active:scale-[0.98]"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -388,7 +389,6 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
         </div>
       </div>
 
-      {/* 연락처 모달 */}
       <ContactInfoModal
         isOpen={showContactModal}
         onClose={() => setShowContactModal(false)}
@@ -396,7 +396,6 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
         email="actor@example.com"
       />
 
-      {/* 섭외 요청 모달 */}
       <CastingRequestModal
         isOpen={showCastingModal}
         onClose={() => setShowCastingModal(false)}

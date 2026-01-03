@@ -63,19 +63,15 @@ export default function FavoritesPage() {
         {/* 헤더 */}
         <div>
           <h1 className="text-2xl font-bold text-ivory">찜 목록</h1>
-          <p className="text-zinc-400 mt-1">관심있는 배우를 저장하고 관리하세요</p>
+          <p className="text-muted-gray mt-1">관심있는 배우를 저장하고 관리하세요</p>
         </div>
 
         {/* 찜 목록 */}
         {favorites.length === 0 ? (
           <DarkCard className="text-center py-16">
-            <HeartIcon className="w-16 h-16 text-zinc-600 mx-auto mb-4" />
-            <h2 className="text-xl font-semibold text-ivory mb-2">
-              찜한 배우가 없습니다
-            </h2>
-            <p className="text-zinc-400 mb-6">
-              배우 검색에서 마음에 드는 배우를 찜해보세요
-            </p>
+            <HeartIcon className="w-16 h-16 text-muted-gray mx-auto mb-4" />
+            <h2 className="text-xl font-semibold text-ivory mb-2">찜한 배우가 없습니다</h2>
+            <p className="text-muted-gray mb-6">배우 검색에서 마음에 드는 배우를 찜해보세요</p>
             <Link href="/actor-search">
               <GoldButton>배우 검색하기</GoldButton>
             </Link>
@@ -87,28 +83,18 @@ export default function FavoritesPage() {
                 {/* 이미지 */}
                 <Link href={`/actors/${actor.id}`}>
                   <div className="relative aspect-[3/4]">
-                    <Image
-                      src={actor.image}
-                      alt={actor.name}
-                      fill
-                      className="object-cover"
-                    />
+                    <Image src={actor.image} alt={actor.name} fill className="object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
                     {/* 정보 오버레이 */}
                     <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h3 className="text-lg font-semibold text-white mb-1">
-                        {actor.name}
-                      </h3>
-                      <p className="text-sm text-zinc-300 mb-2">
+                      <h3 className="text-lg font-semibold text-white mb-1">{actor.name}</h3>
+                      <p className="text-sm text-warm-gray mb-2">
                         {actor.age} · 필모 {actor.filmography}편
                       </p>
                       <div className="flex flex-wrap gap-1">
                         {actor.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-0.5 bg-gold/20 rounded text-xs text-gold"
-                          >
+                          <span key={tag} className="px-2 py-0.5 bg-gold/20 rounded text-xs text-gold">
                             {tag}
                           </span>
                         ))}
@@ -126,7 +112,7 @@ export default function FavoritesPage() {
                 </button>
 
                 {/* 하단 액션 */}
-                <div className="p-3 border-t border-zinc-800">
+                <div className="p-3 border-t border-border">
                   <div className="flex gap-2">
                     <Link href={`/actors/${actor.id}`} className="flex-1">
                       <GoldButton variant="secondary" size="sm" fullWidth>
@@ -146,4 +132,3 @@ export default function FavoritesPage() {
     </DashboardLayout>
   );
 }
-

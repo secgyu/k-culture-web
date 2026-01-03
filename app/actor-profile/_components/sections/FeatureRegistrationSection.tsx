@@ -27,14 +27,10 @@ export function FeatureRegistrationSection() {
   ];
 
   return (
-    <section className="py-24 bg-luxury-black">
+    <section className="section-spacing-md bg-luxury-black">
       <div className="max-w-3xl mx-auto px-6">
-        {/* 제목 */}
-        <h2 className="text-2xl md:text-3xl font-bold text-ivory text-center mb-12">
-          등록 한 번으로 편하게 기다리세요!
-        </h2>
+        <h2 className="text-display-sm text-ivory text-center mb-12">등록 한 번으로 편하게 기다리세요!</h2>
 
-        {/* 폼 필드 스택 */}
         <div className="space-y-3 mb-8">
           {formFields.map((field, index) => (
             <div
@@ -45,33 +41,30 @@ export function FeatureRegistrationSection() {
               <div className="flex items-center gap-3">
                 <span className="text-gold-light font-bold">{field.num}.</span>
                 <span className="text-white font-medium">{field.label}</span>
-                {field.required && <span className="text-red-400 text-sm">*필수</span>}
+                {field.required && <span className="text-red-400 text-body-sm">*필수</span>}
               </div>
             </div>
           ))}
         </div>
 
-        {/* 페이지 인디케이터 (세로) */}
         <div className="flex flex-col items-center gap-2 mb-16">
           {[0, 1, 2].map((i) => (
-            <div key={i} className={`w-2 h-2 rounded-full ${i === 0 ? "bg-gold" : "bg-zinc-700"}`} />
+            <div key={i} className={`w-2 h-2 rounded-full ${i === 0 ? "bg-gold" : "bg-luxury-tertiary"}`} />
           ))}
         </div>
 
-        {/* 등록 후 혜택 */}
-        <h3 className="text-2xl md:text-3xl text-zinc-400 text-center mb-8">
+        <h3 className="text-heading-xl md:text-display-sm text-muted-gray text-center mb-8">
           나만의 프로필을 <span className="font-bold text-ivory">등록</span>했다면?
         </h3>
 
-        {/* 키워드 태그들 */}
         <div className="flex flex-wrap justify-center gap-3 mb-4">
           {styleKeywords.map((keyword) => (
             <span
               key={keyword.label}
-              className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
+              className={`px-5 py-3 rounded-full text-body-sm font-medium transition-all ${
                 keyword.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-luxury-tertiary text-zinc-400 border border-zinc-700"
+                  : "bg-luxury-tertiary text-muted-gray border border-border"
               }`}
             >
               {keyword.label}
@@ -83,10 +76,10 @@ export function FeatureRegistrationSection() {
           {languages.map((lang) => (
             <span
               key={lang.label}
-              className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
+              className={`px-5 py-3 rounded-full text-body-sm font-medium transition-all ${
                 lang.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-luxury-tertiary text-zinc-400 border border-zinc-700"
+                  : "bg-luxury-tertiary text-muted-gray border border-border"
               }`}
             >
               {lang.label}
@@ -94,7 +87,6 @@ export function FeatureRegistrationSection() {
           ))}
         </div>
 
-        {/* 사투리 */}
         <div className="flex flex-wrap justify-center gap-3 mb-4">
           {[
             { label: "충청도사투리", selected: false },
@@ -104,10 +96,10 @@ export function FeatureRegistrationSection() {
           ].map((dialect) => (
             <span
               key={dialect.label}
-              className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
+              className={`px-5 py-3 rounded-full text-body-sm font-medium transition-all ${
                 dialect.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-luxury-tertiary text-zinc-400 border border-zinc-700"
+                  : "bg-luxury-tertiary text-muted-gray border border-border"
               }`}
             >
               {dialect.label}
@@ -115,7 +107,6 @@ export function FeatureRegistrationSection() {
           ))}
         </div>
 
-        {/* 특기 - 음악 */}
         <div className="flex flex-wrap justify-center gap-3 mb-4">
           {[
             { label: "노래", selected: false },
@@ -124,10 +115,10 @@ export function FeatureRegistrationSection() {
           ].map((skill) => (
             <span
               key={skill.label}
-              className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
+              className={`px-5 py-3 rounded-full text-body-sm font-medium transition-all ${
                 skill.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-luxury-tertiary text-zinc-400 border border-zinc-700"
+                  : "bg-luxury-tertiary text-muted-gray border border-border"
               }`}
             >
               {skill.label}
@@ -135,7 +126,6 @@ export function FeatureRegistrationSection() {
           ))}
         </div>
 
-        {/* 특기 - 운동 */}
         <div className="flex flex-wrap justify-center gap-3 mb-16">
           {[
             { label: "수영", selected: true },
@@ -145,10 +135,10 @@ export function FeatureRegistrationSection() {
           ].map((sport) => (
             <span
               key={sport.label}
-              className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
+              className={`px-5 py-3 rounded-full text-body-sm font-medium transition-all ${
                 sport.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-luxury-tertiary text-zinc-400 border border-zinc-700"
+                  : "bg-luxury-tertiary text-muted-gray border border-border"
               }`}
             >
               {sport.label}
@@ -156,76 +146,71 @@ export function FeatureRegistrationSection() {
           ))}
         </div>
 
-        {/* 웹 프로필 완성 타이틀 */}
-        <h3 className="text-2xl md:text-3xl font-bold text-ivory text-center mb-12">
+        <h3 className="text-display-sm text-ivory text-center mb-12">
           나를 대표하는 <span className="text-gold">키워드</span>로 웹 프로필 완성!
         </h3>
 
-        {/* 앱 스크린샷 */}
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {/* 왼쪽: 프로필 페이지 */}
           <div className="bg-luxury-secondary rounded-2xl overflow-hidden shadow-2xl">
             <div className="p-4">
-              {/* 헤더 */}
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-6 text-white">←</div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-warm-gray text-xs">원본</span>
+                  <span className="text-warm-gray text-caption">원본</span>
                   <div className="flex gap-2">
-                    <div className="w-5 h-5 bg-zinc-700 rounded" />
-                    <div className="w-5 h-5 bg-zinc-700 rounded" />
-                    <div className="w-5 h-5 bg-zinc-700 rounded" />
+                    <div className="w-5 h-5 bg-luxury-tertiary rounded" />
+                    <div className="w-5 h-5 bg-luxury-tertiary rounded" />
+                    <div className="w-5 h-5 bg-luxury-tertiary rounded" />
                   </div>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                {/* 프로필 정보 */}
                 <div className="flex-1 space-y-3">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="text-white font-bold text-lg">이하나</h4>
-                      <span className="px-2 py-0.5 bg-gold text-luxury-black font-medium text-xs rounded">여자</span>
+                      <h4 className="text-white font-bold text-heading-md">이하나</h4>
+                      <span className="px-2 py-0.5 bg-gold text-luxury-black font-medium text-caption rounded">
+                        여자
+                      </span>
                     </div>
-                    <p className="text-muted-gray text-xs">Lee Hana</p>
+                    <p className="text-muted-gray text-caption">Lee Hana</p>
                   </div>
-                  <div className="space-y-1 text-xs">
+                  <div className="space-y-1 text-caption">
                     <p className="text-warm-gray">🏢 핑크프로젝트</p>
                     <p className="text-warm-gray">🎓 한국대학교 연기과</p>
                   </div>
-                  <div className="text-xs text-muted-gray">
+                  <div className="text-caption text-muted-gray">
                     <p>단편영화,&lt;우리 사이&gt;, 지수역(주연)</p>
                   </div>
                   <div className="grid grid-cols-3 gap-2 text-center">
                     <div className="bg-luxury-tertiary rounded p-2">
-                      <p className="text-muted-gray text-xs">생년월일</p>
-                      <p className="text-white text-xs">2001</p>
+                      <p className="text-muted-gray text-caption">생년월일</p>
+                      <p className="text-white text-caption">2001</p>
                     </div>
                     <div className="bg-luxury-tertiary rounded p-2">
-                      <p className="text-muted-gray text-xs">키</p>
-                      <p className="text-white text-xs">167 cm</p>
+                      <p className="text-muted-gray text-caption">키</p>
+                      <p className="text-white text-caption">167 cm</p>
                     </div>
                     <div className="bg-luxury-tertiary rounded p-2">
-                      <p className="text-muted-gray text-xs">몸무게</p>
-                      <p className="text-white text-xs">48 kg</p>
+                      <p className="text-muted-gray text-caption">몸무게</p>
+                      <p className="text-white text-caption">48 kg</p>
                     </div>
                   </div>
-                  <p className="text-warm-gray text-xs leading-relaxed">
+                  <p className="text-warm-gray text-caption leading-relaxed">
                     안녕하세요~! 꿈꾸는 배우 이하나입니다. 따뜻한 미소와 자연스러운 연기로...
                   </p>
-                  {/* 태그들 */}
                   <div className="flex flex-wrap gap-1">
                     {["고양이상", "도도한", "청순한", "사랑스러운", "순수", "청아함", "배려심"].map((tag) => (
-                      <span key={tag} className="px-2 py-0.5 bg-purple-600/20 text-gold-light text-xs rounded">
+                      <span key={tag} className="px-2 py-0.5 bg-purple-600/20 text-gold-light text-caption rounded">
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                {/* 프로필 이미지 */}
                 <div className="w-32 aspect-[3/4] relative rounded-lg overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=400&fit=crop"
@@ -238,11 +223,9 @@ export function FeatureRegistrationSection() {
             </div>
           </div>
 
-          {/* 오른쪽: 사진 갤러리 */}
           <div className="bg-luxury-secondary rounded-2xl overflow-hidden shadow-2xl">
             <div className="p-4">
-              <p className="text-warm-gray text-sm mb-4">프로필 사진</p>
-              {/* 메인 이미지 */}
+              <p className="text-warm-gray text-body-sm mb-4">프로필 사진</p>
               <div className="grid grid-cols-3 gap-2 mb-4">
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="aspect-[3/4] relative rounded-lg overflow-hidden">
@@ -255,8 +238,7 @@ export function FeatureRegistrationSection() {
                   </div>
                 ))}
               </div>
-              <p className="text-warm-gray text-sm mb-2">출연 이미지</p>
-              {/* 출연 이미지 */}
+              <p className="text-warm-gray text-body-sm mb-2">출연 이미지</p>
               <div className="grid grid-cols-4 gap-2">
                 {[1, 2, 3, 4].map((i) => (
                   <div key={i} className="aspect-square relative rounded-lg overflow-hidden bg-luxury-tertiary">

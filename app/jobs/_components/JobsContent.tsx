@@ -86,7 +86,7 @@ const getCategoryColor = (category: string) => {
     case "단편영화":
       return "text-green-400";
     case "기타":
-      return "text-zinc-400";
+      return "text-muted-gray";
     case "광고":
       return "text-yellow-400";
     case "웹드라마":
@@ -94,14 +94,14 @@ const getCategoryColor = (category: string) => {
     case "장편영화":
       return "text-gold";
     default:
-      return "text-zinc-400";
+      return "text-muted-gray";
   }
 };
 
 // 작품 카드 컴포넌트
 function JobCard({ job }: { job: (typeof jobsData)[0] }) {
   return (
-    <div className="bg-luxury-black/80 rounded-xl p-6 border border-zinc-800 hover:border-zinc-600 transition-all">
+    <div className="bg-luxury-black/80 rounded-xl p-6 border border-border hover:border-muted-gray transition-all">
       <div className="flex justify-between items-start">
         {/* 왼쪽 콘텐츠 */}
         <div className="flex-1">
@@ -124,16 +124,20 @@ function JobCard({ job }: { job: (typeof jobsData)[0] }) {
 
           {/* 태그들 */}
           <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded">{job.gender}</span>
-            <span className="px-3 py-1 bg-zinc-800 text-zinc-400 text-sm rounded">제작: {job.production}</span>
-            <span className="px-3 py-1 bg-zinc-800 text-zinc-400 text-sm rounded">작품제목: {job.workTitle}</span>
+            <span className="px-3 py-1 bg-luxury-secondary text-warm-gray text-sm rounded">{job.gender}</span>
+            <span className="px-3 py-1 bg-luxury-secondary text-muted-gray text-sm rounded">
+              제작: {job.production}
+            </span>
+            <span className="px-3 py-1 bg-luxury-secondary text-muted-gray text-sm rounded">
+              작품제목: {job.workTitle}
+            </span>
           </div>
         </div>
 
         {/* 오른쪽: 상태 & 조회수 */}
         <div className="text-right ml-4">
           <p className="text-yellow-500 font-medium mb-1">{job.status}</p>
-          <p className="text-zinc-500 text-sm">조회 : {job.views}</p>
+          <p className="text-muted-foreground text-sm">조회 : {job.views}</p>
         </div>
       </div>
     </div>
@@ -149,27 +153,27 @@ export function JobsContent() {
   });
 
   return (
-    <div className="min-h-screen bg-zinc-950">
+    <div className="min-h-screen bg-luxury-black">
       {/* 헤더 */}
-      <header className="w-full px-6 py-4 flex items-center justify-between border-b border-zinc-800">
+      <header className="w-full px-6 py-4 flex items-center justify-between border-b border-border">
         <DoDreamLogo href="/" size="md" className="text-white" />
 
         <nav className="hidden md:flex items-center gap-8">
           <Link href="/ai-matching" className="text-gold hover:text-gold-light transition-colors text-sm font-medium">
             AI 매칭추천
           </Link>
-          <Link href="/actor-search" className="text-zinc-300 hover:text-white transition-colors text-sm">
+          <Link href="/actor-search" className="text-warm-gray hover:text-white transition-colors text-sm">
             배우&모델 찾기
           </Link>
           <Link href="/jobs" className="text-white text-sm font-medium">
             작품구인
           </Link>
-          <Link href="/notice" className="text-zinc-300 hover:text-white transition-colors text-sm">
+          <Link href="/notice" className="text-warm-gray hover:text-white transition-colors text-sm">
             공지사항
           </Link>
           <Link
             href="/profile-register"
-            className="px-4 py-2 border border-zinc-600 text-white text-sm rounded-lg hover:bg-zinc-800 transition-all"
+            className="px-4 py-2 border border-muted-gray text-white text-sm rounded-lg hover:bg-luxury-secondary transition-all"
           >
             프로필 등록하기
           </Link>
@@ -193,13 +197,13 @@ export function JobsContent() {
         </div>
 
         {/* 필터 섹션 */}
-        <div className="bg-luxury-black/50 rounded-2xl p-6 mb-8 border border-zinc-800">
+        <div className="bg-luxury-black/50 rounded-2xl p-6 mb-8 border border-border">
           {/* 검색 */}
           <div className="mb-6">
             <input
               type="text"
               placeholder="작품 검색"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-zinc-300 placeholder-zinc-500"
+              className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-warm-gray placeholder-muted-foreground"
             />
           </div>
 
@@ -207,11 +211,11 @@ export function JobsContent() {
           <div className="flex flex-wrap gap-6">
             {/* 작품구분 */}
             <div className="flex items-center gap-2">
-              <span className="text-zinc-400 text-sm">작품구분</span>
+              <span className="text-muted-gray text-sm">작품구분</span>
               <select
                 value={filters.category}
                 onChange={(e) => setFilters((prev) => ({ ...prev, category: e.target.value }))}
-                className="bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-300 text-sm"
+                className="bg-luxury-secondary border border-border rounded-lg px-3 py-2 text-warm-gray text-sm"
               >
                 <option value="전체">전체</option>
                 <option value="단편영화">단편영화</option>
@@ -224,11 +228,11 @@ export function JobsContent() {
 
             {/* 나이 */}
             <div className="flex items-center gap-2">
-              <span className="text-zinc-400 text-sm">나이</span>
+              <span className="text-muted-gray text-sm">나이</span>
               <select
                 value={filters.age}
                 onChange={(e) => setFilters((prev) => ({ ...prev, age: e.target.value }))}
-                className="bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-300 text-sm"
+                className="bg-luxury-secondary border border-border rounded-lg px-3 py-2 text-warm-gray text-sm"
               >
                 <option value="전체">전체</option>
                 <option value="10대">10대</option>
@@ -241,11 +245,11 @@ export function JobsContent() {
 
             {/* 성별 */}
             <div className="flex items-center gap-2">
-              <span className="text-zinc-400 text-sm">성별</span>
+              <span className="text-muted-gray text-sm">성별</span>
               <select
                 value={filters.gender}
                 onChange={(e) => setFilters((prev) => ({ ...prev, gender: e.target.value }))}
-                className="bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-300 text-sm"
+                className="bg-luxury-secondary border border-border rounded-lg px-3 py-2 text-warm-gray text-sm"
               >
                 <option value="전체">전체</option>
                 <option value="남자">남자</option>
@@ -256,11 +260,11 @@ export function JobsContent() {
 
             {/* 품앗이 */}
             <div className="flex items-center gap-2">
-              <span className="text-zinc-400 text-sm">품앗이</span>
+              <span className="text-muted-gray text-sm">품앗이</span>
               <select
                 value={filters.pumasi}
                 onChange={(e) => setFilters((prev) => ({ ...prev, pumasi: e.target.value }))}
-                className="bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-300 text-sm"
+                className="bg-luxury-secondary border border-border rounded-lg px-3 py-2 text-warm-gray text-sm"
               >
                 <option value="전체">전체</option>
                 <option value="가능">가능</option>

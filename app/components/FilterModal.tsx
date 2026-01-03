@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { COLORS } from "@/lib/constants";
 
 export interface FilterModalOption {
   value: string;
@@ -145,6 +144,8 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
   if (!isVisible) return null;
 
   const paddingItems = 2;
+  const listHeight = ITEM_HEIGHT * 5;
+  const gradientHeight = ITEM_HEIGHT * 2;
 
   return (
     <div
@@ -154,8 +155,7 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
       onClick={handleBackdropClick}
     >
       <div
-        className="absolute inset-0 bg-black/10 backdrop-blur-[15px]"
-        style={{ transition: "opacity 300ms" }}
+        className="absolute inset-0 bg-black/10 backdrop-blur-md transition-opacity duration-300"
         onClick={onClose}
       />
 
@@ -165,51 +165,39 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
         }`}
       >
         <div className="flex justify-center pt-3 pb-4">
-          <div className="w-10 h-1 rounded-full" style={{ backgroundColor: COLORS.border.default }} />
+          <div className="w-10 h-1 rounded-full bg-border" />
         </div>
 
         <div className="px-5 pb-4">
-          <h2 className="text-xl font-bold" style={{ letterSpacing: "-0.02em", color: COLORS.text.primary }}>
-            {title}
-          </h2>
+          <h2 className="text-xl font-bold tracking-tight text-ivory">{title}</h2>
         </div>
 
-        <div className="relative" style={{ height: `${ITEM_HEIGHT * 5}px` }}>
+        <div className="relative" style={{ height: listHeight }}>
           <div
-            className="absolute left-5 right-5 rounded-lg pointer-events-none z-0"
+            className="absolute left-5 right-5 rounded-lg pointer-events-none z-0 bg-luxury-secondary"
             style={{
-              top: `${ITEM_HEIGHT * 2}px`,
-              height: `${ITEM_HEIGHT}px`,
-              backgroundColor: COLORS.background.secondary,
+              top: gradientHeight,
+              height: ITEM_HEIGHT,
             }}
           />
 
           <div
-            className="absolute top-0 left-0 right-0 pointer-events-none z-10"
-            style={{
-              height: `${ITEM_HEIGHT * 2}px`,
-              background: "linear-gradient(to bottom, #141414 0%, rgba(20,20,20,0.8) 50%, rgba(20,20,20,0) 100%)",
-            }}
+            className="absolute top-0 left-0 right-0 pointer-events-none z-10 bg-gradient-to-b from-luxury-secondary via-luxury-secondary/80 to-transparent"
+            style={{ height: gradientHeight }}
           />
 
           <div
-            className="absolute bottom-0 left-0 right-0 pointer-events-none z-10"
-            style={{
-              height: `${ITEM_HEIGHT * 2}px`,
-              background: "linear-gradient(to top, #141414 0%, rgba(20,20,20,0.8) 50%, rgba(20,20,20,0) 100%)",
-            }}
+            className="absolute bottom-0 left-0 right-0 pointer-events-none z-10 bg-gradient-to-t from-luxury-secondary via-luxury-secondary/80 to-transparent"
+            style={{ height: gradientHeight }}
           />
 
           <div
             ref={scrollContainerRef}
-            className="absolute inset-0 overflow-y-auto hide-scrollbar"
+            className="absolute inset-0 overflow-y-auto hide-scrollbar snap-y snap-mandatory"
             onScroll={handleScroll}
-            style={{
-              scrollSnapType: "y mandatory",
-            }}
           >
             {Array.from({ length: paddingItems }).map((_, i) => (
-              <div key={`top-${i}`} style={{ height: `${ITEM_HEIGHT}px` }} />
+              <div key={`top-${i}`} className="h-14" />
             ))}
 
             {options.map((option, index) => {
@@ -218,18 +206,12 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
                 <button
                   key={option.value}
                   onClick={() => handleItemClick(index)}
-                  className="w-full flex items-center justify-center transition-colors"
-                  style={{
-                    height: `${ITEM_HEIGHT}px`,
-                    scrollSnapAlign: "center",
-                  }}
+                  className="w-full h-14 flex items-center justify-center transition-colors snap-center"
                 >
                   <span
-                    className="text-lg font-medium transition-colors"
-                    style={{
-                      letterSpacing: "-0.02em",
-                      color: isOptionSelected ? COLORS.text.primary : COLORS.text.muted,
-                    }}
+                    className={`text-lg font-medium tracking-tight transition-colors ${
+                      isOptionSelected ? "text-ivory" : "text-muted-gray"
+                    }`}
                   >
                     {option.label}
                   </span>
@@ -238,7 +220,7 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
             })}
 
             {Array.from({ length: paddingItems }).map((_, i) => (
-              <div key={`bottom-${i}`} style={{ height: `${ITEM_HEIGHT}px` }} />
+              <div key={`bottom-${i}`} className="h-14" />
             ))}
           </div>
         </div>
@@ -247,12 +229,11 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
           <button
             onClick={handleConfirm}
             disabled={!localSelected}
-            className="w-full h-12 rounded-lg font-medium text-base transition-colors"
-            style={{
-              letterSpacing: "-0.02em",
-              backgroundColor: localSelected ? "#D4AF37" : COLORS.background.tertiary,
-              color: localSelected ? "#0A0A0A" : COLORS.text.disabled,
-            }}
+            className={`w-full h-12 rounded-lg font-medium text-base tracking-tight transition-colors ${
+              localSelected
+                ? "bg-gold text-luxury-black hover:bg-gold-light"
+                : "bg-luxury-tertiary text-muted-gray cursor-not-allowed"
+            }`}
           >
             배우 선택 완료
           </button>

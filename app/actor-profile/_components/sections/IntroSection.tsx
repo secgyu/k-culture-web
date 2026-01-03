@@ -25,7 +25,7 @@ export function IntroSection() {
           &quot;작품 준비하기에도 벅차요!&quot;
         </h2>
 
-        <div className="w-px h-20 bg-zinc-700 mx-auto title-margin-lg" />
+        <div className="w-px h-20 bg-luxury-tertiary mx-auto title-margin-lg" />
 
         <h3 className="text-display-sm text-gold title-margin-md">&quot;작품과 연습에만 집중하고 싶으신가요?&quot;</h3>
 

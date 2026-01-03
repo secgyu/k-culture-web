@@ -12,12 +12,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="text-muted-gray text-sm space-y-1">
+        <div className="text-muted-gray text-body-sm space-y-1">
           <p>두드림(DoDream) | 충남 아산시 순천향로 22 미디어랩스관 702호</p>
           <p>대표 : 양승철 | 문의 : dodreamfilm@gmail.com</p>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-gold/20 text-warm-gray text-sm">
+        <div className="mt-8 pt-8 border-t border-gold/20 text-warm-gray text-body-sm">
           © 2024. DoDream. all rights reserved.
         </div>
       </div>

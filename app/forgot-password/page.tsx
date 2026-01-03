@@ -39,7 +39,7 @@ export default function ForgotPasswordPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <p className="text-zinc-400">
+          <p className="text-muted-gray">
             <span className="text-ivory font-medium">{email}</span>
             <br />
             으로 비밀번호 재설정 링크를 발송했습니다.
@@ -73,7 +73,7 @@ export default function ForgotPasswordPage() {
         </GoldButton>
 
         <div className="text-center">
-          <Link href="/login" className="text-zinc-400 hover:text-ivory transition-colors">
+          <Link href="/login" className="text-muted-gray hover:text-ivory transition-colors">
             로그인으로 돌아가기
           </Link>
         </div>
@@ -81,4 +81,3 @@ export default function ForgotPasswordPage() {
     </AuthLayout>
   );
 }
-

@@ -6,41 +6,34 @@ import { DoDreamInlineLogo } from "@/app/components";
 export function DirectorSection() {
   return (
     <section>
-      {/* 골드 영역 */}
       <div className="bg-gold py-8">
         <div className="w-16 h-16 bg-luxury-black mx-auto" />
       </div>
 
-      {/* 다크 영역 */}
       <div className="bg-luxury-black section-spacing-md">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          {/* 배지 */}
           <div className="inline-block px-7 py-2.5 bg-gold rounded-full title-margin-lg">
             <span className="text-luxury-black font-semibold text-body-sm">감독&PD</span>
           </div>
 
-          {/* 메인 타이틀 */}
           <h2 className="font-display text-display-md lg:text-display-lg text-ivory title-margin-lg">
             &quot;작품 구인도 이렇게 쉽게 하면 좋겠어요!&quot;
           </h2>
 
-          {/* 구분선 */}
-          <div className="w-px h-20 bg-zinc-700 mx-auto" />
+          <div className="w-px h-20 bg-border mx-auto" />
         </div>
       </div>
 
-      {/* 어두운 영역: 문제점 */}
-      <div className="bg-luxury-secondary py-24">
+      <div className="bg-luxury-secondary section-spacing-md">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex gap-12 items-start">
-            {/* 왼쪽: 구인글 이미지 */}
-            <div className="w-80 bg-luxury-tertiary rounded-xl p-4 shadow-xl border border-zinc-700">
+            <div className="w-80 bg-luxury-tertiary rounded-xl p-4 shadow-xl border border-border">
               <div className="space-y-2 text-left">
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 bg-zinc-600 rounded-full" />
+                  <div className="w-8 h-8 bg-muted-gray rounded-full" />
                   <div>
                     <p className="text-xs font-medium text-ivory">구인글</p>
-                    <p className="text-[8px] text-zinc-400">단편/졸작(졸업작품) 모집합니다...</p>
+                    <p className="text-[8px] text-muted-gray">단편/졸작(졸업작품) 모집합니다...</p>
                   </div>
                 </div>
                 {[
@@ -58,31 +51,29 @@ export function DirectorSection() {
                   { label: "12. 마감일자", value: "2000년 00월 00일" },
                 ].map((item, i) => (
                   <div key={i} className="flex text-[7px]">
-                    <span className="text-zinc-500 w-16">{item.label}</span>
-                    <span className="text-zinc-300">{item.value}</span>
+                    <span className="text-muted-gray w-16">{item.label}</span>
+                    <span className="text-warm-gray">{item.value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* 오른쪽: 문제점 리스트 */}
             <div className="flex-1 text-left">
-              <p className="text-gold text-xl font-bold mb-2">낮은 신뢰성과 전달력</p>
-              <p className="text-gold text-xl font-bold mb-2">쉽게 노출되는 개인정보</p>
-              <p className="text-gold text-xl font-bold mb-2">한 눈에 보기 힘든 지원자</p>
-              <p className="text-gold text-xl font-bold mb-8">개별로 답신해야하는 번거로움</p>
+              <p className="text-gold text-heading-lg mb-2">낮은 신뢰성과 전달력</p>
+              <p className="text-gold text-heading-lg mb-2">쉽게 노출되는 개인정보</p>
+              <p className="text-gold text-heading-lg mb-2">한 눈에 보기 힘든 지원자</p>
+              <p className="text-gold text-heading-lg mb-8">개별로 답신해야하는 번거로움</p>
 
-              {/* 세로 점 인디케이터 */}
               <div className="flex flex-col gap-2 mb-8">
                 {[0, 1, 2].map((i) => (
                   <div key={i} className="w-2 h-2 rounded-full bg-luxury-tertiary" />
                 ))}
               </div>
 
-              <p className="text-white text-xl mb-2">별거 아닌듯 하여도</p>
-              <p className="text-gold text-xl font-bold mb-8">지속적으로 느끼는 불편함</p>
+              <p className="text-white text-body-lg mb-2">별거 아닌듯 하여도</p>
+              <p className="text-gold text-heading-lg mb-8">지속적으로 느끼는 불편함</p>
 
-              <h3 className="text-white text-3xl font-bold">
+              <h3 className="text-white text-display-sm">
                 <DoDreamInlineLogo />
                 으로 쉽게 해결!
               </h3>
@@ -91,29 +82,27 @@ export function DirectorSection() {
         </div>
       </div>
 
-      {/* 작품구인 DoDream */}
-      <div className="bg-luxury-black py-24">
+      <div className="bg-luxury-black section-spacing-md">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gold mb-16">
+          <h2 className="text-display-sm md:text-display-md text-gold mb-16">
             작품구인도 <DoDreamInlineLogo className="text-white" />
             에서 한 번에!
           </h2>
 
-          {/* 구인 작성 UI 스크린샷 */}
           <div className="flex gap-4 justify-center mb-8">
             <div className="w-96 bg-luxury-secondary rounded-xl p-4">
               <div className="text-left">
-                <p className="text-warm-gray text-sm mb-4">← 구인글 작성하기</p>
+                <p className="text-warm-gray text-body-sm mb-4">← 구인글 작성하기</p>
                 <div className="space-y-2">
                   <div className="flex gap-2">
-                    <span className="text-muted-gray text-xs">구분</span>
-                    <span className="px-2 py-1 bg-luxury-tertiary text-ivory text-xs rounded">구분선택</span>
+                    <span className="text-muted-gray text-caption">구분</span>
+                    <span className="px-2 py-1 bg-luxury-tertiary text-ivory text-caption rounded">구분선택</span>
                   </div>
                   <div className="flex gap-2 items-center">
-                    <span className="text-muted-gray text-xs">개런티</span>
-                    <span className="px-2 py-1 bg-luxury-tertiary text-ivory text-xs rounded">0</span>
-                    <span className="text-muted-gray text-xs">원</span>
-                    <span className="px-2 py-1 bg-luxury-tertiary text-ivory text-xs rounded">품앗이</span>
+                    <span className="text-muted-gray text-caption">개런티</span>
+                    <span className="px-2 py-1 bg-luxury-tertiary text-ivory text-caption rounded">0</span>
+                    <span className="text-muted-gray text-caption">원</span>
+                    <span className="px-2 py-1 bg-luxury-tertiary text-ivory text-caption rounded">품앗이</span>
                   </div>
                 </div>
               </div>
@@ -121,54 +110,53 @@ export function DirectorSection() {
             <div className="w-80 bg-luxury-secondary rounded-xl p-4">
               <div className="text-left space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-muted-gray text-xs">작품제목</span>
-                  <span className="text-warm-gray text-xs">작성중</span>
+                  <span className="text-muted-gray text-caption">작품제목</span>
+                  <span className="text-warm-gray text-caption">작성중</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-gray text-xs">담당자명</span>
-                  <span className="text-warm-gray text-xs">담당자이름</span>
+                  <span className="text-muted-gray text-caption">담당자명</span>
+                  <span className="text-warm-gray text-caption">담당자이름</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <p className="text-white text-xl mb-2">
+          <p className="text-white text-body-lg mb-2">
             배우&모델에게 필요한 내용만 <span className="text-gold-light font-bold">깔끔하게!</span>
           </p>
-          <p className="text-white text-xl">
+          <p className="text-white text-body-lg">
             핵심 정보로 <span className="text-gold-light font-bold">전달력 UP!</span>
           </p>
         </div>
       </div>
 
-      {/* 지원자 리스트 */}
-      <div className="bg-luxury-black py-24">
+      <div className="bg-luxury-black section-spacing-md">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="bg-luxury-secondary rounded-xl p-6 mb-8">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <span className="px-2 py-1 bg-gold text-white text-xs rounded">모집중</span>
-                <span className="text-white text-sm">대학 졸작 &lt;봉선경&gt; 여성역 배우분 모십니다!</span>
+                <span className="px-2 py-1 bg-gold text-white text-caption rounded">모집중</span>
+                <span className="text-white text-body-sm">대학 졸작 &lt;봉선경&gt; 여성역 배우분 모십니다!</span>
               </div>
-              <div className="flex items-center gap-2 text-warm-gray text-xs">
+              <div className="flex items-center gap-2 text-warm-gray text-caption">
                 <span>마감일: 2024-09-30 [D-6]</span>
                 <span className="px-2 py-1 bg-luxury-tertiary rounded">구인글 수정</span>
               </div>
             </div>
             <div className="bg-luxury-tertiary rounded-lg p-4">
-              <p className="text-warm-gray text-sm mb-4">📝 지원자에게 전달할 메시지</p>
+              <p className="text-warm-gray text-body-sm mb-4">📝 지원자에게 전달할 메시지</p>
               <div className="text-left">
-                <p className="text-white text-sm mb-4">🎬 지원자 확인 (1명 지원) ↻</p>
+                <p className="text-white text-body-sm mb-4">🎬 지원자 확인 (1명 지원) ↻</p>
                 <div className="flex gap-2 mb-4">
-                  <span className="px-3 py-1 bg-luxury-tertiary text-ivory text-xs rounded">카드형</span>
-                  <span className="px-3 py-1 bg-luxury-secondary text-warm-gray text-xs rounded">리스트형</span>
-                  <span className="px-3 py-1 bg-green-600 text-white text-xs rounded">합격 - 0명</span>
-                  <span className="px-3 py-1 bg-blue-600 text-white text-xs rounded">미팅요청 - 0명</span>
-                  <span className="px-3 py-1 bg-red-600 text-white text-xs rounded">불합격 - 0명</span>
-                  <span className="px-3 py-1 bg-luxury-tertiary text-white text-xs rounded">대기 - 1명</span>
+                  <span className="px-3 py-1 bg-luxury-tertiary text-ivory text-caption rounded">카드형</span>
+                  <span className="px-3 py-1 bg-luxury-secondary text-warm-gray text-caption rounded">리스트형</span>
+                  <span className="px-3 py-1 bg-green-600 text-white text-caption rounded">합격 - 0명</span>
+                  <span className="px-3 py-1 bg-blue-600 text-white text-caption rounded">미팅요청 - 0명</span>
+                  <span className="px-3 py-1 bg-red-600 text-white text-caption rounded">불합격 - 0명</span>
+                  <span className="px-3 py-1 bg-luxury-tertiary text-white text-caption rounded">대기 - 1명</span>
                 </div>
                 <div className="w-32 bg-luxury-tertiary rounded-lg overflow-hidden">
-                  <div className="aspect-[3/4] relative bg-amber-200">
+                  <div className="aspect-3/4 relative bg-champagne">
                     <Image
                       src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=300&fit=crop"
                       alt="지원자"
@@ -177,7 +165,7 @@ export function DirectorSection() {
                     />
                   </div>
                   <div className="p-2">
-                    <p className="text-white text-xs font-medium">이하나</p>
+                    <p className="text-white text-caption font-medium">이하나</p>
                     <p className="text-warm-gray text-[8px]">24세 / 167 cm / 48 kg</p>
                   </div>
                 </div>
@@ -185,50 +173,49 @@ export function DirectorSection() {
             </div>
           </div>
 
-          <p className="text-white text-xl">
+          <p className="text-white text-body-lg">
             <span className="text-gold-light font-bold">한 눈에 확인 가능한</span> 지원자 리스트
           </p>
         </div>
       </div>
 
-      {/* 대시보드 */}
-      <div className="bg-luxury-black py-24">
+      <div className="bg-luxury-black section-spacing-md">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="bg-luxury-secondary rounded-xl p-6 mb-8">
             <p className="text-white text-left mb-4">← 이하나님의 프로필 대시보드</p>
             <div className="grid grid-cols-4 gap-4 mb-6">
               <div className="bg-luxury-tertiary rounded-lg p-4 text-center">
-                <p className="text-warm-gray text-xs mb-2">나의 좋아요 수</p>
-                <p className="text-red-400 text-xl">♡</p>
+                <p className="text-warm-gray text-caption mb-2">나의 좋아요 수</p>
+                <p className="text-red-400 text-body-lg">♡</p>
                 <p className="text-white font-bold">0</p>
               </div>
               <div className="bg-luxury-tertiary rounded-lg p-4 text-center">
-                <p className="text-warm-gray text-xs mb-2">누적 프로필 방문자</p>
-                <p className="text-blue-400 text-xl">📊</p>
+                <p className="text-warm-gray text-caption mb-2">누적 프로필 방문자</p>
+                <p className="text-blue-400 text-body-lg">📊</p>
                 <p className="text-white font-bold">16</p>
               </div>
               <div className="bg-luxury-tertiary rounded-lg p-4 text-center">
-                <p className="text-warm-gray text-xs mb-2">누적 지원 내역</p>
-                <p className="text-green-400 text-xl">✓</p>
+                <p className="text-warm-gray text-caption mb-2">누적 지원 내역</p>
+                <p className="text-green-400 text-body-lg">✓</p>
                 <p className="text-white font-bold">2</p>
               </div>
               <div className="bg-luxury-tertiary rounded-lg p-4 text-center">
-                <p className="text-warm-gray text-xs mb-2">누적 섭외 요청</p>
-                <p className="text-gold text-xl">💡</p>
+                <p className="text-warm-gray text-caption mb-2">누적 섭외 요청</p>
+                <p className="text-gold text-body-lg">💡</p>
                 <p className="text-white font-bold">0</p>
               </div>
             </div>
             <div className="space-y-2 text-left">
               <div className="flex items-center justify-between bg-gold/20 rounded-lg px-4 py-2">
-                <span className="text-gold-light text-sm">🚀 상위노출</span>
-                <span className="px-2 py-1 bg-green-600 text-white text-xs rounded">활성화전</span>
+                <span className="text-gold-light text-body-sm">🚀 상위노출</span>
+                <span className="px-2 py-1 bg-green-600 text-white text-caption rounded">활성화전</span>
               </div>
               <div className="flex items-center justify-between bg-luxury-tertiary rounded-lg px-4 py-2">
-                <span className="text-ivory text-sm">🎬 섭외요청 리스트</span>
+                <span className="text-ivory text-body-sm">🎬 섭외요청 리스트</span>
               </div>
               <div className="bg-luxury-tertiary rounded-lg px-4 py-2">
-                <p className="text-ivory text-sm mb-2">📋 지원내역</p>
-                <table className="w-full text-xs text-left">
+                <p className="text-ivory text-body-sm mb-2">📋 지원내역</p>
+                <table className="w-full text-caption text-left">
                   <thead>
                     <tr className="text-muted-gray">
                       <th className="py-1">날짜</th>
@@ -263,29 +250,26 @@ export function DirectorSection() {
             </div>
           </div>
 
-          <p className="text-white text-xl">
+          <p className="text-white text-body-lg">
             배우&모델 <span className="text-gold-light font-bold">지원 결과</span>공유까지!
           </p>
         </div>
       </div>
 
-      {/* 불편함 해소 */}
-      <div className="bg-luxury-black py-24">
+      <div className="bg-luxury-black section-spacing-md">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">작품 구인에서 느낀 불편함을</h2>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">이젠 해소할 타이밍!</h2>
+          <h2 className="text-display-sm md:text-display-md text-white mb-4">작품 구인에서 느낀 불편함을</h2>
+          <h2 className="text-display-sm md:text-display-md text-white">이젠 해소할 타이밍!</h2>
         </div>
       </div>
 
-      {/* THE 효율적인 플랫폼 */}
-      <div className="bg-luxury-black py-24">
+      <div className="bg-luxury-black section-spacing-md">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-gold text-xl font-bold mb-2">THE 효율적인 플랫폼</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">
+          <p className="text-gold text-heading-lg mb-2">THE 효율적인 플랫폼</p>
+          <h2 className="text-display-sm md:text-display-md text-white mb-12">
             <DoDreamInlineLogo />과 지금 바로 함께해 보세요!
           </h2>
 
-          {/* 3개 카드 */}
           <div className="grid grid-cols-3 gap-4">
             <div className="bg-luxury-secondary rounded-2xl p-8 text-center border border-gold/20">
               <div className="w-12 h-12 mx-auto mb-4 text-gold">
@@ -297,8 +281,8 @@ export function DirectorSection() {
                   />
                 </svg>
               </div>
-              <h4 className="font-bold text-ivory mb-3">개인정보 보호</h4>
-              <p className="text-zinc-400 text-sm leading-relaxed">
+              <h4 className="text-heading-md text-ivory mb-3">개인정보 보호</h4>
+              <p className="text-muted-gray text-body-sm leading-relaxed">
                 개인정보 노출 없이
                 <br />
                 작품 구인 가능
@@ -314,8 +298,8 @@ export function DirectorSection() {
                   />
                 </svg>
               </div>
-              <h4 className="font-bold text-ivory mb-3">시간 절약</h4>
-              <p className="text-zinc-400 text-sm leading-relaxed">
+              <h4 className="text-heading-md text-ivory mb-3">시간 절약</h4>
+              <p className="text-muted-gray text-body-sm leading-relaxed">
                 한 곳에서 지원자 확인과
                 <br />
                 지원 결과 공유까지
@@ -333,8 +317,8 @@ export function DirectorSection() {
                   />
                 </svg>
               </div>
-              <h4 className="font-bold text-ivory mb-3">쉽고 빠른 배우 찾기</h4>
-              <p className="text-zinc-400 text-sm leading-relaxed">
+              <h4 className="text-heading-md text-ivory mb-3">쉽고 빠른 배우 찾기</h4>
+              <p className="text-muted-gray text-body-sm leading-relaxed">
                 필요한 조건만
                 <br />
                 간결하게 입력 후,

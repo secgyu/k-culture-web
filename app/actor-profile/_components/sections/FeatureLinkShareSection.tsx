@@ -5,9 +5,8 @@ import { DoDreamLogo, DoDreamInlineLogo } from "@/app/components";
 
 export function FeatureLinkShareSection() {
   return (
-    <section className="py-24 bg-luxury-black">
+    <section className="section-spacing-md bg-luxury-black">
       <div className="max-w-3xl mx-auto px-6 text-center">
-        {/* 공유 아이콘 */}
         <div className="mb-8">
           <svg
             className="w-16 h-16 mx-auto text-gold"
@@ -24,45 +23,36 @@ export function FeatureLinkShareSection() {
           </svg>
         </div>
 
-        {/* 복사 알림 카드 */}
-        <div className="inline-block bg-luxury-secondary rounded-xl px-8 py-4 mb-8 relative border border-zinc-700">
-          {/* 말풍선 꼬리 */}
-          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-luxury-secondary rotate-45 border-l border-t border-zinc-700" />
-          <p className="text-zinc-300">프로필 주소를 복사했습니다.</p>
+        <div className="inline-block bg-luxury-secondary rounded-xl px-8 py-4 mb-8 relative border border-border">
+          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-luxury-secondary rotate-45 border-l border-t border-border" />
+          <p className="text-warm-gray">프로필 주소를 복사했습니다.</p>
         </div>
 
-        {/* 설명 텍스트 */}
-        <p className="text-xl md:text-2xl text-zinc-400 mb-32">
+        <p className="text-heading-lg md:text-heading-xl text-muted-gray mb-32">
           링크 공유를 통해 쉽게 <span className="font-bold text-ivory">프로필을 전송</span>해 보세요!
         </p>
 
-        {/* 구분 */}
-        <div className="border-t border-zinc-800 my-16" />
+        <div className="border-t border-border my-16" />
 
-        {/* 생각하는 이모지 */}
         <div className="text-6xl mb-8">🤔</div>
 
-        {/* FAQ 제목 */}
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-ivory mb-24">
+        <h2 className="text-display-sm md:text-display-md text-ivory mb-24">
           &quot;왜 프로필을 새로 만들어주나요?&quot;
         </h2>
 
-        {/* 기존 프로필 문제점 */}
-        <p className="text-zinc-500 text-lg mb-2">낮은 가독성과</p>
-        <p className="text-zinc-500 text-lg mb-8">제각각이던 사진</p>
+        <p className="text-muted-gray text-body-lg mb-2">낮은 가독성과</p>
+        <p className="text-muted-gray text-body-lg mb-8">제각각이던 사진</p>
 
-        <h3 className="text-2xl md:text-3xl font-bold text-ivory mb-12">
+        <h3 className="text-display-sm text-ivory mb-12">
           중요한 정보를 놓치기 쉬운
           <br />
           기존 프로필들
         </h3>
 
-        {/* 기존 프로필 이미지 예시 */}
         <div className="flex justify-center gap-4 mb-24">
-          {/* 왼쪽: 여성 프로필 */}
-          <div className="w-72 bg-luxury-tertiary rounded-lg overflow-hidden shadow-lg border border-zinc-700">
+          <div className="w-72 bg-luxury-tertiary rounded-lg overflow-hidden shadow-lg border border-border">
             <div className="flex">
-              <div className="w-1/2 aspect-[3/4] relative bg-zinc-700">
+              <div className="w-1/2 aspect-[3/4] relative bg-luxury-tertiary">
                 <Image
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=400&fit=crop"
                   alt="기존 프로필"
@@ -71,8 +61,8 @@ export function FeatureLinkShareSection() {
                 />
               </div>
               <div className="w-1/2 p-3 text-left">
-                <p className="text-xs text-zinc-400 mb-2">배우 프로필</p>
-                <p className="text-[8px] text-zinc-500 leading-relaxed">
+                <p className="text-caption text-muted-gray mb-2">배우 프로필</p>
+                <p className="text-[8px] text-muted-gray leading-relaxed">
                   배우
                   <br />
                   2023 드라마 제목 - 역할
@@ -97,23 +87,22 @@ export function FeatureLinkShareSection() {
             </div>
           </div>
 
-          {/* 오른쪽: 남성 프로필 */}
-          <div className="w-72 bg-luxury-secondary rounded-lg overflow-hidden shadow-lg border border-zinc-700">
-            <div className="aspect-[4/3] relative bg-zinc-800">
+          <div className="w-72 bg-luxury-secondary rounded-lg overflow-hidden shadow-lg border border-border">
+            <div className="aspect-[4/3] relative bg-luxury-secondary">
               <Image
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop"
                 alt="기존 프로필"
                 fill
                 className="object-cover grayscale"
               />
-              <div className="absolute top-2 right-2 text-white text-xs">
+              <div className="absolute top-2 right-2 text-white text-caption">
                 <p>Name</p>
-                <p className="text-[8px] text-zinc-400">Profile</p>
+                <p className="text-[8px] text-muted-gray">Profile</p>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-1 p-2">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="aspect-[3/4] relative bg-zinc-700">
+                <div key={i} className="aspect-[3/4] relative bg-luxury-tertiary">
                   <Image
                     src={`https://images.unsplash.com/photo-150700321116${i}-0a1dd7228f2d?w=100&h=150&fit=crop`}
                     alt={`사진 ${i}`}
@@ -126,16 +115,15 @@ export function FeatureLinkShareSection() {
           </div>
         </div>
 
-        {/* 구분선 */}
         <div className="w-px h-24 bg-gold mx-auto mb-24" />
 
-        {/* 두드림 프로필 비교 */}
         <div className="flex justify-center gap-6 mb-16">
-          {/* 왼쪽: PDF 프로필 */}
           <div className="w-80 bg-luxury-secondary rounded-xl overflow-hidden shadow-2xl">
             <div className="bg-luxury-tertiary px-4 py-3 text-center">
-              <p className="text-white text-sm font-medium">이하나 프로필 PDF</p>
-              <button className="mt-2 px-4 py-1 bg-luxury-tertiary text-ivory text-xs rounded">PDF 다운로드</button>
+              <p className="text-white text-body-sm font-medium">이하나 프로필 PDF</p>
+              <button className="mt-2 px-4 py-1 bg-luxury-tertiary text-ivory text-caption rounded">
+                PDF 다운로드
+              </button>
             </div>
             <div className="flex">
               <div className="w-2/5 aspect-[3/4] relative">
@@ -148,7 +136,7 @@ export function FeatureLinkShareSection() {
               </div>
               <div className="flex-1 p-3 bg-white">
                 <div className="flex items-center gap-2 mb-2">
-                  <h4 className="text-sm font-bold text-gray-900">이하나</h4>
+                  <h4 className="text-body-sm font-bold text-gray-900">이하나</h4>
                   <span className="px-1.5 py-0.5 bg-gold text-luxury-black font-medium text-[8px] rounded">여자</span>
                 </div>
                 <p className="text-[8px] text-gray-500 mb-3">Lee Hana</p>
@@ -195,7 +183,6 @@ export function FeatureLinkShareSection() {
             </div>
           </div>
 
-          {/* 오른쪽: 웹 프로필 */}
           <div className="w-96 bg-white rounded-xl overflow-hidden shadow-2xl border border-gray-200">
             <div className="flex">
               <div className="w-2/5 aspect-[3/4] relative">
@@ -210,10 +197,10 @@ export function FeatureLinkShareSection() {
                 <div className="flex items-start justify-between mb-2">
                   <div>
                     <div className="flex items-center gap-2">
-                      <h4 className="text-lg font-bold text-gray-900">이하나</h4>
+                      <h4 className="text-heading-md text-gray-900">이하나</h4>
                       <span className="px-2 py-0.5 bg-gold text-luxury-black font-medium text-[8px] rounded">여자</span>
                     </div>
-                    <p className="text-xs text-gray-500">Lee Hana</p>
+                    <p className="text-caption text-gray-500">Lee Hana</p>
                   </div>
                   <div className="w-12 h-12 bg-gray-100 rounded grid grid-cols-3 gap-0.5 p-1">
                     {[...Array(9)].map((_, i) => (
@@ -274,16 +261,14 @@ export function FeatureLinkShareSection() {
           </div>
         </div>
 
-        {/* 가독성 UP */}
-        <p className="text-zinc-400 text-lg mb-2">필요한 정보만 깔끔하게 담아</p>
-        <h3 className="text-3xl font-bold text-ivory mb-24">
+        <p className="text-muted-gray text-body-lg mb-2">필요한 정보만 깔끔하게 담아</p>
+        <h3 className="text-display-sm text-ivory mb-24">
           가독성 <span className="text-gold">UP!</span>
         </h3>
 
-        {/* 키워드 박스 */}
         <div className="bg-luxury-secondary rounded-2xl p-6 mb-16 max-w-lg mx-auto border-b-4 border-gold">
           <div className="flex items-start gap-4">
-            <span className="text-zinc-400 text-sm shrink-0">키워드</span>
+            <span className="text-muted-gray text-body-sm shrink-0">키워드</span>
             <div className="flex flex-wrap gap-2">
               {[
                 "고양이상",
@@ -299,7 +284,7 @@ export function FeatureLinkShareSection() {
               ].map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1.5 bg-luxury-tertiary border border-zinc-700 text-zinc-300 text-sm rounded-full"
+                  className="px-3 py-1.5 bg-luxury-tertiary border border-border text-warm-gray text-body-sm rounded-full"
                 >
                   {tag}
                 </span>
@@ -308,16 +293,14 @@ export function FeatureLinkShareSection() {
           </div>
         </div>
 
-        {/* 특색있는 키워드 */}
-        <p className="text-zinc-400 text-lg mb-2">내가 직접 택한</p>
-        <h3 className="text-3xl font-bold text-ivory mb-16">
+        <p className="text-muted-gray text-body-lg mb-2">내가 직접 택한</p>
+        <h3 className="text-display-sm text-ivory mb-16">
           특색있는 <span className="text-gold">키워드</span>
         </h3>
 
-        {/* 출연 사진 그리드 */}
-        <div className="bg-luxury-secondary rounded-2xl shadow-xl p-4 max-w-lg mx-auto mb-8 border border-zinc-800">
+        <div className="bg-luxury-secondary rounded-2xl shadow-xl p-4 max-w-lg mx-auto mb-8 border border-border">
           <div className="flex justify-end mb-2">
-            <span className="text-zinc-400 text-xs">출연 사진 🎬</span>
+            <span className="text-muted-gray text-caption">출연 사진 🎬</span>
           </div>
           <div className="grid grid-cols-2 gap-2">
             {[1, 2, 3, 4].map((i) => (
@@ -333,32 +316,27 @@ export function FeatureLinkShareSection() {
           </div>
         </div>
 
-        {/* 스틸컷 */}
-        <p className="text-zinc-400 text-lg mb-2">프로필 사진과 함께</p>
-        <h3 className="text-3xl font-bold text-ivory mb-24">
+        <p className="text-muted-gray text-body-lg mb-2">프로필 사진과 함께</p>
+        <h3 className="text-display-sm text-ivory mb-24">
           내가 출연한 <span className="text-gold">스틸컷</span>까지!
         </h3>
 
-        {/* PDF 아이콘 */}
         <div className="mb-8">
-          <div className="w-16 h-16 mx-auto bg-luxury-secondary rounded-xl flex items-center justify-center border border-zinc-700">
+          <div className="w-16 h-16 mx-auto bg-luxury-secondary rounded-xl flex items-center justify-center border border-border">
             <span className="text-2xl">📄</span>
           </div>
         </div>
 
-        {/* PDF 출력 */}
-        <h3 className="text-2xl font-bold text-ivory mb-24">
+        <h3 className="text-heading-xl text-ivory mb-24">
           PDF 버튼을 눌러서 <span className="text-gold">출력</span>해보세요!
         </h3>
 
-        {/* DoDream과 함께 */}
-        <p className="text-zinc-400 text-lg mb-2">보다 효과적인 프로필 제작</p>
-        <h3 className="text-3xl font-bold text-ivory mb-16">
+        <p className="text-muted-gray text-body-lg mb-2">보다 효과적인 프로필 제작</p>
+        <h3 className="text-display-sm text-ivory mb-16">
           <DoDreamInlineLogo doorFillColor="fill-gold/10" doorHandleColor="fill-gold" accentColor="text-gold" />과 바로
           함께해 보세요!
         </h3>
 
-        {/* 3개 카드 */}
         <div className="grid grid-cols-3 gap-4 max-w-3xl mx-auto">
           <div className="bg-luxury-secondary rounded-2xl p-8 text-center border border-gold/20">
             <div className="w-12 h-12 mx-auto mb-4 text-gold">
@@ -370,8 +348,8 @@ export function FeatureLinkShareSection() {
                 />
               </svg>
             </div>
-            <h4 className="font-bold text-ivory mb-3">개인정보 보호</h4>
-            <p className="text-gold text-sm leading-relaxed">
+            <h4 className="text-heading-md text-ivory mb-3">개인정보 보호</h4>
+            <p className="text-gold text-body-sm leading-relaxed">
               개인정보 노출 없이
               <br />
               캐스팅 가능
@@ -383,8 +361,8 @@ export function FeatureLinkShareSection() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h4 className="font-bold text-ivory mb-3">시간 절약</h4>
-            <p className="text-gold text-sm leading-relaxed">
+            <h4 className="text-heading-md text-ivory mb-3">시간 절약</h4>
+            <p className="text-gold text-body-sm leading-relaxed">
               프로필 등록 시,
               <br />
               바로 PDF 변환 가능
@@ -400,8 +378,8 @@ export function FeatureLinkShareSection() {
                 />
               </svg>
             </div>
-            <h4 className="font-bold text-ivory mb-3">언제나 누구든지</h4>
-            <p className="text-gold text-sm leading-relaxed">
+            <h4 className="text-heading-md text-ivory mb-3">언제나 누구든지</h4>
+            <p className="text-gold text-body-sm leading-relaxed">
               다른 제한 없이
               <br />
               프로필 등록 가능

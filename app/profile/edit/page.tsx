@@ -66,12 +66,10 @@ export default function ProfileEditPage() {
   return (
     <DashboardLayout userType="actor">
       <div className="max-w-2xl mx-auto space-y-8">
-        {/* 헤더 */}
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-ivory">프로필 수정</h1>
         </div>
 
-        {/* 프로필 이미지 */}
         <DarkCard>
           <div className="flex flex-col items-center">
             <button
@@ -79,65 +77,29 @@ export default function ProfileEditPage() {
               onClick={handleImageClick}
               className="relative w-32 h-32 rounded-full overflow-hidden group"
             >
-              <Image
-                src={profileImage}
-                alt="프로필 이미지"
-                fill
-                className="object-cover"
-              />
+              <Image src={profileImage} alt="프로필 이미지" fill className="object-cover" />
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <CameraIcon className="w-8 h-8 text-white" />
               </div>
             </button>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="hidden"
-            />
-            <p className="mt-3 text-sm text-zinc-500">클릭하여 사진 변경</p>
+            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+            <p className="mt-3 text-sm text-muted-foreground">클릭하여 사진 변경</p>
           </div>
         </DarkCard>
 
-        {/* 기본 정보 */}
         <DarkCard>
           <h2 className="text-lg font-semibold text-ivory mb-6">기본 정보</h2>
           <div className="space-y-5">
-            <DarkInput
-              label="활동명"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+            <DarkInput label="활동명" value={name} onChange={(e) => setName(e.target.value)} />
 
             <div className="grid grid-cols-2 gap-4">
-              <DarkSelect
-                label="성별"
-                options={GENDER_OPTIONS}
-                value={gender}
-                onChange={setGender}
-              />
-              <DarkSelect
-                label="출생년도"
-                options={generateYears()}
-                value={birthYear}
-                onChange={setBirthYear}
-              />
+              <DarkSelect label="성별" options={GENDER_OPTIONS} value={gender} onChange={setGender} />
+              <DarkSelect label="출생년도" options={generateYears()} value={birthYear} onChange={setBirthYear} />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <DarkInput
-                label="키 (cm)"
-                type="number"
-                value={height}
-                onChange={(e) => setHeight(e.target.value)}
-              />
-              <DarkInput
-                label="몸무게 (kg)"
-                type="number"
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
-              />
+              <DarkInput label="키 (cm)" type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
+              <DarkInput label="몸무게 (kg)" type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
             </div>
 
             <DarkTextarea
@@ -151,7 +113,6 @@ export default function ProfileEditPage() {
           </div>
         </DarkCard>
 
-        {/* 연락처 */}
         <DarkCard>
           <h2 className="text-lg font-semibold text-ivory mb-6">연락처</h2>
           <DarkInput
@@ -163,13 +124,8 @@ export default function ProfileEditPage() {
           />
         </DarkCard>
 
-        {/* 저장 버튼 */}
         <div className="flex gap-3">
-          <GoldButton
-            variant="secondary"
-            fullWidth
-            onClick={() => router.back()}
-          >
+          <GoldButton variant="secondary" fullWidth onClick={() => router.back()}>
             취소
           </GoldButton>
           <GoldButton fullWidth loading={loading} onClick={handleSave}>
@@ -180,4 +136,3 @@ export default function ProfileEditPage() {
     </DashboardLayout>
   );
 }
-

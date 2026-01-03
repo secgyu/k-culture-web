@@ -46,9 +46,9 @@ const projects = [
 ];
 
 const statusColors: Record<string, string> = {
-  "기획중": "bg-yellow-500/10 text-yellow-400",
-  "진행중": "bg-blue-500/10 text-blue-400",
-  "캐스팅완료": "bg-green-500/10 text-green-400",
+  기획중: "bg-yellow-500/10 text-yellow-400",
+  진행중: "bg-blue-500/10 text-blue-400",
+  캐스팅완료: "bg-green-500/10 text-green-400",
 };
 
 export default function ProjectsPage() {
@@ -59,7 +59,7 @@ export default function ProjectsPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-ivory">프로젝트</h1>
-            <p className="text-zinc-400 mt-1">진행중인 프로젝트를 관리하세요</p>
+            <p className="text-muted-gray mt-1">진행중인 프로젝트를 관리하세요</p>
           </div>
           <Link href="/projects/new">
             <GoldButton>
@@ -71,13 +71,9 @@ export default function ProjectsPage() {
         {/* 프로젝트 목록 */}
         {projects.length === 0 ? (
           <DarkCard className="text-center py-16">
-            <FolderIcon className="w-16 h-16 text-zinc-600 mx-auto mb-4" />
-            <h2 className="text-xl font-semibold text-ivory mb-2">
-              프로젝트가 없습니다
-            </h2>
-            <p className="text-zinc-400 mb-6">
-              새 프로젝트를 만들어 캐스팅을 시작하세요
-            </p>
+            <FolderIcon className="w-16 h-16 text-muted-gray mx-auto mb-4" />
+            <h2 className="text-xl font-semibold text-ivory mb-2">프로젝트가 없습니다</h2>
+            <p className="text-muted-gray mb-6">새 프로젝트를 만들어 캐스팅을 시작하세요</p>
             <Link href="/projects/new">
               <GoldButton>
                 <PlusIcon className="w-4 h-4 mr-1" /> 첫 프로젝트 만들기
@@ -91,12 +87,7 @@ export default function ProjectsPage() {
                 <DarkCard variant="hover" padding="none" className="overflow-hidden">
                   {/* 썸네일 */}
                   <div className="relative aspect-video">
-                    <Image
-                      src={project.thumbnail}
-                      alt={project.name}
-                      fill
-                      className="object-cover"
-                    />
+                    <Image src={project.thumbnail} alt={project.name} fill className="object-cover" />
                     <div className="absolute top-3 right-3">
                       <span className={`px-2 py-1 rounded text-xs font-medium ${statusColors[project.status]}`}>
                         {project.status}
@@ -106,30 +97,25 @@ export default function ProjectsPage() {
 
                   {/* 정보 */}
                   <div className="p-4">
-                    <h3 className="text-lg font-semibold text-ivory mb-1">
-                      {project.name}
-                    </h3>
-                    <p className="text-sm text-zinc-400 mb-3">
+                    <h3 className="text-lg font-semibold text-ivory mb-1">{project.name}</h3>
+                    <p className="text-sm text-muted-gray mb-3">
                       {project.company} · {project.type}
                     </p>
 
                     {/* 진행률 */}
                     <div className="mb-3">
                       <div className="flex justify-between text-sm mb-1">
-                        <span className="text-zinc-500">캐스팅 진행률</span>
+                        <span className="text-muted-foreground">캐스팅 진행률</span>
                         <span className="text-gold">{project.progress}%</span>
                       </div>
-                      <div className="h-1.5 bg-zinc-700 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-gold transition-all"
-                          style={{ width: `${project.progress}%` }}
-                        />
+                      <div className="h-1.5 bg-luxury-tertiary rounded-full overflow-hidden">
+                        <div className="h-full bg-gold transition-all" style={{ width: `${project.progress}%` }} />
                       </div>
                     </div>
 
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-zinc-500">{project.characters}개 배역</span>
-                      <span className="text-zinc-500">{project.createdAt}</span>
+                      <span className="text-muted-foreground">{project.characters}개 배역</span>
+                      <span className="text-muted-foreground">{project.createdAt}</span>
                     </div>
                   </div>
                 </DarkCard>
@@ -141,4 +127,3 @@ export default function ProjectsPage() {
     </DashboardLayout>
   );
 }
-

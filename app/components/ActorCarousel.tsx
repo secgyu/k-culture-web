@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { COLORS } from "@/lib/constants";
 
 export interface Actor {
   id: string;
@@ -90,55 +89,22 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
   return (
     <div className="w-full flex flex-col overflow-hidden">
       <div
-        className="relative flex items-center justify-center gap-3 px-5 py-4"
-        style={{ height: "400px" }}
+        className="relative flex items-center justify-center gap-3 px-5 py-4 h-[400px]"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <button
-          onClick={goToPrev}
-          className="shrink-0 flex flex-col justify-end items-center"
-          style={{ width: "184px", height: "332px" }}
-        >
-          <div
-            className="absolute rounded-md overflow-hidden bg-white"
-            style={{
-              width: "160px",
-              height: "226px",
-              bottom: "32px",
-              zIndex: 0,
-            }}
-          >
+        <button onClick={goToPrev} className="shrink-0 flex flex-col justify-end items-center w-[184px] h-[332px]">
+          <div className="absolute w-40 h-[226px] bottom-8 z-0 rounded-md overflow-hidden bg-white">
             <Image src={leftCard.imageUrl} alt={leftCard.name} fill className="object-cover" sizes="160px" />
           </div>
-          <div
-            className="relative w-full"
-            style={{
-              height: "137px",
-              background: "rgba(145, 158, 171, 0.16)",
-              border: "0.8px solid rgba(25, 31, 40, 0.1)",
-              backdropFilter: "blur(7px)",
-              borderRadius: "1.6px 1.6px 16px 16px",
-              zIndex: 1,
-            }}
-          />
+          <div className="relative w-full h-[137px] z-[1] bg-warm-gray/15 border border-luxury-black/10 backdrop-blur rounded-b-2xl" />
         </button>
         <Link
           href={`/actors/${activeActor.id}`}
-          className="shrink-0 flex flex-col justify-end items-center relative cursor-pointer"
-          style={{ width: "230px", height: "400px" }}
+          className="shrink-0 flex flex-col justify-end items-center relative cursor-pointer w-[230px] h-[400px]"
         >
-          <div
-            className="absolute rounded-md overflow-hidden"
-            style={{
-              width: "200px",
-              height: "283px",
-              top: "0.5px",
-              left: "calc(50% - 100px)",
-              zIndex: 0,
-            }}
-          >
+          <div className="absolute w-[200px] h-[283px] top-0 left-1/2 -translate-x-1/2 z-0 rounded-md overflow-hidden">
             <Image
               src={activeActor.imageUrl}
               alt={activeActor.name}
@@ -148,68 +114,26 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
               priority
             />
           </div>
-          <div
-            className="relative w-full"
-            style={{
-              height: "160px",
-              background: "rgba(145, 158, 171, 0.16)",
-              border: "1px solid rgba(25, 31, 40, 0.1)",
-              backdropFilter: "blur(7px)",
-              borderRadius: "2px 2px 20px 20px",
-              zIndex: 1,
-            }}
-          />
+          <div className="relative w-full h-40 z-[1] bg-warm-gray/15 border border-luxury-black/10 backdrop-blur rounded-b-[20px]" />
         </Link>
-        <button
-          onClick={goToNext}
-          className="shrink-0 flex flex-col justify-end items-center"
-          style={{ width: "185px", height: "332px" }}
-        >
-          <div
-            className="absolute rounded-md overflow-hidden bg-white"
-            style={{
-              width: "160px",
-              height: "226px",
-              bottom: "32px",
-              zIndex: 0,
-            }}
-          >
+        <button onClick={goToNext} className="shrink-0 flex flex-col justify-end items-center w-[185px] h-[332px]">
+          <div className="absolute w-40 h-[226px] bottom-8 z-0 rounded-md overflow-hidden bg-white">
             <Image src={rightCard.imageUrl} alt={rightCard.name} fill className="object-cover" sizes="160px" />
           </div>
-          <div
-            className="relative w-full"
-            style={{
-              height: "137px",
-              background: "rgba(145, 158, 171, 0.16)",
-              border: "0.8px solid rgba(25, 31, 40, 0.1)",
-              backdropFilter: "blur(7px)",
-              borderRadius: "1.6px 1.6px 16px 16px",
-              zIndex: 1,
-            }}
-          />
+          <div className="relative w-full h-[137px] z-[1] bg-warm-gray/15 border border-luxury-black/10 backdrop-blur rounded-b-2xl" />
         </button>
       </div>
       <div className="flex flex-col items-center px-5 py-4 gap-8">
         <div className="flex flex-col items-center gap-3">
-          <h2
-            className="font-bold"
-            style={{ fontSize: "24px", lineHeight: "28px", letterSpacing: "-0.022em", color: COLORS.text.primary }}
-          >
-            {activeActor.name}
-          </h2>
-          <p className="text-base" style={{ letterSpacing: "-0.02em", color: COLORS.text.secondary }}>
+          <h2 className="text-2xl leading-7 tracking-tight font-bold text-ivory">{activeActor.name}</h2>
+          <p className="text-base tracking-tight text-warm-gray">
             {activeActor.age} · 필모 {activeActor.filmography}편
           </p>
           <div className="flex flex-wrap justify-center gap-1.5">
             {activeActor.tags.map((tag, index) => (
               <span
                 key={index}
-                className="px-2 py-1 text-sm font-medium rounded"
-                style={{
-                  background: COLORS.status.planning.bg,
-                  color: COLORS.text.secondary,
-                  letterSpacing: "-0.02em",
-                }}
+                className="px-2 py-1 text-sm font-medium tracking-tight rounded bg-gold/10 text-warm-gray"
               >
                 {tag}
               </span>
@@ -220,18 +144,12 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
           {sampleWorks.map((work, index) => (
             <div
               key={index}
-              className="flex items-center gap-1.5 px-3 py-1.5 shrink-0"
-              style={{
-                border: `1px solid ${COLORS.border.default}`,
-                borderRadius: "999px",
-              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 shrink-0 border border-border rounded-full"
             >
-              <div className="w-6 h-6 rounded-full overflow-hidden bg-gray-200">
+              <div className="w-6 h-6 rounded-full overflow-hidden bg-luxury-tertiary">
                 <Image src={work.thumbnail} alt={work.name} width={24} height={24} className="object-cover" />
               </div>
-              <span className="text-xs font-medium" style={{ letterSpacing: "-0.02em", color: COLORS.text.secondary }}>
-                {work.name}
-              </span>
+              <span className="text-xs font-medium tracking-tight text-warm-gray">{work.name}</span>
             </div>
           ))}
         </div>

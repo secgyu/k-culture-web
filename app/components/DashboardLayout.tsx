@@ -3,15 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DoDreamLogo } from "./DoDreamLogo";
-import {
-  HomeIcon,
-  UserIcon,
-  FolderIcon,
-  HeartIcon,
-  SettingsIcon,
-  LogoutIcon,
-  SearchIcon,
-} from "./Icons";
+import { HomeIcon, UserIcon, FolderIcon, HeartIcon, SettingsIcon, LogoutIcon, SearchIcon } from "./Icons";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -39,16 +31,13 @@ export function DashboardLayout({ children, userType = "actor" }: DashboardLayou
 
   return (
     <div className="min-h-screen bg-luxury-black flex">
-      {/* 사이드바 */}
-      <aside className="w-64 bg-luxury-secondary border-r border-zinc-800 flex flex-col fixed h-full">
-        {/* 로고 */}
-        <div className="p-6 border-b border-zinc-800">
+      <aside className="w-64 bg-luxury-secondary border-r border-border flex flex-col fixed h-full">
+        <div className="p-6 border-b border-border">
           <Link href="/">
             <DoDreamLogo size="md" />
           </Link>
         </div>
 
-        {/* 네비게이션 */}
         <nav className="flex-1 p-4">
           <ul className="space-y-1">
             {navItems.map((item) => {
@@ -59,9 +48,7 @@ export function DashboardLayout({ children, userType = "actor" }: DashboardLayou
                   <Link
                     href={item.href}
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
-                      isActive
-                        ? "bg-gold/10 text-gold"
-                        : "text-zinc-400 hover:bg-zinc-800 hover:text-ivory"
+                      isActive ? "bg-gold/10 text-gold" : "text-muted-gray hover:bg-luxury-tertiary hover:text-ivory"
                     }`}
                   >
                     <Icon className="w-5 h-5" />
@@ -73,20 +60,17 @@ export function DashboardLayout({ children, userType = "actor" }: DashboardLayou
           </ul>
         </nav>
 
-        {/* 하단 */}
-        <div className="p-4 border-t border-zinc-800">
-          <button className="flex items-center gap-3 px-4 py-3 w-full text-zinc-400 hover:text-red-400 transition-colors rounded-xl hover:bg-zinc-800">
+        <div className="p-4 border-t border-border">
+          <button className="flex items-center gap-3 px-4 py-3 w-full text-muted-gray hover:text-red-400 transition-colors rounded-xl hover:bg-luxury-tertiary">
             <LogoutIcon className="w-5 h-5" />
             <span className="font-medium">로그아웃</span>
           </button>
         </div>
       </aside>
 
-      {/* 메인 컨텐츠 */}
       <main className="flex-1 ml-64">
         <div className="p-8">{children}</div>
       </main>
     </div>
   );
 }
-

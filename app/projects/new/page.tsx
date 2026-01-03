@@ -59,11 +59,10 @@ export default function NewProjectPage() {
         {/* 헤더 */}
         <div>
           <h1 className="text-2xl font-bold text-ivory">새 프로젝트</h1>
-          <p className="text-zinc-400 mt-1">프로젝트 정보를 입력하세요</p>
+          <p className="text-muted-gray mt-1">프로젝트 정보를 입력하세요</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* 기본 정보 */}
           <DarkCard>
             <h2 className="text-lg font-semibold text-ivory mb-6">기본 정보</h2>
             <div className="space-y-5">
@@ -90,13 +89,7 @@ export default function NewProjectPage() {
                   onChange={setProjectType}
                 />
 
-                <DarkSelect
-                  label="장르"
-                  placeholder="장르 선택"
-                  options={GENRES}
-                  value={genre}
-                  onChange={setGenre}
-                />
+                <DarkSelect label="장르" placeholder="장르 선택" options={GENRES} value={genre} onChange={setGenre} />
               </div>
 
               <DarkInput
@@ -108,7 +101,6 @@ export default function NewProjectPage() {
             </div>
           </DarkCard>
 
-          {/* 배역 정보 */}
           <DarkCard>
             <h2 className="text-lg font-semibold text-ivory mb-6">배역 정보</h2>
             <DarkTextarea
@@ -121,14 +113,8 @@ export default function NewProjectPage() {
             />
           </DarkCard>
 
-          {/* 버튼 */}
           <div className="flex gap-3">
-            <GoldButton
-              type="button"
-              variant="secondary"
-              fullWidth
-              onClick={() => router.back()}
-            >
+            <GoldButton type="button" variant="secondary" fullWidth onClick={() => router.back()}>
               취소
             </GoldButton>
             <GoldButton type="submit" fullWidth disabled={!isValid} loading={loading}>
@@ -140,4 +126,3 @@ export default function NewProjectPage() {
     </DashboardLayout>
   );
 }
-
