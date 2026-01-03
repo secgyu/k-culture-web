@@ -4,38 +4,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
 import { PencilIcon, PlayIcon } from "@/app/components/Icons";
-
-// 임시 프로필 데이터
-const profile = {
-  name: "김배우",
-  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-  introduction: "깊은 눈빛으로 서사를 만드는 배우입니다",
-  birthYear: 1995,
-  gender: "남성",
-  height: 178,
-  weight: 68,
-  skills: ["영어(원어민 수준)", "피아노", "검술", "승마", "수영"],
-  filmography: [
-    { year: 2024, type: "드라마", title: "사랑의 계절", role: "민준 역", roleType: "주연" },
-    { year: 2023, type: "영화", title: "서울의 밤", role: "강민 역", roleType: "조연" },
-    { year: 2022, type: "웹드라마", title: "청춘시대", role: "지호 역", roleType: "주연" },
-  ],
-  showreels: [
-    {
-      title: "2024 Showreel",
-      thumbnail: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=300&h=200&fit=crop",
-      duration: "3:15",
-    },
-    {
-      title: "감정연기 모음",
-      thumbnail: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&h=200&fit=crop",
-      duration: "2:30",
-    },
-  ],
-};
+import { useGetMyProfile } from "@/src/users/users";
 
 export default function ProfilePage() {
-  const age = new Date().getFullYear() - profile.birthYear;
+  const { data: profileData, isLoading } = useGetMyProfile();
+  const profile = profileData?.data;
+
+  if (isLoading || !profile) {
+    return (
+      <DashboardLayout userType="actor">
+        <div className="flex items-center justify-center h-64">
+          <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+        </div>
+      </DashboardLayout>
+    );
+  }
+
+  const currentYear = new Date().getFullYear();
+  // height, weight는 UserProfile에 있음
 
   return (
     <DashboardLayout userType="actor">
@@ -52,29 +38,34 @@ export default function ProfilePage() {
         <DarkCard>
           <div className="flex flex-col md:flex-row gap-6">
             <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden flex-shrink-0 mx-auto md:mx-0">
-              <Image src={profile.image} alt={profile.name} fill className="object-cover" />
+              <Image 
+                src={profile.profileImage || "https://via.placeholder.com/160"} 
+                alt={profile.name} 
+                fill 
+                className="object-cover" 
+              />
             </div>
 
             <div className="flex-1 text-center md:text-left">
               <h2 className="text-2xl font-bold text-ivory mb-2">{profile.name}</h2>
-              <p className="text-muted-gray mb-4">{profile.introduction}</p>
+              <p className="text-muted-gray mb-4">{profile.bio || "소개글이 없습니다"}</p>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-muted-foreground">나이</p>
-                  <p className="text-ivory font-medium">{age}세</p>
+                  <p className="text-sm text-muted-foreground">포지션</p>
+                  <p className="text-ivory font-medium">{profile.position || "-"}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">성별</p>
-                  <p className="text-ivory font-medium">{profile.gender}</p>
+                  <p className="text-sm text-muted-foreground">소속사</p>
+                  <p className="text-ivory font-medium">{profile.agency || "프리랜서"}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">키</p>
-                  <p className="text-ivory font-medium">{profile.height}cm</p>
+                  <p className="text-ivory font-medium">{profile.height ? `${profile.height}cm` : "-"}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">몸무게</p>
-                  <p className="text-ivory font-medium">{profile.weight}kg</p>
+                  <p className="text-ivory font-medium">{profile.weight ? `${profile.weight}kg` : "-"}</p>
                 </div>
               </div>
             </div>
@@ -83,14 +74,21 @@ export default function ProfilePage() {
 
         <DarkCard>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-ivory">스킬 & 특기</h2>
+            <h2 className="text-lg font-semibold text-ivory">연락처</h2>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {profile.skills.map((skill) => (
-              <span key={skill} className="px-3 py-1.5 bg-gold/10 border border-gold/30 rounded-full text-gold text-sm">
-                {skill}
-              </span>
-            ))}
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <span className="text-muted-gray">이메일</span>
+              <span className="text-ivory">{profile.email}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-gray">전화번호</span>
+              <span className="text-ivory">{profile.phone || "-"}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-gray">출연료</span>
+              <span className="text-ivory">{profile.fee || "협의"}</span>
+            </div>
           </div>
         </DarkCard>
 
@@ -103,24 +101,9 @@ export default function ProfilePage() {
               </GoldButton>
             </Link>
           </div>
-          <div className="space-y-3">
-            {profile.filmography.map((item, idx) => (
-              <div key={idx} className="flex items-center gap-4 p-4 bg-luxury-secondary/50 rounded-xl">
-                <div className="text-center min-w-[60px]">
-                  <p className="text-lg font-bold text-ivory">{item.year}</p>
-                  <p className="text-xs text-muted-foreground">{item.type}</p>
-                </div>
-                <div className="flex-1">
-                  <p className="text-ivory font-medium">{item.title}</p>
-                  <p className="text-sm text-muted-gray">{item.role}</p>
-                </div>
-                <span className="px-2 py-1 bg-gold/10 rounded text-xs text-gold">{item.roleType}</span>
-              </div>
-            ))}
-          </div>
+          <p className="text-muted-gray text-center py-8">필모그래피를 추가해보세요</p>
         </DarkCard>
 
-        {/* 쇼릴 */}
         <DarkCard>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-ivory">쇼릴</h2>
@@ -130,27 +113,9 @@ export default function ProfilePage() {
               </GoldButton>
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {profile.showreels.map((item, idx) => (
-              <div key={idx} className="relative group rounded-xl overflow-hidden cursor-pointer">
-                <div className="relative aspect-video">
-                  <Image src={item.thumbnail} alt={item.title} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-14 h-14 rounded-full bg-gold flex items-center justify-center">
-                      <PlayIcon className="w-6 h-6 text-luxury-black ml-1" />
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
-                  <p className="text-ivory font-medium">{item.title}</p>
-                  <p className="text-sm text-muted-gray">{item.duration}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="text-muted-gray text-center py-8">쇼릴을 추가해보세요</p>
         </DarkCard>
       </div>
     </DashboardLayout>
   );
 }
-

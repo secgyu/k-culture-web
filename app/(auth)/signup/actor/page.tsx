@@ -76,14 +76,8 @@ export default function ActorSignupPage() {
         onSuccess: () => {
           router.push("/onboarding/actor/step1");
         },
-        onError: (error) => {
-          // API 에러 처리
-          const errorMessage = error?.message || "회원가입에 실패했습니다";
-          if (errorMessage.includes("이미 사용 중")) {
-            setErrors({ email: "이미 사용 중인 이메일입니다" });
-          } else {
-            setErrors({ email: errorMessage });
-          }
+        onError: () => {
+          setErrors({ email: "회원가입에 실패했습니다" });
         },
       }
     );

@@ -3,12 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { AuthLayout, GoldButton, DarkInput } from "@/app/components";
+import { useForgotPassword } from "@/src/auth/auth";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
+
+  const forgotPasswordMutation = useForgotPassword();
 
   const isValid = email.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -16,18 +18,19 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
     if (!isValid) return;
 
-    setLoading(true);
     setError("");
 
-    try {
-      // TODO: API 연동
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setSent(true);
-    } catch {
-      setError("이메일 발송에 실패했습니다. 다시 시도해주세요.");
-    } finally {
-      setLoading(false);
-    }
+    forgotPasswordMutation.mutate(
+      { data: { email } },
+      {
+        onSuccess: () => {
+          setSent(true);
+        },
+        onError: () => {
+          setError("이메일 발송에 실패했습니다. 다시 시도해주세요.");
+        },
+      }
+    );
   };
 
   if (sent) {
@@ -68,7 +71,7 @@ export default function ForgotPasswordPage() {
           error={error}
         />
 
-        <GoldButton type="submit" fullWidth disabled={!isValid} loading={loading}>
+        <GoldButton type="submit" fullWidth disabled={!isValid} loading={forgotPasswordMutation.isPending}>
           재설정 링크 발송
         </GoldButton>
 
@@ -81,4 +84,3 @@ export default function ForgotPasswordPage() {
     </AuthLayout>
   );
 }
-

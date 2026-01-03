@@ -1,16 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AuthLayout } from "@/app/components";
 import { Button, FormField, PasswordInput } from "@/components/ui";
+import { useResetPassword } from "@/src/auth/auth";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token") || "";
+
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const resetPasswordMutation = useResetPassword();
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -33,17 +38,17 @@ export default function ResetPasswordPage() {
     e.preventDefault();
     if (!validate()) return;
 
-    setLoading(true);
-
-    try {
-      // TODO: API 연동
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      router.push("/login");
-    } catch {
-      setErrors({ password: "비밀번호 재설정에 실패했습니다" });
-    } finally {
-      setLoading(false);
-    }
+    resetPasswordMutation.mutate(
+      { data: { token, password, passwordConfirm } },
+      {
+        onSuccess: () => {
+          router.push("/login");
+        },
+        onError: () => {
+          setErrors({ password: "비밀번호 재설정에 실패했습니다" });
+        },
+      }
+    );
   };
 
   const isValid = password.length >= 8 && password === passwordConfirm;
@@ -69,11 +74,10 @@ export default function ResetPasswordPage() {
           />
         </FormField>
 
-        <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={loading}>
+        <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={resetPasswordMutation.isPending}>
           비밀번호 변경
         </Button>
       </form>
     </AuthLayout>
   );
 }
-

@@ -1,6 +1,6 @@
 /**
  * MSW 핸들러 모음
- * orval로 생성된 모든 mock 핸들러를 통합
+ * orval로 생성된 mock 핸들러 + 커스텀 오버라이드
  */
 
 import { getActorsMock } from '../actors/actors.msw';
@@ -34,4 +34,3 @@ export const handlers = [
   ...getUploadMock(),
   ...getUsersMock(),
 ];
-

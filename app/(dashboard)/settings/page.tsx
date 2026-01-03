@@ -1,43 +1,88 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
 import { SettingsIcon, UserIcon, LogoutIcon } from "@/app/components/Icons";
+import { useGetNotificationSettings, useUpdateNotificationSettings, useGetMyProfile } from "@/src/users/users";
+import { useLogout, useDeleteAccount } from "@/src/auth/auth";
 
 export default function SettingsPage() {
+  const { data: profileData } = useGetMyProfile();
+  const { data: settingsData, isLoading } = useGetNotificationSettings();
+  
   const [castingNotification, setCastingNotification] = useState(true);
   const [messageNotification, setMessageNotification] = useState(true);
   const [marketingNotification, setMarketingNotification] = useState(false);
 
-  const [loading, setLoading] = useState(false);
+  const updateSettingsMutation = useUpdateNotificationSettings();
+  const logoutMutation = useLogout();
+  const deleteAccountMutation = useDeleteAccount();
+
+  // 서버 데이터로 초기화
+  useEffect(() => {
+    if (settingsData?.data) {
+      setCastingNotification(settingsData.data.castingNotification);
+      setMessageNotification(settingsData.data.messageNotification);
+      setMarketingNotification(settingsData.data.marketingNotification);
+    }
+  }, [settingsData]);
 
   const handleSave = async () => {
-    setLoading(true);
-    try {
-      // TODO: API 연동
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      alert("설정이 저장되었습니다");
-    } finally {
-      setLoading(false);
-    }
+    updateSettingsMutation.mutate(
+      {
+        data: {
+          castingNotification,
+          messageNotification,
+          marketingNotification,
+        },
+      },
+      {
+        onSuccess: () => {
+          alert("설정이 저장되었습니다");
+        },
+      }
+    );
   };
 
   const handleLogout = () => {
     if (confirm("로그아웃 하시겠습니까?")) {
-      // TODO: 로그아웃 처리
-      window.location.href = "/login";
+      logoutMutation.mutate(undefined, {
+        onSuccess: () => {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          window.location.href = "/login";
+        },
+      });
     }
   };
 
   const handleDeleteAccount = () => {
     if (confirm("정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.")) {
-      // TODO: 계정 삭제 처리
-      window.location.href = "/";
+      deleteAccountMutation.mutate(undefined, {
+        onSuccess: () => {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          window.location.href = "/";
+        },
+      });
     }
   };
 
+  const userType = profileData?.data?.type || "actor";
+  const userEmail = profileData?.data?.email || "user@example.com";
+
+  if (isLoading) {
+    return (
+      <DashboardLayout userType={userType}>
+        <div className="flex items-center justify-center h-64">
+          <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+        </div>
+      </DashboardLayout>
+    );
+  }
+
   return (
-    <DashboardLayout userType="actor">
+    <DashboardLayout userType={userType}>
       <div className="max-w-2xl mx-auto space-y-8">
         <div>
           <h1 className="text-2xl font-bold text-ivory">설정</h1>
@@ -59,7 +104,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between py-3 border-b border-border">
               <div>
                 <p className="text-ivory">이메일</p>
-                <p className="text-sm text-muted-gray">actor@example.com</p>
+                <p className="text-sm text-muted-gray">{userEmail}</p>
               </div>
             </div>
 
@@ -76,7 +121,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between py-3">
               <div>
                 <p className="text-ivory">회원 유형</p>
-                <p className="text-sm text-muted-gray">배우</p>
+                <p className="text-sm text-muted-gray">{userType === "actor" ? "배우" : "에이전시"}</p>
               </div>
             </div>
           </div>
@@ -153,7 +198,7 @@ export default function SettingsPage() {
           </div>
 
           <div className="mt-6">
-            <GoldButton fullWidth loading={loading} onClick={handleSave}>
+            <GoldButton fullWidth loading={updateSettingsMutation.isPending} onClick={handleSave}>
               설정 저장
             </GoldButton>
           </div>
@@ -173,15 +218,17 @@ export default function SettingsPage() {
           <div className="space-y-3">
             <button
               onClick={handleLogout}
-              className="w-full py-3 text-left text-warm-gray hover:text-ivory transition-colors"
+              disabled={logoutMutation.isPending}
+              className="w-full py-3 text-left text-warm-gray hover:text-ivory transition-colors disabled:opacity-50"
             >
-              로그아웃
+              {logoutMutation.isPending ? "로그아웃 중..." : "로그아웃"}
             </button>
             <button
               onClick={handleDeleteAccount}
-              className="w-full py-3 text-left text-red-400 hover:text-red-300 transition-colors"
+              disabled={deleteAccountMutation.isPending}
+              className="w-full py-3 text-left text-red-400 hover:text-red-300 transition-colors disabled:opacity-50"
             >
-              계정 삭제
+              {deleteAccountMutation.isPending ? "처리 중..." : "계정 삭제"}
             </button>
           </div>
         </DarkCard>
@@ -189,4 +236,3 @@ export default function SettingsPage() {
     </DashboardLayout>
   );
 }
-

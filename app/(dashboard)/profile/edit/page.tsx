@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { DashboardLayout, DarkCard, GoldButton, DarkInput, DarkSelect, DarkTextarea } from "@/app/components";
 import { CameraIcon } from "@/app/components/Icons";
+import { useGetMyProfile, useUpdateMyProfile } from "@/src/users/users";
 
 const GENDER_OPTIONS = [
   { value: "남성", label: "남성" },
@@ -24,18 +25,30 @@ export default function ProfileEditPage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // 임시 초기 데이터
-  const [profileImage, setProfileImage] = useState<string>(
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
-  );
-  const [name, setName] = useState("김배우");
+  const { data: profileData, isLoading } = useGetMyProfile();
+  const updateProfileMutation = useUpdateMyProfile();
+
+  const [profileImage, setProfileImage] = useState<string>("");
+  const [name, setName] = useState("");
   const [gender, setGender] = useState("남성");
   const [birthYear, setBirthYear] = useState("1995");
-  const [height, setHeight] = useState("178");
-  const [weight, setWeight] = useState("68");
-  const [introduction, setIntroduction] = useState("깊은 눈빛으로 서사를 만드는 배우입니다");
-  const [phone, setPhone] = useState("010-1234-5678");
-  const [loading, setLoading] = useState(false);
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+  const [introduction, setIntroduction] = useState("");
+  const [phone, setPhone] = useState("");
+
+  // 서버 데이터로 초기화
+  useEffect(() => {
+    if (profileData?.data) {
+      const p = profileData.data;
+      setProfileImage(p.profileImage || "");
+      setName(p.name || "");
+      setPhone(p.phone || "");
+      setIntroduction(p.bio || "");
+      if (p.height) setHeight(String(p.height));
+      if (p.weight) setWeight(String(p.weight));
+    }
+  }, [profileData]);
 
   const handleImageClick = () => {
     fileInputRef.current?.click();
@@ -53,15 +66,32 @@ export default function ProfileEditPage() {
   };
 
   const handleSave = async () => {
-    setLoading(true);
-    try {
-      // TODO: API 연동
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      router.push("/profile");
-    } finally {
-      setLoading(false);
-    }
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("bio", introduction);
+    if (height) formData.append("height", height);
+    if (weight) formData.append("weight", weight);
+
+    updateProfileMutation.mutate(
+      { data: formData as any },
+      {
+        onSuccess: () => {
+          router.push("/profile");
+        },
+      }
+    );
   };
+
+  if (isLoading) {
+    return (
+      <DashboardLayout userType="actor">
+        <div className="flex items-center justify-center h-64">
+          <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+        </div>
+      </DashboardLayout>
+    );
+  }
 
   return (
     <DashboardLayout userType="actor">
@@ -77,7 +107,12 @@ export default function ProfileEditPage() {
               onClick={handleImageClick}
               className="relative w-32 h-32 rounded-full overflow-hidden group"
             >
-              <Image src={profileImage} alt="프로필 이미지" fill className="object-cover" />
+              <Image 
+                src={profileImage || "https://via.placeholder.com/128"} 
+                alt="프로필 이미지" 
+                fill 
+                className="object-cover" 
+              />
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <CameraIcon className="w-8 h-8 text-white" />
               </div>
@@ -128,7 +163,7 @@ export default function ProfileEditPage() {
           <GoldButton variant="secondary" fullWidth onClick={() => router.back()}>
             취소
           </GoldButton>
-          <GoldButton fullWidth loading={loading} onClick={handleSave}>
+          <GoldButton fullWidth loading={updateProfileMutation.isPending} onClick={handleSave}>
             저장
           </GoldButton>
         </div>
@@ -136,4 +171,3 @@ export default function ProfileEditPage() {
     </DashboardLayout>
   );
 }
-

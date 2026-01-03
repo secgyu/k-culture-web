@@ -3,16 +3,29 @@
 import Link from "next/link";
 import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
 import { EyeIcon, HeartIcon, PhoneIcon, ChartBarIcon, UserIcon, PlusIcon } from "@/app/components/Icons";
-
-const userType: "actor" | "agency" = "actor";
+import { useGetDashboardStats } from "@/src/dashboard/dashboard";
+import { useGetMyProfile } from "@/src/users/users";
+import type { ActorDashboardStats, AgencyDashboardStats } from "@/src/model";
 
 function ActorDashboard() {
+  const { data: statsData, isLoading } = useGetDashboardStats();
+
+  // 타입 가드를 사용하여 배우 대시보드 통계로 캐스팅
+  const rawStats = statsData?.data as ActorDashboardStats | undefined;
   const stats = {
-    views: 128,
-    likes: 24,
-    contacts: 3,
-    profileCompleteness: 65,
+    profileViews: rawStats?.profileViews ?? 0,
+    likes: rawStats?.likes ?? 0,
+    contactRequests: rawStats?.contactRequests ?? 0,
+    profileCompleteness: rawStats?.profileCompleteness ?? 0,
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">
@@ -62,7 +75,7 @@ function ActorDashboard() {
             </div>
             <div>
               <p className="text-sm text-muted-gray">프로필 조회</p>
-              <p className="text-2xl font-bold text-ivory">{stats.views}</p>
+              <p className="text-2xl font-bold text-ivory">{stats.profileViews}</p>
             </div>
           </div>
         </DarkCard>
@@ -86,7 +99,7 @@ function ActorDashboard() {
             </div>
             <div>
               <p className="text-sm text-muted-gray">섭외 요청</p>
-              <p className="text-2xl font-bold text-ivory">{stats.contacts}</p>
+              <p className="text-2xl font-bold text-ivory">{stats.contactRequests}</p>
             </div>
           </div>
         </DarkCard>
@@ -129,11 +142,24 @@ function ActorDashboard() {
 }
 
 function AgencyDashboard() {
+  const { data: statsData, isLoading } = useGetDashboardStats();
+
+  // 타입 가드를 사용하여 에이전시 대시보드 통계로 캐스팅
+  const rawStats = statsData?.data as AgencyDashboardStats | undefined;
   const stats = {
-    projects: 5,
-    favorites: 32,
-    contacts: 12,
+    activeProjects: rawStats?.activeProjects ?? 0,
+    favoriteActors: rawStats?.favoriteActors ?? 0,
+    sentContacts: rawStats?.sentContacts ?? 0,
+    totalCharacters: rawStats?.totalCharacters ?? 0,
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">
@@ -157,7 +183,7 @@ function AgencyDashboard() {
             </div>
             <div>
               <p className="text-sm text-muted-gray">진행중 프로젝트</p>
-              <p className="text-2xl font-bold text-ivory">{stats.projects}</p>
+              <p className="text-2xl font-bold text-ivory">{stats.activeProjects}</p>
             </div>
           </div>
         </DarkCard>
@@ -169,7 +195,7 @@ function AgencyDashboard() {
             </div>
             <div>
               <p className="text-sm text-muted-gray">찜한 배우</p>
-              <p className="text-2xl font-bold text-ivory">{stats.favorites}</p>
+              <p className="text-2xl font-bold text-ivory">{stats.favoriteActors}</p>
             </div>
           </div>
         </DarkCard>
@@ -181,7 +207,7 @@ function AgencyDashboard() {
             </div>
             <div>
               <p className="text-sm text-muted-gray">보낸 섭외</p>
-              <p className="text-2xl font-bold text-ivory">{stats.contacts}</p>
+              <p className="text-2xl font-bold text-ivory">{stats.sentContacts}</p>
             </div>
           </div>
         </DarkCard>
@@ -250,10 +276,12 @@ function AgencyDashboard() {
 }
 
 export default function DashboardPage() {
+  const { data: profileData } = useGetMyProfile();
+  const userType = profileData?.data?.type || "actor";
+
   return (
     <DashboardLayout userType={userType}>
       {userType === "actor" ? <ActorDashboard /> : <AgencyDashboard />}
     </DashboardLayout>
   );
 }
-
