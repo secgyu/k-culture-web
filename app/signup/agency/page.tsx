@@ -3,8 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { AuthLayout, GoldButton, DarkInput } from "@/app/components";
+import { AuthLayout } from "@/app/components";
 import { CheckIcon } from "@/app/components/Icons";
+import { Button, FormField, Input, PasswordInput } from "@/components/ui";
 
 export default function AgencySignupPage() {
   const router = useRouter();
@@ -75,33 +76,33 @@ export default function AgencySignupPage() {
   return (
     <AuthLayout title="캐스팅 담당자 회원가입" subtitle="AI로 완벽한 배우를 찾아보세요">
       <form onSubmit={handleSubmit} className="space-y-5">
-        <DarkInput
-          type="email"
-          label="이메일"
-          placeholder="업무용 이메일을 입력하세요"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          error={errors.email}
-        />
+        <FormField label="이메일" error={errors.email}>
+          <Input
+            type="email"
+            placeholder="업무용 이메일을 입력하세요"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            error={!!errors.email}
+          />
+        </FormField>
 
-        <DarkInput
-          type="password"
-          label="비밀번호"
-          placeholder="8자 이상 입력하세요"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          error={errors.password}
-          hint="영문, 숫자를 포함한 8자 이상"
-        />
+        <FormField label="비밀번호" error={errors.password} hint="영문, 숫자를 포함한 8자 이상">
+          <PasswordInput
+            placeholder="8자 이상 입력하세요"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            error={!!errors.password}
+          />
+        </FormField>
 
-        <DarkInput
-          type="password"
-          label="비밀번호 확인"
-          placeholder="비밀번호를 다시 입력하세요"
-          value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-          error={errors.passwordConfirm}
-        />
+        <FormField label="비밀번호 확인" error={errors.passwordConfirm}>
+          <PasswordInput
+            placeholder="비밀번호를 다시 입력하세요"
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            error={!!errors.passwordConfirm}
+          />
+        </FormField>
 
         <div className="space-y-3 pt-2">
           <label className="flex items-center gap-3 cursor-pointer group">
@@ -168,9 +169,9 @@ export default function AgencySignupPage() {
           {errors.terms && <p className="text-sm text-red-400">{errors.terms}</p>}
         </div>
 
-        <GoldButton type="submit" fullWidth disabled={!isValid} loading={loading}>
+        <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={loading}>
           회원가입
-        </GoldButton>
+        </Button>
 
         <div className="text-center">
           <span className="text-muted-gray">이미 계정이 있으신가요? </span>

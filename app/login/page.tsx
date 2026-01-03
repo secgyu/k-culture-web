@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { AuthLayout, GoldButton, DarkInput } from "@/app/components";
+import { AuthLayout } from "@/app/components";
+import { Button, FormField, Input, PasswordInput } from "@/components/ui";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -35,23 +36,24 @@ export default function LoginPage() {
   return (
     <AuthLayout title="로그인" subtitle="두드림에 오신 것을 환영합니다">
       <form onSubmit={handleLogin} className="space-y-6">
-        <DarkInput
-          type="email"
-          label="이메일"
-          placeholder="이메일 주소를 입력하세요"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          error={error ? " " : undefined}
-        />
+        <FormField label="이메일" error={error ? " " : undefined}>
+          <Input
+            type="email"
+            placeholder="이메일 주소를 입력하세요"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            error={!!error}
+          />
+        </FormField>
 
-        <DarkInput
-          type="password"
-          label="비밀번호"
-          placeholder="비밀번호를 입력하세요"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          error={error}
-        />
+        <FormField label="비밀번호" error={error}>
+          <PasswordInput
+            placeholder="비밀번호를 입력하세요"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            error={!!error}
+          />
+        </FormField>
 
         <div className="flex justify-end">
           <Link href="/forgot-password" className="text-sm text-muted-gray hover:text-gold transition-colors">
@@ -59,9 +61,9 @@ export default function LoginPage() {
           </Link>
         </div>
 
-        <GoldButton type="submit" fullWidth disabled={!isValid} loading={loading}>
+        <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={loading}>
           로그인
-        </GoldButton>
+        </Button>
 
         <div className="text-center">
           <span className="text-muted-gray">계정이 없으신가요? </span>

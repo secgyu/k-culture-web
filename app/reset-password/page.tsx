@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { AuthLayout, GoldButton, DarkInput } from "@/app/components";
+import { AuthLayout } from "@/app/components";
+import { Button, FormField, PasswordInput } from "@/components/ui";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -50,30 +51,28 @@ export default function ResetPasswordPage() {
   return (
     <AuthLayout title="비밀번호 재설정" subtitle="새로운 비밀번호를 입력해주세요">
       <form onSubmit={handleSubmit} className="space-y-6">
-        <DarkInput
-          type="password"
-          label="새 비밀번호"
-          placeholder="8자 이상 입력하세요"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          error={errors.password}
-          hint="영문, 숫자를 포함한 8자 이상"
-        />
+        <FormField label="새 비밀번호" error={errors.password} hint="영문, 숫자를 포함한 8자 이상">
+          <PasswordInput
+            placeholder="8자 이상 입력하세요"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            error={!!errors.password}
+          />
+        </FormField>
 
-        <DarkInput
-          type="password"
-          label="새 비밀번호 확인"
-          placeholder="비밀번호를 다시 입력하세요"
-          value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-          error={errors.passwordConfirm}
-        />
+        <FormField label="새 비밀번호 확인" error={errors.passwordConfirm}>
+          <PasswordInput
+            placeholder="비밀번호를 다시 입력하세요"
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            error={!!errors.passwordConfirm}
+          />
+        </FormField>
 
-        <GoldButton type="submit" fullWidth disabled={!isValid} loading={loading}>
+        <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={loading}>
           비밀번호 변경
-        </GoldButton>
+        </Button>
       </form>
     </AuthLayout>
   );
 }
-
