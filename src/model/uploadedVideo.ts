@@ -17,9 +17,9 @@
  */
 
 export interface UploadedVideo {
-  url?: string;
+  url: string;
   thumbnailUrl?: string;
-  filename?: string;
+  filename: string;
   size?: number;
   /** 재생시간 (예: '3:15') */
   duration?: string;

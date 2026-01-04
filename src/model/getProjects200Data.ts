@@ -19,6 +19,6 @@ import type { ProjectSummary } from './projectSummary';
 import type { Pagination } from './pagination';
 
 export type GetProjects200Data = {
-  projects?: ProjectSummary[];
-  pagination?: Pagination;
+  projects: ProjectSummary[];
+  pagination: Pagination;
 };

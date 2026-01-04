@@ -18,6 +18,6 @@
 import type { UploadedImage } from './uploadedImage';
 
 export type UploadImage200 = {
-  success?: true;
-  data?: UploadedImage;
+  success: true;
+  data: UploadedImage;
 };

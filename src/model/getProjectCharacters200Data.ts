@@ -18,5 +18,5 @@
 import type { CharacterDetail } from './characterDetail';
 
 export type GetProjectCharacters200Data = {
-  characters?: CharacterDetail[];
+  characters: CharacterDetail[];
 };

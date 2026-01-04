@@ -18,6 +18,6 @@
 import type { AuthTokens } from './authTokens';
 
 export type RefreshToken200 = {
-  success?: true;
-  data?: AuthTokens;
+  success: true;
+  data: AuthTokens;
 };

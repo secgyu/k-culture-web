@@ -18,6 +18,6 @@
 import type { CreateActorProfile201Data } from './createActorProfile201Data';
 
 export type CreateActorProfile201 = {
-  success?: true;
-  data?: CreateActorProfile201Data;
+  success: true;
+  data: CreateActorProfile201Data;
 };

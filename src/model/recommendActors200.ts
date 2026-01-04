@@ -18,6 +18,6 @@
 import type { RecommendActors200Data } from './recommendActors200Data';
 
 export type RecommendActors200 = {
-  success?: true;
-  data?: RecommendActors200Data;
+  success: true;
+  data: RecommendActors200Data;
 };

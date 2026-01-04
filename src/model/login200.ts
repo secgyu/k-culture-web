@@ -18,6 +18,6 @@
 import type { Login200Data } from './login200Data';
 
 export type Login200 = {
-  success?: true;
-  data?: Login200Data;
+  success: true;
+  data: Login200Data;
 };

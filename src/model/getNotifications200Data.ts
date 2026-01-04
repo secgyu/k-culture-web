@@ -19,8 +19,8 @@ import type { NotificationItem } from './notificationItem';
 import type { Pagination } from './pagination';
 
 export type GetNotifications200Data = {
-  notifications?: NotificationItem[];
+  notifications: NotificationItem[];
   /** 읽지 않은 알림 수 */
-  unreadCount?: number;
-  pagination?: Pagination;
+  unreadCount: number;
+  pagination: Pagination;
 };

@@ -18,6 +18,6 @@
 import type { UpdateJob200Data } from './updateJob200Data';
 
 export type UpdateJob200 = {
-  success?: true;
-  data?: UpdateJob200Data;
+  success: true;
+  data: UpdateJob200Data;
 };

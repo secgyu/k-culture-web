@@ -17,6 +17,6 @@
  */
 
 export type DeleteFavorite200 = {
-  success?: true;
-  message?: string;
+  success: true;
+  message: string;
 };

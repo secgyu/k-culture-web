@@ -17,6 +17,6 @@
  */
 
 export type CreateCharacter201Data = {
-  id?: string;
-  name?: string;
+  id: string;
+  name: string;
 };

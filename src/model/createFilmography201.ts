@@ -18,6 +18,6 @@
 import type { CreateFilmography201Data } from './createFilmography201Data';
 
 export type CreateFilmography201 = {
-  success?: true;
-  data?: CreateFilmography201Data;
+  success: true;
+  data: CreateFilmography201Data;
 };

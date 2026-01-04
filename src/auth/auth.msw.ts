@@ -42,19 +42,19 @@ import type {
 } from '.././model';
 
 
-export const getLoginResponseMock = (overrideResponse: Partial< Login200 > = {}): Login200 => ({success: faker.helpers.arrayElement([true, undefined]), data: faker.helpers.arrayElement([{accessToken: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), refreshToken: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), user: faker.helpers.arrayElement([{id: faker.string.uuid(), email: faker.internet.email(), name: faker.string.alpha({length: {min: 10, max: 20}}), type: faker.helpers.arrayElement(Object.values(UserType)), profileImage: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), createdAt: faker.helpers.arrayElement([`${faker.date.past().toISOString().split('.')[0]}Z`, undefined])}, undefined])}, undefined]), ...overrideResponse})
+export const getLoginResponseMock = (overrideResponse: Partial< Login200 > = {}): Login200 => ({success: true, data: {accessToken: faker.string.alpha({length: {min: 10, max: 20}}), refreshToken: faker.string.alpha({length: {min: 10, max: 20}}), user: {id: faker.string.uuid(), email: faker.internet.email(), name: faker.string.alpha({length: {min: 10, max: 20}}), type: faker.helpers.arrayElement(Object.values(UserType)), profileImage: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), createdAt: faker.helpers.arrayElement([`${faker.date.past().toISOString().split('.')[0]}Z`, undefined])}}, ...overrideResponse})
 
-export const getSignupResponseMock = (overrideResponse: Partial< Signup201 > = {}): Signup201 => ({success: faker.helpers.arrayElement([true, undefined]), data: faker.helpers.arrayElement([{userId: faker.helpers.arrayElement([faker.string.uuid(), undefined]), email: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), type: faker.helpers.arrayElement([faker.helpers.arrayElement(Object.values(UserType)), undefined])}, undefined]), ...overrideResponse})
+export const getSignupResponseMock = (overrideResponse: Partial< Signup201 > = {}): Signup201 => ({success: true, data: {userId: faker.string.uuid(), email: faker.string.alpha({length: {min: 10, max: 20}}), type: faker.helpers.arrayElement(Object.values(UserType))}, ...overrideResponse})
 
-export const getForgotPasswordResponseMock = (overrideResponse: Partial< ForgotPassword200 > = {}): ForgotPassword200 => ({success: faker.helpers.arrayElement([true, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getForgotPasswordResponseMock = (overrideResponse: Partial< ForgotPassword200 > = {}): ForgotPassword200 => ({success: true, message: faker.string.alpha({length: {min: 10, max: 20}}), ...overrideResponse})
 
-export const getResetPasswordResponseMock = (overrideResponse: Partial< ResetPassword200 > = {}): ResetPassword200 => ({success: faker.helpers.arrayElement([true, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getResetPasswordResponseMock = (overrideResponse: Partial< ResetPassword200 > = {}): ResetPassword200 => ({success: true, message: faker.string.alpha({length: {min: 10, max: 20}}), ...overrideResponse})
 
-export const getLogoutResponseMock = (overrideResponse: Partial< Logout200 > = {}): Logout200 => ({success: faker.helpers.arrayElement([true, undefined]), ...overrideResponse})
+export const getLogoutResponseMock = (overrideResponse: Partial< Logout200 > = {}): Logout200 => ({success: true, ...overrideResponse})
 
-export const getDeleteAccountResponseMock = (overrideResponse: Partial< DeleteAccount200 > = {}): DeleteAccount200 => ({success: faker.helpers.arrayElement([true, undefined]), message: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
+export const getDeleteAccountResponseMock = (overrideResponse: Partial< DeleteAccount200 > = {}): DeleteAccount200 => ({success: true, message: faker.string.alpha({length: {min: 10, max: 20}}), ...overrideResponse})
 
-export const getRefreshTokenResponseMock = (overrideResponse: Partial< RefreshToken200 > = {}): RefreshToken200 => ({success: faker.helpers.arrayElement([true, undefined]), data: faker.helpers.arrayElement([{accessToken: faker.string.alpha({length: {min: 10, max: 20}}), refreshToken: faker.string.alpha({length: {min: 10, max: 20}})}, undefined]), ...overrideResponse})
+export const getRefreshTokenResponseMock = (overrideResponse: Partial< RefreshToken200 > = {}): RefreshToken200 => ({success: true, data: {accessToken: faker.string.alpha({length: {min: 10, max: 20}}), refreshToken: faker.string.alpha({length: {min: 10, max: 20}})}, ...overrideResponse})
 
 
 export const getLoginMockHandler = (overrideResponse?: Login200 | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<Login200> | Login200), options?: RequestHandlerOptions) => {

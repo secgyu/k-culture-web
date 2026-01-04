@@ -17,6 +17,6 @@
  */
 
 export type DeleteShowreel200 = {
-  success?: true;
-  message?: string;
+  success: true;
+  message: string;
 };

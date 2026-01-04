@@ -719,6 +719,9 @@ components:
     # ===== 에이전시 스키마 =====
     AgencyProfile:
       type: object
+      required:
+        - agencyId
+        - agencyName
       properties:
         agencyId:
           type: string
@@ -766,6 +769,10 @@ components:
 
     FavoriteItem:
       type: object
+      required:
+        - id
+        - type
+        - targetId
       properties:
         id:
           type: string
@@ -784,6 +791,9 @@ components:
     # ===== 파일 업로드 스키마 =====
     UploadedImage:
       type: object
+      required:
+        - url
+        - filename
       properties:
         url:
           type: string
@@ -798,6 +808,9 @@ components:
 
     UploadedVideo:
       type: object
+      required:
+        - url
+        - filename
       properties:
         url:
           type: string
@@ -1037,6 +1050,11 @@ components:
     # ===== 대시보드 스키마 =====
     ActorDashboardStats:
       type: object
+      required:
+        - profileViews
+        - likes
+        - contactRequests
+        - profileCompleteness
       properties:
         profileViews:
           type: integer
@@ -1055,6 +1073,11 @@ components:
 
     AgencyDashboardStats:
       type: object
+      required:
+        - activeProjects
+        - favoriteActors
+        - sentContacts
+        - totalCharacters
       properties:
         activeProjects:
           type: integer
@@ -1194,12 +1217,19 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - accessToken
+                      - refreshToken
+                      - user
                     properties:
                       accessToken:
                         type: string
@@ -1287,12 +1317,19 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - userId
+                      - email
+                      - type
                     properties:
                       userId:
                         type: string
@@ -1352,6 +1389,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - message
                 properties:
                   success:
                     type: boolean
@@ -1404,6 +1444,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - message
                 properties:
                   success:
                     type: boolean
@@ -1451,6 +1494,8 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
                 properties:
                   success:
                     type: boolean
@@ -1478,6 +1523,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - message
                 properties:
                   success:
                     type: boolean
@@ -1517,6 +1565,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -1603,12 +1654,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - actors
+                      - pagination
                     properties:
                       actors:
                         type: array
@@ -1659,6 +1716,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -1748,12 +1808,17 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - recommendedActors
                     properties:
                       recommendedActors:
                         type: array
@@ -1820,12 +1885,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - actorId
+                      - name
                     properties:
                       actorId:
                         type: string
@@ -1916,12 +1987,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - contactId
+                      - status
                     properties:
                       contactId:
                         type: string
@@ -2031,12 +2108,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - title
                     properties:
                       id:
                         type: string
@@ -2073,6 +2156,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -2121,12 +2207,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - title
                     properties:
                       id:
                         type: string
@@ -2165,6 +2257,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - message
                 properties:
                   success:
                     type: boolean
@@ -2287,12 +2382,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - title
                     properties:
                       id:
                         type: string
@@ -2344,12 +2445,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - title
                     properties:
                       id:
                         type: string
@@ -2386,6 +2493,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - message
                 properties:
                   success:
                     type: boolean
@@ -2440,12 +2550,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - projects
+                      - pagination
                     properties:
                       projects:
                         type: array
@@ -2501,12 +2617,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - projectName
                     properties:
                       id:
                         type: string
@@ -2545,6 +2667,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -2604,12 +2729,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - projectName
                     properties:
                       id:
                         type: string
@@ -2648,6 +2779,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - message
                 properties:
                   success:
                     type: boolean
@@ -2685,12 +2819,17 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - characters
                     properties:
                       characters:
                         type: array
@@ -2755,12 +2894,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - name
                     properties:
                       id:
                         type: string
@@ -2805,12 +2950,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - name
                     properties:
                       id:
                         type: string
@@ -2847,6 +2998,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - message
                 properties:
                   success:
                     type: boolean
@@ -2891,6 +3045,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -2933,6 +3090,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -3039,12 +3199,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - name
                     properties:
                       id:
                         type: string
@@ -3080,6 +3246,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -3121,6 +3290,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -3176,12 +3348,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - favorites
+                      - pagination
                     properties:
                       favorites:
                         type: array
@@ -3245,12 +3423,19 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - type
+                      - targetId
                     properties:
                       id:
                         type: string
@@ -3293,6 +3478,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - message
                 properties:
                   success:
                     type: boolean
@@ -3344,6 +3532,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -3407,6 +3598,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -3495,12 +3689,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - jobs
+                      - pagination
                     properties:
                       jobs:
                         type: array
@@ -3564,12 +3764,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - title
                     properties:
                       id:
                         type: string
@@ -3607,6 +3813,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -3666,12 +3875,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - id
+                      - title
                     properties:
                       id:
                         type: string
@@ -3713,6 +3928,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - message
                 properties:
                   success:
                     type: boolean
@@ -3765,12 +3983,18 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - notices
+                      - pagination
                     properties:
                       notices:
                         type: array
@@ -3819,6 +4043,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -3865,6 +4092,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
@@ -3936,12 +4166,19 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - notifications
+                      - unreadCount
+                      - pagination
                     properties:
                       notifications:
                         type: array
@@ -4003,6 +4240,8 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
                 properties:
                   success:
                     type: boolean
@@ -4032,12 +4271,17 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - success
+                  - data
                 properties:
                   success:
                     type: boolean
                     const: true
                   data:
                     type: object
+                    required:
+                      - updatedCount
                     properties:
                       updatedCount:
                         type: integer

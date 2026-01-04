@@ -17,7 +17,7 @@
  */
 
 export type UpdateMyProfile200Data = {
-  id?: string;
-  name?: string;
+  id: string;
+  name: string;
   profileImageUrl?: string;
 };

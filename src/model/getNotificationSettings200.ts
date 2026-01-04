@@ -18,6 +18,6 @@
 import type { NotificationSettings } from './notificationSettings';
 
 export type GetNotificationSettings200 = {
-  success?: true;
-  data?: NotificationSettings;
+  success: true;
+  data: NotificationSettings;
 };

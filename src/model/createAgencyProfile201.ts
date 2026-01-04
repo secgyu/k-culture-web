@@ -18,6 +18,6 @@
 import type { AgencyProfile } from './agencyProfile';
 
 export type CreateAgencyProfile201 = {
-  success?: true;
-  data?: AgencyProfile;
+  success: true;
+  data: AgencyProfile;
 };

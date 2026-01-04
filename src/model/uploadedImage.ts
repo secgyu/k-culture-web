@@ -17,8 +17,8 @@
  */
 
 export interface UploadedImage {
-  url?: string;
-  filename?: string;
+  url: string;
+  filename: string;
   /** 파일 크기 (bytes) */
   size?: number;
   mimeType?: string;

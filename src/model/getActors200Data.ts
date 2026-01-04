@@ -19,6 +19,6 @@ import type { ActorSummary } from './actorSummary';
 import type { Pagination } from './pagination';
 
 export type GetActors200Data = {
-  actors?: ActorSummary[];
-  pagination?: Pagination;
+  actors: ActorSummary[];
+  pagination: Pagination;
 };

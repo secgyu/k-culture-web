@@ -18,5 +18,5 @@
 import type { ActorRecommendation } from './actorRecommendation';
 
 export type RecommendActors200Data = {
-  recommendedActors?: ActorRecommendation[];
+  recommendedActors: ActorRecommendation[];
 };

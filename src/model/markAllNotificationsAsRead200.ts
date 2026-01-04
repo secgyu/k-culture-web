@@ -18,6 +18,6 @@
 import type { MarkAllNotificationsAsRead200Data } from './markAllNotificationsAsRead200Data';
 
 export type MarkAllNotificationsAsRead200 = {
-  success?: true;
-  data?: MarkAllNotificationsAsRead200Data;
+  success: true;
+  data: MarkAllNotificationsAsRead200Data;
 };

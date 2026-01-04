@@ -18,6 +18,6 @@
 import type { UploadedVideo } from './uploadedVideo';
 
 export type UploadVideo200 = {
-  success?: true;
-  data?: UploadedVideo;
+  success: true;
+  data: UploadedVideo;
 };

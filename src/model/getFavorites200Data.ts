@@ -19,6 +19,6 @@ import type { FavoriteItem } from './favoriteItem';
 import type { Pagination } from './pagination';
 
 export type GetFavorites200Data = {
-  favorites?: FavoriteItem[];
-  pagination?: Pagination;
+  favorites: FavoriteItem[];
+  pagination: Pagination;
 };

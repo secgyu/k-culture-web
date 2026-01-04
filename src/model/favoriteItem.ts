@@ -19,9 +19,9 @@ import type { FavoriteType } from './favoriteType';
 import type { ActorSummary } from './actorSummary';
 
 export interface FavoriteItem {
-  id?: string;
-  type?: FavoriteType;
-  targetId?: string;
+  id: string;
+  type: FavoriteType;
+  targetId: string;
   actor?: ActorSummary;
   createdAt?: string;
 }

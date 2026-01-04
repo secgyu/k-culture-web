@@ -17,6 +17,6 @@
  */
 
 export type CreateProject201Data = {
-  id?: string;
-  projectName?: string;
+  id: string;
+  projectName: string;
 };

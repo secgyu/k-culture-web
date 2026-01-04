@@ -17,6 +17,6 @@
  */
 
 export type CreateJob201Data = {
-  id?: string;
-  title?: string;
+  id: string;
+  title: string;
 };

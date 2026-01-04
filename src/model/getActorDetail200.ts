@@ -18,6 +18,6 @@
 import type { ActorDetail } from './actorDetail';
 
 export type GetActorDetail200 = {
-  success?: true;
-  data?: ActorDetail;
+  success: true;
+  data: ActorDetail;
 };

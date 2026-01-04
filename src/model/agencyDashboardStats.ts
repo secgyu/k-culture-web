@@ -18,11 +18,11 @@
 
 export interface AgencyDashboardStats {
   /** 진행중 프로젝트 수 */
-  activeProjects?: number;
+  activeProjects: number;
   /** 찜한 배우 수 */
-  favoriteActors?: number;
+  favoriteActors: number;
   /** 보낸 섭외 수 */
-  sentContacts?: number;
+  sentContacts: number;
   /** 전체 캐릭터 수 */
-  totalCharacters?: number;
+  totalCharacters: number;
 }

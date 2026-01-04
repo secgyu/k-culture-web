@@ -18,5 +18,5 @@
 
 export type MarkAllNotificationsAsRead200Data = {
   /** 읽음 처리된 알림 수 */
-  updatedCount?: number;
+  updatedCount: number;
 };

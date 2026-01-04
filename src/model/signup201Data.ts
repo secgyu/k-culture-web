@@ -18,7 +18,7 @@
 import type { UserType } from './userType';
 
 export type Signup201Data = {
-  userId?: string;
-  email?: string;
-  type?: UserType;
+  userId: string;
+  email: string;
+  type: UserType;
 };

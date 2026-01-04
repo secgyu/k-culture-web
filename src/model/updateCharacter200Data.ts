@@ -17,6 +17,6 @@
  */
 
 export type UpdateCharacter200Data = {
-  id?: string;
-  name?: string;
+  id: string;
+  name: string;
 };

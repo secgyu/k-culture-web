@@ -18,6 +18,6 @@
 import type { ContactActor200DataStatus } from './contactActor200DataStatus';
 
 export type ContactActor200Data = {
-  contactId?: string;
-  status?: ContactActor200DataStatus;
+  contactId: string;
+  status: ContactActor200DataStatus;
 };

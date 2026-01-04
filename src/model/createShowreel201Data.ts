@@ -17,7 +17,7 @@
  */
 
 export type CreateShowreel201Data = {
-  id?: string;
-  title?: string;
+  id: string;
+  title: string;
   videoUrls?: string[];
 };

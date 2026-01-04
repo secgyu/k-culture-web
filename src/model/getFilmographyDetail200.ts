@@ -18,6 +18,6 @@
 import type { FilmographyItem } from './filmographyItem';
 
 export type GetFilmographyDetail200 = {
-  success?: true;
-  data?: FilmographyItem;
+  success: true;
+  data: FilmographyItem;
 };

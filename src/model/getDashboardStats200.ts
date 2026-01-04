@@ -18,6 +18,6 @@
 import type { GetDashboardStats200Data } from './getDashboardStats200Data';
 
 export type GetDashboardStats200 = {
-  success?: true;
-  data?: GetDashboardStats200Data;
+  success: true;
+  data: GetDashboardStats200Data;
 };

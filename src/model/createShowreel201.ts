@@ -18,6 +18,6 @@
 import type { CreateShowreel201Data } from './createShowreel201Data';
 
 export type CreateShowreel201 = {
-  success?: true;
-  data?: CreateShowreel201Data;
+  success: true;
+  data: CreateShowreel201Data;
 };

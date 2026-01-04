@@ -18,6 +18,6 @@
 import type { GetNotices200Data } from './getNotices200Data';
 
 export type GetNotices200 = {
-  success?: true;
-  data?: GetNotices200Data;
+  success: true;
+  data: GetNotices200Data;
 };

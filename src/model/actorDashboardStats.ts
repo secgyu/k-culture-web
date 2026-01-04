@@ -18,15 +18,15 @@
 
 export interface ActorDashboardStats {
   /** 프로필 조회수 */
-  profileViews?: number;
+  profileViews: number;
   /** 찜 받은 수 */
-  likes?: number;
+  likes: number;
   /** 섭외 요청 수 */
-  contactRequests?: number;
+  contactRequests: number;
   /**
    * 프로필 완성도 (%)
    * @minimum 0
    * @maximum 100
    */
-  profileCompleteness?: number;
+  profileCompleteness: number;
 }

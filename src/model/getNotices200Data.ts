@@ -19,6 +19,6 @@ import type { NoticeSummary } from './noticeSummary';
 import type { Pagination } from './pagination';
 
 export type GetNotices200Data = {
-  notices?: NoticeSummary[];
-  pagination?: Pagination;
+  notices: NoticeSummary[];
+  pagination: Pagination;
 };

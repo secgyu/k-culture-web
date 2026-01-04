@@ -17,6 +17,6 @@
  */
 
 export type UpdateFilmography200Data = {
-  id?: string;
-  title?: string;
+  id: string;
+  title: string;
 };

@@ -18,6 +18,6 @@
 import type { UpdateFilmography200Data } from './updateFilmography200Data';
 
 export type UpdateFilmography200 = {
-  success?: true;
-  data?: UpdateFilmography200Data;
+  success: true;
+  data: UpdateFilmography200Data;
 };

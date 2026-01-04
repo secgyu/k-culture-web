@@ -18,6 +18,6 @@
 import type { GetActors200Data } from './getActors200Data';
 
 export type GetActors200 = {
-  success?: true;
-  data?: GetActors200Data;
+  success: true;
+  data: GetActors200Data;
 };

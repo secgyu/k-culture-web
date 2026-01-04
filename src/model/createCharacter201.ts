@@ -18,6 +18,6 @@
 import type { CreateCharacter201Data } from './createCharacter201Data';
 
 export type CreateCharacter201 = {
-  success?: true;
-  data?: CreateCharacter201Data;
+  success: true;
+  data: CreateCharacter201Data;
 };

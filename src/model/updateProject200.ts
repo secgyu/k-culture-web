@@ -18,6 +18,6 @@
 import type { UpdateProject200Data } from './updateProject200Data';
 
 export type UpdateProject200 = {
-  success?: true;
-  data?: UpdateProject200Data;
+  success: true;
+  data: UpdateProject200Data;
 };

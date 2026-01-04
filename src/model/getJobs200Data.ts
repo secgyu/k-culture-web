@@ -19,6 +19,6 @@ import type { JobSummary } from './jobSummary';
 import type { Pagination } from './pagination';
 
 export type GetJobs200Data = {
-  jobs?: JobSummary[];
-  pagination?: Pagination;
+  jobs: JobSummary[];
+  pagination: Pagination;
 };

@@ -18,6 +18,6 @@
 import type { GetProjects200Data } from './getProjects200Data';
 
 export type GetProjects200 = {
-  success?: true;
-  data?: GetProjects200Data;
+  success: true;
+  data: GetProjects200Data;
 };

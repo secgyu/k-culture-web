@@ -17,7 +17,7 @@
  */
 
 export type CreateActorProfile201Data = {
-  actorId?: string;
-  name?: string;
+  actorId: string;
+  name: string;
   profileImageUrl?: string;
 };

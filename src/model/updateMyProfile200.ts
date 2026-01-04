@@ -18,6 +18,6 @@
 import type { UpdateMyProfile200Data } from './updateMyProfile200Data';
 
 export type UpdateMyProfile200 = {
-  success?: true;
-  data?: UpdateMyProfile200Data;
+  success: true;
+  data: UpdateMyProfile200Data;
 };

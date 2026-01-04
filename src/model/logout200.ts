@@ -17,5 +17,5 @@
  */
 
 export type Logout200 = {
-  success?: true;
+  success: true;
 };

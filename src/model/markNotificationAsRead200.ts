@@ -17,5 +17,5 @@
  */
 
 export type MarkNotificationAsRead200 = {
-  success?: true;
+  success: true;
 };

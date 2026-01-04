@@ -18,6 +18,6 @@
 import type { CreateProject201Data } from './createProject201Data';
 
 export type CreateProject201 = {
-  success?: true;
-  data?: CreateProject201Data;
+  success: true;
+  data: CreateProject201Data;
 };

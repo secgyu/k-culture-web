@@ -17,8 +17,8 @@
  */
 
 export interface AgencyProfile {
-  agencyId?: string;
-  agencyName?: string;
+  agencyId: string;
+  agencyName: string;
   representativeName?: string;
   foundedYear?: string;
   specialties?: string[];

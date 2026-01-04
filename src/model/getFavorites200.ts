@@ -18,6 +18,6 @@
 import type { GetFavorites200Data } from './getFavorites200Data';
 
 export type GetFavorites200 = {
-  success?: true;
-  data?: GetFavorites200Data;
+  success: true;
+  data: GetFavorites200Data;
 };

@@ -18,6 +18,6 @@
 import type { Signup201Data } from './signup201Data';
 
 export type Signup201 = {
-  success?: true;
-  data?: Signup201Data;
+  success: true;
+  data: Signup201Data;
 };

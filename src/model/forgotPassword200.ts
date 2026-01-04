@@ -17,6 +17,6 @@
  */
 
 export type ForgotPassword200 = {
-  success?: true;
-  message?: string;
+  success: true;
+  message: string;
 };

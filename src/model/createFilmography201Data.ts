@@ -17,6 +17,6 @@
  */
 
 export type CreateFilmography201Data = {
-  id?: string;
-  title?: string;
+  id: string;
+  title: string;
 };

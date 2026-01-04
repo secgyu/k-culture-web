@@ -18,6 +18,6 @@
 import type { AddFavorite201Data } from './addFavorite201Data';
 
 export type AddFavorite201 = {
-  success?: true;
-  data?: AddFavorite201Data;
+  success: true;
+  data: AddFavorite201Data;
 };

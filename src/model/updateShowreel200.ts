@@ -18,6 +18,6 @@
 import type { UpdateShowreel200Data } from './updateShowreel200Data';
 
 export type UpdateShowreel200 = {
-  success?: true;
-  data?: UpdateShowreel200Data;
+  success: true;
+  data: UpdateShowreel200Data;
 };

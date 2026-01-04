@@ -18,7 +18,7 @@
 import type { User } from './user';
 
 export type Login200Data = {
-  accessToken?: string;
-  refreshToken?: string;
-  user?: User;
+  accessToken: string;
+  refreshToken: string;
+  user: User;
 };

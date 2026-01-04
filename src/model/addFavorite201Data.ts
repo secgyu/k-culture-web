@@ -18,7 +18,7 @@
 import type { FavoriteType } from './favoriteType';
 
 export type AddFavorite201Data = {
-  id?: string;
-  type?: FavoriteType;
-  targetId?: string;
+  id: string;
+  type: FavoriteType;
+  targetId: string;
 };

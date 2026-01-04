@@ -18,6 +18,6 @@
 import type { ContactActor200Data } from './contactActor200Data';
 
 export type ContactActor200 = {
-  success?: true;
-  data?: ContactActor200Data;
+  success: true;
+  data: ContactActor200Data;
 };

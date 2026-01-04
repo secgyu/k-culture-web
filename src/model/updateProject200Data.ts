@@ -17,6 +17,6 @@
  */
 
 export type UpdateProject200Data = {
-  id?: string;
-  projectName?: string;
+  id: string;
+  projectName: string;
 };
