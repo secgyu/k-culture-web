@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
-import { PencilIcon, PlayIcon } from "@/app/components/Icons";
+import { PencilIcon } from "@/app/components/Icons";
 import { useGetMyProfile } from "@/src/users/users";
 
 export default function ProfilePage() {
@@ -21,7 +21,6 @@ export default function ProfilePage() {
   }
 
   const currentYear = new Date().getFullYear();
-  // height, weight는 UserProfile에 있음
 
   return (
     <DashboardLayout userType="actor">
@@ -38,11 +37,11 @@ export default function ProfilePage() {
         <DarkCard>
           <div className="flex flex-col md:flex-row gap-6">
             <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden flex-shrink-0 mx-auto md:mx-0">
-              <Image 
-                src={profile.profileImage || "https://via.placeholder.com/160"} 
-                alt={profile.name} 
-                fill 
-                className="object-cover" 
+              <Image
+                src={profile.profileImage || "https://via.placeholder.com/160"}
+                alt={profile.name}
+                fill
+                className="object-cover"
               />
             </div>
 

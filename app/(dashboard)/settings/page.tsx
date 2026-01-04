@@ -9,7 +9,7 @@ import { useLogout, useDeleteAccount } from "@/src/auth/auth";
 export default function SettingsPage() {
   const { data: profileData } = useGetMyProfile();
   const { data: settingsData, isLoading } = useGetNotificationSettings();
-  
+
   const [castingNotification, setCastingNotification] = useState(true);
   const [messageNotification, setMessageNotification] = useState(true);
   const [marketingNotification, setMarketingNotification] = useState(false);
@@ -18,7 +18,6 @@ export default function SettingsPage() {
   const logoutMutation = useLogout();
   const deleteAccountMutation = useDeleteAccount();
 
-  // 서버 데이터로 초기화
   useEffect(() => {
     if (settingsData?.data) {
       setCastingNotification(settingsData.data.castingNotification);

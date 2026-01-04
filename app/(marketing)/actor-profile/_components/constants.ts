@@ -1,4 +1,3 @@
-// 배우 이미지 슬라이더용 이미지 목록
 export const ACTOR_IMAGES = [
   "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&crop=face",
   "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=400&fit=crop&crop=face",

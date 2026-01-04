@@ -21,7 +21,6 @@ export default function ActorOnboardingStep2() {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // 파일 크기 체크 (5MB 제한)
       if (file.size > 5 * 1024 * 1024) {
         alert("파일 크기는 5MB 이하여야 합니다.");
         return;
@@ -58,7 +57,6 @@ export default function ActorOnboardingStep2() {
       subtitle="캐스팅 담당자에게 보여질 정보입니다"
     >
       <div className="space-y-6">
-        {/* 프로필 이미지 업로드 */}
         <div className="flex flex-col items-center">
           <div className="relative">
             <button
@@ -77,7 +75,6 @@ export default function ActorOnboardingStep2() {
               )}
             </button>
 
-            {/* 삭제 버튼 */}
             {data.profileImage && (
               <button
                 type="button"
@@ -91,7 +88,6 @@ export default function ActorOnboardingStep2() {
               </button>
             )}
 
-            {/* 가이드라인 툴팁 */}
             <div className="absolute -right-8 top-0">
               <ImageUploadGuide />
             </div>
@@ -105,7 +101,6 @@ export default function ActorOnboardingStep2() {
           </div>
         </div>
 
-        {/* 자기소개 */}
         <DarkTextarea
           label="한줄 소개"
           placeholder="자신을 소개하는 문구를 작성해주세요 (최소 10자)"

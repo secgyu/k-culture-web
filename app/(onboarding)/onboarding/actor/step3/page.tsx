@@ -62,7 +62,6 @@ export default function ActorOnboardingStep3() {
       subtitle="보유한 스킬을 선택하면 매칭에 도움이 됩니다"
     >
       <div className="space-y-6">
-        {/* 선택된 특기 */}
         {data.skills.length > 0 && (
           <div>
             <p className="text-caption text-muted-gray mb-2">선택된 특기 ({data.skills.length}개)</p>
@@ -82,7 +81,6 @@ export default function ActorOnboardingStep3() {
           </div>
         )}
 
-        {/* 특기 카테고리 */}
         <div className="space-y-4 max-h-64 overflow-y-auto pr-2 hide-scrollbar">
           {SKILL_CATEGORIES.map((category) => (
             <div key={category.name}>

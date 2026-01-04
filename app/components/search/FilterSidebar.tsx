@@ -107,7 +107,6 @@ export function FilterSidebar() {
   return (
     <aside className="hidden lg:block w-72 shrink-0">
       <div className="sticky top-20 bg-luxury-secondary border-r border-zinc-800 rounded-2xl p-5 max-h-[calc(100vh-6rem)] overflow-y-auto hide-scrollbar">
-        {/* 헤더 */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <h2 className="text-heading-md text-ivory">필터</h2>
@@ -122,9 +121,7 @@ export function FilterSidebar() {
           </button>
         </div>
 
-        {/* 필터 섹션들 */}
         <div className="divide-y divide-zinc-800">
-          {/* 구분 */}
           <FilterSection title="구분">
             <div className="flex flex-wrap gap-2">
               {["무관", "배우", "모델"].map((option) => (
@@ -138,7 +135,6 @@ export function FilterSidebar() {
             </div>
           </FilterSection>
 
-          {/* 성별 */}
           <FilterSection title="성별">
             <div className="flex flex-wrap gap-2">
               {["무관", "남자", "여자"].map((option) => (
@@ -152,7 +148,6 @@ export function FilterSidebar() {
             </div>
           </FilterSection>
 
-          {/* 나이 */}
           <FilterSection title="나이">
             <RangeInput
               label=""
@@ -164,7 +159,6 @@ export function FilterSidebar() {
             />
           </FilterSection>
 
-          {/* 키 */}
           <FilterSection title="키">
             <RangeInput
               label=""
@@ -176,7 +170,6 @@ export function FilterSidebar() {
             />
           </FilterSection>
 
-          {/* 몸무게 */}
           <FilterSection title="몸무게">
             <RangeInput
               label=""
@@ -188,7 +181,6 @@ export function FilterSidebar() {
             />
           </FilterSection>
 
-          {/* 특기/자격증 */}
           <FilterSection title="특기/자격증" defaultOpen={false}>
             <div className="flex flex-wrap gap-2">
               {skillOptions.map((skill) => (
@@ -202,7 +194,6 @@ export function FilterSidebar() {
             </div>
           </FilterSection>
 
-          {/* 필모그래피 유형 */}
           <FilterSection title="필모그래피 유형" defaultOpen={false}>
             <div className="flex flex-wrap gap-2">
               {filmographyOptions.map((type) => (
@@ -216,7 +207,6 @@ export function FilterSidebar() {
             </div>
           </FilterSection>
 
-          {/* 운전면허 */}
           <FilterSection title="운전면허" defaultOpen={false}>
             <div className="flex flex-wrap gap-2">
               {["무관", "1종", "2종"].map((option) => (
@@ -230,7 +220,6 @@ export function FilterSidebar() {
             </div>
           </FilterSection>
 
-          {/* 품앗이 */}
           <FilterSection title="품앗이" defaultOpen={false}>
             <div className="flex flex-wrap gap-2">
               {["무관", "가능", "불가능"].map((option) => (
@@ -244,7 +233,6 @@ export function FilterSidebar() {
             </div>
           </FilterSection>
 
-          {/* 키워드 검색 */}
           <FilterSection title="키워드">
             <input
               type="text"

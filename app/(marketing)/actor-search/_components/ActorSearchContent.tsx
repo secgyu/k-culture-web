@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { LandingHeader } from "@/app/components";
 import { CompareFloatingBar, CompareModal } from "@/app/components/compare";
@@ -89,7 +89,12 @@ function ActorCard({ actor, isBlurred = false }: { actor: Actor; isBlurred?: boo
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
             <div className="text-center">
               <svg className="w-8 h-8 text-white/80 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
               </svg>
               <p className="text-white/80 text-caption">로그인하고 보기</p>
             </div>
@@ -105,14 +110,18 @@ function ActorCard({ actor, isBlurred = false }: { actor: Actor; isBlurred?: boo
         <div className="space-y-1 text-body-sm text-muted-gray mb-3">
           <div className="flex items-center gap-2">
             <span>{actor.age || "정보없음"}</span>
-            {actor.filmography && actor.filmography > 0 && <span className="text-muted-gray">· 작품 {actor.filmography}편</span>}
+            {actor.filmography && actor.filmography > 0 && (
+              <span className="text-muted-gray">· 작품 {actor.filmography}편</span>
+            )}
           </div>
         </div>
 
         {actor.tags && actor.tags.length > 0 && (
           <div className="flex flex-wrap gap-1">
             {actor.tags.slice(0, 3).map((tag) => (
-              <span key={tag} className="px-2 py-0.5 bg-gold/10 rounded text-xs text-gold">{tag}</span>
+              <span key={tag} className="px-2 py-0.5 bg-gold/10 rounded text-xs text-gold">
+                {tag}
+              </span>
             ))}
           </div>
         )}
@@ -166,7 +175,12 @@ export function ActorSearchContent() {
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
                   <svg className="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                 </div>
                 <div>
@@ -174,7 +188,10 @@ export function ActorSearchContent() {
                   <p className="text-warm-gray text-body-sm">배우 프로필 전체, 연락처, 포트폴리오까지!</p>
                 </div>
               </div>
-              <Link href="/login" className="px-4 py-2 bg-gold text-luxury-black font-medium text-body-sm rounded-lg hover:bg-gold-light transition-colors duration-200 active:scale-[0.98]">
+              <Link
+                href="/login"
+                className="px-4 py-2 bg-gold text-luxury-black font-medium text-body-sm rounded-lg hover:bg-gold-light transition-colors duration-200 active:scale-[0.98]"
+              >
                 로그인
               </Link>
             </div>

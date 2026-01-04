@@ -11,7 +11,6 @@ import {
   Footer,
 } from "./sections";
 
-// 메인 랜딩 페이지 컴포넌트
 export function ActorProfileLanding() {
   return (
     <div className="min-h-screen">
@@ -24,7 +23,6 @@ export function ActorProfileLanding() {
       <CTASection />
       <Footer />
 
-      {/* 커스텀 애니메이션 스타일 */}
       <style jsx global>{`
         @keyframes bounce-slow {
           0%,

@@ -56,7 +56,6 @@ export default function NewProjectPage() {
   return (
     <DashboardLayout userType="agency">
       <div className="max-w-2xl mx-auto space-y-8">
-        {/* 헤더 */}
         <div>
           <h1 className="text-2xl font-bold text-ivory">새 프로젝트</h1>
           <p className="text-muted-gray mt-1">프로젝트 정보를 입력하세요</p>
@@ -126,4 +125,3 @@ export default function NewProjectPage() {
     </DashboardLayout>
   );
 }
-

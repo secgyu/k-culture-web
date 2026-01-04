@@ -9,8 +9,6 @@ import type { ActorDashboardStats, AgencyDashboardStats } from "@/src/model";
 
 function ActorDashboard() {
   const { data: statsData, isLoading } = useGetDashboardStats();
-
-  // 타입 가드를 사용하여 배우 대시보드 통계로 캐스팅
   const rawStats = statsData?.data as ActorDashboardStats | undefined;
   const stats = {
     profileViews: rawStats?.profileViews ?? 0,
@@ -143,8 +141,6 @@ function ActorDashboard() {
 
 function AgencyDashboard() {
   const { data: statsData, isLoading } = useGetDashboardStats();
-
-  // 타입 가드를 사용하여 에이전시 대시보드 통계로 캐스팅
   const rawStats = statsData?.data as AgencyDashboardStats | undefined;
   const stats = {
     activeProjects: rawStats?.activeProjects ?? 0,

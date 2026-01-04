@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
 import { PlusIcon, UserIcon, PencilIcon, XMarkIcon } from "@/app/components/Icons";
@@ -47,7 +46,11 @@ export default function ProjectDetailPage() {
           <div>
             <div className="flex items-center gap-3 mb-2">
               <h1 className="text-2xl font-bold text-ivory">{project.projectName}</h1>
-              <span className={`px-2 py-1 rounded text-xs font-medium ${statusColors[project.status] || statusColors["진행중"]}`}>
+              <span
+                className={`px-2 py-1 rounded text-xs font-medium ${
+                  statusColors[project.status] || statusColors["진행중"]
+                }`}
+              >
                 {project.status}
               </span>
             </div>
@@ -64,7 +67,9 @@ export default function ProjectDetailPage() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-lg font-semibold text-ivory">캐스팅 진행률</h2>
-              <p className="text-sm text-muted-gray">{castingComplete}/{totalCharacters} 배역 완료</p>
+              <p className="text-sm text-muted-gray">
+                {castingComplete}/{totalCharacters} 배역 완료
+              </p>
             </div>
             <span className="text-3xl font-bold text-gold">{progress}%</span>
           </div>

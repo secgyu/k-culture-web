@@ -23,7 +23,6 @@ export function CompareCard({ actor }: CompareCardProps) {
 
   return (
     <div className="bg-luxury-secondary rounded-2xl border border-border overflow-hidden flex flex-col">
-      {/* 상단 이미지 */}
       <div className="relative aspect-3/4 bg-luxury-tertiary">
         <Image
           src={`https://images.unsplash.com/photo-${1507003211169 + actor.id}?w=400&h=500&fit=crop&crop=face`}
@@ -44,9 +43,7 @@ export function CompareCard({ actor }: CompareCardProps) {
         </div>
       </div>
 
-      {/* 비교 항목들 */}
       <div className="p-4 space-y-4 flex-1">
-        {/* 기본 정보 */}
         <div className="grid grid-cols-3 gap-2 text-center">
           <div className="bg-luxury-tertiary rounded-lg p-2">
             <p className="text-caption text-muted-gray">나이</p>
@@ -62,7 +59,6 @@ export function CompareCard({ actor }: CompareCardProps) {
           </div>
         </div>
 
-        {/* 필모그래피 */}
         <div className="border-t border-border pt-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-caption text-muted-gray">필모그래피</span>
@@ -70,7 +66,6 @@ export function CompareCard({ actor }: CompareCardProps) {
           </div>
         </div>
 
-        {/* 대표작 */}
         <div className="border-t border-border pt-4">
           <p className="text-caption text-muted-gray mb-2">대표작</p>
           <div className="space-y-1">
@@ -82,7 +77,6 @@ export function CompareCard({ actor }: CompareCardProps) {
           </div>
         </div>
 
-        {/* 특기 */}
         <div className="border-t border-border pt-4">
           <p className="text-caption text-muted-gray mb-2">특기/자격증</p>
           <div className="flex flex-wrap gap-1">
@@ -94,7 +88,6 @@ export function CompareCard({ actor }: CompareCardProps) {
           </div>
         </div>
 
-        {/* 연락처 */}
         <div className="border-t border-border pt-4">
           <p className="text-caption text-muted-gray mb-2">연락처</p>
           <p className="text-body-sm text-warm-gray">{sampleData.phone}</p>
@@ -102,7 +95,6 @@ export function CompareCard({ actor }: CompareCardProps) {
         </div>
       </div>
 
-      {/* 하단 버튼 */}
       <div className="p-4 pt-0">
         <Link
           href={`/actors/${actor.id}`}

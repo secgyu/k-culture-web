@@ -37,7 +37,6 @@ export default function ProfileEditPage() {
   const [introduction, setIntroduction] = useState("");
   const [phone, setPhone] = useState("");
 
-  // 서버 데이터로 초기화
   useEffect(() => {
     if (profileData?.data) {
       const p = profileData.data;
@@ -107,11 +106,11 @@ export default function ProfileEditPage() {
               onClick={handleImageClick}
               className="relative w-32 h-32 rounded-full overflow-hidden group"
             >
-              <Image 
-                src={profileImage || "https://via.placeholder.com/128"} 
-                alt="프로필 이미지" 
-                fill 
-                className="object-cover" 
+              <Image
+                src={profileImage || "https://via.placeholder.com/128"}
+                alt="프로필 이미지"
+                fill
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <CameraIcon className="w-8 h-8 text-white" />

@@ -3,21 +3,14 @@
 import Link from "next/link";
 
 interface DoDreamLogoProps {
-  /** 로고 크기 */
   size?: "xs" | "sm" | "md" | "lg";
-  /** × 기호 색상 */
   accentColor?: string;
-  /** 문 아이콘 배경 색상 */
   doorFillColor?: string;
-  /** 문 아이콘 손잡이 색상 */
   doorHandleColor?: string;
-  /** 링크 URL (없으면 링크 없이 렌더링) */
   href?: string;
-  /** 추가 클래스명 */
   className?: string;
 }
 
-// 크기별 설정
 const sizeConfig = {
   xs: {
     container: "text-[8px]",
@@ -92,7 +85,6 @@ export function DoDreamLogo({
   return logoContent;
 }
 
-/** × 기호를 포함한 텍스트 로고 (아이콘 없이) */
 export function DoDreamTextLogo({
   accentColor = "text-gold",
   className = "",
@@ -104,7 +96,6 @@ export function DoDreamTextLogo({
   );
 }
 
-/** 인라인 로고 - h2, h3 등 텍스트 흐름 안에서 사용 */
 export function DoDreamInlineLogo({
   doorFillColor = "fill-white/10",
   doorHandleColor = "fill-gold",

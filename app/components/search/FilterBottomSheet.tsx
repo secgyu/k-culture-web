@@ -101,7 +101,6 @@ export function FilterBottomSheet() {
     setFilter("filmographyTypes", newTypes);
   };
 
-  // ESC 키로 닫기
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isBottomSheetOpen) {
@@ -112,7 +111,6 @@ export function FilterBottomSheet() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isBottomSheetOpen, closeBottomSheet]);
 
-  // 바텀시트 열릴 때 스크롤 방지
   useEffect(() => {
     if (isBottomSheetOpen) {
       document.body.style.overflow = "hidden";
@@ -128,17 +126,13 @@ export function FilterBottomSheet() {
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
-      {/* 배경 오버레이 */}
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in" onClick={closeBottomSheet} />
 
-      {/* 바텀시트 */}
       <div className="absolute bottom-0 left-0 right-0 bg-luxury-secondary rounded-t-3xl max-h-[85vh] flex flex-col animate-slide-up">
-        {/* 핸들바 */}
         <div className="flex justify-center pt-3 pb-2">
           <div className="w-10 h-1 bg-zinc-600 rounded-full" />
         </div>
 
-        {/* 헤더 */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-800">
           <div className="flex items-center gap-2">
             <h2 className="text-heading-md text-ivory">필터</h2>
@@ -162,10 +156,8 @@ export function FilterBottomSheet() {
           </div>
         </div>
 
-        {/* 필터 콘텐츠 */}
         <div className="flex-1 overflow-y-auto px-5 pb-6">
           <div className="divide-y divide-zinc-800">
-            {/* 구분 */}
             <FilterSection title="구분">
               <div className="flex flex-wrap gap-2">
                 {["무관", "배우", "모델"].map((option) => (
@@ -179,7 +171,6 @@ export function FilterBottomSheet() {
               </div>
             </FilterSection>
 
-            {/* 성별 */}
             <FilterSection title="성별">
               <div className="flex flex-wrap gap-2">
                 {["무관", "남자", "여자"].map((option) => (
@@ -193,7 +184,6 @@ export function FilterBottomSheet() {
               </div>
             </FilterSection>
 
-            {/* 나이 */}
             <FilterSection title="나이">
               <RangeInput
                 unit="세"
@@ -204,7 +194,6 @@ export function FilterBottomSheet() {
               />
             </FilterSection>
 
-            {/* 키 */}
             <FilterSection title="키">
               <RangeInput
                 unit="cm"
@@ -215,7 +204,6 @@ export function FilterBottomSheet() {
               />
             </FilterSection>
 
-            {/* 몸무게 */}
             <FilterSection title="몸무게">
               <RangeInput
                 unit="kg"
@@ -226,7 +214,6 @@ export function FilterBottomSheet() {
               />
             </FilterSection>
 
-            {/* 특기/자격증 */}
             <FilterSection title="특기/자격증" defaultOpen={false}>
               <div className="flex flex-wrap gap-2">
                 {skillOptions.map((skill) => (
@@ -240,7 +227,6 @@ export function FilterBottomSheet() {
               </div>
             </FilterSection>
 
-            {/* 필모그래피 유형 */}
             <FilterSection title="필모그래피 유형" defaultOpen={false}>
               <div className="flex flex-wrap gap-2">
                 {filmographyOptions.map((type) => (
@@ -254,7 +240,6 @@ export function FilterBottomSheet() {
               </div>
             </FilterSection>
 
-            {/* 운전면허 */}
             <FilterSection title="운전면허" defaultOpen={false}>
               <div className="flex flex-wrap gap-2">
                 {["무관", "1종", "2종"].map((option) => (
@@ -268,7 +253,6 @@ export function FilterBottomSheet() {
               </div>
             </FilterSection>
 
-            {/* 품앗이 */}
             <FilterSection title="품앗이" defaultOpen={false}>
               <div className="flex flex-wrap gap-2">
                 {["무관", "가능", "불가능"].map((option) => (
@@ -282,7 +266,6 @@ export function FilterBottomSheet() {
               </div>
             </FilterSection>
 
-            {/* 키워드 검색 */}
             <FilterSection title="키워드">
               <input
                 type="text"
@@ -295,7 +278,6 @@ export function FilterBottomSheet() {
           </div>
         </div>
 
-        {/* 하단 적용 버튼 */}
         <div className="p-5 border-t border-zinc-800 bg-luxury-secondary">
           <button
             onClick={closeBottomSheet}

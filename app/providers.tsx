@@ -10,14 +10,7 @@ interface ProvidersProps {
   children: ReactNode;
 }
 
-/**
- * 클라이언트 프로바이더 래퍼
- * - MSW Provider (개발 환경에서 API 모킹)
- * - React Query Provider
- * - 개발 도구 (개발 환경에서만 표시)
- */
 export function Providers({ children }: ProvidersProps) {
-  // useState로 QueryClient 인스턴스 유지 (SSR 호환)
   const [queryClient] = useState(() => createQueryClient());
 
   return (

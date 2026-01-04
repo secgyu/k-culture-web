@@ -31,7 +31,6 @@ export default function ActorOnboardingStep1() {
     router.push("/onboarding/actor/step2");
   };
 
-  // 페이지 로드 시 localStorage에 step 저장
   useEffect(() => {
     localStorage.setItem("onboarding_step1", "visited");
   }, []);
@@ -67,7 +66,6 @@ export default function ActorOnboardingStep1() {
           onChange={(value) => updateData({ birthYear: value })}
         />
 
-        {/* 추가 정보 (선택) */}
         <div className="grid grid-cols-2 gap-4">
           <DarkInput
             label="키 (선택)"
