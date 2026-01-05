@@ -5,13 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGetActorDetail, useContactActor } from "@/src/actors/actors";
 import { PageLayout } from "@/components/common";
-import {
-  ContactInfoModal,
-  CastingRequestModal,
-  ShowreelSection,
-  FilmographySection,
-  ActorProfileHeader,
-} from "./";
+import { ContactInfoModal, CastingRequestModal, ShowreelSection, FilmographySection, ActorProfileHeader } from "./";
 
 function ActorDetailSkeleton() {
   return (
