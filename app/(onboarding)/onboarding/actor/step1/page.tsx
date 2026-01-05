@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
-import { GoldButton, DarkInput, DarkSelect } from "@/app/components";
+import { GoldButton, DarkInput, DarkSelect } from "@/components/common";
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
 
 const GENDER_OPTIONS = [

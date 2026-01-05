@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { DoDreamLogo, LandingHeader } from "@/app/components";
+import { DoDreamLogo, LandingHeader } from "@/components/common";
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);

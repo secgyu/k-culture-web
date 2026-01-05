@@ -1,4 +1,4 @@
-export { DoDreamLogo } from "./DoDreamLogo";
+export { DoDreamLogo, DoDreamInlineLogo } from "./DoDreamLogo";
 export * from "./Icons";
 export { default as EmptyState } from "./EmptyState";
 export { default as ActorCard } from "./ActorCard";

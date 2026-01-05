@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGetActorDetail, useContactActor } from "@/src/actors/actors";
-import { ChevronLeftIcon, ShareIcon, PlayIcon, PhoneIcon } from "@/app/components/Icons";
-import { PageLayout } from "@/app/components/PageLayout";
+import { ChevronLeftIcon, ShareIcon, PlayIcon, PhoneIcon } from "@/components/common/Misc/Icons";
+import { PageLayout } from "@/components/common";
 import type { FilmographyItem } from "@/src/model";
 
 function ContactInfoModal({

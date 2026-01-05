@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DoDreamLogo } from "./DoDreamLogo";
-import { HomeIcon, UserIcon, FolderIcon, HeartIcon, SettingsIcon, LogoutIcon, SearchIcon } from "./Icons";
+import { DoDreamLogo } from "@/components/common";
+import { HomeIcon, UserIcon, FolderIcon, HeartIcon, SettingsIcon, LogoutIcon, SearchIcon } from "@/components/common/Misc/Icons";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

@@ -1,4 +1,4 @@
-import { DarkInput, DarkSelect, DarkTextarea } from "@/app/components";
+import { DarkInput, DarkSelect, DarkTextarea } from "@/components/common";
 
 const GENDER_OPTIONS = [
   { value: "남성", label: "남성" },

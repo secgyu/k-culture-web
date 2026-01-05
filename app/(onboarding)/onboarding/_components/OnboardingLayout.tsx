@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { DoDreamLogo } from "@/app/components";
-import { ProfilePreview, ProfilePreviewModal, AutoSaveIndicator } from "@/app/components/profile";
+import { DoDreamLogo } from "@/components/common";
+import { ProfilePreview, ProfilePreviewModal, AutoSaveIndicator } from "@/components/features/profile";
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
 
 interface OnboardingLayoutProps {

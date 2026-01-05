@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
-import { HeartIcon, XMarkIcon } from "@/app/components/Icons";
+import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { HeartIcon, XMarkIcon } from "@/components/common/Misc/Icons";
 import { useGetFavorites, useDeleteFavorite } from "@/src/favorites/favorites";
 
 export default function FavoritesPage() {

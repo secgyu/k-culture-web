@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AuthLayout } from "@/app/components";
-import { Button, FormField, PasswordInput } from "@/components/ui";
+import { AuthLayout } from "@/components/common";
+import { Button, FormField, PasswordInput, Spinner } from "@/components/ui";
 import { useResetPassword } from "@/src/auth/auth";
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token") || "";
@@ -79,5 +79,21 @@ export default function ResetPasswordPage() {
         </Button>
       </form>
     </AuthLayout>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense
+      fallback={
+        <AuthLayout title="비밀번호 재설정" subtitle="새로운 비밀번호를 입력해주세요">
+          <div className="flex justify-center py-12">
+            <Spinner size="lg" />
+          </div>
+        </AuthLayout>
+      }
+    >
+      <ResetPasswordForm />
+    </Suspense>
   );
 }

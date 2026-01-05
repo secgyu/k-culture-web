@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { ProfilePreview } from "./ProfilePreview";
-import { XMarkIcon } from "../Icons";
+import { XMarkIcon } from "@/components/common/Misc/Icons";
 
 interface ProfilePreviewModalProps {
   isOpen: boolean;

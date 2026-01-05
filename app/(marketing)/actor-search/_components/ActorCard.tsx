@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCompareStore, CompareActor } from "@/stores/useCompareStore";
-import { CheckIcon, PlusIcon } from "@/app/components/Icons";
+import { CheckIcon, PlusIcon } from "@/components/common/Misc/Icons";
 import { Badge } from "@/components/ui";
 import { cn } from "@/lib/utils";
 

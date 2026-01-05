@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { AuthLayout, GoldButton, DarkInput } from "@/app/components";
+import { AuthLayout, GoldButton, DarkInput } from "@/components/common";
 import { useForgotPassword } from "@/src/auth/auth";
 
 export default function ForgotPasswordPage() {

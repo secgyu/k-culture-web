@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeftIcon, SearchIcon } from "@/app/components/Icons";
+import { ArrowLeftIcon, SearchIcon } from "@/components/common/Misc/Icons";
 
 interface HeaderProps {
   title: string;

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import Image from "next/image";
-import { DarkCard } from "@/app/components";
-import { CameraIcon } from "@/app/components/Icons";
+import { DarkCard } from "@/components/common";
+import { CameraIcon } from "@/components/common/Misc/Icons";
 
 interface ProfileImageUploadProps {
   imageUrl: string;

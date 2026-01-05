@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { AuthLayout } from "@/app/components";
-import { CheckIcon } from "@/app/components/Icons";
+import { AuthLayout } from "@/components/common";
+import { CheckIcon } from "@/components/common/Misc/Icons";
 import { Button, FormField, Input, PasswordInput } from "@/components/ui";
 import { useSignup } from "@/src/auth/auth";
 

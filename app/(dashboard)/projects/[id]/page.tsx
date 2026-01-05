@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
-import { PlusIcon, UserIcon, PencilIcon, XMarkIcon } from "@/app/components/Icons";
+import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { PlusIcon, UserIcon, PencilIcon, XMarkIcon } from "@/components/common/Misc/Icons";
 import { useGetProjectDetail } from "@/src/projects/projects";
 import { useGetProjectCharacters } from "@/src/characters/characters";
 

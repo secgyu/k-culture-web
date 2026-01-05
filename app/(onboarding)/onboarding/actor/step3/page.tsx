@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
-import { GoldButton } from "@/app/components";
-import { XMarkIcon } from "@/app/components/Icons";
+import { GoldButton } from "@/components/common";
+import { XMarkIcon } from "@/components/common/Misc/Icons";
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
 
 const SKILL_CATEGORIES = [

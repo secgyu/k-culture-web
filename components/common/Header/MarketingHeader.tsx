@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { DoDreamLogo } from "@/app/components";
+import { DoDreamLogo } from "@/components/common";
 
 interface MarketingHeaderProps {
   currentPath?: string;

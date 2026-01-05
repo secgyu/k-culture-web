@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
-import { PlusIcon, FolderIcon } from "@/app/components/Icons";
+import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { PlusIcon, FolderIcon } from "@/components/common/Misc/Icons";
 import { useGetProjects } from "@/src/projects/projects";
 
 const statusColors: Record<string, string> = {

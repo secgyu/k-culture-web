@@ -4,9 +4,9 @@ import { useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
-import { GoldButton, DarkTextarea } from "@/app/components";
-import { CameraIcon } from "@/app/components/Icons";
-import { ImageUploadGuide } from "@/app/components/profile";
+import { GoldButton, DarkTextarea } from "@/components/common";
+import { CameraIcon } from "@/components/common/Misc/Icons";
+import { ImageUploadGuide } from "@/components/features/profile";
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
 
 export default function ActorOnboardingStep2() {

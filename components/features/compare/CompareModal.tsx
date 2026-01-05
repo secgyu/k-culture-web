@@ -3,7 +3,7 @@
 import { useCompareStore } from "@/stores/useCompareStore";
 import { useModal } from "@/lib/hooks";
 import { CompareCard } from "./CompareCard";
-import { XIcon } from "../Icons";
+import { XIcon } from "@/components/common/Misc/Icons";
 
 export function CompareModal() {
   const { actors, isModalOpen, closeModal, clearAll } = useCompareStore();

@@ -1,7 +1,7 @@
 "use client";
 
 import { useFilterStore } from "@/stores/useFilterStore";
-import { ChevronDownIcon } from "../Icons";
+import { ChevronDownIcon } from "@/components/common/Misc/Icons";
 import { useState } from "react";
 
 function FilterSection({

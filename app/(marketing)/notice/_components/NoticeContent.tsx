@@ -1,6 +1,6 @@
 "use client";
 
-import { DoDreamLogo } from "@/app/components";
+import { DoDreamLogo } from "@/components/common";
 import Link from "next/link";
 import { useGetNotices } from "@/src/notices/notices";
 

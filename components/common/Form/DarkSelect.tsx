@@ -1,7 +1,7 @@
 "use client";
 
 import { SelectHTMLAttributes, forwardRef } from "react";
-import { ChevronDownIcon } from "./Icons";
+import { ChevronDownIcon } from "@/components/common/Misc/Icons";
 
 interface Option {
   value: string;

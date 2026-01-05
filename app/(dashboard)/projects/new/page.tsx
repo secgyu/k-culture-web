@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { DashboardLayout, DarkCard, GoldButton, DarkInput, DarkSelect, DarkTextarea } from "@/app/components";
+import { DashboardLayout, DarkCard, GoldButton, DarkInput, DarkSelect, DarkTextarea } from "@/components/common";
 
 const PROJECT_TYPES = [
   { value: "영화", label: "영화" },

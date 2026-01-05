@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { DoDreamLogo } from "./DoDreamLogo";
+import { DoDreamLogo } from "@/components/common";
 
 interface AuthLayoutProps {
   children: React.ReactNode;

@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { DoDreamLogo, GoldButton } from "@/app/components";
-import { CheckIcon } from "@/app/components/Icons";
+import { DoDreamLogo, GoldButton } from "@/components/common";
+import { CheckIcon } from "@/components/common/Misc/Icons";
 
 export default function ActorOnboardingComplete() {
   return (

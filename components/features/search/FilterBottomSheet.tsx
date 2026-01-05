@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useFilterStore } from "@/stores/useFilterStore";
-import { XMarkIcon, ChevronDownIcon } from "../Icons";
+import { XMarkIcon, ChevronDownIcon } from "@/components/common/Misc/Icons";
 import { useState } from "react";
 
 function FilterSection({

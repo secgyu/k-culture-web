@@ -1,6 +1,6 @@
 "use client";
 
-import { MarketingHeader } from "@/app/components/MarketingHeader";
+import { MarketingHeader } from "@/components/common";
 import { Input, Textarea, Button } from "@/components/ui";
 
 export function AIMatchingContent() {

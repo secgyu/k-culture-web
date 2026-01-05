@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { AuthLayout, DarkCard } from "@/app/components";
-import { UserIcon, BriefcaseIcon } from "@/app/components/Icons";
+import { AuthLayout, DarkCard } from "@/components/common";
+import { UserIcon, BriefcaseIcon } from "@/components/common/Misc/Icons";
 
 export default function SignupPage() {
   return (

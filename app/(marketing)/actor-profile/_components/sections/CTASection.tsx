@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { DoDreamInlineLogo } from "@/app/components";
+import { DoDreamInlineLogo } from "@/components/common";
 
 export function CTASection() {
   return (

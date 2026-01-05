@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CompareActor, useCompareStore } from "@/stores/useCompareStore";
-import { XIcon } from "../Icons";
+import { XIcon } from "@/components/common/Misc/Icons";
 
 interface CompareCardProps {
   actor: CompareActor;

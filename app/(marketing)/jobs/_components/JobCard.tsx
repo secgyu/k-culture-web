@@ -2,6 +2,7 @@
 
 import { Badge, Card } from "@/components/ui";
 import { cn } from "@/lib/utils";
+import type { JobSummary } from "@/src/model";
 
 const getCategoryColor = (category: string) => {
   const colors: Record<string, string> = {
@@ -15,18 +16,7 @@ const getCategoryColor = (category: string) => {
 };
 
 interface JobCardProps {
-  job: {
-    id: string;
-    category: string;
-    isPumasi: boolean;
-    price: number | null;
-    title: string;
-    gender: string;
-    production: string;
-    workTitle: string;
-    status: string;
-    views: number;
-  };
+  job: JobSummary;
 }
 
 export function JobCard({ job }: JobCardProps) {

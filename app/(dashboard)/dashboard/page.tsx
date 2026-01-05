@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
-import { EyeIcon, HeartIcon, PhoneIcon, ChartBarIcon, UserIcon, PlusIcon } from "@/app/components/Icons";
+import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { EyeIcon, HeartIcon, PhoneIcon, ChartBarIcon, UserIcon, PlusIcon } from "@/components/common/Misc/Icons";
 import { useGetDashboardStats } from "@/src/dashboard/dashboard";
 import { useGetMyProfile } from "@/src/users/users";
 import type { ActorDashboardStats, AgencyDashboardStats } from "@/src/model";

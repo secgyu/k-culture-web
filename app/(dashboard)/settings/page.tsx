@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
-import { SettingsIcon, UserIcon, LogoutIcon } from "@/app/components/Icons";
+import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { SettingsIcon, UserIcon, LogoutIcon } from "@/components/common/Misc/Icons";
 import { useGetNotificationSettings, useUpdateNotificationSettings, useGetMyProfile } from "@/src/users/users";
 import { useLogout, useDeleteAccount } from "@/src/auth/auth";
 

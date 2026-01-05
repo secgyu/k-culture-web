@@ -21,7 +21,7 @@ export function useProfileForm() {
     birthYear: "1995",
   });
 
-  const handleChange = useCallback((field: keyof FormData, value: string) => {
+  const handleChange = useCallback((field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   }, []);
 

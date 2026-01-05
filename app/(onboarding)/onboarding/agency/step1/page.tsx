@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
-import { GoldButton, DarkInput, DarkSelect } from "@/app/components";
+import { GoldButton, DarkInput, DarkSelect } from "@/components/common";
 
 const SPECIALTY_OPTIONS = [
   { value: "영화", label: "영화" },

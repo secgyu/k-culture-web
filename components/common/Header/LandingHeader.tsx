@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { DoDreamLogo } from "./DoDreamLogo";
+import { DoDreamLogo } from "@/components/common";
 
 interface NavItem {
   href: string;

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { ChevronDownIcon } from "../Icons";
+import { ChevronDownIcon } from "@/components/common/Misc/Icons";
 
 export type SortOption = "latest" | "filmography" | "age-asc" | "age-desc" | "name";
 

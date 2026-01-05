@@ -1,4 +1,4 @@
-import { DarkInput } from "@/app/components";
+import { DarkInput } from "@/components/common";
 
 interface ContactFormProps {
   phone: string;

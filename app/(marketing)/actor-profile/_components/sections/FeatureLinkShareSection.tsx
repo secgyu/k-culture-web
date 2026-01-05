@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { DoDreamLogo, DoDreamInlineLogo } from "@/app/components";
+import { DoDreamLogo, DoDreamInlineLogo } from "@/components/common";
 
 export function FeatureLinkShareSection() {
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { DoDreamLogo } from "@/app/components";
+import { DoDreamLogo } from "@/components/common";
 import Link from "next/link";
 import { useGetJobs } from "@/src/jobs/jobs";
 import { useFilters } from "@/lib/hooks";
@@ -9,6 +9,7 @@ import { JobCard } from "./JobCard";
 import type { JobCategory } from "@/src/model";
 
 interface JobFilters {
+  [key: string]: string | boolean | undefined;
   category: string;
   gender: string;
   pumasi: string;

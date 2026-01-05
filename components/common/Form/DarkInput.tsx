@@ -1,7 +1,7 @@
 "use client";
 
 import { InputHTMLAttributes, forwardRef, useState } from "react";
-import { EyeIcon, EyeOffIcon } from "./Icons";
+import { EyeIcon, EyeOffIcon } from "@/components/common/Misc/Icons";
 
 interface DarkInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

@@ -96,7 +96,7 @@ export function DoDreamTextLogo({
   );
 }
 
-export function DoDreamInlineLogo({
+function DoDreamInlineLogo({
   doorFillColor = "fill-white/10",
   doorHandleColor = "fill-gold",
   accentColor = "text-gold",
@@ -121,3 +121,4 @@ export function DoDreamInlineLogo({
 }
 
 export default DoDreamLogo;
+export { DoDreamInlineLogo };

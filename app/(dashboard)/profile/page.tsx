@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
-import { PencilIcon } from "@/app/components/Icons";
+import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { PencilIcon } from "@/components/common/Misc/Icons";
 import { useGetMyProfile } from "@/src/users/users";
 
 export default function ProfilePage() {

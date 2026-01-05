@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { DoDreamInlineLogo } from "@/app/components";
+import { DoDreamInlineLogo } from "@/components/common";
 
 export function DirectorSection() {
   return (

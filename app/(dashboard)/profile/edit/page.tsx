@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { DashboardLayout, DarkCard, GoldButton } from "@/app/components";
+import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
 import { useGetMyProfile, useUpdateMyProfile } from "@/src/users/users";
 import { useImageUpload } from "@/lib/hooks";
 import { Spinner } from "@/components/ui";

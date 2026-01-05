@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCompareStore } from "@/stores/useCompareStore";
-import { XIcon } from "../Icons";
+import { XIcon } from "@/components/common/Misc/Icons";
 
 export function CompareFloatingBar() {
   const { actors, removeActor, clearAll, openModal } = useCompareStore();

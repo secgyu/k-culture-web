@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { LandingHeader } from "@/app/components";
-import { CompareFloatingBar, CompareModal } from "@/app/components/compare";
+import { LandingHeader } from "@/components/common";
+import { CompareFloatingBar, CompareModal } from "@/components/features/compare";
 import {
   FilterSidebar,
   FilterBottomSheet,
@@ -13,7 +13,7 @@ import {
   SortButton,
   SortBottomSheet,
   SortOption,
-} from "@/app/components/search";
+} from "@/components/features/search";
 import { useGetActors } from "@/src/actors/actors";
 import { useAuth } from "@/lib/hooks";
 import { Spinner } from "@/components/ui";
