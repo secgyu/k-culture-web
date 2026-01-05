@@ -1,7 +1,7 @@
 "use client";
 
-import { DoDreamLogo } from "@/app/components";
-import Link from "next/link";
+import { MarketingHeader } from "@/app/components/MarketingHeader";
+import { Input, Textarea, Button } from "@/components/ui";
 
 export function AIMatchingContent() {
   return (
@@ -11,36 +11,7 @@ export function AIMatchingContent() {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-900/20 rounded-full blur-3xl" />
       </div>
 
-      <header className="relative z-20 w-full px-6 py-4 flex items-center justify-between border-b border-border">
-        <DoDreamLogo href="/" size="md" className="text-white" />
-
-        <nav className="hidden md:flex items-center gap-8">
-          <Link href="/ai-matching" className="text-gold hover:text-gold-light transition-colors text-sm font-medium">
-            AI 매칭추천
-          </Link>
-          <Link href="/actor-search" className="text-warm-gray hover:text-white transition-colors text-sm">
-            배우&모델 찾기
-          </Link>
-          <Link href="/jobs" className="text-warm-gray hover:text-white transition-colors text-sm">
-            작품구인
-          </Link>
-          <Link href="/notice" className="text-warm-gray hover:text-white transition-colors text-sm">
-            공지사항
-          </Link>
-          <Link
-            href="/profile-register"
-            className="px-4 py-2 border border-muted-gray text-white text-sm rounded-lg hover:bg-luxury-secondary transition-all"
-          >
-            프로필 등록하기
-          </Link>
-        </nav>
-
-        <button className="md:hidden text-white">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </header>
+      <MarketingHeader currentPath="/ai-matching" />
 
       <main className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-80px)] px-6 py-12 opacity-30 blur-[2px]">
         <div className="text-center mb-12">
@@ -57,63 +28,34 @@ export function AIMatchingContent() {
         <div className="w-full max-w-3xl mx-auto">
           <div className="bg-luxury-black/50 backdrop-blur-sm rounded-2xl p-8 mb-6 border border-border">
             <div className="grid md:grid-cols-3 gap-4 mb-6">
-              <div>
-                <label className="block text-muted-foreground text-sm mb-2">작품 이름</label>
-                <input
-                  type="text"
-                  placeholder="작품 이름 입력"
-                  className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground"
-                  disabled
-                />
-              </div>
-              <div>
-                <label className="block text-muted-foreground text-sm mb-2">장르</label>
-                <input
-                  type="text"
-                  placeholder="장르 선택"
-                  className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground"
-                  disabled
-                />
-              </div>
-              <div>
-                <label className="block text-muted-foreground text-sm mb-2">제작 형태</label>
-                <input
-                  type="text"
-                  placeholder="제작 형태 선택"
-                  className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground"
-                  disabled
-                />
-              </div>
+              <Input
+                placeholder="작품 이름 입력"
+                disabled
+                className="bg-luxury-secondary border-border text-muted-gray"
+              />
+              <Input placeholder="장르 선택" disabled className="bg-luxury-secondary border-border text-muted-gray" />
+              <Input
+                placeholder="제작 형태 선택"
+                disabled
+                className="bg-luxury-secondary border-border text-muted-gray"
+              />
             </div>
 
             <div className="mb-6">
-              <label className="block text-muted-foreground text-sm mb-2">시놉시스</label>
-              <textarea
+              <Textarea
                 placeholder="시놉시스를 입력해주세요..."
-                className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground h-32 resize-none"
                 disabled
+                className="bg-luxury-secondary border-border text-muted-gray h-32 resize-none"
               />
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-muted-foreground text-sm mb-2">캐릭터 이름</label>
-                <input
-                  type="text"
-                  placeholder="캐릭터 이름"
-                  className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground"
-                  disabled
-                />
-              </div>
-              <div>
-                <label className="block text-muted-foreground text-sm mb-2">캐릭터 설명</label>
-                <input
-                  type="text"
-                  placeholder="캐릭터에 대해 설명해주세요"
-                  className="w-full bg-luxury-secondary border border-border rounded-lg px-4 py-3 text-muted-gray placeholder-muted-foreground"
-                  disabled
-                />
-              </div>
+              <Input placeholder="캐릭터 이름" disabled className="bg-luxury-secondary border-border text-muted-gray" />
+              <Input
+                placeholder="캐릭터에 대해 설명해주세요"
+                disabled
+                className="bg-luxury-secondary border-border text-muted-gray"
+              />
             </div>
           </div>
 
@@ -124,18 +66,19 @@ export function AIMatchingContent() {
           </div>
 
           <div className="space-y-3">
-            <button
-              className="w-full py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 cursor-not-allowed"
+            <Button
               disabled
+              className="w-full py-4 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 cursor-not-allowed"
             >
               AI 추천 받기
-            </button>
-            <button
-              className="w-full py-4 rounded-xl font-semibold bg-luxury-secondary text-warm-gray border border-border"
+            </Button>
+            <Button
               disabled
+              variant="secondary"
+              className="w-full py-4 bg-luxury-secondary text-warm-gray border-border"
             >
               필터로 직접 찾기
-            </button>
+            </Button>
           </div>
         </div>
       </main>

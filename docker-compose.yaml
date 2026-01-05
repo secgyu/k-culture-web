@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: kculture-postgres
+    environment:
+      POSTGRES_USER: kculture
+      POSTGRES_PASSWORD: kculture
+      POSTGRES_DB: kculture
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: kculture-redis
+    command: redis-server --requirepass kculture
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: kculture-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@kculture.com
+      PGADMIN_DEFAULT_PASSWORD: kculture123
+    ports:
+      - "5051:80"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:

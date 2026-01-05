@@ -1,0 +1,128 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useCompareStore, CompareActor } from "@/stores/useCompareStore";
+import { CheckIcon, PlusIcon } from "@/app/components/Icons";
+import { Badge } from "@/components/ui";
+import { cn } from "@/lib/utils";
+
+interface ActorCardProps {
+  actor: {
+    id: string;
+    name: string;
+    imageUrl?: string;
+    age?: string;
+    filmography?: number;
+    tags?: string[];
+  };
+  isBlurred?: boolean;
+}
+
+export function ActorCard({ actor, isBlurred = false }: ActorCardProps) {
+  const { addActor, removeActor, isInCompare, actors, maxActors } = useCompareStore();
+  const isSelected = isInCompare(Number(actor.id));
+  const isFull = actors.length >= maxActors;
+
+  const handleCompareClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (isSelected) {
+      removeActor(Number(actor.id));
+    } else if (!isFull) {
+      const compareActor: CompareActor = {
+        id: Number(actor.id),
+        name: actor.name,
+        gender: "미정",
+        age: 0,
+        height: 0,
+        weight: 0,
+        work: "",
+        image: actor.imageUrl || "",
+      };
+      addActor(compareActor);
+    }
+  };
+
+  const cardContent = (
+    <div
+      className={cn(
+        "bg-luxury-black rounded-xl overflow-hidden border transition-all duration-200 cursor-pointer active:scale-[0.98]",
+        isSelected ? "border-gold shadow-lg shadow-gold/20" : "border-border hover:border-muted-gray hover:shadow-lg"
+      )}
+    >
+      <div className="relative aspect-[3/4] bg-luxury-secondary">
+        <Image
+          src={actor.imageUrl || `https://images.unsplash.com/photo-1507003211169?w=300&h=400&fit=crop&crop=face`}
+          alt={actor.name}
+          fill
+          className={cn("object-cover", isBlurred && "blur-sm")}
+        />
+
+        {!isBlurred && (
+          <button
+            onClick={handleCompareClick}
+            disabled={!isSelected && isFull}
+            aria-label={isSelected ? "비교에서 제거" : "비교에 추가"}
+            className={cn(
+              "absolute top-2 right-2 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200",
+              isSelected
+                ? "bg-gold text-luxury-black hover:bg-gold-light"
+                : isFull
+                ? "bg-luxury-black/50 text-muted-gray cursor-not-allowed"
+                : "bg-luxury-black/70 text-white hover:bg-gold hover:text-luxury-black backdrop-blur-sm"
+            )}
+          >
+            {isSelected ? <CheckIcon className="w-4 h-4" /> : <PlusIcon className="w-4 h-4" />}
+          </button>
+        )}
+
+        {isBlurred && (
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <div className="text-center">
+              <svg className="w-8 h-8 text-white/80 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
+              <p className="text-white/80 text-caption">로그인하고 보기</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="p-4">
+        <h3 className={cn("text-ivory font-bold mb-2", isBlurred && "blur-sm")}>{isBlurred ? "***" : actor.name}</h3>
+
+        <div className="space-y-1 text-body-sm text-muted-gray mb-3">
+          <div className="flex items-center gap-2">
+            <span>{actor.age || "정보없음"}</span>
+            {actor.filmography && actor.filmography > 0 && (
+              <span className="text-muted-gray">· 작품 {actor.filmography}편</span>
+            )}
+          </div>
+        </div>
+
+        {actor.tags && actor.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {actor.tags.slice(0, 3).map((tag) => (
+              <Badge key={tag} variant="secondary" className="bg-gold/10 text-gold border-0">
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  if (isBlurred) {
+    return <Link href="/login">{cardContent}</Link>;
+  }
+
+  return <Link href={`/actors/${actor.id}`}>{cardContent}</Link>;
+}

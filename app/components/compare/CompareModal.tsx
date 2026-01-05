@@ -1,34 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
 import { useCompareStore } from "@/stores/useCompareStore";
+import { useModal } from "@/lib/hooks";
 import { CompareCard } from "./CompareCard";
 import { XIcon } from "../Icons";
 
 export function CompareModal() {
   const { actors, isModalOpen, closeModal, clearAll } = useCompareStore();
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isModalOpen) {
-        closeModal();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isModalOpen, closeModal]);
-
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isModalOpen]);
+  useModal(isModalOpen, closeModal);
 
   if (!isModalOpen) return null;
 
@@ -57,6 +37,7 @@ export function CompareModal() {
             </button>
           </div>
         </div>
+
         <div className="p-8 overflow-y-auto max-h-[calc(90vh-100px)]">
           {actors.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">

@@ -9,6 +9,7 @@ export { default as FilterModal } from "./FilterModal";
 
 export { DoDreamLogo, DoDreamTextLogo, DoDreamInlineLogo } from "./DoDreamLogo";
 export { LandingHeader } from "./LandingHeader";
+export { MarketingHeader } from "./MarketingHeader";
 
 export { AuthLayout } from "./AuthLayout";
 export { DashboardLayout } from "./DashboardLayout";
