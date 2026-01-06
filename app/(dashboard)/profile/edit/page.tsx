@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
 import { useGetMyProfile, useUpdateMyProfile } from "@/src/users/users";
@@ -9,7 +9,16 @@ import { Spinner } from "@/components/ui";
 import { ProfileImageUpload } from "./_components/ProfileImageUpload";
 import { BasicInfoForm } from "./_components/BasicInfoForm";
 import { ContactForm } from "./_components/ContactForm";
-import { useProfileForm } from "./_hooks/useProfileForm";
+
+interface FormData {
+  name: string;
+  phone: string;
+  introduction: string;
+  height: string;
+  weight: string;
+  gender: string;
+  birthYear: string;
+}
 
 export default function ProfileEditPage() {
   const router = useRouter();
@@ -17,7 +26,20 @@ export default function ProfileEditPage() {
   const updateProfileMutation = useUpdateMyProfile();
 
   const { imageUrl, handleImageChange } = useImageUpload(profileData?.data?.profileImage || "");
-  const { formData, setFormData, handleChange } = useProfileForm();
+
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    phone: "",
+    introduction: "",
+    height: "",
+    weight: "",
+    gender: "남성",
+    birthYear: "1995",
+  });
+
+  const handleChange = useCallback((field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  }, []);
 
   useEffect(() => {
     if (profileData?.data) {

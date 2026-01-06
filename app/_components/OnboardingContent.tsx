@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { DoDreamLogo } from "../components";
+import { DoDreamLogo } from "@/components/common";
 
 function RoleCard({
   title,
