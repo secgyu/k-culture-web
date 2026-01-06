@@ -1,18 +1,5 @@
 import { DarkInput, DarkSelect, DarkTextarea } from "@/components/common";
-
-const GENDER_OPTIONS = [
-  { value: "남성", label: "남성" },
-  { value: "여성", label: "여성" },
-];
-
-const generateYears = () => {
-  const currentYear = new Date().getFullYear();
-  const years = [];
-  for (let i = currentYear - 15; i >= currentYear - 80; i--) {
-    years.push({ value: String(i), label: `${i}년` });
-  }
-  return years;
-};
+import { GENDER_SELECT_OPTIONS, BIRTH_YEAR_OPTIONS } from "@/lib/constants";
 
 interface BasicInfoFormProps {
   formData: {
@@ -34,13 +21,13 @@ export function BasicInfoForm({ formData, onChange }: BasicInfoFormProps) {
       <div className="grid grid-cols-2 gap-4">
         <DarkSelect
           label="성별"
-          options={GENDER_OPTIONS}
+          options={GENDER_SELECT_OPTIONS}
           value={formData.gender}
           onChange={(value) => onChange("gender", value)}
         />
         <DarkSelect
           label="출생년도"
-          options={generateYears()}
+          options={BIRTH_YEAR_OPTIONS}
           value={formData.birthYear}
           onChange={(value) => onChange("birthYear", value)}
         />

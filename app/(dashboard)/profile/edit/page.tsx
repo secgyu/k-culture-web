@@ -35,15 +35,16 @@ export default function ProfileEditPage() {
   }, [profileData, setFormData]);
 
   const handleSave = async () => {
-    const formDataToSend = new FormData();
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("phone", formData.phone);
-    formDataToSend.append("bio", formData.introduction);
-    if (formData.height) formDataToSend.append("height", formData.height);
-    if (formData.weight) formDataToSend.append("weight", formData.weight);
-
     updateProfileMutation.mutate(
-      { data: formDataToSend as any },
+      {
+        data: {
+          name: formData.name,
+          phone: formData.phone,
+          bio: formData.introduction,
+          height: formData.height ? Number(formData.height) : undefined,
+          weight: formData.weight ? Number(formData.weight) : undefined,
+        },
+      },
       {
         onSuccess: () => router.push("/profile"),
       }

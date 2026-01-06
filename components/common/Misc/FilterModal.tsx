@@ -1,33 +1,32 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect } from "react";
+import { useScrollPicker, type ScrollPickerOption } from "@/lib/hooks";
+import { SCROLL_PICKER, ANIMATION_DURATION } from "@/lib/constants";
 
-export interface FilterModalOption {
-  value: string;
-  label: string;
-}
+export type { ScrollPickerOption as FilterModalOption };
 
 interface FilterModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  options: FilterModalOption[];
+  options: ScrollPickerOption[];
   selectedValue?: string;
   onSelect: (value: string) => void;
 }
 
-const ITEM_HEIGHT = 56;
-
 export default function FilterModal({ isOpen, onClose, title, options, selectedValue, onSelect }: FilterModalProps) {
-  const [localSelected, setLocalSelected] = useState(selectedValue || "");
   const [isAnimating, setIsAnimating] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const isScrollingRef = useRef(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const isClosingRef = useRef(false);
 
-  const selectedIndex = options.findIndex((opt) => opt.value === localSelected);
+  const {
+    scrollContainerRef,
+    localSelected,
+    handleScroll,
+    handleItemClick,
+    cleanup,
+    isClosingRef,
+  } = useScrollPicker({ options, selectedValue, isOpen });
 
   useEffect(() => {
     if (isOpen) {
@@ -41,83 +40,13 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
       const timer = setTimeout(() => {
         setIsVisible(false);
         isClosingRef.current = false;
-      }, 300);
+      }, ANIMATION_DURATION.normal);
       return () => clearTimeout(timer);
     }
-  }, [isOpen]);
-
-  useEffect(() => {
-    setLocalSelected(selectedValue || "");
-  }, [selectedValue, isOpen]);
-
-  useEffect(() => {
-    if (isOpen && scrollContainerRef.current && options.length > 0) {
-      const timer = setTimeout(() => {
-        const container = scrollContainerRef.current;
-        if (!container) return;
-
-        const targetIndex = selectedIndex >= 0 ? selectedIndex : 0;
-        const targetScroll = targetIndex * ITEM_HEIGHT;
-        container.scrollTop = targetScroll;
-
-        if (!localSelected && options.length > 0) {
-          setLocalSelected(options[0].value);
-        }
-      }, 100);
-      return () => clearTimeout(timer);
-    }
-  }, [isOpen, selectedIndex, options, localSelected]);
-
-  const handleScroll = useCallback(() => {
-    if (!scrollContainerRef.current || options.length === 0 || isClosingRef.current) return;
-
-    isScrollingRef.current = true;
-
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current);
-    }
-
-    scrollTimeoutRef.current = setTimeout(() => {
-      const container = scrollContainerRef.current;
-      if (!container || isClosingRef.current) return;
-
-      const scrollTop = container.scrollTop;
-      const centerIndex = Math.round(scrollTop / ITEM_HEIGHT);
-      const clampedIndex = Math.max(0, Math.min(centerIndex, options.length - 1));
-
-      const targetScroll = clampedIndex * ITEM_HEIGHT;
-      container.scrollTo({
-        top: targetScroll,
-        behavior: "smooth",
-      });
-
-      if (options[clampedIndex] && !isClosingRef.current) {
-        setLocalSelected(options[clampedIndex].value);
-      }
-
-      isScrollingRef.current = false;
-    }, 100);
-  }, [options]);
-
-  const handleItemClick = (index: number) => {
-    if (!scrollContainerRef.current) return;
-
-    const targetScroll = index * ITEM_HEIGHT;
-    scrollContainerRef.current.scrollTo({
-      top: targetScroll,
-      behavior: "smooth",
-    });
-
-    setLocalSelected(options[index].value);
-  };
+  }, [isOpen, isClosingRef]);
 
   const handleConfirm = () => {
-    isClosingRef.current = true;
-
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current);
-      scrollTimeoutRef.current = null;
-    }
+    cleanup();
 
     if (localSelected) {
       onSelect(localSelected);
@@ -131,19 +60,10 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
     }
   };
 
-  useEffect(() => {
-    return () => {
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
-  }, []);
-
   if (!isVisible) return null;
 
-  const paddingItems = 2;
-  const listHeight = ITEM_HEIGHT * 5;
-  const gradientHeight = ITEM_HEIGHT * 2;
+  const listHeight = SCROLL_PICKER.itemHeight * SCROLL_PICKER.visibleItems;
+  const gradientHeight = SCROLL_PICKER.itemHeight * 2;
 
   return (
     <div
@@ -175,7 +95,7 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
             className="absolute left-5 right-5 rounded-lg pointer-events-none z-0 bg-luxury-secondary"
             style={{
               top: gradientHeight,
-              height: ITEM_HEIGHT,
+              height: SCROLL_PICKER.itemHeight,
             }}
           />
 
@@ -194,7 +114,7 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
             className="absolute inset-0 overflow-y-auto hide-scrollbar snap-y snap-mandatory"
             onScroll={handleScroll}
           >
-            {Array.from({ length: paddingItems }).map((_, i) => (
+            {Array.from({ length: SCROLL_PICKER.paddingItems }).map((_, i) => (
               <div key={`top-${i}`} className="h-14" />
             ))}
 
@@ -217,7 +137,7 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
               );
             })}
 
-            {Array.from({ length: paddingItems }).map((_, i) => (
+            {Array.from({ length: SCROLL_PICKER.paddingItems }).map((_, i) => (
               <div key={`bottom-${i}`} className="h-14" />
             ))}
           </div>

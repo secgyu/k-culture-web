@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { DoDreamLogo } from "@/components/common";
 import { HomeIcon, UserIcon, FolderIcon, HeartIcon, SettingsIcon, LogoutIcon, SearchIcon } from "@/components/common/Misc/Icons";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -27,7 +28,14 @@ const agencyNavItems = [
 
 export function DashboardLayout({ children, userType = "actor" }: DashboardLayoutProps) {
   const pathname = usePathname();
+  const router = useRouter();
+  const logout = useAuthStore((state) => state.logout);
   const navItems = userType === "agency" ? agencyNavItems : actorNavItems;
+
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
 
   return (
     <div className="min-h-screen bg-luxury-black flex">
@@ -61,7 +69,10 @@ export function DashboardLayout({ children, userType = "actor" }: DashboardLayou
         </nav>
 
         <div className="p-4 border-t border-border">
-          <button className="flex items-center gap-3 px-4 py-3 w-full text-muted-gray hover:text-red-400 transition-colors rounded-xl hover:bg-luxury-tertiary">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-4 py-3 w-full text-muted-gray hover:text-red-400 transition-colors rounded-xl hover:bg-luxury-tertiary"
+          >
             <LogoutIcon className="w-5 h-5" />
             <span className="font-medium">로그아웃</span>
           </button>

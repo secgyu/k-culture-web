@@ -11,7 +11,7 @@ interface Option {
 interface DarkSelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "onChange"> {
   label?: string;
   error?: string;
-  options: Option[];
+  options: readonly Option[] | Option[];
   placeholder?: string;
   onChange?: (value: string) => void;
 }

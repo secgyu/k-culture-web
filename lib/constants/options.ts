@@ -4,6 +4,19 @@ export const AGE_RANGE_OPTIONS = ["10대", "20대", "30대", "40대", "50대", "
 // 성별 옵션
 export const GENDER_OPTIONS = ["남성", "여성", "기타"] as const;
 
+export const GENDER_SELECT_OPTIONS = [
+  { value: "남성", label: "남성" },
+  { value: "여성", label: "여성" },
+] as const;
+
+export const BIRTH_YEAR_OPTIONS = (() => {
+  const currentYear = new Date().getFullYear();
+  return Array.from({ length: 66 }, (_, i) => {
+    const year = currentYear - 15 - i;
+    return { value: String(year), label: `${year}년` };
+  });
+})();
+
 // 역할 유형 옵션
 export const ROLE_TYPE_OPTIONS = ["주연", "조연", "단역", "엑스트라", "특별출연"] as const;
 

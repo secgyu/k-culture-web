@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { LandingHeader } from "@/components/common";
 import { ProfileSlide, SearchFilterSlide, AIMatchingSlide, MobileProfileSlide } from "./slides";
+import { CAROUSEL_INTERVAL } from "@/lib/constants";
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -11,7 +12,7 @@ export function HeroSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % 4);
-    }, 5000);
+    }, CAROUSEL_INTERVAL);
     return () => clearInterval(interval);
   }, []);
 
