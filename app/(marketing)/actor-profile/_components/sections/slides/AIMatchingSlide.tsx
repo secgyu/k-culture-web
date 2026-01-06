@@ -1,6 +1,8 @@
 "use client";
 
-export function AIMatchingSlide() {
+import { memo } from "react";
+
+export const AIMatchingSlide = memo(function AIMatchingSlide() {
   return (
     <div className="bg-luxury-secondary rounded-2xl overflow-hidden shadow-2xl p-8 max-w-3xl mx-auto">
       <h3 className="text-heading-xl text-white text-center mb-2">AI 매칭 기술을 통해</h3>
@@ -24,4 +26,4 @@ export function AIMatchingSlide() {
       </button>
     </div>
   );
-}
+});

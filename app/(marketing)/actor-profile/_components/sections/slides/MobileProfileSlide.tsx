@@ -1,8 +1,9 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 
-export function MobileProfileSlide() {
+export const MobileProfileSlide = memo(function MobileProfileSlide() {
   return (
     <div className="bg-gradient-to-br from-champagne to-ivory rounded-2xl overflow-hidden shadow-2xl max-w-5xl mx-auto">
       <div className="flex">
@@ -122,4 +123,4 @@ export function MobileProfileSlide() {
       </div>
     </div>
   );
-}
+});

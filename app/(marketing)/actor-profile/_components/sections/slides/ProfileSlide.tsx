@@ -1,9 +1,10 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 import { DoDreamLogo } from "@/components/common";
 
-export function ProfileSlide() {
+export const ProfileSlide = memo(function ProfileSlide() {
   return (
     <div className="flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden shadow-2xl max-w-4xl mx-auto">
       <div className="relative w-full md:w-2/5 aspect-[3/4] md:aspect-auto min-h-[400px]">
@@ -95,4 +96,4 @@ export function ProfileSlide() {
       </div>
     </div>
   );
-}
+});

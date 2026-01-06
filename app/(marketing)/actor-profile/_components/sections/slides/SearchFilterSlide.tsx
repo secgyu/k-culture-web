@@ -1,8 +1,9 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 
-export function SearchFilterSlide() {
+export const SearchFilterSlide = memo(function SearchFilterSlide() {
   return (
     <div className="bg-luxury-secondary rounded-2xl overflow-hidden shadow-2xl p-6 max-w-5xl mx-auto border border-gold/10">
       <p className="text-ivory text-center text-body-lg mb-6">오늘보다 내일이 더 빛날 배우분들을 만나보세요.</p>
@@ -96,4 +97,4 @@ export function SearchFilterSlide() {
       </div>
     </div>
   );
-}
+});

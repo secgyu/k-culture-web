@@ -19,14 +19,11 @@ export default function FilterModal({ isOpen, onClose, title, options, selectedV
   const [isAnimating, setIsAnimating] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  const {
-    scrollContainerRef,
-    localSelected,
-    handleScroll,
-    handleItemClick,
-    cleanup,
-    isClosingRef,
-  } = useScrollPicker({ options, selectedValue, isOpen });
+  const { scrollContainerRef, localSelected, handleScroll, handleItemClick, cleanup, isClosingRef } = useScrollPicker({
+    options,
+    selectedValue,
+    isOpen,
+  });
 
   useEffect(() => {
     if (isOpen) {

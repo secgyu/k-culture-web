@@ -1,117 +1,93 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import { AuthLayout } from "@/components/common";
 import { CheckIcon } from "@/components/common/Misc/Icons";
 import { Button, FormField, Input, PasswordInput } from "@/components/ui";
 import { useSignup } from "@/src/auth/auth";
+import { signupFormSchema, type SignupFormData } from "@/lib/validations";
 
 export default function ActorSignupPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [termsAgreed, setTermsAgreed] = useState(false);
-  const [privacyAgreed, setPrivacyAgreed] = useState(false);
-  const [marketingAgreed, setMarketingAgreed] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
   const signupMutation = useSignup();
 
-  const allAgreed = termsAgreed && privacyAgreed;
+  const form = useForm<SignupFormData>({
+    resolver: zodResolver(signupFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      termsAgreed: false,
+      privacyAgreed: false,
+      marketingAgreed: false,
+    },
+  });
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors, isValid },
+  } = form;
+
+  const termsAgreed = watch("termsAgreed");
+  const privacyAgreed = watch("privacyAgreed");
+  const marketingAgreed = watch("marketingAgreed");
+
+  const allAgreed = termsAgreed && privacyAgreed && marketingAgreed;
 
   const handleAgreeAll = () => {
-    const newState = !(termsAgreed && privacyAgreed && marketingAgreed);
-    setTermsAgreed(newState);
-    setPrivacyAgreed(newState);
-    setMarketingAgreed(newState);
+    const newState = !allAgreed;
+    setValue("termsAgreed", newState);
+    setValue("privacyAgreed", newState);
+    setValue("marketingAgreed", newState);
   };
 
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!email) {
-      newErrors.email = "이메일을 입력해주세요";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = "올바른 이메일 형식이 아닙니다";
-    }
-
-    if (!password) {
-      newErrors.password = "비밀번호를 입력해주세요";
-    } else if (password.length < 8) {
-      newErrors.password = "비밀번호는 8자 이상이어야 합니다";
-    }
-
-    if (password !== passwordConfirm) {
-      newErrors.passwordConfirm = "비밀번호가 일치하지 않습니다";
-    }
-
-    if (!termsAgreed || !privacyAgreed) {
-      newErrors.terms = "필수 약관에 동의해주세요";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-
+  const onSubmit = handleSubmit((data) => {
     signupMutation.mutate(
       {
         data: {
-          email,
-          password,
-          passwordConfirm,
+          email: data.email,
+          password: data.password,
+          passwordConfirm: data.passwordConfirm,
           type: "actor",
-          termsAgreed,
-          privacyAgreed,
-          marketingAgreed,
+          termsAgreed: data.termsAgreed,
+          privacyAgreed: data.privacyAgreed,
+          marketingAgreed: data.marketingAgreed || false,
         },
       },
       {
         onSuccess: () => {
+          toast.success("회원가입이 완료되었습니다");
           router.push("/onboarding/actor/step1");
         },
         onError: () => {
-          setErrors({ email: "회원가입에 실패했습니다" });
+          toast.error("회원가입에 실패했습니다");
         },
       }
     );
-  };
-
-  const isValid = email && password.length >= 8 && password === passwordConfirm && allAgreed;
+  });
 
   return (
     <AuthLayout title="배우 회원가입" subtitle="프로필을 등록하고 캐스팅 기회를 받으세요">
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <FormField label="이메일" error={errors.email}>
-          <Input
-            type="email"
-            placeholder="이메일 주소를 입력하세요"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={!!errors.email}
-          />
+      <form onSubmit={onSubmit} className="space-y-5">
+        <FormField label="이메일" error={errors.email?.message}>
+          <Input type="email" placeholder="이메일 주소를 입력하세요" {...register("email")} error={!!errors.email} />
         </FormField>
 
-        <FormField label="비밀번호" error={errors.password} hint="영문, 숫자를 포함한 8자 이상">
-          <PasswordInput
-            placeholder="8자 이상 입력하세요"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={!!errors.password}
-          />
+        <FormField label="비밀번호" error={errors.password?.message} hint="영문, 숫자를 포함한 8자 이상">
+          <PasswordInput placeholder="8자 이상 입력하세요" {...register("password")} error={!!errors.password} />
         </FormField>
 
-        <FormField label="비밀번호 확인" error={errors.passwordConfirm}>
+        <FormField label="비밀번호 확인" error={errors.passwordConfirm?.message}>
           <PasswordInput
             placeholder="비밀번호를 다시 입력하세요"
-            value={passwordConfirm}
-            onChange={(e) => setPasswordConfirm(e.target.value)}
+            {...register("passwordConfirm")}
             error={!!errors.passwordConfirm}
           />
         </FormField>
@@ -136,7 +112,7 @@ export default function ActorSignupPage() {
             <label className="flex items-center gap-3 cursor-pointer group">
               <button
                 type="button"
-                onClick={() => setTermsAgreed(!termsAgreed)}
+                onClick={() => setValue("termsAgreed", !termsAgreed)}
                 className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
                   termsAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
                 }`}
@@ -151,7 +127,7 @@ export default function ActorSignupPage() {
             <label className="flex items-center gap-3 cursor-pointer group">
               <button
                 type="button"
-                onClick={() => setPrivacyAgreed(!privacyAgreed)}
+                onClick={() => setValue("privacyAgreed", !privacyAgreed)}
                 className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
                   privacyAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
                 }`}
@@ -166,7 +142,7 @@ export default function ActorSignupPage() {
             <label className="flex items-center gap-3 cursor-pointer group">
               <button
                 type="button"
-                onClick={() => setMarketingAgreed(!marketingAgreed)}
+                onClick={() => setValue("marketingAgreed", !marketingAgreed)}
                 className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
                   marketingAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
                 }`}
@@ -178,7 +154,9 @@ export default function ActorSignupPage() {
               </span>
             </label>
           </div>
-          {errors.terms && <p className="text-sm text-red-400">{errors.terms}</p>}
+          {(errors.termsAgreed || errors.privacyAgreed) && (
+            <p className="text-sm text-red-400">{errors.termsAgreed?.message || errors.privacyAgreed?.message}</p>
+          )}
         </div>
 
         <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={signupMutation.isPending}>
