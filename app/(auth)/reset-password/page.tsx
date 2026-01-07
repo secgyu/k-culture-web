@@ -1,75 +1,65 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthLayout } from "@/components/common";
 import { Button, FormField, PasswordInput, Spinner } from "@/components/ui";
 import { useResetPassword } from "@/src/auth/auth";
+import { resetPasswordFormSchema, type ResetPasswordFormData } from "@/lib/validations";
 
 function ResetPasswordForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token") || "";
-
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
   const resetPasswordMutation = useResetPassword();
 
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isValid },
+  } = useForm<ResetPasswordFormData>({
+    resolver: zodResolver(resetPasswordFormSchema),
+    mode: "onChange",
+    defaultValues: {
+      password: "",
+      passwordConfirm: "",
+    },
+  });
 
-    if (!password) {
-      newErrors.password = "비밀번호를 입력해주세요";
-    } else if (password.length < 8) {
-      newErrors.password = "비밀번호는 8자 이상이어야 합니다";
-    }
-
-    if (password !== passwordConfirm) {
-      newErrors.passwordConfirm = "비밀번호가 일치하지 않습니다";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-
+  const onSubmit = handleSubmit((data) => {
     resetPasswordMutation.mutate(
-      { data: { token, password, passwordConfirm } },
+      { data: { token, ...data } },
       {
         onSuccess: () => {
           router.push("/login");
         },
         onError: () => {
-          setErrors({ password: "비밀번호 재설정에 실패했습니다" });
+          setError("root", {
+            message: "비밀번호 재설정에 실패했습니다",
+          });
         },
       }
     );
-  };
-
-  const isValid = password.length >= 8 && password === passwordConfirm;
+  });
 
   return (
     <AuthLayout title="비밀번호 재설정" subtitle="새로운 비밀번호를 입력해주세요">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <FormField label="새 비밀번호" error={errors.password} hint="영문, 숫자를 포함한 8자 이상">
+      <form onSubmit={onSubmit} className="space-y-6">
+        <FormField label="새 비밀번호" error={errors.password?.message || errors.root?.message} hint="영문, 숫자를 포함한 8자 이상">
           <PasswordInput
             placeholder="8자 이상 입력하세요"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={!!errors.password}
+            {...register("password")}
+            error={!!errors.password || !!errors.root}
           />
         </FormField>
 
-        <FormField label="새 비밀번호 확인" error={errors.passwordConfirm}>
+        <FormField label="새 비밀번호 확인" error={errors.passwordConfirm?.message}>
           <PasswordInput
             placeholder="비밀번호를 다시 입력하세요"
-            value={passwordConfirm}
-            onChange={(e) => setPasswordConfirm(e.target.value)}
+            {...register("passwordConfirm")}
             error={!!errors.passwordConfirm}
           />
         </FormField>

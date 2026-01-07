@@ -2,37 +2,47 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthLayout } from "@/components/common";
-import { Button, Input } from "@/components/ui";
+import { Button, FormField, Input } from "@/components/ui";
 import { useForgotPassword } from "@/src/auth/auth";
+import { forgotPasswordFormSchema, type ForgotPasswordFormData } from "@/lib/validations";
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
-  const [error, setError] = useState("");
-
+  const [submittedEmail, setSubmittedEmail] = useState("");
   const forgotPasswordMutation = useForgotPassword();
 
-  const isValid = email.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isValid },
+  } = useForm<ForgotPasswordFormData>({
+    resolver: zodResolver(forgotPasswordFormSchema),
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+    },
+  });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isValid) return;
-
-    setError("");
-
+  const onSubmit = handleSubmit((data) => {
     forgotPasswordMutation.mutate(
-      { data: { email } },
+      { data },
       {
         onSuccess: () => {
+          setSubmittedEmail(data.email);
           setSent(true);
         },
         onError: () => {
-          setError("이메일 발송에 실패했습니다. 다시 시도해주세요.");
+          setError("root", {
+            message: "이메일 발송에 실패했습니다. 다시 시도해주세요.",
+          });
         },
       }
     );
-  };
+  });
 
   if (sent) {
     return (
@@ -44,7 +54,7 @@ export default function ForgotPasswordPage() {
             </svg>
           </div>
           <p className="text-muted-gray">
-            <span className="text-ivory font-medium">{email}</span>
+            <span className="text-ivory font-medium">{submittedEmail}</span>
             <br />
             으로 비밀번호 재설정 링크를 발송했습니다.
             <br />
@@ -62,19 +72,16 @@ export default function ForgotPasswordPage() {
 
   return (
     <AuthLayout title="비밀번호 찾기" subtitle="가입한 이메일로 재설정 링크를 보내드립니다">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2">
-          <label className="block text-sm font-medium text-warm-gray">이메일</label>
+      <form onSubmit={onSubmit} className="space-y-6">
+        <FormField label="이메일" error={errors.email?.message || errors.root?.message}>
           <Input
             type="email"
             placeholder="가입한 이메일 주소를 입력하세요"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={!!error}
+            {...register("email")}
+            error={!!errors.email || !!errors.root}
             inputSize="lg"
           />
-          {error && <p className="text-sm text-red-400">{error}</p>}
-        </div>
+        </FormField>
 
         <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={forgotPasswordMutation.isPending}>
           재설정 링크 발송

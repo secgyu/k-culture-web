@@ -1,33 +1,38 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { AuthLayout } from "@/components/common";
 import { Button, FormField, Input, PasswordInput } from "@/components/ui";
 import { useLogin } from "@/src/auth/auth";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { loginFormSchema, type LoginFormData } from "@/lib/validations";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const login = useAuthStore((state) => state.login);
-
   const loginMutation = useLogin();
 
-  const isValid = email.length > 0 && password.length >= 8;
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isValid },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginFormSchema),
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isValid) return;
-
-    setError("");
-
+  const onSubmit = handleSubmit((data) => {
     loginMutation.mutate(
-      { data: { email, password } },
+      { data },
       {
         onSuccess: (response) => {
           if (response.data) {
@@ -40,32 +45,32 @@ export default function LoginPage() {
           router.push("/dashboard");
         },
         onError: () => {
-          setError("이메일 또는 비밀번호가 올바르지 않습니다.");
+          setError("root", {
+            message: "이메일 또는 비밀번호가 올바르지 않습니다.",
+          });
           toast.error("이메일 또는 비밀번호가 올바르지 않습니다");
         },
       }
     );
-  };
+  });
 
   return (
     <AuthLayout title="로그인" subtitle="두드림에 오신 것을 환영합니다">
-      <form onSubmit={handleLogin} className="space-y-6">
-        <FormField label="이메일" error={error ? " " : undefined}>
+      <form onSubmit={onSubmit} className="space-y-6">
+        <FormField label="이메일" error={errors.email?.message || errors.root?.message}>
           <Input
             type="email"
             placeholder="이메일 주소를 입력하세요"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={!!error}
+            {...register("email")}
+            error={!!errors.email || !!errors.root}
           />
         </FormField>
 
-        <FormField label="비밀번호" error={error}>
+        <FormField label="비밀번호" error={errors.password?.message}>
           <PasswordInput
             placeholder="비밀번호를 입력하세요"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={!!error}
+            {...register("password")}
+            error={!!errors.password || !!errors.root}
           />
         </FormField>
 
