@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { AuthLayout } from "@/components/common";
 import { Button, FormField, Input, PasswordInput } from "@/components/ui";
 import { useLogin } from "@/src/auth/auth";
@@ -27,15 +28,16 @@ export default function LoginPage() {
       { data: { email, password } },
       {
         onSuccess: (response) => {
-          // 토큰 저장 (실제 구현시 secure storage 사용)
           if (response.data) {
             localStorage.setItem("accessToken", response.data.accessToken || "");
             localStorage.setItem("refreshToken", response.data.refreshToken || "");
           }
+          toast.success("로그인 성공!");
           router.push("/dashboard");
         },
         onError: () => {
           setError("이메일 또는 비밀번호가 올바르지 않습니다.");
+          toast.error("이메일 또는 비밀번호가 올바르지 않습니다");
         },
       }
     );

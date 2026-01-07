@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import { AuthLayout } from "@/components/common";
 import { CheckIcon } from "@/components/common/Misc/Icons";
 import { Button, FormField, Input, PasswordInput } from "@/components/ui";
@@ -62,7 +63,11 @@ export default function AgencySignupPage() {
       },
       {
         onSuccess: () => {
+          toast.success("회원가입이 완료되었습니다");
           router.push("/onboarding/agency/step1");
+        },
+        onError: () => {
+          toast.error("회원가입에 실패했습니다");
         },
       }
     );

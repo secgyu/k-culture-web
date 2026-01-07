@@ -57,6 +57,22 @@
   --sidebar-ring: #d4af37;
 }
 
+/* 접근성: 전역 Focus Indicators */
+*:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
 @theme inline {
   /* 골드 럭셔리 커스텀 컬러 */
   --color-gold: var(--gold);

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
 import { useGetMyProfile, useUpdateMyProfile } from "@/src/users/users";
 import { useImageUpload } from "@/lib/hooks";
@@ -60,7 +61,13 @@ export default function ProfileEditPage() {
         },
       },
       {
-        onSuccess: () => router.push("/profile"),
+        onSuccess: () => {
+          toast.success("프로필이 저장되었습니다");
+          router.push("/profile");
+        },
+        onError: () => {
+          toast.error("프로필 저장에 실패했습니다");
+        },
       }
     );
   });
