@@ -5,33 +5,53 @@ interface AuthState {
   isAuthenticated: boolean;
   userType: "actor" | "agency" | null;
   accessToken: string | null;
-  login: (token: string, type: "actor" | "agency") => void;
+  refreshToken: string | null;
+  login: (accessToken: string, refreshToken: string, type: "actor" | "agency") => void;
   logout: () => void;
   setUserType: (type: "actor" | "agency") => void;
+  setTokens: (accessToken: string, refreshToken: string) => void;
+  clearTokens: () => void;
+  getAccessToken: () => string | null;
+  getRefreshToken: () => string | null;
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       isAuthenticated: false,
       userType: null,
       accessToken: null,
-      login: (token, type) =>
+      refreshToken: null,
+      login: (accessToken, refreshToken, type) =>
         set({
           isAuthenticated: true,
           userType: type,
-          accessToken: token,
+          accessToken,
+          refreshToken,
         }),
       logout: () =>
         set({
           isAuthenticated: false,
           userType: null,
           accessToken: null,
+          refreshToken: null,
         }),
       setUserType: (type) =>
         set({
           userType: type,
         }),
+      setTokens: (accessToken, refreshToken) =>
+        set({
+          accessToken,
+          refreshToken,
+        }),
+      clearTokens: () =>
+        set({
+          accessToken: null,
+          refreshToken: null,
+        }),
+      getAccessToken: () => get().accessToken,
+      getRefreshToken: () => get().refreshToken,
     }),
     {
       name: "auth-storage",

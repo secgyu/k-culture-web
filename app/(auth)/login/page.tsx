@@ -7,12 +7,14 @@ import { toast } from "sonner";
 import { AuthLayout } from "@/components/common";
 import { Button, FormField, Input, PasswordInput } from "@/components/ui";
 import { useLogin } from "@/src/auth/auth";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const login = useAuthStore((state) => state.login);
 
   const loginMutation = useLogin();
 
@@ -29,8 +31,10 @@ export default function LoginPage() {
       {
         onSuccess: (response) => {
           if (response.data) {
-            localStorage.setItem("accessToken", response.data.accessToken || "");
-            localStorage.setItem("refreshToken", response.data.refreshToken || "");
+            const { accessToken, refreshToken, user } = response.data;
+            if (accessToken && refreshToken && user) {
+              login(accessToken, refreshToken, user.type);
+            }
           }
           toast.success("로그인 성공!");
           router.push("/dashboard");

@@ -6,10 +6,12 @@ import { Button } from "@/components/ui";
 import { SettingsIcon, UserIcon, LogoutIcon } from "@/components/common/Misc/Icons";
 import { useGetNotificationSettings, useUpdateNotificationSettings, useGetMyProfile } from "@/src/users/users";
 import { useLogout, useDeleteAccount } from "@/src/auth/auth";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 export default function SettingsPage() {
   const { data: profileData } = useGetMyProfile();
   const { data: settingsData, isLoading } = useGetNotificationSettings();
+  const logout = useAuthStore((state) => state.logout);
 
   const [castingNotification, setCastingNotification] = useState(true);
   const [messageNotification, setMessageNotification] = useState(true);
@@ -48,8 +50,7 @@ export default function SettingsPage() {
     if (confirm("로그아웃 하시겠습니까?")) {
       logoutMutation.mutate(undefined, {
         onSuccess: () => {
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("refreshToken");
+          logout();
           window.location.href = "/login";
         },
       });
@@ -60,8 +61,7 @@ export default function SettingsPage() {
     if (confirm("정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.")) {
       deleteAccountMutation.mutate(undefined, {
         onSuccess: () => {
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("refreshToken");
+          logout();
           window.location.href = "/";
         },
       });

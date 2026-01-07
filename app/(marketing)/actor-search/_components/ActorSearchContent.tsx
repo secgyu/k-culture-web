@@ -15,13 +15,13 @@ import {
   SortOption,
 } from "@/components/features/search";
 import { useGetActors } from "@/src/actors/actors";
-import { useAuth } from "@/lib/hooks";
+import { useAuthStore } from "@/stores/useAuthStore";
 import { Spinner } from "@/components/ui";
 import { ActorCard } from "./ActorCard";
 
 export function ActorSearchContent() {
   const searchParams = useSearchParams();
-  const { isLoggedIn } = useAuth();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [isSortSheetOpen, setIsSortSheetOpen] = useState(false);
   const [page, setPage] = useState(1);
 
@@ -47,7 +47,7 @@ export function ActorSearchContent() {
           </h1>
         </div>
 
-        {!isLoggedIn && (
+        {!isAuthenticated && (
           <div className="bg-gradient-to-r from-gold/20 to-gold/10 rounded-2xl p-4 mb-8 border border-gold/30 max-w-4xl mx-auto">
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-3">
@@ -96,7 +96,7 @@ export function ActorSearchContent() {
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-6">
                 {actors.map((actor, index) => (
-                  <ActorCard key={actor.id} actor={actor} isBlurred={!isLoggedIn && index >= 4} />
+                  <ActorCard key={actor.id} actor={actor} isBlurred={!isAuthenticated && index >= 4} />
                 ))}
               </div>
             )}
