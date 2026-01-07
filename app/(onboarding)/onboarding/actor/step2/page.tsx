@@ -4,7 +4,8 @@ import { useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
-import { GoldButton, DarkTextarea } from "@/components/common";
+import { DarkTextarea } from "@/components/common";
+import { Button } from "@/components/ui";
 import { CameraIcon } from "@/components/common/Misc/Icons";
 import { ImageUploadGuide } from "@/components/features/profile";
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
@@ -112,12 +113,12 @@ export default function ActorOnboardingStep2() {
         />
 
         <div className="flex gap-3 pt-4">
-          <GoldButton variant="secondary" fullWidth onClick={handleSkip}>
+          <Button variant="gold-secondary" fullWidth onClick={handleSkip}>
             건너뛰기
-          </GoldButton>
-          <GoldButton fullWidth disabled={!isValid} onClick={handleNext}>
+          </Button>
+          <Button variant="gold" fullWidth disabled={!isValid} onClick={handleNext}>
             다음
-          </GoldButton>
+          </Button>
         </div>
       </div>
     </OnboardingLayout>

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
-import { GoldButton } from "@/components/common";
+import { Button } from "@/components/ui";
 import { XMarkIcon } from "@/components/common/Misc/Icons";
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
 
@@ -109,12 +109,12 @@ export default function ActorOnboardingStep3() {
         </div>
 
         <div className="flex gap-3 pt-4">
-          <GoldButton variant="secondary" fullWidth onClick={handleSkip}>
+          <Button variant="gold-secondary" fullWidth onClick={handleSkip}>
             건너뛰기
-          </GoldButton>
-          <GoldButton fullWidth onClick={handleComplete}>
+          </Button>
+          <Button variant="gold" fullWidth onClick={handleComplete}>
             완료
-          </GoldButton>
+          </Button>
         </div>
       </div>
     </OnboardingLayout>

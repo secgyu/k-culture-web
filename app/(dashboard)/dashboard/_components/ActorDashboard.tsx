@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { DarkCard, GoldButton } from "@/components/common";
+import { DarkCard } from "@/components/common";
+import { Button } from "@/components/ui";
 import { EyeIcon, HeartIcon, PhoneIcon, PlusIcon } from "@/components/common/Misc/Icons";
 import { useGetDashboardStats } from "@/src/dashboard/dashboard";
 import { Spinner } from "@/components/ui";
@@ -32,9 +33,9 @@ export function ActorDashboard() {
           <p className="text-muted-gray mt-1">내 활동 현황을 확인하세요</p>
         </div>
         <Link href="/profile/edit">
-          <GoldButton variant="outline" size="sm">
+          <Button variant="gold-outline" size="sm">
             프로필 수정
-          </GoldButton>
+          </Button>
         </Link>
       </div>
 
@@ -53,14 +54,14 @@ export function ActorDashboard() {
         <p className="text-sm text-muted-gray">프로필을 완성하면 더 많은 캐스팅 기회를 얻을 수 있습니다</p>
         <div className="mt-4 flex gap-2">
           <Link href="/profile/filmography">
-            <GoldButton variant="ghost" size="sm">
+            <Button variant="gold-ghost" size="sm">
               <PlusIcon className="w-4 h-4 mr-1" /> 필모그래피 추가
-            </GoldButton>
+            </Button>
           </Link>
           <Link href="/profile/showreel">
-            <GoldButton variant="ghost" size="sm">
+            <Button variant="gold-ghost" size="sm">
               <PlusIcon className="w-4 h-4 mr-1" /> 쇼릴 추가
-            </GoldButton>
+            </Button>
           </Link>
         </div>
       </DarkCard>

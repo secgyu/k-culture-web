@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { DashboardLayout, DarkCard, GoldButton, DarkInput, DarkSelect, DarkTextarea } from "@/components/common";
+import { DashboardLayout, DarkCard, DarkInput, DarkSelect, DarkTextarea } from "@/components/common";
+import { Button } from "@/components/ui";
 
 const PROJECT_TYPES = [
   { value: "영화", label: "영화" },
@@ -113,12 +114,12 @@ export default function NewProjectPage() {
           </DarkCard>
 
           <div className="flex gap-3">
-            <GoldButton type="button" variant="secondary" fullWidth onClick={() => router.back()}>
+            <Button type="button" variant="gold-secondary" fullWidth onClick={() => router.back()}>
               취소
-            </GoldButton>
-            <GoldButton type="submit" fullWidth disabled={!isValid} loading={loading}>
+            </Button>
+            <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={loading}>
               프로젝트 생성
-            </GoldButton>
+            </Button>
           </div>
         </form>
       </div>

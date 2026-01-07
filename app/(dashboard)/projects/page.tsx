@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { DashboardLayout, DarkCard } from "@/components/common";
+import { Button } from "@/components/ui";
 import { PlusIcon, FolderIcon } from "@/components/common/Misc/Icons";
 import { useGetProjects } from "@/src/projects/projects";
 
@@ -35,9 +36,9 @@ export default function ProjectsPage() {
             <p className="text-muted-gray mt-1">진행중인 프로젝트를 관리하세요</p>
           </div>
           <Link href="/projects/new">
-            <GoldButton>
+            <Button variant="gold">
               <PlusIcon className="w-4 h-4 mr-1" /> 새 프로젝트
-            </GoldButton>
+            </Button>
           </Link>
         </div>
 
@@ -47,9 +48,9 @@ export default function ProjectsPage() {
             <h2 className="text-xl font-semibold text-ivory mb-2">프로젝트가 없습니다</h2>
             <p className="text-muted-gray mb-6">새 프로젝트를 만들어 캐스팅을 시작하세요</p>
             <Link href="/projects/new">
-              <GoldButton>
+              <Button variant="gold">
                 <PlusIcon className="w-4 h-4 mr-1" /> 첫 프로젝트 만들기
-              </GoldButton>
+              </Button>
             </Link>
           </DarkCard>
         ) : (

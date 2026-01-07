@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
-import { GoldButton, DarkInput, DarkSelect } from "@/components/common";
+import { DarkInput, DarkSelect } from "@/components/common";
+import { Button } from "@/components/ui";
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
 import { GENDER_SELECT_OPTIONS, BIRTH_YEAR_OPTIONS } from "@/lib/constants";
 import { onboardingStep1Schema, type OnboardingStep1Data } from "@/lib/validations";
@@ -105,9 +106,9 @@ export default function ActorOnboardingStep1() {
           </div>
 
           <div className="pt-4">
-            <GoldButton type="submit" fullWidth disabled={!isValid}>
+            <Button type="submit" variant="gold" fullWidth disabled={!isValid}>
               다음
-            </GoldButton>
+            </Button>
           </div>
         </div>
       </form>

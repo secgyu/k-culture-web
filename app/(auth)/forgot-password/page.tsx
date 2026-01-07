@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { AuthLayout, GoldButton, DarkInput } from "@/components/common";
+import { AuthLayout } from "@/components/common";
+import { Button, Input } from "@/components/ui";
 import { useForgotPassword } from "@/src/auth/auth";
 
 export default function ForgotPasswordPage() {
@@ -50,9 +51,9 @@ export default function ForgotPasswordPage() {
             이메일을 확인해주세요.
           </p>
           <Link href="/login">
-            <GoldButton variant="secondary" fullWidth>
+            <Button variant="gold-secondary" fullWidth>
               로그인으로 돌아가기
-            </GoldButton>
+            </Button>
           </Link>
         </div>
       </AuthLayout>
@@ -62,18 +63,22 @@ export default function ForgotPasswordPage() {
   return (
     <AuthLayout title="비밀번호 찾기" subtitle="가입한 이메일로 재설정 링크를 보내드립니다">
       <form onSubmit={handleSubmit} className="space-y-6">
-        <DarkInput
-          type="email"
-          label="이메일"
-          placeholder="가입한 이메일 주소를 입력하세요"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          error={error}
-        />
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-warm-gray">이메일</label>
+          <Input
+            type="email"
+            placeholder="가입한 이메일 주소를 입력하세요"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            error={!!error}
+            inputSize="lg"
+          />
+          {error && <p className="text-sm text-red-400">{error}</p>}
+        </div>
 
-        <GoldButton type="submit" fullWidth disabled={!isValid} loading={forgotPasswordMutation.isPending}>
+        <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={forgotPasswordMutation.isPending}>
           재설정 링크 발송
-        </GoldButton>
+        </Button>
 
         <div className="text-center">
           <Link href="/login" className="text-muted-gray hover:text-ivory transition-colors">

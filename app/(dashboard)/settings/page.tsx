@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { DashboardLayout, DarkCard } from "@/components/common";
+import { Button } from "@/components/ui";
 import { SettingsIcon, UserIcon, LogoutIcon } from "@/components/common/Misc/Icons";
 import { useGetNotificationSettings, useUpdateNotificationSettings, useGetMyProfile } from "@/src/users/users";
 import { useLogout, useDeleteAccount } from "@/src/auth/auth";
@@ -112,9 +113,9 @@ export default function SettingsPage() {
                 <p className="text-ivory">비밀번호</p>
                 <p className="text-sm text-muted-gray">••••••••</p>
               </div>
-              <GoldButton variant="ghost" size="sm">
+              <Button variant="gold-ghost" size="sm">
                 변경
-              </GoldButton>
+              </Button>
             </div>
 
             <div className="flex items-center justify-between py-3">
@@ -197,9 +198,9 @@ export default function SettingsPage() {
           </div>
 
           <div className="mt-6">
-            <GoldButton fullWidth loading={updateSettingsMutation.isPending} onClick={handleSave}>
+            <Button fullWidth loading={updateSettingsMutation.isPending} onClick={handleSave} variant="gold">
               설정 저장
-            </GoldButton>
+            </Button>
           </div>
         </DarkCard>
 

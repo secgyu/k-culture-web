@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { DashboardLayout, DarkCard } from "@/components/common";
+import { Button } from "@/components/ui";
 import { PencilIcon } from "@/components/common/Misc/Icons";
 import { useGetMyProfile } from "@/src/users/users";
 
@@ -28,9 +29,9 @@ export default function ProfilePage() {
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-ivory">내 프로필</h1>
           <Link href="/profile/edit">
-            <GoldButton variant="outline" size="sm">
+            <Button variant="gold-outline" size="sm">
               <PencilIcon className="w-4 h-4 mr-1" /> 수정
-            </GoldButton>
+            </Button>
           </Link>
         </div>
 
@@ -95,9 +96,9 @@ export default function ProfilePage() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-ivory">필모그래피</h2>
             <Link href="/profile/filmography">
-              <GoldButton variant="ghost" size="sm">
+              <Button variant="gold-ghost" size="sm">
                 관리
-              </GoldButton>
+              </Button>
             </Link>
           </div>
           <p className="text-muted-gray text-center py-8">필모그래피를 추가해보세요</p>
@@ -107,9 +108,9 @@ export default function ProfilePage() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-ivory">쇼릴</h2>
             <Link href="/profile/showreel">
-              <GoldButton variant="ghost" size="sm">
+              <Button variant="gold-ghost" size="sm">
                 관리
-              </GoldButton>
+              </Button>
             </Link>
           </div>
           <p className="text-muted-gray text-center py-8">쇼릴을 추가해보세요</p>

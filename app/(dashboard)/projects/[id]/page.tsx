@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { DashboardLayout, DarkCard } from "@/components/common";
+import { Button } from "@/components/ui";
 import { PlusIcon, UserIcon, PencilIcon, XMarkIcon } from "@/components/common/Misc/Icons";
 import { useGetProjectDetail } from "@/src/projects/projects";
 import { useGetProjectCharacters } from "@/src/characters/characters";
@@ -58,9 +59,9 @@ export default function ProjectDetailPage() {
               {project.company} · {project.projectType} · {project.genre}
             </p>
           </div>
-          <GoldButton variant="outline" size="sm">
+          <Button variant="gold-outline" size="sm">
             <PencilIcon className="w-4 h-4 mr-1" /> 수정
-          </GoldButton>
+          </Button>
         </div>
 
         <DarkCard>
@@ -99,9 +100,9 @@ export default function ProjectDetailPage() {
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-ivory">캐릭터 ({totalCharacters})</h2>
-            <GoldButton size="sm" onClick={() => setShowAddModal(true)}>
+            <Button variant="gold" size="sm" onClick={() => setShowAddModal(true)}>
               <PlusIcon className="w-4 h-4 mr-1" /> 캐릭터 추가
-            </GoldButton>
+            </Button>
           </div>
 
           <div className="space-y-4">
@@ -127,9 +128,9 @@ export default function ProjectDetailPage() {
 
                   <div className="flex gap-2 shrink-0">
                     <Link href={`/actor-search?character=${character.id}`}>
-                      <GoldButton variant="outline" size="sm">
+                      <Button variant="gold-outline" size="sm">
                         배우 찾기
-                      </GoldButton>
+                      </Button>
                     </Link>
                   </div>
                 </div>
@@ -145,7 +146,7 @@ export default function ProjectDetailPage() {
               <p className="text-sm text-muted-gray">시놉시스와 캐릭터 정보로 최적의 배우를 찾아드립니다</p>
             </div>
             <Link href={`/ai-matching?project=${projectId}`}>
-              <GoldButton>AI 매칭 시작</GoldButton>
+              <Button variant="gold">AI 매칭 시작</Button>
             </Link>
           </div>
         </DarkCard>
@@ -161,9 +162,9 @@ export default function ProjectDetailPage() {
               </button>
             </div>
             <p className="text-muted-gray text-center py-8">캐릭터 추가 폼은 추후 구현 예정입니다</p>
-            <GoldButton fullWidth onClick={() => setShowAddModal(false)}>
+            <Button variant="gold" fullWidth onClick={() => setShowAddModal(false)}>
               닫기
-            </GoldButton>
+            </Button>
           </DarkCard>
         </div>
       )}

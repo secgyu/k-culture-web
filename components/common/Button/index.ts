@@ -1,1 +1,0 @@
-export { GoldButton } from "./GoldButton";

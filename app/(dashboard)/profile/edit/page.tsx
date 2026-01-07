@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { DashboardLayout, DarkCard } from "@/components/common";
 import { useGetMyProfile, useUpdateMyProfile } from "@/src/users/users";
 import { useImageUpload } from "@/lib/hooks";
-import { Spinner } from "@/components/ui";
+import { Button, Spinner } from "@/components/ui";
 import { ProfileImageUpload } from "./_components/ProfileImageUpload";
 import { BasicInfoForm } from "./_components/BasicInfoForm";
 import { ContactForm } from "./_components/ContactForm";
@@ -103,12 +103,12 @@ export default function ProfileEditPage() {
           </DarkCard>
 
           <div className="flex gap-3">
-            <GoldButton type="button" variant="secondary" fullWidth onClick={() => router.back()}>
+            <Button type="button" variant="gold-secondary" fullWidth onClick={() => router.back()}>
               취소
-            </GoldButton>
-            <GoldButton type="submit" fullWidth loading={updateProfileMutation.isPending}>
+            </Button>
+            <Button type="submit" variant="gold" fullWidth loading={updateProfileMutation.isPending}>
               저장
-            </GoldButton>
+            </Button>
           </div>
         </div>
       </form>

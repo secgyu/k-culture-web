@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { DarkCard, GoldButton } from "@/components/common";
+import { DarkCard } from "@/components/common";
+import { Button } from "@/components/ui";
 import { ChartBarIcon, HeartIcon, PhoneIcon, PlusIcon, UserIcon } from "@/components/common/Misc/Icons";
 import { useGetDashboardStats } from "@/src/dashboard/dashboard";
 import { Spinner } from "@/components/ui";
@@ -32,9 +33,9 @@ export function AgencyDashboard() {
           <p className="text-muted-gray mt-1">프로젝트와 캐스팅 현황을 확인하세요</p>
         </div>
         <Link href="/projects/new">
-          <GoldButton size="sm">
+          <Button size="sm" variant="gold">
             <PlusIcon className="w-4 h-4 mr-1" /> 새 프로젝트
-          </GoldButton>
+          </Button>
         </Link>
       </div>
 

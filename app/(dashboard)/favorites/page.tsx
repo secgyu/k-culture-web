@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { DashboardLayout, DarkCard, GoldButton } from "@/components/common";
+import { DashboardLayout, DarkCard } from "@/components/common";
+import { Button } from "@/components/ui";
 import { HeartIcon, XMarkIcon } from "@/components/common/Misc/Icons";
 import { useGetFavorites, useDeleteFavorite } from "@/src/favorites/favorites";
 
@@ -13,10 +14,7 @@ export default function FavoritesPage() {
   const favorites = favoritesData?.data?.favorites || [];
 
   const handleRemove = (id: string) => {
-    deleteFavoriteMutation.mutate(
-      { favoriteId: id },
-      { onSuccess: () => refetch() }
-    );
+    deleteFavoriteMutation.mutate({ favoriteId: id }, { onSuccess: () => refetch() });
   };
 
   if (isLoading) {
@@ -43,7 +41,7 @@ export default function FavoritesPage() {
             <h2 className="text-xl font-semibold text-ivory mb-2">찜한 배우가 없습니다</h2>
             <p className="text-muted-gray mb-6">배우 검색에서 마음에 드는 배우를 찜해보세요</p>
             <Link href="/actor-search">
-              <GoldButton>배우 검색하기</GoldButton>
+              <Button variant="gold">배우 검색하기</Button>
             </Link>
           </DarkCard>
         ) : (
@@ -52,11 +50,11 @@ export default function FavoritesPage() {
               <DarkCard key={item.id} variant="hover" padding="none" className="overflow-hidden group">
                 <Link href={`/actors/${item.targetId}`}>
                   <div className="relative aspect-[3/4]">
-                    <Image 
-                      src={item.actor?.imageUrl || "https://via.placeholder.com/300x400"} 
-                      alt={item.actor?.name || ""} 
-                      fill 
-                      className="object-cover" 
+                    <Image
+                      src={item.actor?.imageUrl || "https://via.placeholder.com/300x400"}
+                      alt={item.actor?.name || ""}
+                      fill
+                      className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -86,13 +84,13 @@ export default function FavoritesPage() {
                 <div className="p-3 border-t border-border">
                   <div className="flex gap-2">
                     <Link href={`/actors/${item.targetId}`} className="flex-1">
-                      <GoldButton variant="secondary" size="sm" fullWidth>
+                      <Button variant="gold-secondary" size="sm" fullWidth>
                         프로필 보기
-                      </GoldButton>
+                      </Button>
                     </Link>
-                    <GoldButton variant="outline" size="sm">
+                    <Button variant="gold-outline" size="sm">
                       섭외
-                    </GoldButton>
+                    </Button>
                   </div>
                 </div>
               </DarkCard>

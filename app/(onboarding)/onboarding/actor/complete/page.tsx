@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { DoDreamLogo, GoldButton } from "@/components/common";
+import { DoDreamLogo } from "@/components/common";
+import { Button } from "@/components/ui";
 import { CheckIcon } from "@/components/common/Misc/Icons";
 
 export default function ActorOnboardingComplete() {
@@ -25,12 +26,12 @@ export default function ActorOnboardingComplete() {
 
       <div className="w-full max-w-xs space-y-3">
         <Link href="/dashboard">
-          <GoldButton fullWidth>대시보드로 이동</GoldButton>
+          <Button variant="gold" fullWidth>대시보드로 이동</Button>
         </Link>
         <Link href="/profile/edit">
-          <GoldButton variant="secondary" fullWidth>
+          <Button variant="gold-secondary" fullWidth>
             프로필 상세 입력하기
-          </GoldButton>
+          </Button>
         </Link>
       </div>
     </div>

@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
-import { GoldButton, DarkInput, DarkSelect } from "@/components/common";
+import { DarkInput, DarkSelect } from "@/components/common";
+import { Button } from "@/components/ui";
 import { FOUNDED_YEAR_OPTIONS, AGENCY_SPECIALTY_OPTIONS } from "@/lib/constants";
 import { agencyOnboardingSchema, type AgencyOnboardingData } from "@/lib/validations";
 
@@ -86,9 +87,9 @@ export default function AgencyOnboardingStep1() {
           />
 
           <div className="pt-4">
-            <GoldButton type="submit" fullWidth disabled={!isValid}>
+            <Button type="submit" variant="gold" fullWidth disabled={!isValid}>
               완료
-            </GoldButton>
+            </Button>
           </div>
         </div>
       </form>
