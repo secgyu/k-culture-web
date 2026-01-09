@@ -7,6 +7,8 @@ import { DashboardLayout, DarkCard } from "@/components/common";
 import { Button } from "@/components/ui";
 import { HeartIcon, XMarkIcon } from "@/components/common/Misc/Icons";
 import { useGetFavorites, useDeleteFavorite } from "@/src/favorites/favorites";
+import { getActorImageUrl } from "@/lib/constants/images";
+import { GRADIENT_OVERLAYS, SPINNER } from "@/lib/constants/styles";
 
 export default function FavoritesPage() {
   const { data: favoritesData, isLoading, refetch } = useGetFavorites({ type: "actor" });
@@ -25,7 +27,7 @@ export default function FavoritesPage() {
     return (
       <DashboardLayout userType="agency">
         <div className="flex items-center justify-center h-64">
-          <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+          <div className={SPINNER.MEDIUM} />
         </div>
       </DashboardLayout>
     );
@@ -55,12 +57,12 @@ export default function FavoritesPage() {
                 <Link href={`/actors/${item.targetId}`}>
                   <div className="relative aspect-3/4">
                     <Image
-                      src={item.actor?.imageUrl || "https://via.placeholder.com/300x400"}
+                      src={getActorImageUrl(item.actor?.imageUrl)}
                       alt={item.actor?.name || ""}
                       fill
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                    <div className={`absolute inset-0 ${GRADIENT_OVERLAYS.DARK_TO_TRANSPARENT}`} />
                     <div className="absolute bottom-0 left-0 right-0 p-4">
                       <h3 className="text-lg font-semibold text-white mb-1">{item.actor?.name}</h3>
                       <p className="text-sm text-warm-gray mb-2">

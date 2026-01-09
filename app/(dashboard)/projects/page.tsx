@@ -6,6 +6,8 @@ import { DashboardLayout, DarkCard } from "@/components/common";
 import { Button } from "@/components/ui";
 import { PlusIcon, FolderIcon } from "@/components/common/Misc/Icons";
 import { useGetProjects } from "@/src/projects/projects";
+import { getThumbnailImageUrl } from "@/lib/constants/images";
+import { SPINNER } from "@/lib/constants/styles";
 
 const statusColors: Record<string, string> = {
   기획중: "bg-yellow-500/10 text-yellow-400",
@@ -21,7 +23,7 @@ export default function ProjectsPage() {
     return (
       <DashboardLayout userType="agency">
         <div className="flex items-center justify-center h-64">
-          <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+          <div className={SPINNER.MEDIUM} />
         </div>
       </DashboardLayout>
     );
@@ -59,14 +61,18 @@ export default function ProjectsPage() {
               <Link key={project.id} href={`/projects/${project.id}`}>
                 <DarkCard variant="hover" padding="none" className="overflow-hidden">
                   <div className="relative aspect-video">
-                    <Image 
-                      src={project.thumbnail || "https://via.placeholder.com/300x200"} 
-                      alt={project.title} 
-                      fill 
-                      className="object-cover" 
+                    <Image
+                      src={getThumbnailImageUrl(project.thumbnail)}
+                      alt={project.title}
+                      fill
+                      className="object-cover"
                     />
                     <div className="absolute top-3 right-3">
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${statusColors[project.status] || statusColors["진행중"]}`}>
+                      <span
+                        className={`px-2 py-1 rounded text-xs font-medium ${
+                          statusColors[project.status] || statusColors["진행중"]
+                        }`}
+                      >
                         {project.status}
                       </span>
                     </div>
