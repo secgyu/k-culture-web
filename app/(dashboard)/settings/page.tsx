@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { DashboardLayout, DarkCard } from "@/components/common";
-import { Button, ConfirmDialog } from "@/components/ui";
-import { SettingsIcon, UserIcon, LogoutIcon } from "@/components/common/Misc/Icons";
+import { DashboardLayout } from "@/components/common";
+import { ConfirmDialog } from "@/components/ui";
 import { useGetNotificationSettings, useUpdateNotificationSettings, useGetMyProfile } from "@/src/users/users";
 import { useLogout, useDeleteAccount } from "@/src/auth/auth";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { AccountInfoSection, NotificationSettingsSection, AccountManagementSection } from "./_components";
 
 export default function SettingsPage() {
   const { data: profileData } = useGetMyProfile();
@@ -99,147 +99,23 @@ export default function SettingsPage() {
           <p className="text-muted-gray mt-1">계정 및 알림 설정을 관리하세요</p>
         </div>
 
-        <DarkCard>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
-              <UserIcon className="w-5 h-5 text-gold" />
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-ivory">계정 정보</h2>
-              <p className="text-sm text-muted-gray">로그인 및 계정 관리</p>
-            </div>
-          </div>
+        <AccountInfoSection userEmail={userEmail} userType={userType} />
 
-          <div className="space-y-4">
-            <div className="flex items-center justify-between py-3 border-b border-border">
-              <div>
-                <p className="text-ivory">이메일</p>
-                <p className="text-sm text-muted-gray">{userEmail}</p>
-              </div>
-            </div>
+        <NotificationSettingsSection
+          castingNotification={castingNotification}
+          messageNotification={messageNotification}
+          marketingNotification={marketingNotification}
+          onCastingToggle={() => setCastingNotification(!castingNotification)}
+          onMessageToggle={() => setMessageNotification(!messageNotification)}
+          onMarketingToggle={() => setMarketingNotification(!marketingNotification)}
+          onSave={handleSave}
+          isSaving={updateSettingsMutation.isPending}
+        />
 
-            <div className="flex items-center justify-between py-3 border-b border-border">
-              <div>
-                <p className="text-ivory">비밀번호</p>
-                <p className="text-sm text-muted-gray">••••••••</p>
-              </div>
-              <Button variant="gold-ghost" size="sm">
-                변경
-              </Button>
-            </div>
-
-            <div className="flex items-center justify-between py-3">
-              <div>
-                <p className="text-ivory">회원 유형</p>
-                <p className="text-sm text-muted-gray">{userType === "actor" ? "배우" : "에이전시"}</p>
-              </div>
-            </div>
-          </div>
-        </DarkCard>
-
-        <DarkCard>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
-              <SettingsIcon className="w-5 h-5 text-gold" />
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-ivory">알림 설정</h2>
-              <p className="text-sm text-muted-gray">알림 수신 설정</p>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <div className="flex items-center justify-between py-3 border-b border-border">
-              <div>
-                <p className="text-ivory">캐스팅 알림</p>
-                <p className="text-sm text-muted-gray">섭외 요청 및 캐스팅 관련 알림</p>
-              </div>
-              <button
-                onClick={() => setCastingNotification(!castingNotification)}
-                className={`relative w-12 h-6 rounded-full transition-colors ${
-                  castingNotification ? "bg-gold" : "bg-luxury-tertiary"
-                }`}
-              >
-                <div
-                  className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                    castingNotification ? "left-7" : "left-1"
-                  }`}
-                />
-              </button>
-            </div>
-
-            <div className="flex items-center justify-between py-3 border-b border-border">
-              <div>
-                <p className="text-ivory">메시지 알림</p>
-                <p className="text-sm text-muted-gray">새 메시지 수신 알림</p>
-              </div>
-              <button
-                onClick={() => setMessageNotification(!messageNotification)}
-                className={`relative w-12 h-6 rounded-full transition-colors ${
-                  messageNotification ? "bg-gold" : "bg-luxury-tertiary"
-                }`}
-              >
-                <div
-                  className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                    messageNotification ? "left-7" : "left-1"
-                  }`}
-                />
-              </button>
-            </div>
-
-            <div className="flex items-center justify-between py-3">
-              <div>
-                <p className="text-ivory">마케팅 알림</p>
-                <p className="text-sm text-muted-gray">이벤트 및 프로모션 알림</p>
-              </div>
-              <button
-                onClick={() => setMarketingNotification(!marketingNotification)}
-                className={`relative w-12 h-6 rounded-full transition-colors ${
-                  marketingNotification ? "bg-gold" : "bg-luxury-tertiary"
-                }`}
-              >
-                <div
-                  className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                    marketingNotification ? "left-7" : "left-1"
-                  }`}
-                />
-              </button>
-            </div>
-          </div>
-
-          <div className="mt-6">
-            <Button fullWidth loading={updateSettingsMutation.isPending} onClick={handleSave} variant="gold">
-              설정 저장
-            </Button>
-          </div>
-        </DarkCard>
-
-        <DarkCard className="border-red-500/30">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
-              <LogoutIcon className="w-5 h-5 text-red-400" />
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-ivory">계정 관리</h2>
-              <p className="text-sm text-muted-gray">로그아웃 및 계정 삭제</p>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <button
-              onClick={() => setLogoutDialogOpen(true)}
-              className="w-full py-3 text-left text-warm-gray hover:text-ivory transition-colors"
-            >
-              로그아웃
-            </button>
-            <button
-              onClick={() => setDeleteDialogOpen(true)}
-              className="w-full py-3 text-left text-red-400 hover:text-red-300 transition-colors"
-            >
-              계정 삭제
-            </button>
-          </div>
-        </DarkCard>
+        <AccountManagementSection
+          onLogout={() => setLogoutDialogOpen(true)}
+          onDeleteAccount={() => setDeleteDialogOpen(true)}
+        />
       </div>
 
       <ConfirmDialog
