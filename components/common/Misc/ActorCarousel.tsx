@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { SAMPLE_WORKS } from "@/lib/constants/images";
 
 export interface Actor {
   id: string;
@@ -73,19 +74,6 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
   const leftCard = actors[getCardIndex(-1)];
   const rightCard = actors[getCardIndex(1)];
 
-  const sampleWorks = [
-    {
-      name: "나의아저씨",
-      thumbnail: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=48&h=48&fit=crop",
-    },
-    {
-      name: "미스터선샤인",
-      thumbnail: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=48&h=48&fit=crop",
-    },
-    { name: "시그널", thumbnail: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=48&h=48&fit=crop" },
-    { name: "비밀의숲", thumbnail: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=48&h=48&fit=crop" },
-  ];
-
   return (
     <div className="w-full flex flex-col overflow-hidden">
       <div
@@ -141,7 +129,7 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
           </div>
         </div>
         <div className="flex gap-1.5 overflow-x-auto hide-scrollbar w-full justify-center">
-          {sampleWorks.map((work, index) => (
+          {SAMPLE_WORKS.map((work, index) => (
             <div
               key={index}
               className="flex items-center gap-1.5 px-3 py-1.5 shrink-0 border border-border rounded-full"
