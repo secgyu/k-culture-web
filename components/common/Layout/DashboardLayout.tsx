@@ -1,10 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { DoDreamLogo } from "@/components/common";
-import { HomeIcon, UserIcon, FolderIcon, HeartIcon, SettingsIcon, LogoutIcon, SearchIcon, MenuIcon, XIcon } from "@/components/common/Misc/Icons";
+import {
+  HomeIcon,
+  UserIcon,
+  FolderIcon,
+  HeartIcon,
+  SettingsIcon,
+  LogoutIcon,
+  SearchIcon,
+  MenuIcon,
+  XIcon,
+} from "@/components/common/Misc/Icons";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 interface DashboardLayoutProps {
@@ -12,49 +22,49 @@ interface DashboardLayoutProps {
   userType?: "actor" | "agency";
 }
 
-const actorNavItems = [
+const ACTOR_NAV_ITEMS = [
   { href: "/dashboard", label: "대시보드", icon: HomeIcon },
   { href: "/profile", label: "내 프로필", icon: UserIcon },
   { href: "/favorites", label: "찜 목록", icon: HeartIcon },
   { href: "/settings", label: "설정", icon: SettingsIcon },
-];
+] as const;
 
-const agencyNavItems = [
+const AGENCY_NAV_ITEMS = [
   { href: "/dashboard", label: "대시보드", icon: HomeIcon },
   { href: "/actor-search", label: "배우 검색", icon: SearchIcon },
   { href: "/projects", label: "프로젝트", icon: FolderIcon },
   { href: "/favorites", label: "찜 목록", icon: HeartIcon },
   { href: "/settings", label: "설정", icon: SettingsIcon },
-];
+] as const;
 
 export function DashboardLayout({ children, userType = "actor" }: DashboardLayoutProps) {
   const pathname = usePathname();
   const router = useRouter();
   const logout = useAuthStore((state) => state.logout);
-  const navItems = userType === "agency" ? agencyNavItems : actorNavItems;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleLogout = () => {
+  const navItems = useMemo(() => (userType === "agency" ? AGENCY_NAV_ITEMS : ACTOR_NAV_ITEMS), [userType]);
+
+  const handleLogout = useCallback(() => {
     logout();
     router.push("/login");
-  };
+  }, [logout, router]);
 
-  const closeMobileMenu = () => {
+  const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-luxury-black flex">
       {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-luxury-black/80 backdrop-blur-sm z-40 lg:hidden"
-          onClick={closeMobileMenu}
-        />
+        <div className="fixed inset-0 bg-luxury-black/80 backdrop-blur-sm z-40 lg:hidden" onClick={closeMobileMenu} />
       )}
 
-      <aside className={`fixed lg:static w-64 bg-luxury-secondary border-r border-border flex-col h-full z-50 transition-transform duration-300 ease-in-out ${
-        isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-      } lg:flex`}>
+      <aside
+        className={`fixed lg:static w-64 bg-luxury-secondary border-r border-border flex-col h-full z-50 transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        } lg:flex`}
+      >
         <div className="p-6 border-b border-border flex items-center justify-between">
           <Link href="/">
             <DoDreamLogo size="md" />
