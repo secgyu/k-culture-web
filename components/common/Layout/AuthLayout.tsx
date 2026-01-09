@@ -29,7 +29,7 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
         </div>
       </main>
 
-      <footer className="p-6 text-center text-muted-gray text-sm">© 2024 DoDream. All rights reserved.</footer>
+      <footer className="p-6 text-center text-muted-gray text-sm">© 2026 DoDream. All rights reserved.</footer>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { useGetActorDetail, useContactActor } from "@/src/actors/actors";
 import { PageLayout } from "@/components/common";
 import { ContactInfoModal, CastingRequestModal, ShowreelSection, FilmographySection, ActorProfileHeader } from "./";
@@ -69,7 +70,10 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
       {
         onSuccess: () => {
           setShowCastingModal(false);
-          alert("섭외 요청이 전송되었습니다!");
+          toast.success("섭외 요청이 전송되었습니다!");
+        },
+        onError: () => {
+          toast.error("섭외 요청 전송에 실패했습니다");
         },
       }
     );

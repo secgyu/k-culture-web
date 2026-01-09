@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { DashboardLayout, DarkCard } from "@/components/common";
-import { Button } from "@/components/ui";
+import { Button, ConfirmDialog } from "@/components/ui";
 import { SettingsIcon, UserIcon, LogoutIcon } from "@/components/common/Misc/Icons";
 import { useGetNotificationSettings, useUpdateNotificationSettings, useGetMyProfile } from "@/src/users/users";
 import { useLogout, useDeleteAccount } from "@/src/auth/auth";
@@ -16,6 +17,8 @@ export default function SettingsPage() {
   const [castingNotification, setCastingNotification] = useState(true);
   const [messageNotification, setMessageNotification] = useState(true);
   const [marketingNotification, setMarketingNotification] = useState(false);
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const updateSettingsMutation = useUpdateNotificationSettings();
   const logoutMutation = useLogout();
@@ -40,32 +43,39 @@ export default function SettingsPage() {
       },
       {
         onSuccess: () => {
-          alert("설정이 저장되었습니다");
+          toast.success("설정이 저장되었습니다");
+        },
+        onError: () => {
+          toast.error("설정 저장에 실패했습니다");
         },
       }
     );
   };
 
   const handleLogout = () => {
-    if (confirm("로그아웃 하시겠습니까?")) {
-      logoutMutation.mutate(undefined, {
-        onSuccess: () => {
-          logout();
-          window.location.href = "/login";
-        },
-      });
-    }
+    logoutMutation.mutate(undefined, {
+      onSuccess: () => {
+        logout();
+        window.location.href = "/login";
+      },
+      onError: () => {
+        toast.error("로그아웃에 실패했습니다");
+        setLogoutDialogOpen(false);
+      },
+    });
   };
 
   const handleDeleteAccount = () => {
-    if (confirm("정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.")) {
-      deleteAccountMutation.mutate(undefined, {
-        onSuccess: () => {
-          logout();
-          window.location.href = "/";
-        },
-      });
-    }
+    deleteAccountMutation.mutate(undefined, {
+      onSuccess: () => {
+        logout();
+        window.location.href = "/";
+      },
+      onError: () => {
+        toast.error("계정 삭제에 실패했습니다");
+        setDeleteDialogOpen(false);
+      },
+    });
   };
 
   const userType = profileData?.data?.type || "actor";
@@ -217,22 +227,43 @@ export default function SettingsPage() {
 
           <div className="space-y-3">
             <button
-              onClick={handleLogout}
-              disabled={logoutMutation.isPending}
-              className="w-full py-3 text-left text-warm-gray hover:text-ivory transition-colors disabled:opacity-50"
+              onClick={() => setLogoutDialogOpen(true)}
+              className="w-full py-3 text-left text-warm-gray hover:text-ivory transition-colors"
             >
-              {logoutMutation.isPending ? "로그아웃 중..." : "로그아웃"}
+              로그아웃
             </button>
             <button
-              onClick={handleDeleteAccount}
-              disabled={deleteAccountMutation.isPending}
-              className="w-full py-3 text-left text-red-400 hover:text-red-300 transition-colors disabled:opacity-50"
+              onClick={() => setDeleteDialogOpen(true)}
+              className="w-full py-3 text-left text-red-400 hover:text-red-300 transition-colors"
             >
-              {deleteAccountMutation.isPending ? "처리 중..." : "계정 삭제"}
+              계정 삭제
             </button>
           </div>
         </DarkCard>
       </div>
+
+      <ConfirmDialog
+        open={logoutDialogOpen}
+        onOpenChange={setLogoutDialogOpen}
+        title="로그아웃"
+        description="정말 로그아웃 하시겠습니까?"
+        confirmText="로그아웃"
+        cancelText="취소"
+        onConfirm={handleLogout}
+        loading={logoutMutation.isPending}
+      />
+
+      <ConfirmDialog
+        open={deleteDialogOpen}
+        onOpenChange={setDeleteDialogOpen}
+        title="계정 삭제"
+        description="정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다."
+        confirmText="삭제"
+        cancelText="취소"
+        onConfirm={handleDeleteAccount}
+        variant="danger"
+        loading={deleteAccountMutation.isPending}
+      />
     </DashboardLayout>
   );
 }
