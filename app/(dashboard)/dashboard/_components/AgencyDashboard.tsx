@@ -5,6 +5,7 @@ import { ChartBarIcon, HeartIcon, PhoneIcon, PlusIcon, UserIcon } from "@/compon
 import { useGetDashboardStats } from "@/src/dashboard/dashboard";
 import { Spinner } from "@/components/ui";
 import type { AgencyDashboardStats } from "@/src/model";
+import { StatCard } from "./StatCard";
 
 export function AgencyDashboard() {
   const { data: statsData, isLoading } = useGetDashboardStats();
@@ -26,7 +27,6 @@ export function AgencyDashboard() {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-ivory">대시보드</h1>
@@ -39,46 +39,30 @@ export function AgencyDashboard() {
         </Link>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <DarkCard>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center">
-              <ChartBarIcon className="w-6 h-6 text-gold" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-gray">진행중 프로젝트</p>
-              <p className="text-2xl font-bold text-ivory">{stats.activeProjects}</p>
-            </div>
-          </div>
-        </DarkCard>
-
-        <DarkCard>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center">
-              <HeartIcon className="w-6 h-6 text-red-400" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-gray">찜한 배우</p>
-              <p className="text-2xl font-bold text-ivory">{stats.favoriteActors}</p>
-            </div>
-          </div>
-        </DarkCard>
-
-        <DarkCard>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center">
-              <PhoneIcon className="w-6 h-6 text-green-400" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-gray">보낸 섭외</p>
-              <p className="text-2xl font-bold text-ivory">{stats.sentContacts}</p>
-            </div>
-          </div>
-        </DarkCard>
+        <StatCard
+          icon={<ChartBarIcon className="w-6 h-6" />}
+          iconBgColor="bg-gold/10"
+          iconColor="text-gold"
+          label="진행중 프로젝트"
+          value={stats.activeProjects}
+        />
+        <StatCard
+          icon={<HeartIcon className="w-6 h-6" />}
+          iconBgColor="bg-red-500/10"
+          iconColor="text-red-400"
+          label="찜한 배우"
+          value={stats.favoriteActors}
+        />
+        <StatCard
+          icon={<PhoneIcon className="w-6 h-6" />}
+          iconBgColor="bg-green-500/10"
+          iconColor="text-green-400"
+          label="보낸 섭외"
+          value={stats.sentContacts}
+        />
       </div>
 
-      {/* Active Projects */}
       <DarkCard>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-ivory">진행중 프로젝트</h2>
@@ -108,7 +92,6 @@ export function AgencyDashboard() {
         </div>
       </DarkCard>
 
-      {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Link href="/actor-search">
           <DarkCard variant="hover" className="group">

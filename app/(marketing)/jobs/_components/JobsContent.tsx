@@ -6,7 +6,7 @@ import { useGetJobs } from "@/src/jobs/jobs";
 import { useFilters } from "@/lib/hooks";
 import { Spinner, Input, Select } from "@/components/ui";
 import { JobCard } from "./JobCard";
-import type { JobCategory } from "@/src/model";
+import type { JobCategory, GetJobsGender } from "@/src/model";
 
 interface JobFilters {
   [key: string]: string | boolean | undefined;
@@ -46,7 +46,7 @@ export function JobsContent() {
 
   const { data: jobsData, isLoading } = useGetJobs({
     category: filters.category !== "전체" ? (filters.category as JobCategory) : undefined,
-    gender: filters.gender !== "전체" ? (filters.gender as any) : undefined,
+    gender: filters.gender !== "전체" ? (filters.gender as GetJobsGender) : undefined,
     isPumasi: filters.pumasi === "가능" ? true : filters.pumasi === "불가능" ? false : undefined,
   });
 

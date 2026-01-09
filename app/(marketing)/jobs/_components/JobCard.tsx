@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Badge, Card } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import type { JobSummary } from "@/src/model";
@@ -19,7 +20,7 @@ interface JobCardProps {
   job: JobSummary;
 }
 
-export function JobCard({ job }: JobCardProps) {
+export const JobCard = memo(function JobCard({ job }: JobCardProps) {
   return (
     <Card className="bg-luxury-black/80 hover:border-muted-gray transition-all cursor-pointer">
       <div className="p-6">
@@ -61,4 +62,4 @@ export function JobCard({ job }: JobCardProps) {
       </div>
     </Card>
   );
-}
+});

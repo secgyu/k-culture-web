@@ -5,6 +5,7 @@ import { EyeIcon, HeartIcon, PhoneIcon, PlusIcon } from "@/components/common/Mis
 import { useGetDashboardStats } from "@/src/dashboard/dashboard";
 import { Spinner } from "@/components/ui";
 import type { ActorDashboardStats } from "@/src/model";
+import { StatCard } from "./StatCard";
 
 export function ActorDashboard() {
   const { data: statsData, isLoading } = useGetDashboardStats();
@@ -26,7 +27,6 @@ export function ActorDashboard() {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-ivory">대시보드</h1>
@@ -39,7 +39,6 @@ export function ActorDashboard() {
         </Link>
       </div>
 
-      {/* Profile Completeness */}
       <DarkCard variant="gold">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-ivory">프로필 완성도</h2>
@@ -66,46 +65,30 @@ export function ActorDashboard() {
         </div>
       </DarkCard>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <DarkCard>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
-              <EyeIcon className="w-6 h-6 text-blue-400" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-gray">프로필 조회</p>
-              <p className="text-2xl font-bold text-ivory">{stats.profileViews}</p>
-            </div>
-          </div>
-        </DarkCard>
-
-        <DarkCard>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center">
-              <HeartIcon className="w-6 h-6 text-red-400" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-gray">찜</p>
-              <p className="text-2xl font-bold text-ivory">{stats.likes}</p>
-            </div>
-          </div>
-        </DarkCard>
-
-        <DarkCard>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center">
-              <PhoneIcon className="w-6 h-6 text-green-400" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-gray">섭외 요청</p>
-              <p className="text-2xl font-bold text-ivory">{stats.contactRequests}</p>
-            </div>
-          </div>
-        </DarkCard>
+        <StatCard
+          icon={<EyeIcon className="w-6 h-6" />}
+          iconBgColor="bg-blue-500/10"
+          iconColor="text-blue-400"
+          label="프로필 조회"
+          value={stats.profileViews}
+        />
+        <StatCard
+          icon={<HeartIcon className="w-6 h-6" />}
+          iconBgColor="bg-red-500/10"
+          iconColor="text-red-400"
+          label="찜"
+          value={stats.likes}
+        />
+        <StatCard
+          icon={<PhoneIcon className="w-6 h-6" />}
+          iconBgColor="bg-green-500/10"
+          iconColor="text-green-400"
+          label="섭외 요청"
+          value={stats.contactRequests}
+        />
       </div>
 
-      {/* Recent Activity */}
       <DarkCard>
         <h2 className="text-lg font-semibold text-ivory mb-4">최근 활동</h2>
         <div className="space-y-4">
@@ -141,4 +124,3 @@ export function ActorDashboard() {
     </div>
   );
 }
-

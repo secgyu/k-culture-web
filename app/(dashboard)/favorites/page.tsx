@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useCallback } from "react";
 import { DashboardLayout, DarkCard } from "@/components/common";
 import { Button } from "@/components/ui";
 import { HeartIcon, XMarkIcon } from "@/components/common/Misc/Icons";
@@ -13,9 +14,12 @@ export default function FavoritesPage() {
 
   const favorites = favoritesData?.data?.favorites || [];
 
-  const handleRemove = (id: string) => {
-    deleteFavoriteMutation.mutate({ favoriteId: id }, { onSuccess: () => refetch() });
-  };
+  const handleRemove = useCallback(
+    (id: string) => {
+      deleteFavoriteMutation.mutate({ favoriteId: id }, { onSuccess: () => refetch() });
+    },
+    [deleteFavoriteMutation, refetch]
+  );
 
   if (isLoading) {
     return (
@@ -49,7 +53,7 @@ export default function FavoritesPage() {
             {favorites.map((item) => (
               <DarkCard key={item.id} variant="hover" padding="none" className="overflow-hidden group">
                 <Link href={`/actors/${item.targetId}`}>
-                  <div className="relative aspect-[3/4]">
+                  <div className="relative aspect-3/4">
                     <Image
                       src={item.actor?.imageUrl || "https://via.placeholder.com/300x400"}
                       alt={item.actor?.name || ""}

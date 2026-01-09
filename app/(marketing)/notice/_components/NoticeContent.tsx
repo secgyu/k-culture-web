@@ -3,9 +3,11 @@
 import { DoDreamLogo } from "@/components/common";
 import Link from "next/link";
 import { useGetNotices } from "@/src/notices/notices";
+import type { NoticeSummary } from "@/src/model";
 
-function NoticeItem({ notice }: { notice: any }) {
-  const formatDate = (dateStr: string) => {
+function NoticeItem({ notice }: { notice: NoticeSummary }) {
+  const formatDate = (dateStr?: string) => {
+    if (!dateStr) return "-";
     const date = new Date(dateStr);
     return `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}.`;
   };

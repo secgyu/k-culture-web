@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { memo, useCallback } from "react";
 import { useCompareStore, CompareActor } from "@/stores/useCompareStore";
 import { CheckIcon, PlusIcon } from "@/components/common/Misc/Icons";
 import { Badge } from "@/components/ui";
@@ -19,31 +20,34 @@ interface ActorCardProps {
   isBlurred?: boolean;
 }
 
-export function ActorCard({ actor, isBlurred = false }: ActorCardProps) {
+export const ActorCard = memo(function ActorCard({ actor, isBlurred = false }: ActorCardProps) {
   const { addActor, removeActor, isInCompare, actors, maxActors } = useCompareStore();
   const isSelected = isInCompare(Number(actor.id));
   const isFull = actors.length >= maxActors;
 
-  const handleCompareClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleCompareClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
 
-    if (isSelected) {
-      removeActor(Number(actor.id));
-    } else if (!isFull) {
-      const compareActor: CompareActor = {
-        id: Number(actor.id),
-        name: actor.name,
-        gender: "미정",
-        age: 0,
-        height: 0,
-        weight: 0,
-        work: "",
-        image: actor.imageUrl || "",
-      };
-      addActor(compareActor);
-    }
-  };
+      if (isSelected) {
+        removeActor(Number(actor.id));
+      } else if (!isFull) {
+        const compareActor: CompareActor = {
+          id: Number(actor.id),
+          name: actor.name,
+          gender: "미정",
+          age: 0,
+          height: 0,
+          weight: 0,
+          work: "",
+          image: actor.imageUrl || "",
+        };
+        addActor(compareActor);
+      }
+    },
+    [isSelected, isFull, actor.id, actor.name, actor.imageUrl, removeActor, addActor]
+  );
 
   const cardContent = (
     <div
@@ -52,7 +56,7 @@ export function ActorCard({ actor, isBlurred = false }: ActorCardProps) {
         isSelected ? "border-gold shadow-lg shadow-gold/20" : "border-border hover:border-muted-gray hover:shadow-lg"
       )}
     >
-      <div className="relative aspect-[3/4] bg-luxury-secondary">
+      <div className="relative aspect-3/4 bg-luxury-secondary">
         <Image
           src={actor.imageUrl || `https://images.unsplash.com/photo-1507003211169?w=300&h=400&fit=crop&crop=face`}
           alt={actor.name}
@@ -125,4 +129,4 @@ export function ActorCard({ actor, isBlurred = false }: ActorCardProps) {
   }
 
   return <Link href={`/actors/${actor.id}`}>{cardContent}</Link>;
-}
+});

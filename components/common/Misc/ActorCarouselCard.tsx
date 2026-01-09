@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { memo } from "react";
 
 interface ActorCardProps {
   id: string;
@@ -13,7 +14,7 @@ interface ActorCardProps {
   onClick?: () => void;
 }
 
-export default function ActorCard({
+const ActorCarouselCard = memo(function ActorCarouselCard({
   name,
   imageUrl,
   age,
@@ -81,4 +82,6 @@ export default function ActorCard({
       </div>
     </div>
   );
-}
+});
+
+export default ActorCarouselCard;
