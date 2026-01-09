@@ -1,105 +1,37 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useFilterStore } from "@/stores/useFilterStore";
-import { XMarkIcon, ChevronDownIcon } from "@/components/common/Misc/Icons";
-import { useState } from "react";
-
-function FilterSection({
-  title,
-  children,
-  defaultOpen = true,
-}: {
-  title: string;
-  children: React.ReactNode;
-  defaultOpen?: boolean;
-}) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-
-  return (
-    <div className="border-b border-zinc-800 last:border-b-0">
-      <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between py-4 text-left">
-        <span className="text-body-sm font-medium text-ivory">{title}</span>
-        <ChevronDownIcon
-          className={`w-4 h-4 text-muted-gray transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-        />
-      </button>
-      {isOpen && <div className="pb-4">{children}</div>}
-    </div>
-  );
-}
-
-function FilterChip({ label, selected, onClick }: { label: string; selected: boolean; onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`px-3 py-1.5 rounded-full text-caption font-medium transition-all duration-200 ${
-        selected
-          ? "bg-gold text-luxury-black"
-          : "bg-luxury-tertiary text-muted-gray hover:text-warm-gray hover:bg-zinc-700"
-      }`}
-    >
-      {label}
-    </button>
-  );
-}
-
-function RangeInput({
-  unit,
-  minValue,
-  maxValue,
-  onMinChange,
-  onMaxChange,
-}: {
-  unit: string;
-  minValue: string;
-  maxValue: string;
-  onMinChange: (value: string) => void;
-  onMaxChange: (value: string) => void;
-}) {
-  return (
-    <div className="flex items-center gap-2">
-      <input
-        type="number"
-        placeholder="최소"
-        value={minValue}
-        onChange={(e) => onMinChange(e.target.value)}
-        className="flex-1 bg-luxury-tertiary border border-zinc-700 rounded-lg px-3 py-2 text-ivory text-body-sm placeholder-muted-gray focus:outline-none focus:border-gold transition-colors"
-      />
-      <span className="text-muted-gray">~</span>
-      <input
-        type="number"
-        placeholder="최대"
-        value={maxValue}
-        onChange={(e) => onMaxChange(e.target.value)}
-        className="flex-1 bg-luxury-tertiary border border-zinc-700 rounded-lg px-3 py-2 text-ivory text-body-sm placeholder-muted-gray focus:outline-none focus:border-gold transition-colors"
-      />
-      <span className="text-caption text-muted-gray w-8">{unit}</span>
-    </div>
-  );
-}
+import { XMarkIcon } from "@/components/common/Misc/Icons";
+import { FilterSection } from "./FilterSection";
+import { FilterChip } from "./FilterChip";
+import { RangeInput } from "./RangeInput";
+import { SKILL_OPTIONS, FILMOGRAPHY_TYPE_OPTIONS } from "@/lib/constants/options";
 
 export function FilterBottomSheet() {
   const { filters, setFilter, resetFilters, isBottomSheetOpen, closeBottomSheet, getActiveFilterCount } =
     useFilterStore();
   const activeCount = getActiveFilterCount();
 
-  const skillOptions = ["연기", "춤", "노래", "악기", "무술", "수영", "운전", "영어", "일본어", "중국어"];
-  const filmographyOptions = ["드라마", "영화", "광고", "뮤직비디오", "웹드라마", "독립영화"];
+  const toggleSkill = useCallback(
+    (skill: string) => {
+      const newSkills = filters.skills.includes(skill)
+        ? filters.skills.filter((s) => s !== skill)
+        : [...filters.skills, skill];
+      setFilter("skills", newSkills);
+    },
+    [filters.skills, setFilter]
+  );
 
-  const toggleSkill = (skill: string) => {
-    const newSkills = filters.skills.includes(skill)
-      ? filters.skills.filter((s) => s !== skill)
-      : [...filters.skills, skill];
-    setFilter("skills", newSkills);
-  };
-
-  const toggleFilmographyType = (type: string) => {
-    const newTypes = filters.filmographyTypes.includes(type)
-      ? filters.filmographyTypes.filter((t) => t !== type)
-      : [...filters.filmographyTypes, type];
-    setFilter("filmographyTypes", newTypes);
-  };
+  const toggleFilmographyType = useCallback(
+    (type: string) => {
+      const newTypes = filters.filmographyTypes.includes(type)
+        ? filters.filmographyTypes.filter((t) => t !== type)
+        : [...filters.filmographyTypes, type];
+      setFilter("filmographyTypes", newTypes);
+    },
+    [filters.filmographyTypes, setFilter]
+  );
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -216,7 +148,7 @@ export function FilterBottomSheet() {
 
             <FilterSection title="특기/자격증" defaultOpen={false}>
               <div className="flex flex-wrap gap-2">
-                {skillOptions.map((skill) => (
+                {SKILL_OPTIONS.map((skill) => (
                   <FilterChip
                     key={skill}
                     label={skill}
@@ -229,7 +161,7 @@ export function FilterBottomSheet() {
 
             <FilterSection title="필모그래피 유형" defaultOpen={false}>
               <div className="flex flex-wrap gap-2">
-                {filmographyOptions.map((type) => (
+                {FILMOGRAPHY_TYPE_OPTIONS.map((type) => (
                   <FilterChip
                     key={type}
                     label={type}

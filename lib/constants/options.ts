@@ -49,6 +49,28 @@ export const PROJECT_TYPE_OPTIONS = ["영화", "드라마", "웹드라마", "OTT
 
 export const PROJECT_GENRE_OPTIONS = ["액션", "로맨스", "코미디", "드라마", "스릴러", "공포", "SF", "판타지", "사극", "기타"] as const;
 
+// Filter options for actor search
+export const SKILL_OPTIONS = [
+  "연기",
+  "춤",
+  "노래",
+  "악기",
+  "무술",
+  "수영",
+  "운전",
+  "영어",
+  "일본어",
+  "중국어",
+] as const;
+
+export const FILMOGRAPHY_TYPE_OPTIONS = ["드라마", "영화", "광고", "뮤직비디오", "웹드라마", "독립영화"] as const;
+
+export const PROJECT_STATUS_OPTIONS = [
+  { value: "기획중", label: "기획중" },
+  { value: "진행중", label: "진행중" },
+  { value: "캐스팅완료", label: "캐스팅완료" },
+] as const;
+
 export const generateYears = (count: number = 30, startYear: number = new Date().getFullYear()) =>
   Array.from({ length: count }, (_, i) => startYear - i);
 
@@ -58,4 +80,7 @@ export type RoleType = (typeof ROLE_TYPE_OPTIONS)[number];
 export type Genre = (typeof GENRE_OPTIONS)[number];
 export type Position = (typeof POSITION_OPTIONS)[number];
 export type Fee = (typeof FEE_OPTIONS)[number];
+export type SkillOption = (typeof SKILL_OPTIONS)[number];
+export type FilmographyTypeOption = (typeof FILMOGRAPHY_TYPE_OPTIONS)[number];
+export type ProjectStatusOption = (typeof PROJECT_STATUS_OPTIONS)[number]["value"];
 
