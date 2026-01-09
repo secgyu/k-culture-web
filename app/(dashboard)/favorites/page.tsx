@@ -3,12 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback } from "react";
-import { DashboardLayout, DarkCard } from "@/components/common";
+import { DashboardLayout, DashboardLoadingState, DarkCard } from "@/components/common";
 import { Button } from "@/components/ui";
 import { HeartIcon, XMarkIcon } from "@/components/common/Misc/Icons";
 import { useGetFavorites, useDeleteFavorite } from "@/src/favorites/favorites";
 import { getActorImageUrl } from "@/lib/constants/images";
-import { GRADIENT_OVERLAYS, SPINNER } from "@/lib/constants/styles";
+import { GRADIENT_OVERLAYS } from "@/lib/constants/styles";
 
 export default function FavoritesPage() {
   const { data: favoritesData, isLoading, refetch } = useGetFavorites({ type: "actor" });
@@ -24,13 +24,7 @@ export default function FavoritesPage() {
   );
 
   if (isLoading) {
-    return (
-      <DashboardLayout userType="agency">
-        <div className="flex items-center justify-center h-64">
-          <div className={SPINNER.MEDIUM} />
-        </div>
-      </DashboardLayout>
-    );
+    return <DashboardLoadingState userType="agency" />;
   }
 
   return (

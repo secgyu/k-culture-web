@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { useGetActorDetail, useContactActor } from "@/src/actors/actors";
 import { PageLayout } from "@/components/common";
 import { ContactInfoModal, CastingRequestModal, ShowreelSection, FilmographySection, ActorProfileHeader } from "./";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 function ActorDetailSkeleton() {
   return (
@@ -39,6 +40,7 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
   const router = useRouter();
   const [showContactModal, setShowContactModal] = useState(false);
   const [showCastingModal, setShowCastingModal] = useState(false);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const { data, isLoading } = useGetActorDetail(actorId, {
     query: { enabled: !!actorId },
@@ -49,8 +51,7 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
   const actor = data?.data;
 
   const handleContact = () => {
-    const isLoggedIn = localStorage.getItem("onboarding_step1");
-    if (!isLoggedIn) {
+    if (!isAuthenticated) {
       router.push("/login");
       return;
     }

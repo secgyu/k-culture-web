@@ -21,9 +21,15 @@ interface ActorCardProps {
 }
 
 export const ActorCard = memo(function ActorCard({ actor, isBlurred = false }: ActorCardProps) {
-  const { addActor, removeActor, isInCompare, actors, maxActors } = useCompareStore();
+  const addActor = useCompareStore((state) => state.addActor);
+  const removeActor = useCompareStore((state) => state.removeActor);
+  const isInCompare = useCompareStore((state) => state.isInCompare);
+
+  const actorsCount = useCompareStore((state) => state.actors.length);
+  const maxActors = useCompareStore((state) => state.maxActors);
+
   const isSelected = isInCompare(Number(actor.id));
-  const isFull = actors.length >= maxActors;
+  const isFull = actorsCount >= maxActors;
 
   const handleCompareClick = useCallback(
     (e: React.MouseEvent) => {
