@@ -51,7 +51,7 @@ export function NoticeContent() {
             공지사항
           </Link>
           <Link
-            href="/profile-register"
+            href="/signup?type=actor"
             className="border-muted-gray hover:bg-luxury-secondary rounded-lg border px-4 py-2 text-sm text-white transition-all"
           >
             프로필 등록하기
@@ -62,12 +62,12 @@ export function NoticeContent() {
       <main className="mx-auto max-w-6xl px-6 py-12">
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-white">공지사항</h1>
-          <Link href="#" className="text-warm-gray flex items-center gap-2 transition-colors hover:text-white">
+          <span className="text-muted-gray flex cursor-not-allowed items-center gap-2 opacity-50">
             자주 묻는 질문
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </Link>
+          </span>
         </div>
 
         <div className="bg-luxury-black/30 border-border rounded-2xl border p-6">

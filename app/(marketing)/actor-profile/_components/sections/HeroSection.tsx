@@ -64,6 +64,7 @@ export function HeroSection() {
             <button
               key={i}
               onClick={() => setCurrentSlide(i)}
+              aria-label={`슬라이드 ${i + 1}로 이동`}
               className={`hover:bg-gold/60 h-3 w-3 rounded-full transition-all duration-300 focus:outline-none ${
                 currentSlide === i ? "bg-gold w-8" : "bg-warm-gray/30"
               }`}

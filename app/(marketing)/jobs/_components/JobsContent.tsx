@@ -76,7 +76,7 @@ export function JobsContent() {
             공지사항
           </Link>
           <Link
-            href="/profile-register"
+            href="/signup?type=actor"
             className="border-muted-gray hover:bg-luxury-secondary rounded-lg border px-4 py-2 text-sm text-white transition-all"
           >
             프로필 등록하기

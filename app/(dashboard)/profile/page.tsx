@@ -24,8 +24,6 @@ export default function ProfilePage() {
     );
   }
 
-  const currentYear = new Date().getFullYear();
-
   return (
     <DashboardLayout userType="actor">
       <div className="mx-auto max-w-4xl space-y-8">
