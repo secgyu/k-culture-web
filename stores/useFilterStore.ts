@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { DEFAULT_FILTERS, FILTER_DEFAULT_VALUE, isDefaultValue } from "@/lib/constants/filter-defaults";
 
 export interface FilterState {
   category: string;
@@ -10,7 +11,7 @@ export interface FilterState {
   weightMin: string;
   weightMax: string;
   license: string;
-  품앗이: string;
+  workExchange: string;
   filmBudget: string;
   adBudget: string;
   keyword: string;
@@ -22,32 +23,15 @@ interface FilterStore {
   filters: FilterState;
   isBottomSheetOpen: boolean;
   setFilter: <K extends keyof FilterState>(key: K, value: FilterState[K]) => void;
+  setFilters: (filters: Partial<FilterState>) => void;
   resetFilters: () => void;
   openBottomSheet: () => void;
   closeBottomSheet: () => void;
   getActiveFilterCount: () => number;
 }
 
-const defaultFilters: FilterState = {
-  category: "무관",
-  gender: "무관",
-  ageMin: "",
-  ageMax: "",
-  heightMin: "",
-  heightMax: "",
-  weightMin: "",
-  weightMax: "",
-  license: "무관",
-  품앗이: "무관",
-  filmBudget: "100,000",
-  adBudget: "100,000",
-  keyword: "",
-  skills: [],
-  filmographyTypes: [],
-};
-
 export const useFilterStore = create<FilterStore>((set, get) => ({
-  filters: { ...defaultFilters },
+  filters: { ...DEFAULT_FILTERS },
   isBottomSheetOpen: false,
 
   setFilter: (key, value) => {
@@ -56,8 +40,14 @@ export const useFilterStore = create<FilterStore>((set, get) => ({
     }));
   },
 
+  setFilters: (newFilters) => {
+    set((state) => ({
+      filters: { ...state.filters, ...newFilters },
+    }));
+  },
+
   resetFilters: () => {
-    set({ filters: { ...defaultFilters } });
+    set({ filters: { ...DEFAULT_FILTERS } });
   },
 
   openBottomSheet: () => {
@@ -72,18 +62,17 @@ export const useFilterStore = create<FilterStore>((set, get) => ({
     const { filters } = get();
     let count = 0;
 
-    if (filters.category !== "무관") count++;
-    if (filters.gender !== "무관") count++;
+    if (!isDefaultValue(filters.category, FILTER_DEFAULT_VALUE)) count++;
+    if (!isDefaultValue(filters.gender, FILTER_DEFAULT_VALUE)) count++;
     if (filters.ageMin || filters.ageMax) count++;
     if (filters.heightMin || filters.heightMax) count++;
     if (filters.weightMin || filters.weightMax) count++;
-    if (filters.license !== "무관") count++;
-    if (filters.품앗이 !== "무관") count++;
-    if (filters.skills.length > 0) count++;
-    if (filters.filmographyTypes.length > 0) count++;
+    if (!isDefaultValue(filters.license, FILTER_DEFAULT_VALUE)) count++;
+    if (!isDefaultValue(filters.workExchange, FILTER_DEFAULT_VALUE)) count++;
+    if (!isDefaultValue(filters.skills, [])) count++;
+    if (!isDefaultValue(filters.filmographyTypes, [])) count++;
     if (filters.keyword) count++;
 
     return count;
   },
 }));
-

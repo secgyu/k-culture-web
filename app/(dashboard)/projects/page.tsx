@@ -7,12 +7,7 @@ import { Button } from "@/components/ui";
 import { PlusIcon, FolderIcon } from "@/components/common/Misc/Icons";
 import { useGetProjects } from "@/src/projects/projects";
 import { getThumbnailImageUrl } from "@/lib/constants/images";
-
-const statusColors: Record<string, string> = {
-  기획중: "bg-yellow-500/10 text-yellow-400",
-  진행중: "bg-blue-500/10 text-blue-400",
-  캐스팅완료: "bg-green-500/10 text-green-400",
-};
+import { getProjectStatusStyle } from "@/lib/constants/styles";
 
 export default function ProjectsPage() {
   const { data: projectsData, isLoading } = useGetProjects();
@@ -63,7 +58,7 @@ export default function ProjectsPage() {
                     <div className="absolute top-3 right-3">
                       <span
                         className={`px-2 py-1 rounded text-xs font-medium ${
-                          statusColors[project.status] || statusColors["진행중"]
+                          getProjectStatusStyle(project.status).badge
                         }`}
                       >
                         {project.status}

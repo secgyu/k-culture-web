@@ -185,14 +185,14 @@ export function FilterBottomSheet() {
               </div>
             </FilterSection>
 
-            <FilterSection title="품앗이" defaultOpen={false}>
+            <FilterSection title="workExchange" defaultOpen={false}>
               <div className="flex flex-wrap gap-2">
                 {["무관", "가능", "불가능"].map((option) => (
                   <FilterChip
                     key={option}
                     label={option}
-                    selected={filters.품앗이 === option}
-                    onClick={() => setFilter("품앗이", option)}
+                    selected={filters.workExchange === option}
+                    onClick={() => setFilter("workExchange", option)}
                   />
                 ))}
               </div>

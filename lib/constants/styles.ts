@@ -23,3 +23,27 @@ export const ASPECT_RATIOS = {
   PORTRAIT: "aspect-3/4",
   VIDEO: "aspect-video",
 } as const;
+
+export const PROJECT_STATUS_STYLES = {
+  기획중: {
+    badge: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
+    icon: "text-yellow-400",
+    dot: "bg-yellow-400",
+  },
+  진행중: {
+    badge: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    icon: "text-blue-400",
+    dot: "bg-blue-400",
+  },
+  캐스팅완료: {
+    badge: "bg-green-500/10 text-green-400 border-green-500/20",
+    icon: "text-green-400",
+    dot: "bg-green-400",
+  },
+} as const;
+
+export type ProjectStatus = keyof typeof PROJECT_STATUS_STYLES;
+
+export function getProjectStatusStyle(status: string) {
+  return PROJECT_STATUS_STYLES[status as ProjectStatus] || PROJECT_STATUS_STYLES.진행중;
+}
