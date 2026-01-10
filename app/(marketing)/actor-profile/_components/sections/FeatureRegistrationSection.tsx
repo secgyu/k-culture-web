@@ -28,10 +28,10 @@ export function FeatureRegistrationSection() {
 
   return (
     <section className="section-spacing-md bg-luxury-black">
-      <div className="max-w-3xl mx-auto px-6">
-        <h2 className="text-display-sm text-ivory text-center mb-12">등록 한 번으로 편하게 기다리세요!</h2>
+      <div className="mx-auto max-w-3xl px-6">
+        <h2 className="text-display-sm text-ivory mb-12 text-center">등록 한 번으로 편하게 기다리세요!</h2>
 
-        <div className="space-y-3 mb-8">
+        <div className="mb-8 space-y-3">
           {formFields.map((field, index) => (
             <div
               key={field.num}
@@ -40,31 +40,31 @@ export function FeatureRegistrationSection() {
             >
               <div className="flex items-center gap-3">
                 <span className="text-gold-light font-bold">{field.num}.</span>
-                <span className="text-white font-medium">{field.label}</span>
-                {field.required && <span className="text-red-400 text-body-sm">*필수</span>}
+                <span className="font-medium text-white">{field.label}</span>
+                {field.required && <span className="text-body-sm text-red-400">*필수</span>}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="flex flex-col items-center gap-2 mb-16">
+        <div className="mb-16 flex flex-col items-center gap-2">
           {[0, 1, 2].map((i) => (
-            <div key={i} className={`w-2 h-2 rounded-full ${i === 0 ? "bg-gold" : "bg-luxury-tertiary"}`} />
+            <div key={i} className={`h-2 w-2 rounded-full ${i === 0 ? "bg-gold" : "bg-luxury-tertiary"}`} />
           ))}
         </div>
 
-        <h3 className="text-heading-xl md:text-display-sm text-muted-gray text-center mb-8">
-          나만의 프로필을 <span className="font-bold text-ivory">등록</span>했다면?
+        <h3 className="text-heading-xl md:text-display-sm text-muted-gray mb-8 text-center">
+          나만의 프로필을 <span className="text-ivory font-bold">등록</span>했다면?
         </h3>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-4">
+        <div className="mb-4 flex flex-wrap justify-center gap-3">
           {styleKeywords.map((keyword) => (
             <span
               key={keyword.label}
-              className={`px-5 py-3 rounded-full text-body-sm font-medium transition-all ${
+              className={`text-body-sm rounded-full px-5 py-3 font-medium transition-all ${
                 keyword.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-luxury-tertiary text-muted-gray border border-border"
+                  : "bg-luxury-tertiary text-muted-gray border-border border"
               }`}
             >
               {keyword.label}
@@ -72,14 +72,14 @@ export function FeatureRegistrationSection() {
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-4">
+        <div className="mb-4 flex flex-wrap justify-center gap-3">
           {languages.map((lang) => (
             <span
               key={lang.label}
-              className={`px-5 py-3 rounded-full text-body-sm font-medium transition-all ${
+              className={`text-body-sm rounded-full px-5 py-3 font-medium transition-all ${
                 lang.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-luxury-tertiary text-muted-gray border border-border"
+                  : "bg-luxury-tertiary text-muted-gray border-border border"
               }`}
             >
               {lang.label}
@@ -87,7 +87,7 @@ export function FeatureRegistrationSection() {
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-4">
+        <div className="mb-4 flex flex-wrap justify-center gap-3">
           {[
             { label: "충청도사투리", selected: false },
             { label: "전라도사투리", selected: false },
@@ -96,10 +96,10 @@ export function FeatureRegistrationSection() {
           ].map((dialect) => (
             <span
               key={dialect.label}
-              className={`px-5 py-3 rounded-full text-body-sm font-medium transition-all ${
+              className={`text-body-sm rounded-full px-5 py-3 font-medium transition-all ${
                 dialect.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-luxury-tertiary text-muted-gray border border-border"
+                  : "bg-luxury-tertiary text-muted-gray border-border border"
               }`}
             >
               {dialect.label}
@@ -107,7 +107,7 @@ export function FeatureRegistrationSection() {
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-4">
+        <div className="mb-4 flex flex-wrap justify-center gap-3">
           {[
             { label: "노래", selected: false },
             { label: "피아노", selected: false },
@@ -115,10 +115,10 @@ export function FeatureRegistrationSection() {
           ].map((skill) => (
             <span
               key={skill.label}
-              className={`px-5 py-3 rounded-full text-body-sm font-medium transition-all ${
+              className={`text-body-sm rounded-full px-5 py-3 font-medium transition-all ${
                 skill.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-luxury-tertiary text-muted-gray border border-border"
+                  : "bg-luxury-tertiary text-muted-gray border-border border"
               }`}
             >
               {skill.label}
@@ -126,7 +126,7 @@ export function FeatureRegistrationSection() {
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
+        <div className="mb-16 flex flex-wrap justify-center gap-3">
           {[
             { label: "수영", selected: true },
             { label: "요가", selected: false },
@@ -135,10 +135,10 @@ export function FeatureRegistrationSection() {
           ].map((sport) => (
             <span
               key={sport.label}
-              className={`px-5 py-3 rounded-full text-body-sm font-medium transition-all ${
+              className={`text-body-sm rounded-full px-5 py-3 font-medium transition-all ${
                 sport.selected
                   ? "bg-gold text-luxury-black font-medium"
-                  : "bg-luxury-tertiary text-muted-gray border border-border"
+                  : "bg-luxury-tertiary text-muted-gray border-border border"
               }`}
             >
               {sport.label}
@@ -146,23 +146,23 @@ export function FeatureRegistrationSection() {
           ))}
         </div>
 
-        <h3 className="text-display-sm text-ivory text-center mb-12">
+        <h3 className="text-display-sm text-ivory mb-12 text-center">
           나를 대표하는 <span className="text-gold">키워드</span>로 웹 프로필 완성!
         </h3>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          <div className="bg-luxury-secondary rounded-2xl overflow-hidden shadow-2xl">
+        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
+          <div className="bg-luxury-secondary overflow-hidden rounded-2xl shadow-2xl">
             <div className="p-4">
-              <div className="flex items-center justify-between mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 text-white">←</div>
+                  <div className="h-6 w-6 text-white">←</div>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-warm-gray text-caption">원본</span>
                   <div className="flex gap-2">
-                    <div className="w-5 h-5 bg-luxury-tertiary rounded" />
-                    <div className="w-5 h-5 bg-luxury-tertiary rounded" />
-                    <div className="w-5 h-5 bg-luxury-tertiary rounded" />
+                    <div className="bg-luxury-tertiary h-5 w-5 rounded" />
+                    <div className="bg-luxury-tertiary h-5 w-5 rounded" />
+                    <div className="bg-luxury-tertiary h-5 w-5 rounded" />
                   </div>
                 </div>
               </div>
@@ -170,15 +170,15 @@ export function FeatureRegistrationSection() {
               <div className="flex gap-4">
                 <div className="flex-1 space-y-3">
                   <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="text-white font-bold text-heading-md">이하나</h4>
-                      <span className="px-2 py-0.5 bg-gold text-luxury-black font-medium text-caption rounded">
+                    <div className="mb-1 flex items-center gap-2">
+                      <h4 className="text-heading-md font-bold text-white">이하나</h4>
+                      <span className="bg-gold text-luxury-black text-caption rounded px-2 py-0.5 font-medium">
                         여자
                       </span>
                     </div>
                     <p className="text-muted-gray text-caption">Lee Hana</p>
                   </div>
-                  <div className="space-y-1 text-caption">
+                  <div className="text-caption space-y-1">
                     <p className="text-warm-gray">🏢 핑크프로젝트</p>
                     <p className="text-warm-gray">🎓 한국대학교 연기과</p>
                   </div>
@@ -188,15 +188,15 @@ export function FeatureRegistrationSection() {
                   <div className="grid grid-cols-3 gap-2 text-center">
                     <div className="bg-luxury-tertiary rounded p-2">
                       <p className="text-muted-gray text-caption">생년월일</p>
-                      <p className="text-white text-caption">2001</p>
+                      <p className="text-caption text-white">2001</p>
                     </div>
                     <div className="bg-luxury-tertiary rounded p-2">
                       <p className="text-muted-gray text-caption">키</p>
-                      <p className="text-white text-caption">167 cm</p>
+                      <p className="text-caption text-white">167 cm</p>
                     </div>
                     <div className="bg-luxury-tertiary rounded p-2">
                       <p className="text-muted-gray text-caption">몸무게</p>
-                      <p className="text-white text-caption">48 kg</p>
+                      <p className="text-caption text-white">48 kg</p>
                     </div>
                   </div>
                   <p className="text-warm-gray text-caption leading-relaxed">
@@ -204,14 +204,14 @@ export function FeatureRegistrationSection() {
                   </p>
                   <div className="flex flex-wrap gap-1">
                     {["고양이상", "도도한", "청순한", "사랑스러운", "순수", "청아함", "배려심"].map((tag) => (
-                      <span key={tag} className="px-2 py-0.5 bg-purple-600/20 text-gold-light text-caption rounded">
+                      <span key={tag} className="text-gold-light text-caption rounded bg-purple-600/20 px-2 py-0.5">
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="w-32 aspect-[3/4] relative rounded-lg overflow-hidden">
+                <div className="relative aspect-[3/4] w-32 overflow-hidden rounded-lg">
                   <Image
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=400&fit=crop"
                     alt="프로필"
@@ -223,12 +223,12 @@ export function FeatureRegistrationSection() {
             </div>
           </div>
 
-          <div className="bg-luxury-secondary rounded-2xl overflow-hidden shadow-2xl">
+          <div className="bg-luxury-secondary overflow-hidden rounded-2xl shadow-2xl">
             <div className="p-4">
               <p className="text-warm-gray text-body-sm mb-4">프로필 사진</p>
-              <div className="grid grid-cols-3 gap-2 mb-4">
+              <div className="mb-4 grid grid-cols-3 gap-2">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="aspect-[3/4] relative rounded-lg overflow-hidden">
+                  <div key={i} className="relative aspect-[3/4] overflow-hidden rounded-lg">
                     <Image
                       src={`https://images.unsplash.com/photo-153452874177${i}-53994a69daeb?w=200&h=300&fit=crop`}
                       alt={`사진 ${i}`}
@@ -241,7 +241,7 @@ export function FeatureRegistrationSection() {
               <p className="text-warm-gray text-body-sm mb-2">출연 이미지</p>
               <div className="grid grid-cols-4 gap-2">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="aspect-square relative rounded-lg overflow-hidden bg-luxury-tertiary">
+                  <div key={i} className="bg-luxury-tertiary relative aspect-square overflow-hidden rounded-lg">
                     <Image
                       src={`https://images.unsplash.com/photo-149479010837${i}-be9c29b29330?w=150&h=150&fit=crop`}
                       alt={`출연 ${i}`}

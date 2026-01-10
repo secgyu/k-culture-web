@@ -1,5 +1,7 @@
 import { memo } from "react";
-import { Spinner, EmptyState } from "@/components/ui";
+
+import { EmptyState, Spinner } from "@/components/ui";
+
 import { ActorCard } from "./ActorCard";
 
 interface Actor {
@@ -20,7 +22,7 @@ interface ActorGridProps {
 export const ActorGrid = memo(function ActorGrid({ actors, isLoading, isAuthenticated }: ActorGridProps) {
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex h-64 items-center justify-center">
         <Spinner size="lg" />
       </div>
     );
@@ -31,7 +33,7 @@ export const ActorGrid = memo(function ActorGrid({ actors, isLoading, isAuthenti
   }
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-6">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 xl:grid-cols-5">
       {actors.map((actor, index) => (
         <ActorCard key={actor.id} actor={actor} isBlurred={!isAuthenticated && index >= 4} />
       ))}

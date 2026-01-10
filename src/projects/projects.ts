@@ -15,10 +15,7 @@
 
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation,
-  useQuery
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -31,9 +28,11 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
-} from '@tanstack/react-query';
+  UseQueryResult,
+} from "@tanstack/react-query";
 
+import { customFetch } from "../../lib/fetcher";
+import type { BodyType, ErrorType } from "../../lib/fetcher";
 import type {
   CreateProject201,
   DeleteProject200,
@@ -43,385 +42,407 @@ import type {
   NotFoundErrorResponse,
   ProjectCreateRequest,
   UnauthorizedErrorResponse,
-  UpdateProject200
-} from '.././model';
-
-import { customFetch } from '../../lib/fetcher';
-import type { ErrorType , BodyType } from '../../lib/fetcher';
-
-
-
+  UpdateProject200,
+} from ".././model";
 
 /**
  * @summary 프로젝트 목록 조회
  */
-export const getProjects = (
-    params?: GetProjectsParams,
- signal?: AbortSignal
+export const getProjects = (params?: GetProjectsParams, signal?: AbortSignal) => {
+  return customFetch<GetProjects200>({ url: `/api/projects`, method: "GET", params, signal });
+};
+
+export const getGetProjectsQueryKey = (params?: GetProjectsParams) => {
+  return [`/api/projects`, ...(params ? [params] : [])] as const;
+};
+
+export const getGetProjectsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getProjects>>,
+  TError = ErrorType<UnauthorizedErrorResponse>,
+>(
+  params?: GetProjectsParams,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>> }
 ) => {
-      
-      
-      return customFetch<GetProjects200>(
-      {url: `/api/projects`, method: 'GET',
-        params, signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
+  const queryKey = queryOptions?.queryKey ?? getGetProjectsQueryKey(params);
 
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjects>>> = ({ signal }) => getProjects(params, signal);
 
-export const getGetProjectsQueryKey = (params?: GetProjectsParams,) => {
-    return [
-    `/api/projects`, ...(params ? [params]: [])
-    ] as const;
-    }
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getProjects>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-    
-export const getGetProjectsQueryOptions = <TData = Awaited<ReturnType<typeof getProjects>>, TError = ErrorType<UnauthorizedErrorResponse>>(params?: GetProjectsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>>, }
-) => {
+export type GetProjectsQueryResult = NonNullable<Awaited<ReturnType<typeof getProjects>>>;
+export type GetProjectsQueryError = ErrorType<UnauthorizedErrorResponse>;
 
-const {query: queryOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetProjectsQueryKey(params);
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjects>>> = ({ signal }) => getProjects(params, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetProjectsQueryResult = NonNullable<Awaited<ReturnType<typeof getProjects>>>
-export type GetProjectsQueryError = ErrorType<UnauthorizedErrorResponse>
-
-
-export function useGetProjects<TData = Awaited<ReturnType<typeof getProjects>>, TError = ErrorType<UnauthorizedErrorResponse>>(
- params: undefined |  GetProjectsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>> & Pick<
+export function useGetProjects<
+  TData = Awaited<ReturnType<typeof getProjects>>,
+  TError = ErrorType<UnauthorizedErrorResponse>,
+>(
+  params: undefined | GetProjectsParams,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>> &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getProjects>>,
           TError,
           Awaited<ReturnType<typeof getProjects>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetProjects<TData = Awaited<ReturnType<typeof getProjects>>, TError = ErrorType<UnauthorizedErrorResponse>>(
- params?: GetProjectsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useGetProjects<
+  TData = Awaited<ReturnType<typeof getProjects>>,
+  TError = ErrorType<UnauthorizedErrorResponse>,
+>(
+  params?: GetProjectsParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>> &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getProjects>>,
           TError,
           Awaited<ReturnType<typeof getProjects>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetProjects<TData = Awaited<ReturnType<typeof getProjects>>, TError = ErrorType<UnauthorizedErrorResponse>>(
- params?: GetProjectsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useGetProjects<
+  TData = Awaited<ReturnType<typeof getProjects>>,
+  TError = ErrorType<UnauthorizedErrorResponse>,
+>(
+  params?: GetProjectsParams,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 /**
  * @summary 프로젝트 목록 조회
  */
 
-export function useGetProjects<TData = Awaited<ReturnType<typeof getProjects>>, TError = ErrorType<UnauthorizedErrorResponse>>(
- params?: GetProjectsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetProjects<
+  TData = Awaited<ReturnType<typeof getProjects>>,
+  TError = ErrorType<UnauthorizedErrorResponse>,
+>(
+  params?: GetProjectsParams,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetProjectsQueryOptions(params, options);
 
-  const queryOptions = getGetProjectsQueryOptions(params,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
 
-  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
 
+/**
+ * @summary 프로젝트 생성
+ */
+export const createProject = (projectCreateRequest: BodyType<ProjectCreateRequest>, signal?: AbortSignal) => {
+  return customFetch<CreateProject201>({
+    url: `/api/projects`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: projectCreateRequest,
+    signal,
+  });
+};
 
+export const getCreateProjectMutationOptions = <
+  TError = ErrorType<UnauthorizedErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createProject>>,
+    TError,
+    { data: BodyType<ProjectCreateRequest> },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createProject>>,
+  TError,
+  { data: BodyType<ProjectCreateRequest> },
+  TContext
+> => {
+  const mutationKey = ["createProject"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createProject>>,
+    { data: BodyType<ProjectCreateRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createProject(data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateProjectMutationResult = NonNullable<Awaited<ReturnType<typeof createProject>>>;
+export type CreateProjectMutationBody = BodyType<ProjectCreateRequest>;
+export type CreateProjectMutationError = ErrorType<UnauthorizedErrorResponse>;
 
 /**
  * @summary 프로젝트 생성
  */
-export const createProject = (
-    projectCreateRequest: BodyType<ProjectCreateRequest>,
- signal?: AbortSignal
-) => {
-      
-      
-      return customFetch<CreateProject201>(
-      {url: `/api/projects`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: projectCreateRequest, signal
-    },
-      );
-    }
-  
+export const useCreateProject = <TError = ErrorType<UnauthorizedErrorResponse>, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof createProject>>,
+      TError,
+      { data: BodyType<ProjectCreateRequest> },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof createProject>>,
+  TError,
+  { data: BodyType<ProjectCreateRequest> },
+  TContext
+> => {
+  const mutationOptions = getCreateProjectMutationOptions(options);
 
-
-export const getCreateProjectMutationOptions = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createProject>>, TError,{data: BodyType<ProjectCreateRequest>}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof createProject>>, TError,{data: BodyType<ProjectCreateRequest>}, TContext> => {
-
-const mutationKey = ['createProject'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createProject>>, {data: BodyType<ProjectCreateRequest>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  createProject(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type CreateProjectMutationResult = NonNullable<Awaited<ReturnType<typeof createProject>>>
-    export type CreateProjectMutationBody = BodyType<ProjectCreateRequest>
-    export type CreateProjectMutationError = ErrorType<UnauthorizedErrorResponse>
-
-    /**
- * @summary 프로젝트 생성
- */
-export const useCreateProject = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createProject>>, TError,{data: BodyType<ProjectCreateRequest>}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof createProject>>,
-        TError,
-        {data: BodyType<ProjectCreateRequest>},
-        TContext
-      > => {
-
-      const mutationOptions = getCreateProjectMutationOptions(options);
-
-      return useMutation(mutationOptions, queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * @summary 프로젝트 상세 조회
  */
-export const getProjectDetail = (
-    projectId: string,
- signal?: AbortSignal
+export const getProjectDetail = (projectId: string, signal?: AbortSignal) => {
+  return customFetch<GetProjectDetail200>({ url: `/api/projects/${projectId}`, method: "GET", signal });
+};
+
+export const getGetProjectDetailQueryKey = (projectId?: string) => {
+  return [`/api/projects/${projectId}`] as const;
+};
+
+export const getGetProjectDetailQueryOptions = <
+  TData = Awaited<ReturnType<typeof getProjectDetail>>,
+  TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>,
+>(
+  projectId: string,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjectDetail>>, TError, TData>> }
 ) => {
-      
-      
-      return customFetch<GetProjectDetail200>(
-      {url: `/api/projects/${projectId}`, method: 'GET', signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
+  const queryKey = queryOptions?.queryKey ?? getGetProjectDetailQueryKey(projectId);
 
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjectDetail>>> = ({ signal }) =>
+    getProjectDetail(projectId, signal);
 
-export const getGetProjectDetailQueryKey = (projectId?: string,) => {
-    return [
-    `/api/projects/${projectId}`
-    ] as const;
-    }
+  return { queryKey, queryFn, enabled: !!projectId, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getProjectDetail>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-    
-export const getGetProjectDetailQueryOptions = <TData = Awaited<ReturnType<typeof getProjectDetail>>, TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>>(projectId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjectDetail>>, TError, TData>>, }
-) => {
+export type GetProjectDetailQueryResult = NonNullable<Awaited<ReturnType<typeof getProjectDetail>>>;
+export type GetProjectDetailQueryError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>;
 
-const {query: queryOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetProjectDetailQueryKey(projectId);
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjectDetail>>> = ({ signal }) => getProjectDetail(projectId, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(projectId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getProjectDetail>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetProjectDetailQueryResult = NonNullable<Awaited<ReturnType<typeof getProjectDetail>>>
-export type GetProjectDetailQueryError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>
-
-
-export function useGetProjectDetail<TData = Awaited<ReturnType<typeof getProjectDetail>>, TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>>(
- projectId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjectDetail>>, TError, TData>> & Pick<
+export function useGetProjectDetail<
+  TData = Awaited<ReturnType<typeof getProjectDetail>>,
+  TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>,
+>(
+  projectId: string,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjectDetail>>, TError, TData>> &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getProjectDetail>>,
           TError,
           Awaited<ReturnType<typeof getProjectDetail>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetProjectDetail<TData = Awaited<ReturnType<typeof getProjectDetail>>, TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>>(
- projectId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjectDetail>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useGetProjectDetail<
+  TData = Awaited<ReturnType<typeof getProjectDetail>>,
+  TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>,
+>(
+  projectId: string,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjectDetail>>, TError, TData>> &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getProjectDetail>>,
           TError,
           Awaited<ReturnType<typeof getProjectDetail>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetProjectDetail<TData = Awaited<ReturnType<typeof getProjectDetail>>, TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>>(
- projectId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjectDetail>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useGetProjectDetail<
+  TData = Awaited<ReturnType<typeof getProjectDetail>>,
+  TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>,
+>(
+  projectId: string,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjectDetail>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 /**
  * @summary 프로젝트 상세 조회
  */
 
-export function useGetProjectDetail<TData = Awaited<ReturnType<typeof getProjectDetail>>, TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>>(
- projectId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjectDetail>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetProjectDetail<
+  TData = Awaited<ReturnType<typeof getProjectDetail>>,
+  TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>,
+>(
+  projectId: string,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProjectDetail>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetProjectDetailQueryOptions(projectId, options);
 
-  const queryOptions = getGetProjectDetailQueryOptions(projectId,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
 
-  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
 
+/**
+ * @summary 프로젝트 수정
+ */
+export const updateProject = (projectId: string, projectCreateRequest: BodyType<ProjectCreateRequest>) => {
+  return customFetch<UpdateProject200>({
+    url: `/api/projects/${projectId}`,
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    data: projectCreateRequest,
+  });
+};
 
+export const getUpdateProjectMutationOptions = <
+  TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateProject>>,
+    TError,
+    { projectId: string; data: BodyType<ProjectCreateRequest> },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof updateProject>>,
+  TError,
+  { projectId: string; data: BodyType<ProjectCreateRequest> },
+  TContext
+> => {
+  const mutationKey = ["updateProject"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof updateProject>>,
+    { projectId: string; data: BodyType<ProjectCreateRequest> }
+  > = (props) => {
+    const { projectId, data } = props ?? {};
+
+    return updateProject(projectId, data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type UpdateProjectMutationResult = NonNullable<Awaited<ReturnType<typeof updateProject>>>;
+export type UpdateProjectMutationBody = BodyType<ProjectCreateRequest>;
+export type UpdateProjectMutationError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>;
 
 /**
  * @summary 프로젝트 수정
  */
-export const updateProject = (
-    projectId: string,
-    projectCreateRequest: BodyType<ProjectCreateRequest>,
- ) => {
-      
-      
-      return customFetch<UpdateProject200>(
-      {url: `/api/projects/${projectId}`, method: 'PUT',
-      headers: {'Content-Type': 'application/json', },
-      data: projectCreateRequest
-    },
-      );
-    }
-  
+export const useUpdateProject = <
+  TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof updateProject>>,
+      TError,
+      { projectId: string; data: BodyType<ProjectCreateRequest> },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof updateProject>>,
+  TError,
+  { projectId: string; data: BodyType<ProjectCreateRequest> },
+  TContext
+> => {
+  const mutationOptions = getUpdateProjectMutationOptions(options);
 
-
-export const getUpdateProjectMutationOptions = <TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateProject>>, TError,{projectId: string;data: BodyType<ProjectCreateRequest>}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof updateProject>>, TError,{projectId: string;data: BodyType<ProjectCreateRequest>}, TContext> => {
-
-const mutationKey = ['updateProject'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateProject>>, {projectId: string;data: BodyType<ProjectCreateRequest>}> = (props) => {
-          const {projectId,data} = props ?? {};
-
-          return  updateProject(projectId,data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type UpdateProjectMutationResult = NonNullable<Awaited<ReturnType<typeof updateProject>>>
-    export type UpdateProjectMutationBody = BodyType<ProjectCreateRequest>
-    export type UpdateProjectMutationError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>
-
-    /**
- * @summary 프로젝트 수정
- */
-export const useUpdateProject = <TError = ErrorType<UnauthorizedErrorResponse | NotFoundErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateProject>>, TError,{projectId: string;data: BodyType<ProjectCreateRequest>}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof updateProject>>,
-        TError,
-        {projectId: string;data: BodyType<ProjectCreateRequest>},
-        TContext
-      > => {
-
-      const mutationOptions = getUpdateProjectMutationOptions(options);
-
-      return useMutation(mutationOptions, queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * @summary 프로젝트 삭제
  */
-export const deleteProject = (
-    projectId: string,
- ) => {
-      
-      
-      return customFetch<DeleteProject200>(
-      {url: `/api/projects/${projectId}`, method: 'DELETE'
-    },
-      );
-    }
-  
+export const deleteProject = (projectId: string) => {
+  return customFetch<DeleteProject200>({ url: `/api/projects/${projectId}`, method: "DELETE" });
+};
 
+export const getDeleteProjectMutationOptions = <
+  TError = ErrorType<UnauthorizedErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteProject>>, TError, { projectId: string }, TContext>;
+}): UseMutationOptions<Awaited<ReturnType<typeof deleteProject>>, TError, { projectId: string }, TContext> => {
+  const mutationKey = ["deleteProject"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getDeleteProjectMutationOptions = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteProject>>, TError,{projectId: string}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof deleteProject>>, TError,{projectId: string}, TContext> => {
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteProject>>, { projectId: string }> = (props) => {
+    const { projectId } = props ?? {};
 
-const mutationKey = ['deleteProject'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return deleteProject(projectId);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type DeleteProjectMutationResult = NonNullable<Awaited<ReturnType<typeof deleteProject>>>;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteProject>>, {projectId: string}> = (props) => {
-          const {projectId} = props ?? {};
+export type DeleteProjectMutationError = ErrorType<UnauthorizedErrorResponse>;
 
-          return  deleteProject(projectId,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteProjectMutationResult = NonNullable<Awaited<ReturnType<typeof deleteProject>>>
-    
-    export type DeleteProjectMutationError = ErrorType<UnauthorizedErrorResponse>
-
-    /**
+/**
  * @summary 프로젝트 삭제
  */
-export const useDeleteProject = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteProject>>, TError,{projectId: string}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteProject>>,
-        TError,
-        {projectId: string},
-        TContext
-      > => {
+export const useDeleteProject = <TError = ErrorType<UnauthorizedErrorResponse>, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteProject>>, TError, { projectId: string }, TContext>;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<Awaited<ReturnType<typeof deleteProject>>, TError, { projectId: string }, TContext> => {
+  const mutationOptions = getDeleteProjectMutationOptions(options);
 
-      const mutationOptions = getDeleteProjectMutationOptions(options);
-
-      return useMutation(mutationOptions, queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};

@@ -1,13 +1,18 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useForm, Controller } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
-import { DarkInput, DarkSelect } from "@/components/common";
+import { Controller, useForm } from "react-hook-form";
+
 import { Button } from "@/components/ui";
-import { FOUNDED_YEAR_OPTIONS, AGENCY_SPECIALTY_OPTIONS } from "@/lib/constants";
-import { agencyOnboardingSchema, type AgencyOnboardingData } from "@/lib/validations";
+
+import { DarkInput, DarkSelect } from "@/components/common";
+
+import { AGENCY_SPECIALTY_OPTIONS, FOUNDED_YEAR_OPTIONS } from "@/lib/constants";
+import { type AgencyOnboardingData, agencyOnboardingSchema } from "@/lib/validations";
 
 export default function AgencyOnboardingStep1() {
   const router = useRouter();

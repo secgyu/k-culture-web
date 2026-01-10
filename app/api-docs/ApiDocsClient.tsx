@@ -1,7 +1,8 @@
 "use client";
 
-import Script from "next/script";
 import { useCallback } from "react";
+
+import Script from "next/script";
 
 declare global {
   interface Window {

@@ -1,7 +1,8 @@
 "use client";
 
-import { useOnboardingStore } from "@/stores/useOnboardingStore";
 import { useEffect, useState } from "react";
+
+import { useOnboardingStore } from "@/stores/useOnboardingStore";
 
 export function AutoSaveIndicator() {
   const { lastSavedAt } = useOnboardingStore();
@@ -18,8 +19,8 @@ export function AutoSaveIndicator() {
   if (!showSaved) return null;
 
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-green-600/90 text-white text-body-sm rounded-full shadow-lg animate-fade-in z-50 flex items-center gap-2">
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div className="text-body-sm animate-fade-in fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-green-600/90 px-4 py-2 text-white shadow-lg">
+      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
       </svg>
       <span>임시 저장됨</span>

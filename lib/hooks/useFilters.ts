@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 
 export interface FilterState {
   [key: string]: string | boolean | undefined;
@@ -11,9 +11,7 @@ interface UseFiltersReturn<T extends FilterState> {
   setFilters: (filters: Partial<T>) => void;
 }
 
-export function useFilters<T extends FilterState>(
-  initialFilters: T
-): UseFiltersReturn<T> {
+export function useFilters<T extends FilterState>(initialFilters: T): UseFiltersReturn<T> {
   const [filters, setFiltersState] = useState<T>(initialFilters);
 
   const setFilter = useCallback(<K extends keyof T>(key: K, value: T[K]) => {
@@ -41,4 +39,3 @@ export function useFilters<T extends FilterState>(
     setFilters,
   };
 }
-

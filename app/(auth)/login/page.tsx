@@ -2,14 +2,21 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { AuthLayout } from "@/components/common";
+
 import { Button, FormField, Input, PasswordInput } from "@/components/ui";
-import { useLogin } from "@/src/auth/auth";
+
+import { AuthLayout } from "@/components/common";
+
+import { type LoginFormData, loginFormSchema } from "@/lib/validations";
+
 import { useAuthStore } from "@/stores/useAuthStore";
-import { loginFormSchema, type LoginFormData } from "@/lib/validations";
+
+import { useLogin } from "@/src/auth/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -75,7 +82,7 @@ export default function LoginPage() {
         </FormField>
 
         <div className="flex justify-end">
-          <Link href="/forgot-password" className="text-sm text-muted-gray hover:text-gold transition-colors">
+          <Link href="/forgot-password" className="text-muted-gray hover:text-gold text-sm transition-colors">
             비밀번호를 잊으셨나요?
           </Link>
         </div>

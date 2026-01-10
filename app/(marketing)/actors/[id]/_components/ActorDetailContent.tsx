@@ -1,28 +1,34 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+
 import { toast } from "sonner";
-import { useGetActorDetail, useContactActor } from "@/src/actors/actors";
+
 import { PageLayout } from "@/components/common";
-import { ContactInfoModal, CastingRequestModal, ShowreelSection, FilmographySection, ActorProfileHeader } from "./";
+
 import { useAuthStore } from "@/stores/useAuthStore";
+
+import { useContactActor, useGetActorDetail } from "@/src/actors/actors";
+
+import { ActorProfileHeader, CastingRequestModal, ContactInfoModal, FilmographySection, ShowreelSection } from "./";
 
 function ActorDetailSkeleton() {
   return (
-    <PageLayout className="pb-24 animate-pulse">
-      <div className="h-[480px] bg-luxury-secondary" />
+    <PageLayout className="animate-pulse pb-24">
+      <div className="bg-luxury-secondary h-[480px]" />
       <section className="px-5 py-8">
-        <div className="h-6 w-32 bg-luxury-secondary rounded mb-6" />
+        <div className="bg-luxury-secondary mb-6 h-6 w-32 rounded" />
         <div className="space-y-4">
           {[1, 2, 3].map((i) => (
             <div key={i} className="flex gap-4">
-              <div className="w-16 h-22 bg-luxury-secondary rounded-lg" />
+              <div className="bg-luxury-secondary h-22 w-16 rounded-lg" />
               <div className="flex-1">
-                <div className="h-3 w-12 bg-luxury-secondary rounded mb-2" />
-                <div className="h-4 w-3/4 bg-luxury-secondary rounded mb-2" />
-                <div className="h-3 w-1/2 bg-luxury-secondary rounded" />
+                <div className="bg-luxury-secondary mb-2 h-3 w-12 rounded" />
+                <div className="bg-luxury-secondary mb-2 h-4 w-3/4 rounded" />
+                <div className="bg-luxury-secondary h-3 w-1/2 rounded" />
               </div>
             </div>
           ))}
@@ -89,7 +95,7 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
       <PageLayout className="items-center justify-center">
         <div className="text-center">
           <p className="text-muted-gray">배우 정보를 찾을 수 없습니다.</p>
-          <Link href="/actor-search" className="mt-4 underline text-gold hover:text-gold-light">
+          <Link href="/actor-search" className="text-gold hover:text-gold-light mt-4 underline">
             돌아가기
           </Link>
         </div>
@@ -112,11 +118,11 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
       <ShowreelSection showreels={actor.showreels} />
 
       {actor.skills && actor.skills.length > 0 && (
-        <section className="px-5 py-8 bg-luxury-secondary border-y border-border">
+        <section className="bg-luxury-secondary border-border border-y px-5 py-8">
           <h2 className="text-heading-md text-ivory mb-4">특기</h2>
           <div className="flex flex-wrap gap-2">
             {actor.skills.map((skill, i) => (
-              <span key={i} className="px-4 py-2 bg-luxury-tertiary rounded-full text-ivory">
+              <span key={i} className="bg-luxury-tertiary text-ivory rounded-full px-4 py-2">
                 {skill}
               </span>
             ))}
@@ -124,16 +130,16 @@ export function ActorDetailContent({ actorId }: ActorDetailContentProps) {
         </section>
       )}
 
-      <div className="fixed bottom-0 left-0 right-0 z-20 px-5 py-4 bg-luxury-black border-t border-border flex gap-3">
+      <div className="bg-luxury-black border-border fixed right-0 bottom-0 left-0 z-20 flex gap-3 border-t px-5 py-4">
         <button
           onClick={handleContact}
-          className="flex-1 py-3 px-6 bg-luxury-tertiary text-ivory font-medium rounded-xl hover:bg-opacity-80 transition-colors active:scale-[0.98]"
+          className="bg-luxury-tertiary text-ivory hover:bg-opacity-80 flex-1 rounded-xl px-6 py-3 font-medium transition-colors active:scale-[0.98]"
         >
           연락처 보기
         </button>
         <button
           onClick={() => setShowCastingModal(true)}
-          className="flex-1 py-3 px-6 bg-gold text-luxury-black font-medium rounded-xl hover:bg-gold-light transition-colors active:scale-[0.98]"
+          className="bg-gold text-luxury-black hover:bg-gold-light flex-1 rounded-xl px-6 py-3 font-medium transition-colors active:scale-[0.98]"
         >
           섭외 요청
         </button>

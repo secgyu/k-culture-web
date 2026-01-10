@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 interface UseModalReturn {
   handleEscape: () => void;
@@ -6,10 +6,7 @@ interface UseModalReturn {
   unlockScroll: () => void;
 }
 
-export function useModal(
-  isOpen: boolean,
-  onClose: () => void
-): UseModalReturn {
+export function useModal(isOpen: boolean, onClose: () => void): UseModalReturn {
   const handleEscape = useCallback(() => {
     if (isOpen) {
       onClose();
@@ -48,4 +45,3 @@ export function useModal(
     unlockScroll,
   };
 }
-

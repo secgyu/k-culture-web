@@ -15,154 +15,164 @@
 
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation
-} from '@tanstack/react-query';
-import type {
-  MutationFunction,
-  QueryClient,
-  UseMutationOptions,
-  UseMutationResult
-} from '@tanstack/react-query';
+import { useMutation } from "@tanstack/react-query";
+import type { MutationFunction, QueryClient, UseMutationOptions, UseMutationResult } from "@tanstack/react-query";
 
+import { customFetch } from "../../lib/fetcher";
+import type { BodyType, ErrorType } from "../../lib/fetcher";
 import type {
   AgencyCreateRequest,
   CreateAgencyProfile201,
   UnauthorizedErrorResponse,
-  UpdateAgencyProfile200
-} from '.././model';
-
-import { customFetch } from '../../lib/fetcher';
-import type { ErrorType , BodyType } from '../../lib/fetcher';
-
-
-
+  UpdateAgencyProfile200,
+} from ".././model";
 
 /**
  * @summary 에이전시 프로필 등록
  */
-export const createAgencyProfile = (
-    agencyCreateRequest: BodyType<AgencyCreateRequest>,
- signal?: AbortSignal
-) => {
-      
-      
-      return customFetch<CreateAgencyProfile201>(
-      {url: `/api/agencies/profile`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: agencyCreateRequest, signal
-    },
-      );
-    }
-  
+export const createAgencyProfile = (agencyCreateRequest: BodyType<AgencyCreateRequest>, signal?: AbortSignal) => {
+  return customFetch<CreateAgencyProfile201>({
+    url: `/api/agencies/profile`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: agencyCreateRequest,
+    signal,
+  });
+};
 
+export const getCreateAgencyProfileMutationOptions = <
+  TError = ErrorType<UnauthorizedErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createAgencyProfile>>,
+    TError,
+    { data: BodyType<AgencyCreateRequest> },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createAgencyProfile>>,
+  TError,
+  { data: BodyType<AgencyCreateRequest> },
+  TContext
+> => {
+  const mutationKey = ["createAgencyProfile"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getCreateAgencyProfileMutationOptions = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createAgencyProfile>>, TError,{data: BodyType<AgencyCreateRequest>}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof createAgencyProfile>>, TError,{data: BodyType<AgencyCreateRequest>}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createAgencyProfile>>,
+    { data: BodyType<AgencyCreateRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['createAgencyProfile'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return createAgencyProfile(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type CreateAgencyProfileMutationResult = NonNullable<Awaited<ReturnType<typeof createAgencyProfile>>>;
+export type CreateAgencyProfileMutationBody = BodyType<AgencyCreateRequest>;
+export type CreateAgencyProfileMutationError = ErrorType<UnauthorizedErrorResponse>;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createAgencyProfile>>, {data: BodyType<AgencyCreateRequest>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  createAgencyProfile(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type CreateAgencyProfileMutationResult = NonNullable<Awaited<ReturnType<typeof createAgencyProfile>>>
-    export type CreateAgencyProfileMutationBody = BodyType<AgencyCreateRequest>
-    export type CreateAgencyProfileMutationError = ErrorType<UnauthorizedErrorResponse>
-
-    /**
+/**
  * @summary 에이전시 프로필 등록
  */
-export const useCreateAgencyProfile = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createAgencyProfile>>, TError,{data: BodyType<AgencyCreateRequest>}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof createAgencyProfile>>,
-        TError,
-        {data: BodyType<AgencyCreateRequest>},
-        TContext
-      > => {
+export const useCreateAgencyProfile = <TError = ErrorType<UnauthorizedErrorResponse>, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof createAgencyProfile>>,
+      TError,
+      { data: BodyType<AgencyCreateRequest> },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof createAgencyProfile>>,
+  TError,
+  { data: BodyType<AgencyCreateRequest> },
+  TContext
+> => {
+  const mutationOptions = getCreateAgencyProfileMutationOptions(options);
 
-      const mutationOptions = getCreateAgencyProfileMutationOptions(options);
-
-      return useMutation(mutationOptions, queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * @summary 에이전시 프로필 수정
  */
-export const updateAgencyProfile = (
-    agencyCreateRequest: BodyType<AgencyCreateRequest>,
- ) => {
-      
-      
-      return customFetch<UpdateAgencyProfile200>(
-      {url: `/api/agencies/profile`, method: 'PUT',
-      headers: {'Content-Type': 'application/json', },
-      data: agencyCreateRequest
-    },
-      );
-    }
-  
+export const updateAgencyProfile = (agencyCreateRequest: BodyType<AgencyCreateRequest>) => {
+  return customFetch<UpdateAgencyProfile200>({
+    url: `/api/agencies/profile`,
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    data: agencyCreateRequest,
+  });
+};
 
+export const getUpdateAgencyProfileMutationOptions = <
+  TError = ErrorType<UnauthorizedErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateAgencyProfile>>,
+    TError,
+    { data: BodyType<AgencyCreateRequest> },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof updateAgencyProfile>>,
+  TError,
+  { data: BodyType<AgencyCreateRequest> },
+  TContext
+> => {
+  const mutationKey = ["updateAgencyProfile"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getUpdateAgencyProfileMutationOptions = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateAgencyProfile>>, TError,{data: BodyType<AgencyCreateRequest>}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof updateAgencyProfile>>, TError,{data: BodyType<AgencyCreateRequest>}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof updateAgencyProfile>>,
+    { data: BodyType<AgencyCreateRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['updateAgencyProfile'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return updateAgencyProfile(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type UpdateAgencyProfileMutationResult = NonNullable<Awaited<ReturnType<typeof updateAgencyProfile>>>;
+export type UpdateAgencyProfileMutationBody = BodyType<AgencyCreateRequest>;
+export type UpdateAgencyProfileMutationError = ErrorType<UnauthorizedErrorResponse>;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateAgencyProfile>>, {data: BodyType<AgencyCreateRequest>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  updateAgencyProfile(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type UpdateAgencyProfileMutationResult = NonNullable<Awaited<ReturnType<typeof updateAgencyProfile>>>
-    export type UpdateAgencyProfileMutationBody = BodyType<AgencyCreateRequest>
-    export type UpdateAgencyProfileMutationError = ErrorType<UnauthorizedErrorResponse>
-
-    /**
+/**
  * @summary 에이전시 프로필 수정
  */
-export const useUpdateAgencyProfile = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateAgencyProfile>>, TError,{data: BodyType<AgencyCreateRequest>}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof updateAgencyProfile>>,
-        TError,
-        {data: BodyType<AgencyCreateRequest>},
-        TContext
-      > => {
+export const useUpdateAgencyProfile = <TError = ErrorType<UnauthorizedErrorResponse>, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof updateAgencyProfile>>,
+      TError,
+      { data: BodyType<AgencyCreateRequest> },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof updateAgencyProfile>>,
+  TError,
+  { data: BodyType<AgencyCreateRequest> },
+  TContext
+> => {
+  const mutationOptions = getUpdateAgencyProfileMutationOptions(options);
 
-      const mutationOptions = getUpdateAgencyProfileMutationOptions(options);
-
-      return useMutation(mutationOptions, queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};

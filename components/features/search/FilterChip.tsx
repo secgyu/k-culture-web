@@ -12,7 +12,7 @@ export const FilterChip = memo(function FilterChip({ label, selected, onClick }:
   return (
     <button
       onClick={onClick}
-      className={`px-3 py-1.5 rounded-full text-caption font-medium transition-all duration-200 ${
+      className={`text-caption rounded-full px-3 py-1.5 font-medium transition-all duration-200 ${
         selected
           ? "bg-gold text-luxury-black"
           : "bg-luxury-tertiary text-muted-gray hover:text-warm-gray hover:bg-zinc-700"

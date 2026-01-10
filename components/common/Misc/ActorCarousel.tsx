@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
+
 import { SAMPLE_WORKS } from "@/lib/constants/images";
 
 export interface Actor {
@@ -75,24 +77,24 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
   const rightCard = actors[getCardIndex(1)];
 
   return (
-    <div className="w-full flex flex-col overflow-hidden">
+    <div className="flex w-full flex-col overflow-hidden">
       <div
-        className="relative flex items-center justify-center gap-3 px-5 py-4 h-[400px]"
+        className="relative flex h-[400px] items-center justify-center gap-3 px-5 py-4"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <button onClick={goToPrev} className="shrink-0 flex flex-col justify-end items-center w-[184px] h-[332px]">
-          <div className="absolute w-40 h-[226px] bottom-8 z-0 rounded-md overflow-hidden bg-white">
+        <button onClick={goToPrev} className="flex h-[332px] w-[184px] shrink-0 flex-col items-center justify-end">
+          <div className="absolute bottom-8 z-0 h-[226px] w-40 overflow-hidden rounded-md bg-white">
             <Image src={leftCard.imageUrl} alt={leftCard.name} fill className="object-cover" sizes="160px" />
           </div>
-          <div className="relative w-full h-[137px] z-[1] bg-warm-gray/15 border border-luxury-black/10 backdrop-blur rounded-b-2xl" />
+          <div className="bg-warm-gray/15 border-luxury-black/10 relative z-[1] h-[137px] w-full rounded-b-2xl border backdrop-blur" />
         </button>
         <Link
           href={`/actors/${activeActor.id}`}
-          className="shrink-0 flex flex-col justify-end items-center relative cursor-pointer w-[230px] h-[400px]"
+          className="relative flex h-[400px] w-[230px] shrink-0 cursor-pointer flex-col items-center justify-end"
         >
-          <div className="absolute w-[200px] h-[283px] top-0 left-1/2 -translate-x-1/2 z-0 rounded-md overflow-hidden">
+          <div className="absolute top-0 left-1/2 z-0 h-[283px] w-[200px] -translate-x-1/2 overflow-hidden rounded-md">
             <Image
               src={activeActor.imageUrl}
               alt={activeActor.name}
@@ -102,42 +104,42 @@ export default function ActorCarousel({ actors }: ActorCarouselProps) {
               priority
             />
           </div>
-          <div className="relative w-full h-40 z-[1] bg-warm-gray/15 border border-luxury-black/10 backdrop-blur rounded-b-[20px]" />
+          <div className="bg-warm-gray/15 border-luxury-black/10 relative z-[1] h-40 w-full rounded-b-[20px] border backdrop-blur" />
         </Link>
-        <button onClick={goToNext} className="shrink-0 flex flex-col justify-end items-center w-[185px] h-[332px]">
-          <div className="absolute w-40 h-[226px] bottom-8 z-0 rounded-md overflow-hidden bg-white">
+        <button onClick={goToNext} className="flex h-[332px] w-[185px] shrink-0 flex-col items-center justify-end">
+          <div className="absolute bottom-8 z-0 h-[226px] w-40 overflow-hidden rounded-md bg-white">
             <Image src={rightCard.imageUrl} alt={rightCard.name} fill className="object-cover" sizes="160px" />
           </div>
-          <div className="relative w-full h-[137px] z-[1] bg-warm-gray/15 border border-luxury-black/10 backdrop-blur rounded-b-2xl" />
+          <div className="bg-warm-gray/15 border-luxury-black/10 relative z-[1] h-[137px] w-full rounded-b-2xl border backdrop-blur" />
         </button>
       </div>
-      <div className="flex flex-col items-center px-5 py-4 gap-8">
+      <div className="flex flex-col items-center gap-8 px-5 py-4">
         <div className="flex flex-col items-center gap-3">
-          <h2 className="text-2xl leading-7 tracking-tight font-bold text-ivory">{activeActor.name}</h2>
-          <p className="text-base tracking-tight text-warm-gray">
+          <h2 className="text-ivory text-2xl leading-7 font-bold tracking-tight">{activeActor.name}</h2>
+          <p className="text-warm-gray text-base tracking-tight">
             {activeActor.age} · 필모 {activeActor.filmography}편
           </p>
           <div className="flex flex-wrap justify-center gap-1.5">
             {activeActor.tags.map((tag, index) => (
               <span
                 key={index}
-                className="px-2 py-1 text-sm font-medium tracking-tight rounded bg-gold/10 text-warm-gray"
+                className="bg-gold/10 text-warm-gray rounded px-2 py-1 text-sm font-medium tracking-tight"
               >
                 {tag}
               </span>
             ))}
           </div>
         </div>
-        <div className="flex gap-1.5 overflow-x-auto hide-scrollbar w-full justify-center">
+        <div className="hide-scrollbar flex w-full justify-center gap-1.5 overflow-x-auto">
           {SAMPLE_WORKS.map((work, index) => (
             <div
               key={index}
-              className="flex items-center gap-1.5 px-3 py-1.5 shrink-0 border border-border rounded-full"
+              className="border-border flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5"
             >
-              <div className="w-6 h-6 rounded-full overflow-hidden bg-luxury-tertiary">
+              <div className="bg-luxury-tertiary h-6 w-6 overflow-hidden rounded-full">
                 <Image src={work.thumbnail} alt={work.name} width={24} height={24} className="object-cover" />
               </div>
-              <span className="text-xs font-medium tracking-tight text-warm-gray">{work.name}</span>
+              <span className="text-warm-gray text-xs font-medium tracking-tight">{work.name}</span>
             </div>
           ))}
         </div>

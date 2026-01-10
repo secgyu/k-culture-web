@@ -55,4 +55,3 @@ export const useCompareStore = create<CompareStore>((set, get) => ({
     set({ isModalOpen: false });
   },
 }));
-

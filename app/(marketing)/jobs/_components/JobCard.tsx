@@ -1,8 +1,11 @@
 "use client";
 
 import { memo } from "react";
+
 import { Badge, Card } from "@/components/ui";
+
 import { cn } from "@/lib/utils";
+
 import type { JobSummary } from "@/src/model";
 
 const getCategoryColor = (category: string) => {
@@ -22,24 +25,24 @@ interface JobCardProps {
 
 export const JobCard = memo(function JobCard({ job }: JobCardProps) {
   return (
-    <Card className="bg-luxury-black/80 hover:border-muted-gray transition-all cursor-pointer">
+    <Card className="bg-luxury-black/80 hover:border-muted-gray cursor-pointer transition-all">
       <div className="p-6">
-        <div className="flex justify-between items-start gap-4">
+        <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
-            <div className="flex items-center gap-3 mb-3">
+            <div className="mb-3 flex items-center gap-3">
               <Badge variant="outline" className={cn("font-medium", getCategoryColor(job.category))}>
                 {job.category}
               </Badge>
               {job.isPumasi ? (
-                <span className="flex items-center gap-1 text-gold text-sm">💜 품앗이</span>
+                <span className="text-gold flex items-center gap-1 text-sm">💜 품앗이</span>
               ) : (
-                <span className="flex items-center gap-1 text-yellow-400 text-sm">
+                <span className="flex items-center gap-1 text-sm text-yellow-400">
                   💰 {job.price?.toLocaleString()} 원
                 </span>
               )}
             </div>
 
-            <h3 className="text-white font-medium text-lg mb-3 line-clamp-2">{job.title}</h3>
+            <h3 className="mb-3 line-clamp-2 text-lg font-medium text-white">{job.title}</h3>
 
             <div className="flex flex-wrap gap-2">
               <Badge variant="secondary" className="bg-luxury-secondary text-warm-gray">
@@ -55,7 +58,7 @@ export const JobCard = memo(function JobCard({ job }: JobCardProps) {
           </div>
 
           <div className="text-right">
-            <p className="text-yellow-500 font-medium mb-1">{job.status}</p>
+            <p className="mb-1 font-medium text-yellow-500">{job.status}</p>
             <p className="text-muted-gray text-sm">조회 : {job.views}</p>
           </div>
         </div>

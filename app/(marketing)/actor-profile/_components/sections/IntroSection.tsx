@@ -1,40 +1,41 @@
 "use client";
 
 import Image from "next/image";
+
 import { ACTOR_IMAGES } from "../constants";
 
 export function IntroSection() {
   return (
     <section className="bg-luxury-black overflow-hidden">
-      <div className="relative w-full overflow-hidden bg-luxury-secondary py-4">
-        <div className="flex animate-scroll-left">
+      <div className="bg-luxury-secondary relative w-full overflow-hidden py-4">
+        <div className="animate-scroll-left flex">
           {[...ACTOR_IMAGES, ...ACTOR_IMAGES].map((src, i) => (
-            <div key={i} className="flex-shrink-0 w-48 md:w-56 lg:w-64 aspect-[3/4] mx-1 relative">
+            <div key={i} className="relative mx-1 aspect-[3/4] w-48 flex-shrink-0 md:w-56 lg:w-64">
               <Image src={src} alt={`배우 ${i + 1}`} fill className="object-cover" />
             </div>
           ))}
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 section-spacing-md text-center">
-        <div className="inline-block px-7 py-2.5 bg-gold rounded-full title-margin-lg">
-          <span className="text-luxury-black font-semibold text-body-sm">배우&모델</span>
+      <div className="section-spacing-md mx-auto max-w-4xl px-6 text-center">
+        <div className="bg-gold title-margin-lg inline-block rounded-full px-7 py-2.5">
+          <span className="text-luxury-black text-body-sm font-semibold">배우&모델</span>
         </div>
 
         <h2 className="font-display text-display-md lg:text-display-lg text-ivory title-margin-lg">
           &quot;작품 준비하기에도 벅차요!&quot;
         </h2>
 
-        <div className="w-px h-20 bg-luxury-tertiary mx-auto title-margin-lg" />
+        <div className="bg-luxury-tertiary title-margin-lg mx-auto h-20 w-px" />
 
         <h3 className="text-display-sm text-gold title-margin-md">&quot;작품과 연습에만 집중하고 싶으신가요?&quot;</h3>
 
         <p className="text-muted-accessible text-body-lg title-margin-lg">등록 한 번으로 편하게 기다리세요!</p>
 
-        <div className="max-w-2xl mx-auto bg-luxury-secondary rounded-2xl p-8 text-left border border-gold/20">
+        <div className="bg-luxury-secondary border-gold/20 mx-auto max-w-2xl rounded-2xl border p-8 text-left">
           <div className="space-y-6">
             <div className="flex items-start gap-5">
-              <span className="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center text-luxury-black font-bold text-body-md">
+              <span className="bg-gold text-luxury-black text-body-md flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-bold">
                 1
               </span>
               <div>
@@ -45,7 +46,7 @@ export function IntroSection() {
               </div>
             </div>
             <div className="flex items-start gap-5">
-              <span className="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center text-luxury-black font-bold text-body-md">
+              <span className="bg-gold text-luxury-black text-body-md flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-bold">
                 2
               </span>
               <div>
@@ -56,7 +57,7 @@ export function IntroSection() {
               </div>
             </div>
             <div className="flex items-start gap-5">
-              <span className="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center text-luxury-black font-bold text-body-md">
+              <span className="bg-gold text-luxury-black text-body-md flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-bold">
                 3
               </span>
               <div>

@@ -9,9 +9,10 @@
 ### 기본 사용 예시
 
 ```typescript
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { queryKeys, invalidateKeys } from '@/lib/query-keys';
-import { CACHE_TIMES } from '@/lib/query-client';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+import { CACHE_TIMES } from "@/lib/query-client";
+import { invalidateKeys, queryKeys } from "@/lib/query-keys";
 
 // 1. 단일 배우 조회 (자주 변하지 않는 데이터)
 function useActor(id: string) {
@@ -58,8 +59,9 @@ Mutation 이후 관련된 쿼리 캐시를 무효화하여 최신 데이터를 �
 ### 예시 1: 찜하기 기능
 
 ```typescript
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { invalidateKeys } from '@/lib/query-keys';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { invalidateKeys } from "@/lib/query-keys";
 
 function useFavoriteActor() {
   const queryClient = useQueryClient();
@@ -125,10 +127,7 @@ function useCreateProject() {
       queryClient.invalidateQueries({ queryKey: invalidateKeys.projects() });
 
       // 새로운 프로젝트를 캐시에 추가 (재조회 방지)
-      queryClient.setQueryData(
-        queryKeys.projects.detail(newProject.id),
-        newProject
-      );
+      queryClient.setQueryData(queryKeys.projects.detail(newProject.id), newProject);
     },
   });
 }
@@ -139,29 +138,29 @@ function useCreateProject() {
 ### CACHE_TIMES 상수
 
 ```typescript
-import { CACHE_TIMES } from '@/lib/query-client';
+import { CACHE_TIMES } from "@/lib/query-client";
 
 // SHORT (1분): 실시간 통계, 알림 등
-staleTime: CACHE_TIMES.SHORT
+staleTime: CACHE_TIMES.SHORT;
 
 // MEDIUM (5분): 목록, 검색 결과 등
-staleTime: CACHE_TIMES.MEDIUM
+staleTime: CACHE_TIMES.MEDIUM;
 
 // LONG (30분): 프로필, 상세 정보 등
-staleTime: CACHE_TIMES.LONG
+staleTime: CACHE_TIMES.LONG;
 
 // VERY_LONG (1시간): 상수, 옵션 등
-staleTime: CACHE_TIMES.VERY_LONG
+staleTime: CACHE_TIMES.VERY_LONG;
 ```
 
 ### 데이터 특성에 따른 전략
 
-| 데이터 유형 | 추천 staleTime | 예시 |
-|-----------|----------------|------|
-| 실시간 데이터 | SHORT (1분) | 대시보드 통계, 알림 카운트 |
-| 사용자 생성 컨텐츠 | MEDIUM (5분) | 프로젝트 목록, 배우 목록 |
-| 프로필 데이터 | LONG (30분) | 사용자 프로필, 배우 상세 |
-| 정적 데이터 | VERY_LONG (1시간) | 옵션 목록, 카테고리 |
+| 데이터 유형        | 추천 staleTime    | 예시                       |
+| ------------------ | ----------------- | -------------------------- |
+| 실시간 데이터      | SHORT (1분)       | 대시보드 통계, 알림 카운트 |
+| 사용자 생성 컨텐츠 | MEDIUM (5분)      | 프로젝트 목록, 배우 목록   |
+| 프로필 데이터      | LONG (30분)       | 사용자 프로필, 배우 상세   |
+| 정적 데이터        | VERY_LONG (1시간) | 옵션 목록, 카테고리        |
 
 ## 4. 특수 케이스
 
@@ -218,7 +217,7 @@ function useProjectWithActors(projectId: string) {
 ### 무한 스크롤
 
 ```typescript
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 function useInfiniteActorList(filters?: Record<string, unknown>) {
   return useInfiniteQuery({
@@ -280,10 +279,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
 const queryClient = useQueryClient();
 
 // 특정 쿼리의 캐시 데이터 확인
-const cachedData = queryClient.getQueryData(queryKeys.actors.detail('123'));
+const cachedData = queryClient.getQueryData(queryKeys.actors.detail("123"));
 
 // 캐시 상태 확인
-const queryState = queryClient.getQueryState(queryKeys.actors.detail('123'));
-console.log('stale:', queryState?.isInvalidated);
-console.log('fetching:', queryState?.isFetching);
+const queryState = queryClient.getQueryState(queryKeys.actors.detail("123"));
+console.log("stale:", queryState?.isInvalidated);
+console.log("fetching:", queryState?.isFetching);
 ```

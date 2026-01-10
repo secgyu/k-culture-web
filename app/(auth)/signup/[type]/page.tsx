@@ -2,14 +2,21 @@
 
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { AuthLayout } from "@/components/common";
+
 import { Button, FormField, Input, PasswordInput } from "@/components/ui";
+
+import { AuthLayout } from "@/components/common";
+
 import { TermsAgreementSection } from "@/components/auth/TermsAgreementSection";
+
+import { type SignupFormData, signupFormSchema } from "@/lib/validations";
+
 import { useSignup } from "@/src/auth/auth";
-import { signupFormSchema, type SignupFormData } from "@/lib/validations";
 
 const SIGNUP_CONFIG = {
   actor: {

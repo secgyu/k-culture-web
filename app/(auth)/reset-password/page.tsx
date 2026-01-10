@@ -1,13 +1,20 @@
 "use client";
 
 import { Suspense } from "react";
+
 import { useRouter, useSearchParams } from "next/navigation";
-import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AuthLayout } from "@/components/common";
+
+import { useForm } from "react-hook-form";
+
 import { Button, FormField, PasswordInput, Spinner } from "@/components/ui";
+
+import { AuthLayout } from "@/components/common";
+
+import { type ResetPasswordFormData, resetPasswordFormSchema } from "@/lib/validations";
+
 import { useResetPassword } from "@/src/auth/auth";
-import { resetPasswordFormSchema, type ResetPasswordFormData } from "@/lib/validations";
 
 function ResetPasswordForm() {
   const router = useRouter();
@@ -48,7 +55,11 @@ function ResetPasswordForm() {
   return (
     <AuthLayout title="비밀번호 재설정" subtitle="새로운 비밀번호를 입력해주세요">
       <form onSubmit={onSubmit} className="space-y-6">
-        <FormField label="새 비밀번호" error={errors.password?.message || errors.root?.message} hint="영문, 숫자를 포함한 8자 이상">
+        <FormField
+          label="새 비밀번호"
+          error={errors.password?.message || errors.root?.message}
+          hint="영문, 숫자를 포함한 8자 이상"
+        >
           <PasswordInput
             placeholder="8자 이상 입력하세요"
             {...register("password")}

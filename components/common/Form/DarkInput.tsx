@@ -1,6 +1,7 @@
 "use client";
 
 import { InputHTMLAttributes, forwardRef, useState } from "react";
+
 import { EyeIcon, EyeOffIcon } from "@/components/common/Misc/Icons";
 
 interface DarkInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -16,12 +17,12 @@ export const DarkInput = forwardRef<HTMLInputElement, DarkInputProps>(
 
     return (
       <div className="space-y-2">
-        {label && <label className="block text-body-sm font-medium text-warm-gray">{label}</label>}
+        {label && <label className="text-body-sm text-warm-gray block font-medium">{label}</label>}
         <div className="relative">
           <input
             ref={ref}
             type={isPassword && showPassword ? "text" : type}
-            className={`w-full px-5 py-4 min-h-[52px] bg-luxury-secondary border rounded-xl text-ivory text-base placeholder-muted-gray focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 focus-visible:border-gold transition-all duration-200 ${
+            className={`bg-luxury-secondary text-ivory placeholder-muted-gray focus-visible:ring-gold/50 focus-visible:border-gold min-h-[52px] w-full rounded-xl border px-5 py-4 text-base transition-all duration-200 focus:outline-none focus-visible:ring-2 ${
               error ? "border-red-500" : "border-border"
             } ${isPassword ? "pr-12" : ""} ${className}`}
             {...props}
@@ -31,9 +32,9 @@ export const DarkInput = forwardRef<HTMLInputElement, DarkInputProps>(
               type="button"
               onClick={() => setShowPassword(!showPassword)}
               aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-gray hover:text-warm-gray transition-colors duration-200"
+              className="text-muted-gray hover:text-warm-gray absolute top-1/2 right-4 -translate-y-1/2 transition-colors duration-200"
             >
-              {showPassword ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+              {showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
             </button>
           )}
         </div>

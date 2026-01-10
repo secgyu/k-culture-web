@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
+
 import { cn } from "@/lib/utils";
 
 interface EmptyStateProps {
@@ -37,13 +38,13 @@ export function EmptyState({ icon, title, description, action, className, size =
   const styles = sizeClasses[size];
 
   if (!icon && !title && description && !action) {
-    return <p className={cn("text-center text-muted-gray", styles.wrapper, className)}>{description}</p>;
+    return <p className={cn("text-muted-gray text-center", styles.wrapper, className)}>{description}</p>;
   }
 
   return (
     <div className={cn("text-center", styles.wrapper, className)}>
       {icon && <div className={cn("text-muted-gray mx-auto", styles.icon)}>{icon}</div>}
-      {title && <h2 className={cn("font-semibold text-ivory", styles.title)}>{title}</h2>}
+      {title && <h2 className={cn("text-ivory font-semibold", styles.title)}>{title}</h2>}
       {description && <p className={cn("text-muted-gray mb-6", styles.description)}>{description}</p>}
       {action}
     </div>

@@ -1,15 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { DoDreamLogo, DoDreamInlineLogo } from "@/components/common";
+
+import { DoDreamInlineLogo, DoDreamLogo } from "@/components/common";
 
 export function FeatureLinkShareSection() {
   return (
     <section className="section-spacing-md bg-luxury-black">
-      <div className="max-w-3xl mx-auto px-6 text-center">
+      <div className="mx-auto max-w-3xl px-6 text-center">
         <div className="mb-8">
           <svg
-            className="w-16 h-16 mx-auto text-gold"
+            className="text-gold mx-auto h-16 w-16"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -23,18 +24,18 @@ export function FeatureLinkShareSection() {
           </svg>
         </div>
 
-        <div className="inline-block bg-luxury-secondary rounded-xl px-8 py-4 mb-8 relative border border-border">
-          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-luxury-secondary rotate-45 border-l border-t border-border" />
+        <div className="bg-luxury-secondary border-border relative mb-8 inline-block rounded-xl border px-8 py-4">
+          <div className="bg-luxury-secondary border-border absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 border-t border-l" />
           <p className="text-warm-gray">프로필 주소를 복사했습니다.</p>
         </div>
 
         <p className="text-heading-lg md:text-heading-xl text-muted-gray mb-32">
-          링크 공유를 통해 쉽게 <span className="font-bold text-ivory">프로필을 전송</span>해 보세요!
+          링크 공유를 통해 쉽게 <span className="text-ivory font-bold">프로필을 전송</span>해 보세요!
         </p>
 
-        <div className="border-t border-border my-16" />
+        <div className="border-border my-16 border-t" />
 
-        <div className="text-6xl mb-8">🤔</div>
+        <div className="mb-8 text-6xl">🤔</div>
 
         <h2 className="text-display-sm md:text-display-md text-ivory mb-24">
           &quot;왜 프로필을 새로 만들어주나요?&quot;
@@ -49,10 +50,10 @@ export function FeatureLinkShareSection() {
           기존 프로필들
         </h3>
 
-        <div className="flex justify-center gap-4 mb-24">
-          <div className="w-72 bg-luxury-tertiary rounded-lg overflow-hidden shadow-lg border border-border">
+        <div className="mb-24 flex justify-center gap-4">
+          <div className="bg-luxury-tertiary border-border w-72 overflow-hidden rounded-lg border shadow-lg">
             <div className="flex">
-              <div className="w-1/2 aspect-[3/4] relative bg-luxury-tertiary">
+              <div className="bg-luxury-tertiary relative aspect-[3/4] w-1/2">
                 <Image
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=400&fit=crop"
                   alt="기존 프로필"
@@ -62,7 +63,7 @@ export function FeatureLinkShareSection() {
               </div>
               <div className="w-1/2 p-3 text-left">
                 <p className="text-caption text-muted-gray mb-2">배우 프로필</p>
-                <p className="text-[8px] text-muted-gray leading-relaxed">
+                <p className="text-muted-gray text-[8px] leading-relaxed">
                   배우
                   <br />
                   2023 드라마 제목 - 역할
@@ -87,22 +88,22 @@ export function FeatureLinkShareSection() {
             </div>
           </div>
 
-          <div className="w-72 bg-luxury-secondary rounded-lg overflow-hidden shadow-lg border border-border">
-            <div className="aspect-[4/3] relative bg-luxury-secondary">
+          <div className="bg-luxury-secondary border-border w-72 overflow-hidden rounded-lg border shadow-lg">
+            <div className="bg-luxury-secondary relative aspect-[4/3]">
               <Image
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop"
                 alt="기존 프로필"
                 fill
                 className="object-cover grayscale"
               />
-              <div className="absolute top-2 right-2 text-white text-caption">
+              <div className="text-caption absolute top-2 right-2 text-white">
                 <p>Name</p>
-                <p className="text-[8px] text-muted-gray">Profile</p>
+                <p className="text-muted-gray text-[8px]">Profile</p>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-1 p-2">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="aspect-[3/4] relative bg-luxury-tertiary">
+                <div key={i} className="bg-luxury-tertiary relative aspect-[3/4]">
                   <Image
                     src={`https://images.unsplash.com/photo-150700321116${i}-0a1dd7228f2d?w=100&h=150&fit=crop`}
                     alt={`사진 ${i}`}
@@ -115,18 +116,18 @@ export function FeatureLinkShareSection() {
           </div>
         </div>
 
-        <div className="w-px h-24 bg-gold mx-auto mb-24" />
+        <div className="bg-gold mx-auto mb-24 h-24 w-px" />
 
-        <div className="flex justify-center gap-6 mb-16">
-          <div className="w-80 bg-luxury-secondary rounded-xl overflow-hidden shadow-2xl">
+        <div className="mb-16 flex justify-center gap-6">
+          <div className="bg-luxury-secondary w-80 overflow-hidden rounded-xl shadow-2xl">
             <div className="bg-luxury-tertiary px-4 py-3 text-center">
-              <p className="text-white text-body-sm font-medium">이하나 프로필 PDF</p>
-              <button className="mt-2 px-4 py-1 bg-luxury-tertiary text-ivory text-caption rounded">
+              <p className="text-body-sm font-medium text-white">이하나 프로필 PDF</p>
+              <button className="bg-luxury-tertiary text-ivory text-caption mt-2 rounded px-4 py-1">
                 PDF 다운로드
               </button>
             </div>
             <div className="flex">
-              <div className="w-2/5 aspect-[3/4] relative">
+              <div className="relative aspect-[3/4] w-2/5">
                 <Image
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=400&fit=crop"
                   alt="프로필"
@@ -134,47 +135,47 @@ export function FeatureLinkShareSection() {
                   className="object-cover"
                 />
               </div>
-              <div className="flex-1 p-3 bg-white">
-                <div className="flex items-center gap-2 mb-2">
+              <div className="flex-1 bg-white p-3">
+                <div className="mb-2 flex items-center gap-2">
                   <h4 className="text-body-sm font-bold text-gray-900">이하나</h4>
-                  <span className="px-1.5 py-0.5 bg-gold text-luxury-black font-medium text-[8px] rounded">여자</span>
+                  <span className="bg-gold text-luxury-black rounded px-1.5 py-0.5 text-[8px] font-medium">여자</span>
                 </div>
-                <p className="text-[8px] text-gray-500 mb-3">Lee Hana</p>
-                <p className="text-[7px] text-gray-600 leading-relaxed mb-3">
+                <p className="mb-3 text-[8px] text-gray-500">Lee Hana</p>
+                <p className="mb-3 text-[7px] leading-relaxed text-gray-600">
                   안녕하세요~! 꿈꾸는 배우 이하나입니다. 따뜻한 미소와 자연스러운 연기로 사람들의 마음을 움직이고 싶은
                   신인 배우입니다.
                 </p>
-                <div className="grid grid-cols-3 gap-1 mb-2">
-                  <div className="text-center p-1 bg-gray-50 rounded">
+                <div className="mb-2 grid grid-cols-3 gap-1">
+                  <div className="rounded bg-gray-50 p-1 text-center">
                     <p className="text-[6px] text-gray-400">생년월일</p>
                     <p className="text-[7px] text-gray-700">2001-05-14</p>
                   </div>
-                  <div className="text-center p-1 bg-gray-50 rounded">
+                  <div className="rounded bg-gray-50 p-1 text-center">
                     <p className="text-[6px] text-gray-400">소속사</p>
                     <p className="text-[7px] text-gray-700">핑크프로젝트</p>
                   </div>
-                  <div className="text-center p-1 bg-gray-50 rounded">
+                  <div className="rounded bg-gray-50 p-1 text-center">
                     <p className="text-[6px] text-gray-400">학력</p>
                     <p className="text-[7px] text-gray-700">한국대학교</p>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-1 mb-2">
-                  <div className="text-center p-1 bg-gray-50 rounded">
+                <div className="mb-2 grid grid-cols-3 gap-1">
+                  <div className="rounded bg-gray-50 p-1 text-center">
                     <p className="text-[6px] text-gray-400">키</p>
                     <p className="text-[7px] text-gray-700">167</p>
                   </div>
-                  <div className="text-center p-1 bg-gray-50 rounded">
+                  <div className="rounded bg-gray-50 p-1 text-center">
                     <p className="text-[6px] text-gray-400">몸무게</p>
                     <p className="text-[7px] text-gray-700">48</p>
                   </div>
-                  <div className="text-center p-1 bg-gray-50 rounded">
+                  <div className="rounded bg-gray-50 p-1 text-center">
                     <p className="text-[6px] text-gray-400">발사이즈</p>
                     <p className="text-[7px] text-gray-700">235</p>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-1 mb-2">
+                <div className="mb-2 flex flex-wrap gap-1">
                   {["고양이상", "도도한", "청순한", "귀여운"].map((tag) => (
-                    <span key={tag} className="px-1 py-0.5 bg-gray-100 text-gray-600 text-[6px] rounded">
+                    <span key={tag} className="rounded bg-gray-100 px-1 py-0.5 text-[6px] text-gray-600">
                       {tag}
                     </span>
                   ))}
@@ -183,9 +184,9 @@ export function FeatureLinkShareSection() {
             </div>
           </div>
 
-          <div className="w-96 bg-white rounded-xl overflow-hidden shadow-2xl border border-gray-200">
+          <div className="w-96 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-2xl">
             <div className="flex">
-              <div className="w-2/5 aspect-[3/4] relative">
+              <div className="relative aspect-[3/4] w-2/5">
                 <Image
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=400&fit=crop"
                   alt="프로필"
@@ -194,66 +195,66 @@ export function FeatureLinkShareSection() {
                 />
               </div>
               <div className="flex-1 p-4">
-                <div className="flex items-start justify-between mb-2">
+                <div className="mb-2 flex items-start justify-between">
                   <div>
                     <div className="flex items-center gap-2">
                       <h4 className="text-heading-md text-gray-900">이하나</h4>
-                      <span className="px-2 py-0.5 bg-gold text-luxury-black font-medium text-[8px] rounded">여자</span>
+                      <span className="bg-gold text-luxury-black rounded px-2 py-0.5 text-[8px] font-medium">여자</span>
                     </div>
                     <p className="text-caption text-gray-500">Lee Hana</p>
                   </div>
-                  <div className="w-12 h-12 bg-gray-100 rounded grid grid-cols-3 gap-0.5 p-1">
+                  <div className="grid h-12 w-12 grid-cols-3 gap-0.5 rounded bg-gray-100 p-1">
                     {[...Array(9)].map((_, i) => (
                       <div key={i} className={`${i % 2 === 0 ? "bg-gray-800" : "bg-white"}`} />
                     ))}
                   </div>
                 </div>
-                <p className="text-[8px] text-gray-600 leading-relaxed mb-3">
+                <p className="mb-3 text-[8px] leading-relaxed text-gray-600">
                   안녕하세요~! 꿈꾸는 배우 이하나입니다. 따뜻한 미소와 자연스러운 연기로...
                 </p>
-                <div className="grid grid-cols-3 gap-2 mb-2">
-                  <div className="text-center p-2 bg-gray-50 rounded">
+                <div className="mb-2 grid grid-cols-3 gap-2">
+                  <div className="rounded bg-gray-50 p-2 text-center">
                     <p className="text-[7px] text-gray-400">생년월일</p>
                     <p className="text-[9px] text-gray-700">2001-05-14</p>
                   </div>
-                  <div className="text-center p-2 bg-gray-50 rounded">
+                  <div className="rounded bg-gray-50 p-2 text-center">
                     <p className="text-[7px] text-gray-400">소속사</p>
                     <p className="text-[9px] text-gray-700">핑크프로젝트</p>
                   </div>
-                  <div className="text-center p-2 bg-gray-50 rounded">
+                  <div className="rounded bg-gray-50 p-2 text-center">
                     <p className="text-[7px] text-gray-400">학력</p>
                     <p className="text-[9px] text-gray-700">한국대학교</p>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-2 mb-2">
-                  <div className="text-center p-2 bg-gray-50 rounded">
+                <div className="mb-2 grid grid-cols-3 gap-2">
+                  <div className="rounded bg-gray-50 p-2 text-center">
                     <p className="text-[7px] text-gray-400">키</p>
                     <p className="text-[9px] text-gray-700">167</p>
                   </div>
-                  <div className="text-center p-2 bg-gray-50 rounded">
+                  <div className="rounded bg-gray-50 p-2 text-center">
                     <p className="text-[7px] text-gray-400">몸무게</p>
                     <p className="text-[9px] text-gray-700">48</p>
                   </div>
-                  <div className="text-center p-2 bg-gray-50 rounded">
+                  <div className="rounded bg-gray-50 p-2 text-center">
                     <p className="text-[7px] text-gray-400">발사이즈</p>
                     <p className="text-[9px] text-gray-700">235</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-2 mb-2">
-                  <span className="text-[7px] text-gray-400 shrink-0">키워드</span>
+                <div className="mb-2 flex items-start gap-2">
+                  <span className="shrink-0 text-[7px] text-gray-400">키워드</span>
                   <div className="flex flex-wrap gap-1">
                     {["고양이상", "도도한", "청순한", "귀여운", "사랑스러운", "순수한"].map((tag) => (
-                      <span key={tag} className="px-1.5 py-0.5 bg-gray-100 text-gray-600 text-[7px] rounded">
+                      <span key={tag} className="rounded bg-gray-100 px-1.5 py-0.5 text-[7px] text-gray-600">
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[7px] text-gray-400 shrink-0">대표작품</span>
+                  <span className="shrink-0 text-[7px] text-gray-400">대표작품</span>
                   <p className="text-[8px] text-gray-600">단편영화,&lt;우리 사이&gt;, 지수역(주연)</p>
                 </div>
-                <div className="flex justify-end mt-2">
+                <div className="mt-2 flex justify-end">
                   <DoDreamLogo size="xs" className="text-gray-300" doorFillColor="fill-gray-100" />
                 </div>
               </div>
@@ -266,7 +267,7 @@ export function FeatureLinkShareSection() {
           가독성 <span className="text-gold">UP!</span>
         </h3>
 
-        <div className="bg-luxury-secondary rounded-2xl p-6 mb-16 max-w-lg mx-auto border-b-4 border-gold">
+        <div className="bg-luxury-secondary border-gold mx-auto mb-16 max-w-lg rounded-2xl border-b-4 p-6">
           <div className="flex items-start gap-4">
             <span className="text-muted-gray text-body-sm shrink-0">키워드</span>
             <div className="flex flex-wrap gap-2">
@@ -284,7 +285,7 @@ export function FeatureLinkShareSection() {
               ].map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1.5 bg-luxury-tertiary border border-border text-warm-gray text-body-sm rounded-full"
+                  className="bg-luxury-tertiary border-border text-warm-gray text-body-sm rounded-full border px-3 py-1.5"
                 >
                   {tag}
                 </span>
@@ -298,13 +299,13 @@ export function FeatureLinkShareSection() {
           특색있는 <span className="text-gold">키워드</span>
         </h3>
 
-        <div className="bg-luxury-secondary rounded-2xl shadow-xl p-4 max-w-lg mx-auto mb-8 border border-border">
-          <div className="flex justify-end mb-2">
+        <div className="bg-luxury-secondary border-border mx-auto mb-8 max-w-lg rounded-2xl border p-4 shadow-xl">
+          <div className="mb-2 flex justify-end">
             <span className="text-muted-gray text-caption">출연 사진 🎬</span>
           </div>
           <div className="grid grid-cols-2 gap-2">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="aspect-video relative rounded-lg overflow-hidden">
+              <div key={i} className="relative aspect-video overflow-hidden rounded-lg">
                 <Image
                   src={`https://images.unsplash.com/photo-149479010837${i}-be9c29b29330?w=300&h=200&fit=crop`}
                   alt={`출연 사진 ${i}`}
@@ -322,7 +323,7 @@ export function FeatureLinkShareSection() {
         </h3>
 
         <div className="mb-8">
-          <div className="w-16 h-16 mx-auto bg-luxury-secondary rounded-xl flex items-center justify-center border border-border">
+          <div className="bg-luxury-secondary border-border mx-auto flex h-16 w-16 items-center justify-center rounded-xl border">
             <span className="text-2xl">📄</span>
           </div>
         </div>
@@ -337,9 +338,9 @@ export function FeatureLinkShareSection() {
           함께해 보세요!
         </h3>
 
-        <div className="grid grid-cols-3 gap-4 max-w-3xl mx-auto">
-          <div className="bg-luxury-secondary rounded-2xl p-8 text-center border border-gold/20">
-            <div className="w-12 h-12 mx-auto mb-4 text-gold">
+        <div className="mx-auto grid max-w-3xl grid-cols-3 gap-4">
+          <div className="bg-luxury-secondary border-gold/20 rounded-2xl border p-8 text-center">
+            <div className="text-gold mx-auto mb-4 h-12 w-12">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path
                   strokeLinecap="round"
@@ -355,8 +356,8 @@ export function FeatureLinkShareSection() {
               캐스팅 가능
             </p>
           </div>
-          <div className="bg-luxury-secondary rounded-2xl p-8 text-center border border-gold/20">
-            <div className="w-12 h-12 mx-auto mb-4 text-gold">
+          <div className="bg-luxury-secondary border-gold/20 rounded-2xl border p-8 text-center">
+            <div className="text-gold mx-auto mb-4 h-12 w-12">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -368,8 +369,8 @@ export function FeatureLinkShareSection() {
               바로 PDF 변환 가능
             </p>
           </div>
-          <div className="bg-luxury-secondary rounded-2xl p-8 text-center border border-gold/20">
-            <div className="w-12 h-12 mx-auto mb-4 text-gold">
+          <div className="bg-luxury-secondary border-gold/20 rounded-2xl border p-8 text-center">
+            <div className="text-gold mx-auto mb-4 h-12 w-12">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path
                   strokeLinecap="round"

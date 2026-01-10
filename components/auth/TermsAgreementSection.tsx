@@ -1,7 +1,9 @@
 "use client";
 
-import { UseFormSetValue, UseFormWatch, FieldErrors } from "react-hook-form";
+import { FieldErrors, UseFormSetValue, UseFormWatch } from "react-hook-form";
+
 import { CheckIcon } from "@/components/common/Misc/Icons";
+
 import type { SignupFormData } from "@/lib/validations";
 
 interface TermsAgreementSectionProps {
@@ -26,61 +28,61 @@ export function TermsAgreementSection({ watch, setValue, errors }: TermsAgreemen
 
   return (
     <div className="space-y-3 pt-2">
-      <label className="flex items-center gap-3 cursor-pointer group">
+      <label className="group flex cursor-pointer items-center gap-3">
         <button
           type="button"
           onClick={handleAgreeAll}
-          className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
+          className={`flex h-5 w-5 items-center justify-center rounded border transition-all ${
             termsAgreed && privacyAgreed && marketingAgreed
               ? "bg-gold border-gold"
               : "border-muted-gray group-hover:border-warm-gray"
           }`}
         >
-          {termsAgreed && privacyAgreed && marketingAgreed && <CheckIcon className="w-3 h-3 text-luxury-black" />}
+          {termsAgreed && privacyAgreed && marketingAgreed && <CheckIcon className="text-luxury-black h-3 w-3" />}
         </button>
         <span className="text-ivory font-medium">전체 동의</span>
       </label>
 
-      <div className="border-t border-border pt-3 space-y-2">
-        <label className="flex items-center gap-3 cursor-pointer group">
+      <div className="border-border space-y-2 border-t pt-3">
+        <label className="group flex cursor-pointer items-center gap-3">
           <button
             type="button"
             onClick={() => setValue("termsAgreed", !termsAgreed)}
-            className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
+            className={`flex h-5 w-5 items-center justify-center rounded border transition-all ${
               termsAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
             }`}
           >
-            {termsAgreed && <CheckIcon className="w-3 h-3 text-luxury-black" />}
+            {termsAgreed && <CheckIcon className="text-luxury-black h-3 w-3" />}
           </button>
           <span className="text-warm-gray text-sm">
             <span className="text-gold">[필수]</span> 서비스 이용약관 동의
           </span>
         </label>
 
-        <label className="flex items-center gap-3 cursor-pointer group">
+        <label className="group flex cursor-pointer items-center gap-3">
           <button
             type="button"
             onClick={() => setValue("privacyAgreed", !privacyAgreed)}
-            className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
+            className={`flex h-5 w-5 items-center justify-center rounded border transition-all ${
               privacyAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
             }`}
           >
-            {privacyAgreed && <CheckIcon className="w-3 h-3 text-luxury-black" />}
+            {privacyAgreed && <CheckIcon className="text-luxury-black h-3 w-3" />}
           </button>
           <span className="text-warm-gray text-sm">
             <span className="text-gold">[필수]</span> 개인정보 처리방침 동의
           </span>
         </label>
 
-        <label className="flex items-center gap-3 cursor-pointer group">
+        <label className="group flex cursor-pointer items-center gap-3">
           <button
             type="button"
             onClick={() => setValue("marketingAgreed", !marketingAgreed)}
-            className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
+            className={`flex h-5 w-5 items-center justify-center rounded border transition-all ${
               marketingAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
             }`}
           >
-            {marketingAgreed && <CheckIcon className="w-3 h-3 text-luxury-black" />}
+            {marketingAgreed && <CheckIcon className="text-luxury-black h-3 w-3" />}
           </button>
           <span className="text-warm-gray text-sm">
             <span className="text-muted-gray">[선택]</span> 마케팅 정보 수신 동의

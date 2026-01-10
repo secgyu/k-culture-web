@@ -1,13 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { DashboardLayout, DashboardLoadingState, DarkCard } from "@/components/common";
+import Link from "next/link";
+
 import { Button } from "@/components/ui";
-import { PlusIcon, FolderIcon } from "@/components/common/Misc/Icons";
-import { useGetProjects } from "@/src/projects/projects";
+
+import { DarkCard, DashboardLayout, DashboardLoadingState } from "@/components/common";
+import { FolderIcon, PlusIcon } from "@/components/common/Misc/Icons";
+
 import { getThumbnailImageUrl } from "@/lib/constants/images";
 import { getProjectStatusStyle } from "@/lib/constants/styles";
+
+import { useGetProjects } from "@/src/projects/projects";
 
 export default function ProjectsPage() {
   const { data: projectsData, isLoading } = useGetProjects();
@@ -27,24 +31,24 @@ export default function ProjectsPage() {
           </div>
           <Link href="/projects/new">
             <Button variant="gold">
-              <PlusIcon className="w-4 h-4 mr-1" /> 새 프로젝트
+              <PlusIcon className="mr-1 h-4 w-4" /> 새 프로젝트
             </Button>
           </Link>
         </div>
 
         {projects.length === 0 ? (
-          <DarkCard className="text-center py-16">
-            <FolderIcon className="w-16 h-16 text-muted-gray mx-auto mb-4" />
-            <h2 className="text-xl font-semibold text-ivory mb-2">프로젝트가 없습니다</h2>
+          <DarkCard className="py-16 text-center">
+            <FolderIcon className="text-muted-gray mx-auto mb-4 h-16 w-16" />
+            <h2 className="text-ivory mb-2 text-xl font-semibold">프로젝트가 없습니다</h2>
             <p className="text-muted-gray mb-6">새 프로젝트를 만들어 캐스팅을 시작하세요</p>
             <Link href="/projects/new">
               <Button variant="gold">
-                <PlusIcon className="w-4 h-4 mr-1" /> 첫 프로젝트 만들기
+                <PlusIcon className="mr-1 h-4 w-4" /> 첫 프로젝트 만들기
               </Button>
             </Link>
           </DarkCard>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
               <Link key={project.id} href={`/projects/${project.id}`}>
                 <DarkCard variant="hover" padding="none" className="overflow-hidden">
@@ -57,7 +61,7 @@ export default function ProjectsPage() {
                     />
                     <div className="absolute top-3 right-3">
                       <span
-                        className={`px-2 py-1 rounded text-xs font-medium ${
+                        className={`rounded px-2 py-1 text-xs font-medium ${
                           getProjectStatusStyle(project.status).badge
                         }`}
                       >
@@ -67,16 +71,16 @@ export default function ProjectsPage() {
                   </div>
 
                   <div className="p-4">
-                    <h3 className="text-lg font-semibold text-ivory mb-1">{project.title}</h3>
-                    <p className="text-sm text-muted-gray mb-3">{project.company}</p>
+                    <h3 className="text-ivory mb-1 text-lg font-semibold">{project.title}</h3>
+                    <p className="text-muted-gray mb-3 text-sm">{project.company}</p>
 
                     <div className="mb-3">
-                      <div className="flex justify-between text-sm mb-1">
+                      <div className="mb-1 flex justify-between text-sm">
                         <span className="text-muted-gray">캐스팅 진행률</span>
                         <span className="text-gold">{project.progress}%</span>
                       </div>
-                      <div className="h-1.5 bg-luxury-tertiary rounded-full overflow-hidden">
-                        <div className="h-full bg-gold transition-all" style={{ width: `${project.progress}%` }} />
+                      <div className="bg-luxury-tertiary h-1.5 overflow-hidden rounded-full">
+                        <div className="bg-gold h-full transition-all" style={{ width: `${project.progress}%` }} />
                       </div>
                     </div>
 

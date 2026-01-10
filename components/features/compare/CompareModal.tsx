@@ -1,9 +1,12 @@
 "use client";
 
-import { useCompareStore } from "@/stores/useCompareStore";
-import { useModal } from "@/lib/hooks";
-import { CompareCard } from "./CompareCard";
 import { XIcon } from "@/components/common/Misc/Icons";
+
+import { useModal } from "@/lib/hooks";
+
+import { useCompareStore } from "@/stores/useCompareStore";
+
+import { CompareCard } from "./CompareCard";
 
 export function CompareModal() {
   const { actors, isModalOpen, closeModal, clearAll } = useCompareStore();
@@ -14,9 +17,9 @@ export function CompareModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm animate-fade-in" onClick={closeModal} />
-      <div className="relative w-full max-w-6xl max-h-[90vh] mx-4 bg-luxury-black rounded-3xl border border-border overflow-hidden animate-slide-up">
-        <div className="flex items-center justify-between px-8 py-6 border-b border-border bg-luxury-secondary">
+      <div className="animate-fade-in absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={closeModal} />
+      <div className="bg-luxury-black border-border animate-slide-up relative mx-4 max-h-[90vh] w-full max-w-6xl overflow-hidden rounded-3xl border">
+        <div className="border-border bg-luxury-secondary flex items-center justify-between border-b px-8 py-6">
           <div>
             <h2 className="text-heading-xl text-ivory">배우 비교</h2>
             <p className="text-body-sm text-muted-gray mt-1">선택한 배우들의 프로필을 한눈에 비교해보세요</p>
@@ -24,24 +27,24 @@ export function CompareModal() {
           <div className="flex items-center gap-4">
             <button
               onClick={clearAll}
-              className="px-4 py-2 text-body-sm text-muted-gray hover:text-warm-gray transition-colors duration-200"
+              className="text-body-sm text-muted-gray hover:text-warm-gray px-4 py-2 transition-colors duration-200"
             >
               모두 삭제
             </button>
             <button
               onClick={closeModal}
               aria-label="비교 모달 닫기"
-              className="w-10 h-10 bg-luxury-tertiary rounded-full flex items-center justify-center hover:bg-luxury-secondary transition-colors duration-200"
+              className="bg-luxury-tertiary hover:bg-luxury-secondary flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-200"
             >
-              <XIcon className="w-5 h-5 text-ivory" />
+              <XIcon className="text-ivory h-5 w-5" />
             </button>
           </div>
         </div>
 
-        <div className="p-8 overflow-y-auto max-h-[calc(90vh-100px)]">
+        <div className="max-h-[calc(90vh-100px)] overflow-y-auto p-8">
           {actors.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
-              <div className="w-16 h-16 bg-luxury-tertiary rounded-full flex items-center justify-center mb-4">
+              <div className="bg-luxury-tertiary mb-4 flex h-16 w-16 items-center justify-center rounded-full">
                 <span className="text-3xl">👥</span>
               </div>
               <p className="text-heading-md text-ivory mb-2">비교할 배우가 없습니다</p>
@@ -51,12 +54,12 @@ export function CompareModal() {
             <div
               className={`grid gap-6 ${
                 actors.length === 1
-                  ? "grid-cols-1 max-w-sm mx-auto"
+                  ? "mx-auto max-w-sm grid-cols-1"
                   : actors.length === 2
-                  ? "grid-cols-2 max-w-2xl mx-auto"
-                  : actors.length === 3
-                  ? "grid-cols-3"
-                  : "grid-cols-2 lg:grid-cols-4"
+                    ? "mx-auto max-w-2xl grid-cols-2"
+                    : actors.length === 3
+                      ? "grid-cols-3"
+                      : "grid-cols-2 lg:grid-cols-4"
               }`}
             >
               {actors.map((actor) => (

@@ -9,10 +9,10 @@ export function FilterFloatingButton() {
   return (
     <button
       onClick={openBottomSheet}
-      className="relative flex items-center gap-2 px-5 py-3 bg-gold text-luxury-black font-semibold rounded-full shadow-lg shadow-gold/30 hover:bg-gold-light transition-all duration-200 active:scale-95"
+      className="bg-gold text-luxury-black shadow-gold/30 hover:bg-gold-light relative flex items-center gap-2 rounded-full px-5 py-3 font-semibold shadow-lg transition-all duration-200 active:scale-95"
       aria-label="필터 열기"
     >
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -22,7 +22,7 @@ export function FilterFloatingButton() {
       </svg>
       <span>필터</span>
       {activeCount > 0 && (
-        <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-caption font-bold rounded-full flex items-center justify-center">
+        <span className="text-caption absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 font-bold text-white">
           {activeCount}
         </span>
       )}

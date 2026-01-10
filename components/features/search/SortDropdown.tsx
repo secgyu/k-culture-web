@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 import { ChevronDownIcon } from "@/components/common/Misc/Icons";
 
 export type SortOption = "latest" | "filmography" | "age-asc" | "age-desc" | "name";
@@ -67,19 +69,19 @@ export function SortDropdown({ onSortChange }: SortDropdownProps) {
     <div ref={dropdownRef} className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 bg-luxury-secondary border border-zinc-700 rounded-lg text-body-sm text-ivory hover:border-zinc-600 transition-colors duration-200"
+        className="bg-luxury-secondary text-body-sm text-ivory flex items-center gap-2 rounded-lg border border-zinc-700 px-4 py-2 transition-colors duration-200 hover:border-zinc-600"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
       >
         <span className="text-muted-gray">정렬:</span>
         <span className="font-medium">{currentOption.label}</span>
         <ChevronDownIcon
-          className={`w-4 h-4 text-muted-gray transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          className={`text-muted-gray h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-luxury-secondary border border-zinc-700 rounded-xl shadow-xl z-50 overflow-hidden animate-fade-in">
+        <div className="bg-luxury-secondary animate-fade-in absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-xl border border-zinc-700 shadow-xl">
           <ul role="listbox" className="py-1">
             {sortOptions.map((option) => (
               <li key={option.value}>
@@ -87,7 +89,7 @@ export function SortDropdown({ onSortChange }: SortDropdownProps) {
                   role="option"
                   aria-selected={currentSort === option.value}
                   onClick={() => handleSelect(option)}
-                  className={`w-full text-left px-4 py-2.5 text-body-sm transition-colors duration-150 ${
+                  className={`text-body-sm w-full px-4 py-2.5 text-left transition-colors duration-150 ${
                     currentSort === option.value ? "bg-gold/10 text-gold font-medium" : "text-ivory hover:bg-zinc-700"
                   }`}
                 >
@@ -110,10 +112,10 @@ export function SortButton({ onClick }: { onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="lg:hidden flex items-center gap-2 px-4 py-2.5 bg-luxury-secondary border border-zinc-700 rounded-full text-body-sm text-ivory shadow-lg"
+      className="bg-luxury-secondary text-body-sm text-ivory flex items-center gap-2 rounded-full border border-zinc-700 px-4 py-2.5 shadow-lg lg:hidden"
       aria-label="정렬 옵션 열기"
     >
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -164,29 +166,29 @@ export function SortBottomSheet({ isOpen, onClose }: { isOpen: boolean; onClose:
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in" onClick={onClose} />
+      <div className="animate-fade-in absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="absolute bottom-0 left-0 right-0 bg-luxury-secondary rounded-t-3xl animate-slide-up">
+      <div className="bg-luxury-secondary animate-slide-up absolute right-0 bottom-0 left-0 rounded-t-3xl">
         <div className="flex justify-center pt-3 pb-2">
-          <div className="w-10 h-1 bg-zinc-600 rounded-full" />
+          <div className="h-1 w-10 rounded-full bg-zinc-600" />
         </div>
 
-        <div className="px-5 py-3 border-b border-zinc-800">
+        <div className="border-b border-zinc-800 px-5 py-3">
           <h2 className="text-heading-md text-ivory">정렬</h2>
         </div>
 
-        <ul className="py-2 px-2">
+        <ul className="px-2 py-2">
           {sortOptions.map((option) => (
             <li key={option.value}>
               <button
                 onClick={() => handleSelect(option)}
-                className={`w-full text-left px-4 py-3.5 rounded-xl text-body-base transition-colors duration-150 flex items-center justify-between ${
+                className={`text-body-base flex w-full items-center justify-between rounded-xl px-4 py-3.5 text-left transition-colors duration-150 ${
                   currentSort === option.value ? "bg-gold/10 text-gold font-medium" : "text-ivory hover:bg-zinc-700/50"
                 }`}
               >
                 <span>{option.label}</span>
                 {currentSort === option.value && (
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 )}

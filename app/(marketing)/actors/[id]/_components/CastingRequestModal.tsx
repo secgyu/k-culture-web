@@ -8,13 +8,7 @@ interface CastingRequestModalProps {
   isSubmitting: boolean;
 }
 
-export function CastingRequestModal({
-  isOpen,
-  onClose,
-  onSubmit,
-  actorName,
-  isSubmitting,
-}: CastingRequestModalProps) {
+export function CastingRequestModal({ isOpen, onClose, onSubmit, actorName, isSubmitting }: CastingRequestModalProps) {
   const [message, setMessage] = useState("");
 
   if (!isOpen) return null;
@@ -27,16 +21,16 @@ export function CastingRequestModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
-      <div className="relative bg-luxury-secondary rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl border border-border">
+      <div className="bg-luxury-secondary border-border relative mx-4 w-full max-w-md rounded-2xl border p-6 shadow-xl">
         <h3 className="text-heading-md text-ivory mb-2">섭외 요청</h3>
         <p className="text-body-sm text-muted-gray mb-4">{actorName}님에게 섭외 요청을 보냅니다</p>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-ivory mb-2">메시지</label>
+          <label className="text-ivory mb-2 block text-sm font-medium">메시지</label>
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="w-full h-32 px-4 py-3 bg-luxury-tertiary text-ivory rounded-xl border border-border focus:border-gold focus:outline-none resize-none"
+            className="bg-luxury-tertiary text-ivory border-border focus:border-gold h-32 w-full resize-none rounded-xl border px-4 py-3 focus:outline-none"
             placeholder="섭외 제안 내용을 입력해주세요"
             disabled={isSubmitting}
           />
@@ -45,7 +39,7 @@ export function CastingRequestModal({
         <div className="flex gap-3">
           <button
             onClick={onClose}
-            className="flex-1 py-3 bg-luxury-tertiary text-ivory font-medium rounded-xl hover:bg-opacity-80 transition-colors"
+            className="bg-luxury-tertiary text-ivory hover:bg-opacity-80 flex-1 rounded-xl py-3 font-medium transition-colors"
             disabled={isSubmitting}
           >
             취소
@@ -53,7 +47,7 @@ export function CastingRequestModal({
           <button
             onClick={handleSubmit}
             disabled={!message.trim() || isSubmitting}
-            className="flex-1 py-3 bg-gold text-luxury-black font-medium rounded-xl hover:bg-gold-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-gold text-luxury-black hover:bg-gold-light flex-1 rounded-xl py-3 font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? "전송 중..." : "전송"}
           </button>
@@ -62,4 +56,3 @@ export function CastingRequestModal({
     </div>
   );
 }
-

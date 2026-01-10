@@ -1,13 +1,20 @@
 "use client";
 
 import { useState } from "react";
+
 import Link from "next/link";
-import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AuthLayout } from "@/components/common";
+
+import { useForm } from "react-hook-form";
+
 import { Button, FormField, Input } from "@/components/ui";
+
+import { AuthLayout } from "@/components/common";
+
+import { type ForgotPasswordFormData, forgotPasswordFormSchema } from "@/lib/validations";
+
 import { useForgotPassword } from "@/src/auth/auth";
-import { forgotPasswordFormSchema, type ForgotPasswordFormData } from "@/lib/validations";
 
 export default function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
@@ -47,9 +54,9 @@ export default function ForgotPasswordPage() {
   if (sent) {
     return (
       <AuthLayout title="이메일 발송 완료" subtitle="비밀번호 재설정 링크를 발송했습니다">
-        <div className="text-center space-y-6">
-          <div className="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mx-auto">
-            <svg className="w-8 h-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="space-y-6 text-center">
+          <div className="bg-gold/10 mx-auto flex h-16 w-16 items-center justify-center rounded-full">
+            <svg className="text-gold h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>

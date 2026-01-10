@@ -25,12 +25,12 @@ export default function EmptyState({
   onButtonClick,
 }: EmptyStateProps) {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center px-5">
-      <div className="w-24 h-24 rounded-full bg-luxury-secondary flex items-center justify-center mb-6">
+    <div className="flex flex-1 flex-col items-center justify-center px-5">
+      <div className="bg-luxury-secondary mb-6 flex h-24 w-24 items-center justify-center rounded-full">
         <XCircleIcon />
       </div>
 
-      <p className="text-center text-sm leading-relaxed tracking-tight max-w-[280px] text-warm-gray mb-8">
+      <p className="text-warm-gray mb-8 max-w-[280px] text-center text-sm leading-relaxed tracking-tight">
         {message.split("\n").map((line, index) => (
           <span key={index}>
             {line}
@@ -42,7 +42,7 @@ export default function EmptyState({
       {buttonLabel && (
         <button
           onClick={onButtonClick}
-          className="px-8 py-3 rounded-lg text-sm font-medium tracking-tight border border-border text-warm-gray hover:border-muted-gray transition-colors"
+          className="border-border text-warm-gray hover:border-muted-gray rounded-lg border px-8 py-3 text-sm font-medium tracking-tight transition-colors"
         >
           {buttonLabel}
         </button>

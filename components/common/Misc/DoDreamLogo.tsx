@@ -45,7 +45,7 @@ function DoorIcon({
 }) {
   return (
     <span className={`relative inline-flex items-center justify-center ${className}`}>
-      <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg viewBox="0 0 24 30" className="h-full w-full" fill="none" stroke="currentColor" strokeWidth="1.5">
         <rect x="2" y="2" width="20" height="26" rx="2" className={fillColor || "fill-gold/10"} />
         <rect x="2" y="2" width="20" height="26" rx="2" />
         <circle cx="17" cy="15" r="1.5" className={handleColor || "fill-gold"} />
@@ -104,8 +104,8 @@ function DoDreamInlineLogo({
 }: Pick<DoDreamLogoProps, "doorFillColor" | "doorHandleColor" | "accentColor" | "className">) {
   return (
     <span className={`inline-flex items-center gap-2 align-middle ${className}`}>
-      <span className="relative w-8 h-10 flex items-center justify-center">
-        <svg viewBox="0 0 24 30" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <span className="relative flex h-10 w-8 items-center justify-center">
+        <svg viewBox="0 0 24 30" className="h-full w-full" fill="none" stroke="currentColor" strokeWidth="1.5">
           <rect x="2" y="2" width="20" height="26" rx="2" className={doorFillColor} />
           <rect x="2" y="2" width="20" height="26" rx="2" />
           <circle cx="17" cy="15" r="1.5" className={doorHandleColor} />

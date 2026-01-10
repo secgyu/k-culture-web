@@ -8,4 +8,3 @@ export const ACTOR_IMAGES = [
   "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&h=400&fit=crop&crop=face",
   "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=300&h=400&fit=crop&crop=face",
 ];
-

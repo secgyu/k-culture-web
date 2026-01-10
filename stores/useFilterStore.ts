@@ -1,4 +1,5 @@
 import { create } from "zustand";
+
 import { DEFAULT_FILTERS, FILTER_DEFAULT_VALUE, isDefaultValue } from "@/lib/constants/filter-defaults";
 
 export interface FilterState {

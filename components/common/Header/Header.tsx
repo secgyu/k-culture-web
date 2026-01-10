@@ -9,22 +9,22 @@ interface HeaderProps {
 
 export default function Header({ title, highlightedName }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 h-12 bg-luxury-black border-b border-border">
-      <div className="max-w-lg mx-auto h-full flex items-center justify-between px-5 gap-px">
-        <div className="flex items-center gap-3 w-6">
-          <button className="w-6 h-6 flex items-center justify-center" aria-label="뒤로가기">
-            <ArrowLeftIcon className="w-6 h-6 text-ivory" />
+    <header className="bg-luxury-black border-border sticky top-0 z-50 h-12 border-b">
+      <div className="mx-auto flex h-full max-w-lg items-center justify-between gap-px px-5">
+        <div className="flex w-6 items-center gap-3">
+          <button className="flex h-6 w-6 items-center justify-center" aria-label="뒤로가기">
+            <ArrowLeftIcon className="text-ivory h-6 w-6" />
           </button>
         </div>
-        <h1 className="text-base leading-snug tracking-tight font-semibold flex items-center justify-center text-ivory">
+        <h1 className="text-ivory flex items-center justify-center text-base leading-snug font-semibold tracking-tight">
           {highlightedName && <span className="text-muted-gray">&apos;</span>}
           {highlightedName && <span className="text-ivory">{highlightedName}</span>}
           {highlightedName && <span className="text-muted-gray">&apos;</span>}
-          <span className="ml-1 text-ivory">{title}</span>
+          <span className="text-ivory ml-1">{title}</span>
         </h1>
-        <div className="flex items-center justify-end gap-3 w-6">
-          <button className="w-6 h-6 flex items-center justify-center" aria-label="검색">
-            <SearchIcon className="w-6 h-6 text-ivory" />
+        <div className="flex w-6 items-center justify-end gap-3">
+          <button className="flex h-6 w-6 items-center justify-center" aria-label="검색">
+            <SearchIcon className="text-ivory h-6 w-6" />
           </button>
         </div>
       </div>

@@ -1,19 +1,23 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
-import { useFilterStore } from "@/stores/useFilterStore";
+import { useCallback, useEffect } from "react";
+
 import { XMarkIcon } from "@/components/common/Misc/Icons";
-import { FilterSection } from "./FilterSection";
-import { FilterChip } from "./FilterChip";
-import { RangeInput } from "./RangeInput";
+
 import {
-  SKILL_OPTIONS,
-  FILMOGRAPHY_TYPE_OPTIONS,
   CATEGORY_FILTER_OPTIONS,
+  FILMOGRAPHY_TYPE_OPTIONS,
   GENDER_FILTER_OPTIONS,
   LICENSE_FILTER_OPTIONS,
+  SKILL_OPTIONS,
   WORK_EXCHANGE_FILTER_OPTIONS,
 } from "@/lib/constants/options";
+
+import { useFilterStore } from "@/stores/useFilterStore";
+
+import { FilterChip } from "./FilterChip";
+import { FilterSection } from "./FilterSection";
+import { RangeInput } from "./RangeInput";
 
 export function FilterBottomSheet() {
   const { filters, setFilter, resetFilters, isBottomSheetOpen, closeBottomSheet, getActiveFilterCount } =
@@ -65,18 +69,18 @@ export function FilterBottomSheet() {
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in" onClick={closeBottomSheet} />
+      <div className="animate-fade-in absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={closeBottomSheet} />
 
-      <div className="absolute bottom-0 left-0 right-0 bg-luxury-secondary rounded-t-3xl max-h-[85vh] flex flex-col animate-slide-up">
+      <div className="bg-luxury-secondary animate-slide-up absolute right-0 bottom-0 left-0 flex max-h-[85vh] flex-col rounded-t-3xl">
         <div className="flex justify-center pt-3 pb-2">
-          <div className="w-10 h-1 bg-zinc-600 rounded-full" />
+          <div className="h-1 w-10 rounded-full bg-zinc-600" />
         </div>
 
-        <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-800">
+        <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-3">
           <div className="flex items-center gap-2">
             <h2 className="text-heading-md text-ivory">필터</h2>
             {activeCount > 0 && (
-              <span className="px-2 py-0.5 bg-gold text-luxury-black text-caption font-bold rounded-full">
+              <span className="bg-gold text-luxury-black text-caption rounded-full px-2 py-0.5 font-bold">
                 {activeCount}
               </span>
             )}
@@ -88,9 +92,9 @@ export function FilterBottomSheet() {
             <button
               onClick={closeBottomSheet}
               aria-label="필터 닫기"
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-luxury-tertiary"
+              className="bg-luxury-tertiary flex h-8 w-8 items-center justify-center rounded-full"
             >
-              <XMarkIcon className="w-5 h-5 text-ivory" />
+              <XMarkIcon className="text-ivory h-5 w-5" />
             </button>
           </div>
         </div>
@@ -211,16 +215,16 @@ export function FilterBottomSheet() {
                 placeholder="이름 또는 키워드 입력"
                 value={filters.keyword}
                 onChange={(e) => setFilter("keyword", e.target.value)}
-                className="w-full bg-luxury-tertiary border border-zinc-700 rounded-lg px-3 py-2 text-ivory text-body-sm placeholder-muted-gray focus:outline-none focus:border-gold transition-colors"
+                className="bg-luxury-tertiary text-ivory text-body-sm placeholder-muted-gray focus:border-gold w-full rounded-lg border border-zinc-700 px-3 py-2 transition-colors focus:outline-none"
               />
             </FilterSection>
           </div>
         </div>
 
-        <div className="p-5 border-t border-zinc-800 bg-luxury-secondary">
+        <div className="bg-luxury-secondary border-t border-zinc-800 p-5">
           <button
             onClick={closeBottomSheet}
-            className="w-full py-3 bg-gold text-luxury-black font-semibold text-body-base rounded-xl hover:bg-gold-light transition-colors active:scale-[0.98]"
+            className="bg-gold text-luxury-black text-body-base hover:bg-gold-light w-full rounded-xl py-3 font-semibold transition-colors active:scale-[0.98]"
           >
             {activeCount > 0 ? `${activeCount}개 필터 적용` : "필터 적용"}
           </button>

@@ -1,4 +1,4 @@
-import { QueryClient, DefaultOptions } from '@tanstack/react-query';
+import { DefaultOptions, QueryClient } from "@tanstack/react-query";
 
 export const CACHE_TIMES = {
   SHORT: 1 * 60 * 1000,
@@ -31,7 +31,7 @@ const defaultOptions: DefaultOptions = {
   },
   mutations: {
     retry: 0,
-    networkMode: 'online',
+    networkMode: "online",
   },
 };
 

@@ -6,5 +6,5 @@ interface PageLayoutProps {
 }
 
 export function PageLayout({ children, className = "" }: PageLayoutProps) {
-  return <div className={`min-h-screen flex flex-col bg-luxury-black ${className}`}>{children}</div>;
+  return <div className={`bg-luxury-black flex min-h-screen flex-col ${className}`}>{children}</div>;
 }

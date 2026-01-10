@@ -1,8 +1,11 @@
 "use client";
 
 import * as React from "react";
+
 import { Eye, EyeOff } from "lucide-react";
+
 import { cn } from "@/lib/utils";
+
 import { Input, type InputProps } from "./input";
 
 const PasswordInput = React.forwardRef<HTMLInputElement, Omit<InputProps, "type">>(({ className, ...props }, ref) => {
@@ -15,7 +18,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, Omit<InputProps, "type"
         type="button"
         onClick={() => setShowPassword(!showPassword)}
         aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-gray hover:text-warm-gray transition-colors duration-200"
+        className="text-muted-gray hover:text-warm-gray absolute top-1/2 right-4 -translate-y-1/2 transition-colors duration-200"
       >
         {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
       </button>

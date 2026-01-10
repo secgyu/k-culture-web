@@ -1,6 +1,8 @@
-import { UseFormReturn, Controller } from "react-hook-form";
+import { Controller, UseFormReturn } from "react-hook-form";
+
 import { DarkInput, DarkSelect, DarkTextarea } from "@/components/common";
-import { GENDER_SELECT_OPTIONS, BIRTH_YEAR_OPTIONS } from "@/lib/constants";
+
+import { BIRTH_YEAR_OPTIONS, GENDER_SELECT_OPTIONS } from "@/lib/constants";
 import type { ProfileFormData } from "@/lib/validations";
 
 interface BasicInfoFormProps {

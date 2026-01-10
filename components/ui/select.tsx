@@ -1,9 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+
+import { type VariantProps, cva } from "class-variance-authority";
 import { ChevronDown } from "lucide-react";
+
+import { cn } from "@/lib/utils";
 
 const selectVariants = cva(
   "flex w-full min-w-0 rounded-xl border bg-transparent text-base transition-all duration-200 outline-none appearance-none cursor-pointer disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
@@ -34,7 +36,8 @@ export interface SelectOption {
 }
 
 export interface SelectProps
-  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size" | "onChange">,
+  extends
+    Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size" | "onChange">,
     VariantProps<typeof selectVariants> {
   options: SelectOption[];
   placeholder?: string;
@@ -69,7 +72,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             </option>
           ))}
         </select>
-        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-muted-gray pointer-events-none" />
+        <ChevronDown className="text-muted-gray pointer-events-none absolute top-1/2 right-3 size-5 -translate-y-1/2" />
       </div>
     );
   }

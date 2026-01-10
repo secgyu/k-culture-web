@@ -78,4 +78,3 @@ export const useOnboardingStore = create<OnboardingStore>()(
     }
   )
 );
-

@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { toast } from "sonner";
-import { DashboardLayout } from "@/components/common";
+
 import { ConfirmDialog, Spinner } from "@/components/ui";
-import { useGetNotificationSettings, useUpdateNotificationSettings, useGetMyProfile } from "@/src/users/users";
-import { useLogout, useDeleteAccount } from "@/src/auth/auth";
+
+import { DashboardLayout } from "@/components/common";
+
 import { useAuthStore } from "@/stores/useAuthStore";
-import { AccountInfoSection, NotificationSettingsSection, AccountManagementSection } from "./_components";
+
+import { useDeleteAccount, useLogout } from "@/src/auth/auth";
+import { useGetMyProfile, useGetNotificationSettings, useUpdateNotificationSettings } from "@/src/users/users";
+
+import { AccountInfoSection, AccountManagementSection, NotificationSettingsSection } from "./_components";
 
 export default function SettingsPage() {
   const { data: profileData } = useGetMyProfile();
@@ -84,7 +90,7 @@ export default function SettingsPage() {
   if (isLoading) {
     return (
       <DashboardLayout userType={userType}>
-        <div className="flex items-center justify-center h-64">
+        <div className="flex h-64 items-center justify-center">
           <Spinner size="md" />
         </div>
       </DashboardLayout>
@@ -93,7 +99,7 @@ export default function SettingsPage() {
 
   return (
     <DashboardLayout userType={userType}>
-      <div className="max-w-2xl mx-auto space-y-8">
+      <div className="mx-auto max-w-2xl space-y-8">
         <div>
           <h1 className="text-heading-xl text-ivory">설정</h1>
           <p className="text-muted-gray mt-1">계정 및 알림 설정을 관리하세요</p>

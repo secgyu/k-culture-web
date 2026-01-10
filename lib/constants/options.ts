@@ -37,17 +37,45 @@ export const ROLE_TYPE_OPTIONS = ["주연", "조연", "단역", "엑스트라", 
 
 export const GENRE_OPTIONS = ["영화", "드라마", "뮤지컬", "연극", "웹드라마", "광고", "기타"] as const;
 
-export const REPRESENTATIVE_GENRE_OPTIONS = ["액션", "로맨스", "코미디", "스릴러", "공포", "SF", "판타지", "드라마"] as const;
+export const REPRESENTATIVE_GENRE_OPTIONS = [
+  "액션",
+  "로맨스",
+  "코미디",
+  "스릴러",
+  "공포",
+  "SF",
+  "판타지",
+  "드라마",
+] as const;
 
 export const POSITION_OPTIONS = ["배우", "모델", "가수", "MC", "기타"] as const;
 
 export const FEE_OPTIONS = ["협의", "100만원 이하", "100~300만원", "300~500만원", "500만원 이상"] as const;
 
-export const SPECIALTY_OPTIONS = ["드라마", "영화제작", "광고/CF", "뮤직비디오", "웹드라마", "SF", "스릴러배우전문"] as const;
+export const SPECIALTY_OPTIONS = [
+  "드라마",
+  "영화제작",
+  "광고/CF",
+  "뮤직비디오",
+  "웹드라마",
+  "SF",
+  "스릴러배우전문",
+] as const;
 
 export const PROJECT_TYPE_OPTIONS = ["영화", "드라마", "웹드라마", "OTT 시리즈", "뮤직비디오", "광고", "기타"] as const;
 
-export const PROJECT_GENRE_OPTIONS = ["액션", "로맨스", "코미디", "드라마", "스릴러", "공포", "SF", "판타지", "사극", "기타"] as const;
+export const PROJECT_GENRE_OPTIONS = [
+  "액션",
+  "로맨스",
+  "코미디",
+  "드라마",
+  "스릴러",
+  "공포",
+  "SF",
+  "판타지",
+  "사극",
+  "기타",
+] as const;
 
 export const CATEGORY_FILTER_OPTIONS = ["무관", "배우", "모델"] as const;
 export const GENDER_FILTER_OPTIONS = ["무관", "남자", "여자"] as const;
@@ -87,4 +115,3 @@ export type Fee = (typeof FEE_OPTIONS)[number];
 export type SkillOption = (typeof SKILL_OPTIONS)[number];
 export type FilmographyTypeOption = (typeof FILMOGRAPHY_TYPE_OPTIONS)[number];
 export type ProjectStatusOption = (typeof PROJECT_STATUS_OPTIONS)[number]["value"];
-

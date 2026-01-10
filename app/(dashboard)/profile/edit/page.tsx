@@ -1,18 +1,26 @@
 "use client";
 
 import { useEffect } from "react";
+
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { DashboardLayout, DarkCard } from "@/components/common";
-import { useGetMyProfile, useUpdateMyProfile } from "@/src/users/users";
-import { useImageUpload } from "@/lib/hooks";
+
 import { Button, Spinner } from "@/components/ui";
-import { ProfileImageUpload } from "./_components/ProfileImageUpload";
+
+import { DarkCard, DashboardLayout } from "@/components/common";
+
+import { useImageUpload } from "@/lib/hooks";
+import { type ProfileFormData, profileFormSchema } from "@/lib/validations";
+
+import { useGetMyProfile, useUpdateMyProfile } from "@/src/users/users";
+
 import { BasicInfoForm } from "./_components/BasicInfoForm";
 import { ContactForm } from "./_components/ContactForm";
-import { profileFormSchema, type ProfileFormData } from "@/lib/validations";
+import { ProfileImageUpload } from "./_components/ProfileImageUpload";
 
 export default function ProfileEditPage() {
   const router = useRouter();
@@ -75,7 +83,7 @@ export default function ProfileEditPage() {
   if (isLoading) {
     return (
       <DashboardLayout userType="actor">
-        <div className="flex items-center justify-center h-64">
+        <div className="flex h-64 items-center justify-center">
           <Spinner size="lg" />
         </div>
       </DashboardLayout>
@@ -85,20 +93,20 @@ export default function ProfileEditPage() {
   return (
     <DashboardLayout userType="actor">
       <form onSubmit={onSubmit}>
-        <div className="max-w-2xl mx-auto space-y-8">
+        <div className="mx-auto max-w-2xl space-y-8">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-ivory">프로필 수정</h1>
+            <h1 className="text-ivory text-2xl font-bold">프로필 수정</h1>
           </div>
 
           <ProfileImageUpload imageUrl={imageUrl} onImageChange={handleImageChange} />
 
           <DarkCard>
-            <h2 className="text-lg font-semibold text-ivory mb-6">기본 정보</h2>
+            <h2 className="text-ivory mb-6 text-lg font-semibold">기본 정보</h2>
             <BasicInfoForm form={form} />
           </DarkCard>
 
           <DarkCard>
-            <h2 className="text-lg font-semibold text-ivory mb-6">연락처</h2>
+            <h2 className="text-ivory mb-6 text-lg font-semibold">연락처</h2>
             <ContactForm form={form} />
           </DarkCard>
 

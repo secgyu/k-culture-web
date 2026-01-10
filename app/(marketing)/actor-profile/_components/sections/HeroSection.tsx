@@ -1,10 +1,14 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { useState, useEffect } from "react";
+
 import { LandingHeader } from "@/components/common";
-import { ProfileSlide, SearchFilterSlide, AIMatchingSlide, MobileProfileSlide } from "./slides";
+
 import { CAROUSEL_INTERVAL } from "@/lib/constants";
+
+import { AIMatchingSlide, MobileProfileSlide, ProfileSlide, SearchFilterSlide } from "./slides";
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -23,21 +27,21 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-luxury-black via-luxury-black to-luxury-secondary overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-gold/20 to-transparent" />
+    <section className="from-luxury-black via-luxury-black to-luxury-secondary relative min-h-screen overflow-hidden bg-gradient-to-b">
+      <div className="from-gold/20 absolute top-0 right-0 left-0 h-96 bg-gradient-to-b to-transparent" />
 
       <LandingHeader transparent currentPath="/actor-profile" />
 
-      <div className="relative z-10 flex flex-col items-center px-6 section-spacing-md">
-        <div className="inline-block px-7 py-2.5 bg-gold rounded-full title-margin-md">
-          <span className="text-luxury-black font-semibold text-body-sm">배우&모델</span>
+      <div className="section-spacing-md relative z-10 flex flex-col items-center px-6">
+        <div className="bg-gold title-margin-md inline-block rounded-full px-7 py-2.5">
+          <span className="text-luxury-black text-body-sm font-semibold">배우&모델</span>
         </div>
 
-        <h1 className="font-display text-display-lg lg:text-display-xl text-ivory text-center title-margin-lg">
+        <h1 className="font-display text-display-lg lg:text-display-xl text-ivory title-margin-lg text-center">
           프로필 관리·탐색 플랫폼
         </h1>
 
-        <div className="w-full max-w-5xl mx-auto relative h-[600px] overflow-hidden">
+        <div className="relative mx-auto h-[600px] w-full max-w-5xl overflow-hidden">
           <div className={`absolute inset-0 transition-all duration-700 ${getSlideTransition(0)}`}>
             <ProfileSlide />
           </div>
@@ -55,12 +59,12 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="mt-8 flex justify-center gap-2">
           {[0, 1, 2, 3].map((i) => (
             <button
               key={i}
               onClick={() => setCurrentSlide(i)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 hover:bg-gold/60 focus:outline-none ${
+              className={`hover:bg-gold/60 h-3 w-3 rounded-full transition-all duration-300 focus:outline-none ${
                 currentSlide === i ? "bg-gold w-8" : "bg-warm-gray/30"
               }`}
             />
@@ -71,7 +75,7 @@ export function HeroSection() {
 
         <Link
           href="/signup?type=actor"
-          className="px-16 py-4 bg-gold text-luxury-black font-semibold rounded-xl hover:bg-gold-light transition-all duration-200 text-body-lg active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
+          className="bg-gold text-luxury-black hover:bg-gold-light text-body-lg focus-visible:ring-gold/50 rounded-xl px-16 py-4 font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 active:scale-[0.98]"
         >
           프로필 등록하기
         </Link>

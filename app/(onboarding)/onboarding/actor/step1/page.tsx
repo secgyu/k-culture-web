@@ -1,15 +1,22 @@
 "use client";
 
 import { useEffect } from "react";
+
 import { useRouter } from "next/navigation";
-import { useForm, Controller } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
-import { DarkInput, DarkSelect } from "@/components/common";
+import { Controller, useForm } from "react-hook-form";
+
 import { Button } from "@/components/ui";
+
+import { DarkInput, DarkSelect } from "@/components/common";
+
+import { BIRTH_YEAR_OPTIONS, GENDER_SELECT_OPTIONS } from "@/lib/constants";
+import { type OnboardingStep1Data, onboardingStep1Schema } from "@/lib/validations";
+
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
-import { GENDER_SELECT_OPTIONS, BIRTH_YEAR_OPTIONS } from "@/lib/constants";
-import { onboardingStep1Schema, type OnboardingStep1Data } from "@/lib/validations";
 
 export default function ActorOnboardingStep1() {
   const router = useRouter();

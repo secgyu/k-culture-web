@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+
 import { cn } from "@/lib/utils";
 
 export interface FormFieldProps {
@@ -17,9 +18,9 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
     return (
       <div ref={ref} className={cn("space-y-2", className)}>
         {label && (
-          <label className="block text-body-sm font-medium text-warm-gray">
+          <label className="text-body-sm text-warm-gray block font-medium">
             {label}
-            {required && <span className="text-red-400 ml-1">*</span>}
+            {required && <span className="ml-1 text-red-400">*</span>}
           </label>
         )}
         {children}

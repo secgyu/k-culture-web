@@ -1,15 +1,9 @@
 "use client";
 
 import { ReactNode } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "./dialog";
+
 import { Button } from "./button";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "./dialog";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -64,7 +58,7 @@ export function ConfirmDialog({
             disabled={loading}
             className={
               variant === "danger"
-                ? "flex-1 border-red-500/30 text-red-400 hover:bg-red-500/10 hover:border-red-500/50"
+                ? "flex-1 border-red-500/30 text-red-400 hover:border-red-500/50 hover:bg-red-500/10"
                 : "flex-1"
             }
           >

@@ -1,10 +1,12 @@
 import { Suspense } from "react";
-import { ActorSearchContent } from "./_components/ActorSearchContent";
+
 import { Spinner } from "@/components/ui";
+
+import { ActorSearchContent } from "./_components/ActorSearchContent";
 
 function LoadingFallback() {
   return (
-    <div className="min-h-screen bg-luxury-black flex items-center justify-center">
+    <div className="bg-luxury-black flex min-h-screen items-center justify-center">
       <Spinner size="md" />
     </div>
   );

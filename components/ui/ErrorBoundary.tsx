@@ -1,6 +1,7 @@
 "use client";
 
 import { Component, ReactNode } from "react";
+
 import { Button } from "./button";
 
 interface ErrorBoundaryProps {
@@ -38,11 +39,11 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       }
 
       return (
-        <div className="min-h-screen bg-luxury-black flex items-center justify-center p-4">
-          <div className="max-w-md w-full bg-luxury-secondary rounded-2xl p-8 border border-border">
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mx-auto">
-                <svg className="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="bg-luxury-black flex min-h-screen items-center justify-center p-4">
+          <div className="bg-luxury-secondary border-border w-full max-w-md rounded-2xl border p-8">
+            <div className="space-y-4 text-center">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-red-500/10">
+                <svg className="h-8 w-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -51,7 +52,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                   />
                 </svg>
               </div>
-              <h2 className="text-xl font-bold text-ivory">오류가 발생했습니다</h2>
+              <h2 className="text-ivory text-xl font-bold">오류가 발생했습니다</h2>
               <p className="text-muted-gray text-sm">{this.state.error.message}</p>
               <Button variant="gold" fullWidth onClick={this.reset}>
                 다시 시도

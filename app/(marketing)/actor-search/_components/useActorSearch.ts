@@ -1,8 +1,12 @@
 import { useState } from "react";
+
 import { useSearchParams } from "next/navigation";
-import { useGetActors } from "@/src/actors/actors";
-import { useAuthStore } from "@/stores/useAuthStore";
+
 import { SortOption } from "@/components/features/search";
+
+import { useAuthStore } from "@/stores/useAuthStore";
+
+import { useGetActors } from "@/src/actors/actors";
 import { GetActorsSortBy } from "@/src/model";
 
 /**

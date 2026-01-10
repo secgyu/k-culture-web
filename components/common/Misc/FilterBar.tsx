@@ -28,9 +28,9 @@ function ChevronDownIcon({ className, isSelected }: { className?: string; isSele
 
 export default function FilterBar({ filters, selectedFilters = {}, onFilterClick }: FilterBarProps) {
   return (
-    <div className="sticky top-12 z-40 bg-luxury-black">
-      <div className="max-w-lg mx-auto px-5 py-2">
-        <div className="flex gap-2 overflow-x-auto hide-scrollbar">
+    <div className="bg-luxury-black sticky top-12 z-40">
+      <div className="mx-auto max-w-lg px-5 py-2">
+        <div className="hide-scrollbar flex gap-2 overflow-x-auto">
           {filters.map((filter) => {
             const isSelected = !!selectedFilters[filter.id];
             const displayLabel = selectedFilters[filter.id] || filter.label;
@@ -39,15 +39,13 @@ export default function FilterBar({ filters, selectedFilters = {}, onFilterClick
               <button
                 key={filter.id}
                 onClick={() => onFilterClick?.(filter.id)}
-                className={`flex items-center justify-center gap-1 px-3 h-10 min-w-10 bg-luxury-tertiary border rounded-full text-sm font-medium transition-all whitespace-nowrap shrink-0 ${
-                  isSelected
-                    ? "border-gold text-gold"
-                    : "border-[#2A2A2A] text-warm-gray hover:border-gold/50"
+                className={`bg-luxury-tertiary flex h-10 min-w-10 shrink-0 items-center justify-center gap-1 rounded-full border px-3 text-sm font-medium whitespace-nowrap transition-all ${
+                  isSelected ? "border-gold text-gold" : "text-warm-gray hover:border-gold/50 border-[#2A2A2A]"
                 }`}
                 style={{ letterSpacing: "-0.02em" }}
               >
                 <span>{displayLabel}</span>
-                <ChevronDownIcon className="w-5 h-5" isSelected={isSelected} />
+                <ChevronDownIcon className="h-5 w-5" isSelected={isSelected} />
               </button>
             );
           })}

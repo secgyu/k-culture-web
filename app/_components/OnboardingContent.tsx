@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+
 import { DoDreamLogo } from "@/components/common";
 
 function RoleCard({
@@ -19,56 +20,29 @@ function RoleCard({
   return (
     <Link
       href={href}
-      className={`
-        group relative overflow-hidden
-        w-full max-w-sm p-8 rounded-3xl
-        flex flex-col items-center text-center
-        transition-all duration-300 ease-out
-        hover:scale-105 hover:shadow-2xl
-        ${
-          isPrimary
-            ? "bg-gradient-to-br from-gold via-gold-light to-gold shadow-lg shadow-gold/20"
-            : "bg-luxury-secondary border border-gold/20 hover:border-gold/40"
-        }
-      `}
+      className={`group relative flex w-full max-w-sm flex-col items-center overflow-hidden rounded-3xl p-8 text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl ${
+        isPrimary
+          ? "from-gold via-gold-light to-gold shadow-gold/20 bg-gradient-to-br shadow-lg"
+          : "bg-luxury-secondary border-gold/20 hover:border-gold/40 border"
+      } `}
     >
       <div
-        className={`
-          w-20 h-20 rounded-2xl flex items-center justify-center mb-6
-          transition-transform duration-300 group-hover:scale-110
-          ${isPrimary ? "bg-luxury-black/20" : "bg-gold/10"}
-        `}
+        className={`mb-6 flex h-20 w-20 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110 ${isPrimary ? "bg-luxury-black/20" : "bg-gold/10"} `}
       >
         {icon}
       </div>
 
-      <h3
-        className={`
-          text-heading-xl mb-3
-          ${isPrimary ? "text-luxury-black" : "text-ivory"}
-        `}
-      >
-        {title}
-      </h3>
+      <h3 className={`text-heading-xl mb-3 ${isPrimary ? "text-luxury-black" : "text-ivory"} `}>{title}</h3>
 
-      <p
-        className={`
-          text-body-md leading-relaxed
-          ${isPrimary ? "text-luxury-black/70" : "text-muted-accessible"}
-        `}
-      >
+      <p className={`text-body-md leading-relaxed ${isPrimary ? "text-luxury-black/70" : "text-muted-accessible"} `}>
         {description}
       </p>
 
       <div
-        className={`
-          mt-6 w-10 h-10 rounded-full flex items-center justify-center
-          transition-all duration-300 group-hover:translate-x-1
-          ${isPrimary ? "bg-luxury-black/10" : "bg-gold/10"}
-        `}
+        className={`mt-6 flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 group-hover:translate-x-1 ${isPrimary ? "bg-luxury-black/10" : "bg-gold/10"} `}
       >
         <svg
-          className={`w-5 h-5 ${isPrimary ? "text-luxury-black" : "text-gold"}`}
+          className={`h-5 w-5 ${isPrimary ? "text-luxury-black" : "text-gold"}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -82,35 +56,35 @@ function RoleCard({
 
 export function OnboardingContent() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-luxury-black via-luxury-black to-luxury-secondary flex flex-col">
-      <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-gold/10 to-transparent pointer-events-none" />
+    <div className="from-luxury-black via-luxury-black to-luxury-secondary flex min-h-screen flex-col bg-gradient-to-b">
+      <div className="from-gold/10 pointer-events-none absolute top-0 right-0 left-0 h-96 bg-gradient-to-b to-transparent" />
 
-      <header className="relative z-10 w-full px-6 py-6 flex items-center justify-between">
+      <header className="relative z-10 flex w-full items-center justify-between px-6 py-6">
         <DoDreamLogo href="/" size="md" className="text-ivory" />
 
-        <Link href="/login" className="text-warm-gray hover:text-ivory transition-colors text-sm font-medium">
+        <Link href="/login" className="text-warm-gray hover:text-ivory text-sm font-medium transition-colors">
           로그인
         </Link>
       </header>
 
-      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 section-spacing-md">
-        <div className="text-center title-margin-xl">
+      <main className="section-spacing-md relative z-10 flex flex-1 flex-col items-center justify-center px-6">
+        <div className="title-margin-xl text-center">
           <h1 className="font-display text-display-lg lg:text-display-xl text-ivory title-margin-md">
             두드림에 오신 것을 환영합니다
           </h1>
-          <p className="text-muted-accessible text-body-lg max-w-xl mx-auto">
+          <p className="text-muted-accessible text-body-lg mx-auto max-w-xl">
             배우와 캐스팅 담당자를 연결하는 프로필 관리 플랫폼
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-6 md:gap-8 w-full max-w-4xl justify-center items-center">
+        <div className="flex w-full max-w-4xl flex-col items-center justify-center gap-6 md:flex-row md:gap-8">
           <RoleCard
             title="배우로 시작하기"
             description="프로필을 등록하고 캐스팅 제안을 받아보세요"
             href="/signup?type=actor"
             isPrimary
             icon={
-              <svg className="w-10 h-10 text-luxury-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="text-luxury-black h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -126,7 +100,7 @@ export function OnboardingContent() {
             description="조건에 맞는 배우를 검색하고 섭외 요청을 보내세요"
             href="/actor-search"
             icon={
-              <svg className="w-10 h-10 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="text-gold h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -138,7 +112,7 @@ export function OnboardingContent() {
           />
         </div>
 
-        <p className="mt-12 text-muted-gray text-sm">
+        <p className="text-muted-gray mt-12 text-sm">
           이미 계정이 있으신가요?{" "}
           <Link href="/login" className="text-gold hover:text-gold-light underline transition-colors">
             로그인
@@ -147,7 +121,7 @@ export function OnboardingContent() {
       </main>
 
       <footer className="relative z-10 w-full px-6 py-8 text-center">
-        <div className="text-muted-gray text-xs sm:text-sm space-y-2">
+        <div className="text-muted-gray space-y-2 text-xs sm:text-sm">
           <p className="flex flex-wrap justify-center gap-2">
             <span>주식회사 두드림</span>
             <span className="hidden sm:inline">|</span>

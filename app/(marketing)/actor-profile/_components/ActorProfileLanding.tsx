@@ -1,14 +1,14 @@
 "use client";
 
 import {
-  HeroSection,
-  IntroSection,
-  FeatureRegistrationSection,
-  FeatureLinkShareSection,
+  CTASection,
   CastingDirectorSection,
   DirectorSection,
-  CTASection,
+  FeatureLinkShareSection,
+  FeatureRegistrationSection,
   Footer,
+  HeroSection,
+  IntroSection,
 } from "./sections";
 
 export function ActorProfileLanding() {

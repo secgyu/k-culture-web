@@ -1,12 +1,17 @@
 "use client";
 
+import { memo, useCallback } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
-import { memo, useCallback } from "react";
-import { useCompareStore, CompareActor } from "@/stores/useCompareStore";
-import { CheckIcon, PlusIcon } from "@/components/common/Misc/Icons";
+
 import { Badge } from "@/components/ui";
+
+import { CheckIcon, PlusIcon } from "@/components/common/Misc/Icons";
+
 import { cn } from "@/lib/utils";
+
+import { CompareActor, useCompareStore } from "@/stores/useCompareStore";
 
 interface ActorCardProps {
   actor: {
@@ -58,11 +63,11 @@ export const ActorCard = memo(function ActorCard({ actor, isBlurred = false }: A
   const cardContent = (
     <div
       className={cn(
-        "bg-luxury-black rounded-xl overflow-hidden border transition-all duration-200 cursor-pointer active:scale-[0.98]",
-        isSelected ? "border-gold shadow-lg shadow-gold/20" : "border-border hover:border-muted-gray hover:shadow-lg"
+        "bg-luxury-black cursor-pointer overflow-hidden rounded-xl border transition-all duration-200 active:scale-[0.98]",
+        isSelected ? "border-gold shadow-gold/20 shadow-lg" : "border-border hover:border-muted-gray hover:shadow-lg"
       )}
     >
-      <div className="relative aspect-3/4 bg-luxury-secondary">
+      <div className="bg-luxury-secondary relative aspect-3/4">
         <Image
           src={actor.imageUrl || `https://images.unsplash.com/photo-1507003211169?w=300&h=400&fit=crop&crop=face`}
           alt={actor.name}
@@ -76,22 +81,22 @@ export const ActorCard = memo(function ActorCard({ actor, isBlurred = false }: A
             disabled={!isSelected && isFull}
             aria-label={isSelected ? "비교에서 제거" : "비교에 추가"}
             className={cn(
-              "absolute top-2 right-2 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200",
+              "absolute top-2 right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200",
               isSelected
                 ? "bg-gold text-luxury-black hover:bg-gold-light"
                 : isFull
-                ? "bg-luxury-black/50 text-muted-gray cursor-not-allowed"
-                : "bg-luxury-black/70 text-white hover:bg-gold hover:text-luxury-black backdrop-blur-sm"
+                  ? "bg-luxury-black/50 text-muted-gray cursor-not-allowed"
+                  : "bg-luxury-black/70 hover:bg-gold hover:text-luxury-black text-white backdrop-blur-sm"
             )}
           >
-            {isSelected ? <CheckIcon className="w-4 h-4" /> : <PlusIcon className="w-4 h-4" />}
+            {isSelected ? <CheckIcon className="h-4 w-4" /> : <PlusIcon className="h-4 w-4" />}
           </button>
         )}
 
         {isBlurred && (
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center bg-black/40">
             <div className="text-center">
-              <svg className="w-8 h-8 text-white/80 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="mx-auto mb-2 h-8 w-8 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -99,16 +104,16 @@ export const ActorCard = memo(function ActorCard({ actor, isBlurred = false }: A
                   d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                 />
               </svg>
-              <p className="text-white/80 text-caption">로그인하고 보기</p>
+              <p className="text-caption text-white/80">로그인하고 보기</p>
             </div>
           </div>
         )}
       </div>
 
       <div className="p-4">
-        <h3 className={cn("text-ivory font-bold mb-2", isBlurred && "blur-sm")}>{isBlurred ? "***" : actor.name}</h3>
+        <h3 className={cn("text-ivory mb-2 font-bold", isBlurred && "blur-sm")}>{isBlurred ? "***" : actor.name}</h3>
 
-        <div className="space-y-1 text-body-sm text-muted-gray mb-3">
+        <div className="text-body-sm text-muted-gray mb-3 space-y-1">
           <div className="flex items-center gap-2">
             <span>{actor.age || "정보없음"}</span>
             {actor.filmography && actor.filmography > 0 && (

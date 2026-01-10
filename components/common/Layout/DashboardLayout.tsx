@@ -1,10 +1,14 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
+
 import { usePathname, useRouter } from "next/navigation";
+
 import { DoDreamLogo } from "@/components/common";
 import { MenuIcon } from "@/components/common/Misc/Icons";
+
 import { useAuthStore } from "@/stores/useAuthStore";
+
 import { DashboardSidebar } from "./DashboardSidebar";
 
 interface DashboardLayoutProps {
@@ -28,9 +32,9 @@ export function DashboardLayout({ children, userType = "actor" }: DashboardLayou
   }, []);
 
   return (
-    <div className="min-h-screen bg-luxury-black flex">
+    <div className="bg-luxury-black flex min-h-screen">
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-luxury-black/80 backdrop-blur-sm z-40 lg:hidden" onClick={closeMobileMenu} />
+        <div className="bg-luxury-black/80 fixed inset-0 z-40 backdrop-blur-sm lg:hidden" onClick={closeMobileMenu} />
       )}
 
       <DashboardSidebar
@@ -42,12 +46,12 @@ export function DashboardLayout({ children, userType = "actor" }: DashboardLayou
       />
 
       <main className="flex-1 lg:ml-64">
-        <div className="lg:hidden sticky top-0 z-30 bg-luxury-secondary border-b border-border px-4 py-3 flex items-center gap-3">
+        <div className="bg-luxury-secondary border-border sticky top-0 z-30 flex items-center gap-3 border-b px-4 py-3 lg:hidden">
           <button
             onClick={() => setIsMobileMenuOpen(true)}
-            className="text-muted-gray hover:text-ivory transition-colors p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 rounded-lg"
+            className="text-muted-gray hover:text-ivory focus-visible:ring-gold/50 rounded-lg p-2 transition-colors focus:outline-none focus-visible:ring-2"
           >
-            <MenuIcon className="w-6 h-6" />
+            <MenuIcon className="h-6 w-6" />
           </button>
           <DoDreamLogo size="sm" />
         </div>

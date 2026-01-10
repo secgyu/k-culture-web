@@ -1,9 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
+
 import { Button } from "@/components/ui";
+
 import { XMarkIcon } from "@/components/common/Misc/Icons";
+
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
 
 const SKILL_CATEGORIES = [
@@ -69,7 +73,7 @@ export default function ActorOnboardingStep3() {
               {data.skills.map((skill) => (
                 <span
                   key={skill}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-gold/10 border border-gold/30 rounded-full text-gold text-sm"
+                  className="bg-gold/10 border-gold/30 text-gold inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-sm"
                 >
                   {skill}
                   <button
@@ -78,7 +82,7 @@ export default function ActorOnboardingStep3() {
                     className="hover:text-gold-light"
                     aria-label={`${skill} 삭제`}
                   >
-                    <XMarkIcon className="w-4 h-4" />
+                    <XMarkIcon className="h-4 w-4" />
                   </button>
                 </span>
               ))}
@@ -86,10 +90,10 @@ export default function ActorOnboardingStep3() {
           </div>
         )}
 
-        <div className="space-y-4 max-h-64 overflow-y-auto pr-2 hide-scrollbar">
+        <div className="hide-scrollbar max-h-64 space-y-4 overflow-y-auto pr-2">
           {SKILL_CATEGORIES.map((category) => (
             <div key={category.name}>
-              <h3 className="text-body-sm font-medium text-muted-gray mb-2">{category.name}</h3>
+              <h3 className="text-body-sm text-muted-gray mb-2 font-medium">{category.name}</h3>
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => {
                   const isSelected = data.skills.includes(skill);
@@ -98,7 +102,7 @@ export default function ActorOnboardingStep3() {
                       key={skill}
                       type="button"
                       onClick={() => toggleSkill(skill)}
-                      className={`px-3 py-1.5 rounded-full text-sm transition-all ${
+                      className={`rounded-full px-3 py-1.5 text-sm transition-all ${
                         isSelected
                           ? "bg-gold text-luxury-black font-medium"
                           : "bg-luxury-tertiary text-warm-gray hover:bg-zinc-700"

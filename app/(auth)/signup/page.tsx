@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+
 import { AuthLayout, DarkCard } from "@/components/common";
-import { UserIcon, BriefcaseIcon } from "@/components/common/Misc/Icons";
+import { BriefcaseIcon, UserIcon } from "@/components/common/Misc/Icons";
 
 export default function SignupPage() {
   return (
@@ -11,15 +12,15 @@ export default function SignupPage() {
         <Link href="/signup/actor">
           <DarkCard variant="hover" className="group">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-xl bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-                <UserIcon className="w-7 h-7 text-gold" />
+              <div className="bg-gold/10 group-hover:bg-gold/20 flex h-14 w-14 items-center justify-center rounded-xl transition-colors">
+                <UserIcon className="text-gold h-7 w-7" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-ivory">배우로 가입</h3>
-                <p className="text-sm text-muted-gray">프로필을 등록하고 캐스팅 기회를 받으세요</p>
+                <h3 className="text-ivory text-lg font-semibold">배우로 가입</h3>
+                <p className="text-muted-gray text-sm">프로필을 등록하고 캐스팅 기회를 받으세요</p>
               </div>
               <svg
-                className="w-5 h-5 text-muted-gray group-hover:text-gold transition-colors"
+                className="text-muted-gray group-hover:text-gold h-5 w-5 transition-colors"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -33,15 +34,15 @@ export default function SignupPage() {
         <Link href="/signup/agency">
           <DarkCard variant="hover" className="group">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-xl bg-luxury-tertiary flex items-center justify-center group-hover:bg-border transition-colors">
-                <BriefcaseIcon className="w-7 h-7 text-warm-gray" />
+              <div className="bg-luxury-tertiary group-hover:bg-border flex h-14 w-14 items-center justify-center rounded-xl transition-colors">
+                <BriefcaseIcon className="text-warm-gray h-7 w-7" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-ivory">캐스팅 담당자로 가입</h3>
-                <p className="text-sm text-muted-gray">AI로 완벽한 배우를 찾아보세요</p>
+                <h3 className="text-ivory text-lg font-semibold">캐스팅 담당자로 가입</h3>
+                <p className="text-muted-gray text-sm">AI로 완벽한 배우를 찾아보세요</p>
               </div>
               <svg
-                className="w-5 h-5 text-muted-gray group-hover:text-warm-gray transition-colors"
+                className="text-muted-gray group-hover:text-warm-gray h-5 w-5 transition-colors"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

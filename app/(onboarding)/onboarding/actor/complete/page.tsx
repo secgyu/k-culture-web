@@ -1,32 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import { DoDreamLogo } from "@/components/common";
+
 import { Button } from "@/components/ui";
+
+import { DoDreamLogo } from "@/components/common";
 import { CheckIcon } from "@/components/common/Misc/Icons";
 
 export default function ActorOnboardingComplete() {
   return (
-    <div className="min-h-screen bg-luxury-black flex flex-col items-center justify-center px-6">
+    <div className="bg-luxury-black flex min-h-screen flex-col items-center justify-center px-6">
       <div className="mb-12">
         <DoDreamLogo size="lg" />
       </div>
 
-      <div className="w-20 h-20 rounded-full bg-gold/10 flex items-center justify-center mb-8">
-        <div className="w-14 h-14 rounded-full bg-gold flex items-center justify-center">
-          <CheckIcon className="w-8 h-8 text-luxury-black" />
+      <div className="bg-gold/10 mb-8 flex h-20 w-20 items-center justify-center rounded-full">
+        <div className="bg-gold flex h-14 w-14 items-center justify-center rounded-full">
+          <CheckIcon className="text-luxury-black h-8 w-8" />
         </div>
       </div>
 
-      <h1 className="text-2xl font-bold text-ivory mb-3">프로필 등록 완료!</h1>
-      <p className="text-muted-gray text-center mb-12 max-w-sm">
+      <h1 className="text-ivory mb-3 text-2xl font-bold">프로필 등록 완료!</h1>
+      <p className="text-muted-gray mb-12 max-w-sm text-center">
         이제 캐스팅 담당자들이 당신의 프로필을 볼 수 있습니다.
         <br />더 많은 정보를 입력하면 매칭 확률이 높아집니다.
       </p>
 
       <div className="w-full max-w-xs space-y-3">
         <Link href="/dashboard">
-          <Button variant="gold" fullWidth>대시보드로 이동</Button>
+          <Button variant="gold" fullWidth>
+            대시보드로 이동
+          </Button>
         </Link>
         <Link href="/profile/edit">
           <Button variant="gold-secondary" fullWidth>

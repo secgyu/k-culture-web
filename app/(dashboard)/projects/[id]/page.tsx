@@ -1,13 +1,17 @@
 "use client";
 
 import { useState } from "react";
+
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { DashboardLayout, DarkCard } from "@/components/common";
+
 import { Button, Spinner } from "@/components/ui";
-import { PlusIcon, UserIcon, PencilIcon, XMarkIcon } from "@/components/common/Misc/Icons";
-import { useGetProjectDetail } from "@/src/projects/projects";
+
+import { DarkCard, DashboardLayout } from "@/components/common";
+import { PencilIcon, PlusIcon, UserIcon, XMarkIcon } from "@/components/common/Misc/Icons";
+
 import { useGetProjectCharacters } from "@/src/characters/characters";
+import { useGetProjectDetail } from "@/src/projects/projects";
 
 const statusColors: Record<string, string> = {
   미시작: "bg-luxury-tertiary text-muted-gray",
@@ -29,7 +33,7 @@ export default function ProjectDetailPage() {
   if (projectLoading || !project) {
     return (
       <DashboardLayout userType="agency">
-        <div className="flex items-center justify-center h-64">
+        <div className="flex h-64 items-center justify-center">
           <Spinner size="md" />
         </div>
       </DashboardLayout>
@@ -45,10 +49,10 @@ export default function ProjectDetailPage() {
       <div className="space-y-8">
         <div className="flex items-start justify-between">
           <div>
-            <div className="flex items-center gap-3 mb-2">
-              <h1 className="text-2xl font-bold text-ivory">{project.projectName}</h1>
+            <div className="mb-2 flex items-center gap-3">
+              <h1 className="text-ivory text-2xl font-bold">{project.projectName}</h1>
               <span
-                className={`px-2 py-1 rounded text-xs font-medium ${
+                className={`rounded px-2 py-1 text-xs font-medium ${
                   statusColors[project.status] || statusColors["진행중"]
                 }`}
               >
@@ -60,48 +64,48 @@ export default function ProjectDetailPage() {
             </p>
           </div>
           <Button variant="gold-outline" size="sm">
-            <PencilIcon className="w-4 h-4 mr-1" /> 수정
+            <PencilIcon className="mr-1 h-4 w-4" /> 수정
           </Button>
         </div>
 
         <DarkCard>
-          <div className="flex items-center justify-between mb-4">
+          <div className="mb-4 flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-semibold text-ivory">캐스팅 진행률</h2>
-              <p className="text-sm text-muted-gray">
+              <h2 className="text-ivory text-lg font-semibold">캐스팅 진행률</h2>
+              <p className="text-muted-gray text-sm">
                 {castingComplete}/{totalCharacters} 배역 완료
               </p>
             </div>
-            <span className="text-3xl font-bold text-gold">{progress}%</span>
+            <span className="text-gold text-3xl font-bold">{progress}%</span>
           </div>
-          <div className="h-2 bg-luxury-tertiary rounded-full overflow-hidden">
-            <div className="h-full bg-gold transition-all duration-500" style={{ width: `${progress}%` }} />
+          <div className="bg-luxury-tertiary h-2 overflow-hidden rounded-full">
+            <div className="bg-gold h-full transition-all duration-500" style={{ width: `${progress}%` }} />
           </div>
         </DarkCard>
 
         <DarkCard>
-          <h2 className="text-lg font-semibold text-ivory mb-4">프로젝트 정보</h2>
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <h2 className="text-ivory mb-4 text-lg font-semibold">프로젝트 정보</h2>
+          <div className="mb-4 grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm text-muted-gray">촬영 기간</p>
+              <p className="text-muted-gray text-sm">촬영 기간</p>
               <p className="text-ivory">{project.shootingPeriod || "미정"}</p>
             </div>
             <div>
-              <p className="text-sm text-muted-gray">총 배역</p>
+              <p className="text-muted-gray text-sm">총 배역</p>
               <p className="text-ivory">{totalCharacters}개</p>
             </div>
           </div>
           <div>
-            <p className="text-sm text-muted-gray mb-1">배역 상세</p>
+            <p className="text-muted-gray mb-1 text-sm">배역 상세</p>
             <p className="text-warm-gray">{project.roleInfo || "정보 없음"}</p>
           </div>
         </DarkCard>
 
         <div>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-ivory">캐릭터 ({totalCharacters})</h2>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-ivory text-lg font-semibold">캐릭터 ({totalCharacters})</h2>
             <Button variant="gold" size="sm" onClick={() => setShowAddModal(true)}>
-              <PlusIcon className="w-4 h-4 mr-1" /> 캐릭터 추가
+              <PlusIcon className="mr-1 h-4 w-4" /> 캐릭터 추가
             </Button>
           </div>
 
@@ -109,24 +113,24 @@ export default function ProjectDetailPage() {
             {characters.map((character) => (
               <DarkCard key={character.id} variant="hover">
                 <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0">
-                    <div className="w-full h-full bg-luxury-secondary flex items-center justify-center">
-                      <UserIcon className="w-8 h-8 text-muted-gray" />
+                  <div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl">
+                    <div className="bg-luxury-secondary flex h-full w-full items-center justify-center">
+                      <UserIcon className="text-muted-gray h-8 w-8" />
                     </div>
                   </div>
 
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-1 flex items-center gap-2">
                       <h3 className="text-ivory font-semibold">{character.name}</h3>
-                      <span className="px-2 py-0.5 bg-gold/10 rounded text-xs text-gold">{character.roleType}</span>
+                      <span className="bg-gold/10 text-gold rounded px-2 py-0.5 text-xs">{character.roleType}</span>
                     </div>
-                    <p className="text-sm text-muted-gray mb-2">
+                    <p className="text-muted-gray mb-2 text-sm">
                       {character.gender} · {character.ageRange}
                     </p>
-                    <p className="text-sm text-muted-gray line-clamp-1">{character.description}</p>
+                    <p className="text-muted-gray line-clamp-1 text-sm">{character.description}</p>
                   </div>
 
-                  <div className="flex gap-2 shrink-0">
+                  <div className="flex shrink-0 gap-2">
                     <Link href={`/actor-search?character=${character.id}`}>
                       <Button variant="gold-outline" size="sm">
                         배우 찾기
@@ -142,8 +146,8 @@ export default function ProjectDetailPage() {
         <DarkCard variant="gold">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-ivory font-semibold mb-1">AI로 배우 추천받기</h3>
-              <p className="text-sm text-muted-gray">시놉시스와 캐릭터 정보로 최적의 배우를 찾아드립니다</p>
+              <h3 className="text-ivory mb-1 font-semibold">AI로 배우 추천받기</h3>
+              <p className="text-muted-gray text-sm">시놉시스와 캐릭터 정보로 최적의 배우를 찾아드립니다</p>
             </div>
             <Link href={`/ai-matching?project=${projectId}`}>
               <Button variant="gold">AI 매칭 시작</Button>
@@ -153,19 +157,19 @@ export default function ProjectDetailPage() {
       </div>
 
       {showAddModal && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6">
           <DarkCard className="w-full max-w-md">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-ivory">캐릭터 추가</h2>
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-ivory text-xl font-bold">캐릭터 추가</h2>
               <button
                 onClick={() => setShowAddModal(false)}
                 className="text-muted-gray hover:text-ivory"
                 aria-label="모달 닫기"
               >
-                <XMarkIcon className="w-6 h-6" />
+                <XMarkIcon className="h-6 w-6" />
               </button>
             </div>
-            <p className="text-muted-gray text-center py-8">캐릭터 추가 폼은 추후 구현 예정입니다</p>
+            <p className="text-muted-gray py-8 text-center">캐릭터 추가 폼은 추후 구현 예정입니다</p>
             <Button variant="gold" fullWidth onClick={() => setShowAddModal(false)}>
               닫기
             </Button>

@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+
 import { useRouter } from "next/navigation";
-import { DashboardLayout, DarkCard, DarkInput, DarkSelect, DarkTextarea } from "@/components/common";
+
 import { Button } from "@/components/ui";
+
+import { DarkCard, DarkInput, DarkSelect, DarkTextarea, DashboardLayout } from "@/components/common";
 
 const PROJECT_TYPES = [
   { value: "영화", label: "영화" },
@@ -56,15 +59,15 @@ export default function NewProjectPage() {
 
   return (
     <DashboardLayout userType="agency">
-      <div className="max-w-2xl mx-auto space-y-8">
+      <div className="mx-auto max-w-2xl space-y-8">
         <div>
-          <h1 className="text-2xl font-bold text-ivory">새 프로젝트</h1>
+          <h1 className="text-ivory text-2xl font-bold">새 프로젝트</h1>
           <p className="text-muted-gray mt-1">프로젝트 정보를 입력하세요</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <DarkCard>
-            <h2 className="text-lg font-semibold text-ivory mb-6">기본 정보</h2>
+            <h2 className="text-ivory mb-6 text-lg font-semibold">기본 정보</h2>
             <div className="space-y-5">
               <DarkInput
                 label="프로젝트명"
@@ -102,7 +105,7 @@ export default function NewProjectPage() {
           </DarkCard>
 
           <DarkCard>
-            <h2 className="text-lg font-semibold text-ivory mb-6">배역 정보</h2>
+            <h2 className="text-ivory mb-6 text-lg font-semibold">배역 정보</h2>
             <DarkTextarea
               label="배역 상세"
               placeholder="캐스팅하려는 배역에 대한 상세 정보를 입력하세요"

@@ -1,18 +1,21 @@
 "use client";
 
 import { useCallback } from "react";
-import { useFilterStore } from "@/stores/useFilterStore";
-import { FilterSection } from "./FilterSection";
-import { FilterChip } from "./FilterChip";
-import { RangeInput } from "./RangeInput";
+
 import {
-  SKILL_OPTIONS,
-  FILMOGRAPHY_TYPE_OPTIONS,
   CATEGORY_FILTER_OPTIONS,
+  FILMOGRAPHY_TYPE_OPTIONS,
   GENDER_FILTER_OPTIONS,
   LICENSE_FILTER_OPTIONS,
+  SKILL_OPTIONS,
   WORK_EXCHANGE_FILTER_OPTIONS,
 } from "@/lib/constants/options";
+
+import { useFilterStore } from "@/stores/useFilterStore";
+
+import { FilterChip } from "./FilterChip";
+import { FilterSection } from "./FilterSection";
+import { RangeInput } from "./RangeInput";
 
 export function FilterSidebar() {
   const { filters, setFilter, resetFilters, getActiveFilterCount } = useFilterStore();
@@ -39,13 +42,13 @@ export function FilterSidebar() {
   );
 
   return (
-    <aside className="hidden lg:block w-72 shrink-0">
-      <div className="sticky top-20 bg-luxury-secondary border-r border-zinc-800 rounded-2xl p-5 max-h-[calc(100vh-6rem)] overflow-y-auto hide-scrollbar">
-        <div className="flex items-center justify-between mb-4">
+    <aside className="hidden w-72 shrink-0 lg:block">
+      <div className="bg-luxury-secondary hide-scrollbar sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto rounded-2xl border-r border-zinc-800 p-5">
+        <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <h2 className="text-heading-md text-ivory">필터</h2>
             {activeCount > 0 && (
-              <span className="px-2 py-0.5 bg-gold text-luxury-black text-caption font-bold rounded-full">
+              <span className="bg-gold text-luxury-black text-caption rounded-full px-2 py-0.5 font-bold">
                 {activeCount}
               </span>
             )}
@@ -173,7 +176,7 @@ export function FilterSidebar() {
               placeholder="이름 또는 키워드 입력"
               value={filters.keyword}
               onChange={(e) => setFilter("keyword", e.target.value)}
-              className="w-full bg-luxury-tertiary border border-zinc-700 rounded-lg px-3 py-2 text-ivory text-body-sm placeholder-muted-gray focus:outline-none focus:border-gold transition-colors"
+              className="bg-luxury-tertiary text-ivory text-body-sm placeholder-muted-gray focus:border-gold w-full rounded-lg border border-zinc-700 px-3 py-2 transition-colors focus:outline-none"
             />
           </FilterSection>
         </div>

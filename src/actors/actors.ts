@@ -15,10 +15,7 @@
 
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useMutation,
-  useQuery
-} from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -31,9 +28,11 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
-} from '@tanstack/react-query';
+  UseQueryResult,
+} from "@tanstack/react-query";
 
+import { customFetch } from "../../lib/fetcher";
+import type { BodyType, ErrorType } from "../../lib/fetcher";
 import type {
   ContactActor200,
   ContactActorBody,
@@ -45,494 +44,531 @@ import type {
   NotFoundErrorResponse,
   RecommendActors200,
   RecommendActorsBody,
-  UnauthorizedErrorResponse
-} from '.././model';
-
-import { customFetch } from '../../lib/fetcher';
-import type { ErrorType , BodyType } from '../../lib/fetcher';
-
-
-
+  UnauthorizedErrorResponse,
+} from ".././model";
 
 /**
  * 필터/정렬 조건으로 배우 목록 검색
  * @summary 배우 목록 조회
  */
-export const getActors = (
-    params?: GetActorsParams,
- signal?: AbortSignal
+export const getActors = (params?: GetActorsParams, signal?: AbortSignal) => {
+  return customFetch<GetActors200>({ url: `/api/actors`, method: "GET", params, signal });
+};
+
+export const getGetActorsQueryKey = (params?: GetActorsParams) => {
+  return [`/api/actors`, ...(params ? [params] : [])] as const;
+};
+
+export const getGetActorsQueryOptions = <TData = Awaited<ReturnType<typeof getActors>>, TError = ErrorType<unknown>>(
+  params?: GetActorsParams,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getActors>>, TError, TData>> }
 ) => {
-      
-      
-      return customFetch<GetActors200>(
-      {url: `/api/actors`, method: 'GET',
-        params, signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
+  const queryKey = queryOptions?.queryKey ?? getGetActorsQueryKey(params);
 
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getActors>>> = ({ signal }) => getActors(params, signal);
 
-export const getGetActorsQueryKey = (params?: GetActorsParams,) => {
-    return [
-    `/api/actors`, ...(params ? [params]: [])
-    ] as const;
-    }
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getActors>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-    
-export const getGetActorsQueryOptions = <TData = Awaited<ReturnType<typeof getActors>>, TError = ErrorType<unknown>>(params?: GetActorsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getActors>>, TError, TData>>, }
-) => {
-
-const {query: queryOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetActorsQueryKey(params);
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getActors>>> = ({ signal }) => getActors(params, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getActors>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetActorsQueryResult = NonNullable<Awaited<ReturnType<typeof getActors>>>
-export type GetActorsQueryError = ErrorType<unknown>
-
+export type GetActorsQueryResult = NonNullable<Awaited<ReturnType<typeof getActors>>>;
+export type GetActorsQueryError = ErrorType<unknown>;
 
 export function useGetActors<TData = Awaited<ReturnType<typeof getActors>>, TError = ErrorType<unknown>>(
- params: undefined |  GetActorsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getActors>>, TError, TData>> & Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getActors>>,
-          TError,
-          Awaited<ReturnType<typeof getActors>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+  params: undefined | GetActorsParams,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getActors>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<Awaited<ReturnType<typeof getActors>>, TError, Awaited<ReturnType<typeof getActors>>>,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 export function useGetActors<TData = Awaited<ReturnType<typeof getActors>>, TError = ErrorType<unknown>>(
- params?: GetActorsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getActors>>, TError, TData>> & Pick<
+  params?: GetActorsParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getActors>>, TError, TData>> &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getActors>>,
           TError,
           Awaited<ReturnType<typeof getActors>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 export function useGetActors<TData = Awaited<ReturnType<typeof getActors>>, TError = ErrorType<unknown>>(
- params?: GetActorsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getActors>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+  params?: GetActorsParams,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getActors>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 /**
  * @summary 배우 목록 조회
  */
 
 export function useGetActors<TData = Awaited<ReturnType<typeof getActors>>, TError = ErrorType<unknown>>(
- params?: GetActorsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getActors>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  params?: GetActorsParams,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getActors>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetActorsQueryOptions(params, options);
 
-  const queryOptions = getGetActorsQueryOptions(params,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
 
-  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * 배우 프로필, 필모그래피, 쇼릴 등 상세 정보 조회
  * @summary 배우 상세 조회
  */
-export const getActorDetail = (
-    actorId: string,
- signal?: AbortSignal
+export const getActorDetail = (actorId: string, signal?: AbortSignal) => {
+  return customFetch<GetActorDetail200>({ url: `/api/actors/${actorId}`, method: "GET", signal });
+};
+
+export const getGetActorDetailQueryKey = (actorId?: string) => {
+  return [`/api/actors/${actorId}`] as const;
+};
+
+export const getGetActorDetailQueryOptions = <
+  TData = Awaited<ReturnType<typeof getActorDetail>>,
+  TError = ErrorType<NotFoundErrorResponse>,
+>(
+  actorId: string,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getActorDetail>>, TError, TData>> }
 ) => {
-      
-      
-      return customFetch<GetActorDetail200>(
-      {url: `/api/actors/${actorId}`, method: 'GET', signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
+  const queryKey = queryOptions?.queryKey ?? getGetActorDetailQueryKey(actorId);
 
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getActorDetail>>> = ({ signal }) =>
+    getActorDetail(actorId, signal);
 
-export const getGetActorDetailQueryKey = (actorId?: string,) => {
-    return [
-    `/api/actors/${actorId}`
-    ] as const;
-    }
+  return { queryKey, queryFn, enabled: !!actorId, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getActorDetail>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-    
-export const getGetActorDetailQueryOptions = <TData = Awaited<ReturnType<typeof getActorDetail>>, TError = ErrorType<NotFoundErrorResponse>>(actorId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getActorDetail>>, TError, TData>>, }
-) => {
+export type GetActorDetailQueryResult = NonNullable<Awaited<ReturnType<typeof getActorDetail>>>;
+export type GetActorDetailQueryError = ErrorType<NotFoundErrorResponse>;
 
-const {query: queryOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetActorDetailQueryKey(actorId);
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getActorDetail>>> = ({ signal }) => getActorDetail(actorId, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(actorId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getActorDetail>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetActorDetailQueryResult = NonNullable<Awaited<ReturnType<typeof getActorDetail>>>
-export type GetActorDetailQueryError = ErrorType<NotFoundErrorResponse>
-
-
-export function useGetActorDetail<TData = Awaited<ReturnType<typeof getActorDetail>>, TError = ErrorType<NotFoundErrorResponse>>(
- actorId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getActorDetail>>, TError, TData>> & Pick<
+export function useGetActorDetail<
+  TData = Awaited<ReturnType<typeof getActorDetail>>,
+  TError = ErrorType<NotFoundErrorResponse>,
+>(
+  actorId: string,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getActorDetail>>, TError, TData>> &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getActorDetail>>,
           TError,
           Awaited<ReturnType<typeof getActorDetail>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetActorDetail<TData = Awaited<ReturnType<typeof getActorDetail>>, TError = ErrorType<NotFoundErrorResponse>>(
- actorId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getActorDetail>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useGetActorDetail<
+  TData = Awaited<ReturnType<typeof getActorDetail>>,
+  TError = ErrorType<NotFoundErrorResponse>,
+>(
+  actorId: string,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getActorDetail>>, TError, TData>> &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getActorDetail>>,
           TError,
           Awaited<ReturnType<typeof getActorDetail>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetActorDetail<TData = Awaited<ReturnType<typeof getActorDetail>>, TError = ErrorType<NotFoundErrorResponse>>(
- actorId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getActorDetail>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useGetActorDetail<
+  TData = Awaited<ReturnType<typeof getActorDetail>>,
+  TError = ErrorType<NotFoundErrorResponse>,
+>(
+  actorId: string,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getActorDetail>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 /**
  * @summary 배우 상세 조회
  */
 
-export function useGetActorDetail<TData = Awaited<ReturnType<typeof getActorDetail>>, TError = ErrorType<NotFoundErrorResponse>>(
- actorId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getActorDetail>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useGetActorDetail<
+  TData = Awaited<ReturnType<typeof getActorDetail>>,
+  TError = ErrorType<NotFoundErrorResponse>,
+>(
+  actorId: string,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getActorDetail>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetActorDetailQueryOptions(actorId, options);
 
-  const queryOptions = getGetActorDetailQueryOptions(actorId,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
 
-  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * 프로젝트/캐릭터 정보 기반 AI 배우 추천
  * @summary AI 배우 추천
  */
-export const recommendActors = (
-    recommendActorsBody: BodyType<RecommendActorsBody>,
- signal?: AbortSignal
-) => {
-      
-      
-      return customFetch<RecommendActors200>(
-      {url: `/api/actors/recommend`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: recommendActorsBody, signal
-    },
-      );
-    }
-  
+export const recommendActors = (recommendActorsBody: BodyType<RecommendActorsBody>, signal?: AbortSignal) => {
+  return customFetch<RecommendActors200>({
+    url: `/api/actors/recommend`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: recommendActorsBody,
+    signal,
+  });
+};
 
+export const getRecommendActorsMutationOptions = <
+  TError = ErrorType<UnauthorizedErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof recommendActors>>,
+    TError,
+    { data: BodyType<RecommendActorsBody> },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof recommendActors>>,
+  TError,
+  { data: BodyType<RecommendActorsBody> },
+  TContext
+> => {
+  const mutationKey = ["recommendActors"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getRecommendActorsMutationOptions = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof recommendActors>>, TError,{data: BodyType<RecommendActorsBody>}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof recommendActors>>, TError,{data: BodyType<RecommendActorsBody>}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof recommendActors>>,
+    { data: BodyType<RecommendActorsBody> }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['recommendActors'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return recommendActors(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type RecommendActorsMutationResult = NonNullable<Awaited<ReturnType<typeof recommendActors>>>;
+export type RecommendActorsMutationBody = BodyType<RecommendActorsBody>;
+export type RecommendActorsMutationError = ErrorType<UnauthorizedErrorResponse>;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof recommendActors>>, {data: BodyType<RecommendActorsBody>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  recommendActors(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type RecommendActorsMutationResult = NonNullable<Awaited<ReturnType<typeof recommendActors>>>
-    export type RecommendActorsMutationBody = BodyType<RecommendActorsBody>
-    export type RecommendActorsMutationError = ErrorType<UnauthorizedErrorResponse>
-
-    /**
+/**
  * @summary AI 배우 추천
  */
-export const useRecommendActors = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof recommendActors>>, TError,{data: BodyType<RecommendActorsBody>}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof recommendActors>>,
-        TError,
-        {data: BodyType<RecommendActorsBody>},
-        TContext
-      > => {
+export const useRecommendActors = <TError = ErrorType<UnauthorizedErrorResponse>, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof recommendActors>>,
+      TError,
+      { data: BodyType<RecommendActorsBody> },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof recommendActors>>,
+  TError,
+  { data: BodyType<RecommendActorsBody> },
+  TContext
+> => {
+  const mutationOptions = getRecommendActorsMutationOptions(options);
 
-      const mutationOptions = getRecommendActorsMutationOptions(options);
-
-      return useMutation(mutationOptions, queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * 배우 회원가입 시 프로필 등록
  * @summary 배우 프로필 등록
  */
-export const createActorProfile = (
-    createActorProfileBody: BodyType<CreateActorProfileBody>,
- signal?: AbortSignal
-) => {
-      
-      const formData = new FormData();
-formData.append(`name`, createActorProfileBody.name)
-formData.append(`introduction`, createActorProfileBody.introduction)
-formData.append(`ageGroup`, createActorProfileBody.ageGroup)
-if(createActorProfileBody.profileImage !== undefined) {
- formData.append(`profileImage`, createActorProfileBody.profileImage)
- }
+export const createActorProfile = (createActorProfileBody: BodyType<CreateActorProfileBody>, signal?: AbortSignal) => {
+  const formData = new FormData();
+  formData.append(`name`, createActorProfileBody.name);
+  formData.append(`introduction`, createActorProfileBody.introduction);
+  formData.append(`ageGroup`, createActorProfileBody.ageGroup);
+  if (createActorProfileBody.profileImage !== undefined) {
+    formData.append(`profileImage`, createActorProfileBody.profileImage);
+  }
 
-      return customFetch<CreateActorProfile201>(
-      {url: `/api/actors/profile`, method: 'POST',
-      headers: {'Content-Type': 'multipart/form-data', },
-       data: formData, signal
-    },
-      );
-    }
-  
+  return customFetch<CreateActorProfile201>({
+    url: `/api/actors/profile`,
+    method: "POST",
+    headers: { "Content-Type": "multipart/form-data" },
+    data: formData,
+    signal,
+  });
+};
 
+export const getCreateActorProfileMutationOptions = <
+  TError = ErrorType<UnauthorizedErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createActorProfile>>,
+    TError,
+    { data: BodyType<CreateActorProfileBody> },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createActorProfile>>,
+  TError,
+  { data: BodyType<CreateActorProfileBody> },
+  TContext
+> => {
+  const mutationKey = ["createActorProfile"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getCreateActorProfileMutationOptions = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createActorProfile>>, TError,{data: BodyType<CreateActorProfileBody>}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof createActorProfile>>, TError,{data: BodyType<CreateActorProfileBody>}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createActorProfile>>,
+    { data: BodyType<CreateActorProfileBody> }
+  > = (props) => {
+    const { data } = props ?? {};
 
-const mutationKey = ['createActorProfile'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return createActorProfile(data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type CreateActorProfileMutationResult = NonNullable<Awaited<ReturnType<typeof createActorProfile>>>;
+export type CreateActorProfileMutationBody = BodyType<CreateActorProfileBody>;
+export type CreateActorProfileMutationError = ErrorType<UnauthorizedErrorResponse>;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createActorProfile>>, {data: BodyType<CreateActorProfileBody>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  createActorProfile(data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type CreateActorProfileMutationResult = NonNullable<Awaited<ReturnType<typeof createActorProfile>>>
-    export type CreateActorProfileMutationBody = BodyType<CreateActorProfileBody>
-    export type CreateActorProfileMutationError = ErrorType<UnauthorizedErrorResponse>
-
-    /**
+/**
  * @summary 배우 프로필 등록
  */
-export const useCreateActorProfile = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createActorProfile>>, TError,{data: BodyType<CreateActorProfileBody>}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof createActorProfile>>,
-        TError,
-        {data: BodyType<CreateActorProfileBody>},
-        TContext
-      > => {
+export const useCreateActorProfile = <TError = ErrorType<UnauthorizedErrorResponse>, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof createActorProfile>>,
+      TError,
+      { data: BodyType<CreateActorProfileBody> },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof createActorProfile>>,
+  TError,
+  { data: BodyType<CreateActorProfileBody> },
+  TContext
+> => {
+  const mutationOptions = getCreateActorProfileMutationOptions(options);
 
-      const mutationOptions = getCreateActorProfileMutationOptions(options);
-
-      return useMutation(mutationOptions, queryClient);
-    }
-    /**
+  return useMutation(mutationOptions, queryClient);
+};
+/**
  * 배우 포트폴리오 PDF 다운로드
  * @summary 포트폴리오 다운로드
  */
-export const downloadActorPortfolio = (
-    actorId: string,
- signal?: AbortSignal
+export const downloadActorPortfolio = (actorId: string, signal?: AbortSignal) => {
+  return customFetch<Blob>({ url: `/api/actors/${actorId}/portfolio`, method: "GET", responseType: "blob", signal });
+};
+
+export const getDownloadActorPortfolioQueryKey = (actorId?: string) => {
+  return [`/api/actors/${actorId}/portfolio`] as const;
+};
+
+export const getDownloadActorPortfolioQueryOptions = <
+  TData = Awaited<ReturnType<typeof downloadActorPortfolio>>,
+  TError = ErrorType<NotFoundErrorResponse>,
+>(
+  actorId: string,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof downloadActorPortfolio>>, TError, TData>> }
 ) => {
-      
-      
-      return customFetch<Blob>(
-      {url: `/api/actors/${actorId}/portfolio`, method: 'GET',
-        responseType: 'blob', signal
-    },
-      );
-    }
-  
+  const { query: queryOptions } = options ?? {};
 
+  const queryKey = queryOptions?.queryKey ?? getDownloadActorPortfolioQueryKey(actorId);
 
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof downloadActorPortfolio>>> = ({ signal }) =>
+    downloadActorPortfolio(actorId, signal);
 
-export const getDownloadActorPortfolioQueryKey = (actorId?: string,) => {
-    return [
-    `/api/actors/${actorId}/portfolio`
-    ] as const;
-    }
+  return { queryKey, queryFn, enabled: !!actorId, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof downloadActorPortfolio>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
 
-    
-export const getDownloadActorPortfolioQueryOptions = <TData = Awaited<ReturnType<typeof downloadActorPortfolio>>, TError = ErrorType<NotFoundErrorResponse>>(actorId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof downloadActorPortfolio>>, TError, TData>>, }
-) => {
+export type DownloadActorPortfolioQueryResult = NonNullable<Awaited<ReturnType<typeof downloadActorPortfolio>>>;
+export type DownloadActorPortfolioQueryError = ErrorType<NotFoundErrorResponse>;
 
-const {query: queryOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getDownloadActorPortfolioQueryKey(actorId);
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof downloadActorPortfolio>>> = ({ signal }) => downloadActorPortfolio(actorId, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, enabled: !!(actorId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof downloadActorPortfolio>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type DownloadActorPortfolioQueryResult = NonNullable<Awaited<ReturnType<typeof downloadActorPortfolio>>>
-export type DownloadActorPortfolioQueryError = ErrorType<NotFoundErrorResponse>
-
-
-export function useDownloadActorPortfolio<TData = Awaited<ReturnType<typeof downloadActorPortfolio>>, TError = ErrorType<NotFoundErrorResponse>>(
- actorId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof downloadActorPortfolio>>, TError, TData>> & Pick<
+export function useDownloadActorPortfolio<
+  TData = Awaited<ReturnType<typeof downloadActorPortfolio>>,
+  TError = ErrorType<NotFoundErrorResponse>,
+>(
+  actorId: string,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof downloadActorPortfolio>>, TError, TData>> &
+      Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof downloadActorPortfolio>>,
           TError,
           Awaited<ReturnType<typeof downloadActorPortfolio>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useDownloadActorPortfolio<TData = Awaited<ReturnType<typeof downloadActorPortfolio>>, TError = ErrorType<NotFoundErrorResponse>>(
- actorId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof downloadActorPortfolio>>, TError, TData>> & Pick<
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useDownloadActorPortfolio<
+  TData = Awaited<ReturnType<typeof downloadActorPortfolio>>,
+  TError = ErrorType<NotFoundErrorResponse>,
+>(
+  actorId: string,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof downloadActorPortfolio>>, TError, TData>> &
+      Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof downloadActorPortfolio>>,
           TError,
           Awaited<ReturnType<typeof downloadActorPortfolio>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useDownloadActorPortfolio<TData = Awaited<ReturnType<typeof downloadActorPortfolio>>, TError = ErrorType<NotFoundErrorResponse>>(
- actorId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof downloadActorPortfolio>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+        >,
+        "initialData"
+      >;
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useDownloadActorPortfolio<
+  TData = Awaited<ReturnType<typeof downloadActorPortfolio>>,
+  TError = ErrorType<NotFoundErrorResponse>,
+>(
+  actorId: string,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof downloadActorPortfolio>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 /**
  * @summary 포트폴리오 다운로드
  */
 
-export function useDownloadActorPortfolio<TData = Awaited<ReturnType<typeof downloadActorPortfolio>>, TError = ErrorType<NotFoundErrorResponse>>(
- actorId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof downloadActorPortfolio>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+export function useDownloadActorPortfolio<
+  TData = Awaited<ReturnType<typeof downloadActorPortfolio>>,
+  TError = ErrorType<NotFoundErrorResponse>,
+>(
+  actorId: string,
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof downloadActorPortfolio>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getDownloadActorPortfolioQueryOptions(actorId, options);
 
-  const queryOptions = getDownloadActorPortfolioQueryOptions(actorId,options)
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
 
-  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey;
 
   return query;
 }
-
-
 
 /**
  * 에이전시가 배우에게 캐스팅 제안 전송
  * @summary 배우에게 연락하기
  */
-export const contactActor = (
-    actorId: string,
-    contactActorBody: BodyType<ContactActorBody>,
- signal?: AbortSignal
-) => {
-      
-      
-      return customFetch<ContactActor200>(
-      {url: `/api/actors/${actorId}/contact`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: contactActorBody, signal
-    },
-      );
-    }
-  
+export const contactActor = (actorId: string, contactActorBody: BodyType<ContactActorBody>, signal?: AbortSignal) => {
+  return customFetch<ContactActor200>({
+    url: `/api/actors/${actorId}/contact`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    data: contactActorBody,
+    signal,
+  });
+};
 
+export const getContactActorMutationOptions = <
+  TError = ErrorType<UnauthorizedErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof contactActor>>,
+    TError,
+    { actorId: string; data: BodyType<ContactActorBody> },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof contactActor>>,
+  TError,
+  { actorId: string; data: BodyType<ContactActorBody> },
+  TContext
+> => {
+  const mutationKey = ["contactActor"];
+  const { mutation: mutationOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } };
 
-export const getContactActorMutationOptions = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof contactActor>>, TError,{actorId: string;data: BodyType<ContactActorBody>}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof contactActor>>, TError,{actorId: string;data: BodyType<ContactActorBody>}, TContext> => {
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof contactActor>>,
+    { actorId: string; data: BodyType<ContactActorBody> }
+  > = (props) => {
+    const { actorId, data } = props ?? {};
 
-const mutationKey = ['contactActor'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+    return contactActor(actorId, data);
+  };
 
-      
+  return { mutationFn, ...mutationOptions };
+};
 
+export type ContactActorMutationResult = NonNullable<Awaited<ReturnType<typeof contactActor>>>;
+export type ContactActorMutationBody = BodyType<ContactActorBody>;
+export type ContactActorMutationError = ErrorType<UnauthorizedErrorResponse>;
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof contactActor>>, {actorId: string;data: BodyType<ContactActorBody>}> = (props) => {
-          const {actorId,data} = props ?? {};
-
-          return  contactActor(actorId,data,)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type ContactActorMutationResult = NonNullable<Awaited<ReturnType<typeof contactActor>>>
-    export type ContactActorMutationBody = BodyType<ContactActorBody>
-    export type ContactActorMutationError = ErrorType<UnauthorizedErrorResponse>
-
-    /**
+/**
  * @summary 배우에게 연락하기
  */
-export const useContactActor = <TError = ErrorType<UnauthorizedErrorResponse>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof contactActor>>, TError,{actorId: string;data: BodyType<ContactActorBody>}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof contactActor>>,
-        TError,
-        {actorId: string;data: BodyType<ContactActorBody>},
-        TContext
-      > => {
+export const useContactActor = <TError = ErrorType<UnauthorizedErrorResponse>, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof contactActor>>,
+      TError,
+      { actorId: string; data: BodyType<ContactActorBody> },
+      TContext
+    >;
+  },
+  queryClient?: QueryClient
+): UseMutationResult<
+  Awaited<ReturnType<typeof contactActor>>,
+  TError,
+  { actorId: string; data: BodyType<ContactActorBody> },
+  TContext
+> => {
+  const mutationOptions = getContactActorMutationOptions(options);
 
-      const mutationOptions = getContactActorMutationOptions(options);
-
-      return useMutation(mutationOptions, queryClient);
-    }
-    
+  return useMutation(mutationOptions, queryClient);
+};

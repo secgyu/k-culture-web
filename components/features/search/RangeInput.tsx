@@ -28,7 +28,7 @@ export const RangeInput = memo(function RangeInput({
           placeholder="최소"
           value={minValue}
           onChange={(e) => onMinChange(e.target.value)}
-          className="flex-1 min-w-0 bg-luxury-tertiary border border-zinc-700 rounded-lg px-3 py-2 text-ivory text-body-sm placeholder-muted-gray focus:outline-none focus:border-gold transition-colors"
+          className="bg-luxury-tertiary text-ivory text-body-sm placeholder-muted-gray focus:border-gold min-w-0 flex-1 rounded-lg border border-zinc-700 px-3 py-2 transition-colors focus:outline-none"
         />
         <span className="text-muted-gray shrink-0">~</span>
         <input
@@ -36,7 +36,7 @@ export const RangeInput = memo(function RangeInput({
           placeholder="최대"
           value={maxValue}
           onChange={(e) => onMaxChange(e.target.value)}
-          className="flex-1 min-w-0 bg-luxury-tertiary border border-zinc-700 rounded-lg px-3 py-2 text-ivory text-body-sm placeholder-muted-gray focus:outline-none focus:border-gold transition-colors"
+          className="bg-luxury-tertiary text-ivory text-body-sm placeholder-muted-gray focus:border-gold min-w-0 flex-1 rounded-lg border border-zinc-700 px-3 py-2 transition-colors focus:outline-none"
         />
         <span className="text-caption text-muted-gray shrink-0">{unit}</span>
       </div>

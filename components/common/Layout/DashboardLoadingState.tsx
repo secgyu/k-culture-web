@@ -1,5 +1,6 @@
-import { DashboardLayout } from "./DashboardLayout";
 import { SPINNER } from "@/lib/constants/styles";
+
+import { DashboardLayout } from "./DashboardLayout";
 
 interface DashboardLoadingStateProps {
   userType?: "actor" | "agency";

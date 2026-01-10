@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import type { FilmographyItem } from "@/src/model";
 
 function groupFilmographyByYear(filmography: FilmographyItem[]) {
@@ -31,16 +32,19 @@ export function FilmographySection({ filmography }: FilmographySectionProps) {
             <h3 className="text-heading-sm text-gold mb-4">{year || "기타"}</h3>
             <div className="space-y-4">
               {items.map((item) => (
-                <div key={item.id} className="flex gap-4 p-4 bg-luxury-secondary rounded-xl hover:bg-luxury-tertiary transition-colors">
+                <div
+                  key={item.id}
+                  className="bg-luxury-secondary hover:bg-luxury-tertiary flex gap-4 rounded-xl p-4 transition-colors"
+                >
                   {item.thumbnail && (
-                    <div className="relative w-16 h-22 rounded-lg overflow-hidden shrink-0">
+                    <div className="relative h-22 w-16 shrink-0 overflow-hidden rounded-lg">
                       <Image src={item.thumbnail} alt={item.title || "작품"} fill className="object-cover" />
                     </div>
                   )}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2 mb-1">
-                      <p className="font-medium text-ivory truncate">{item.title}</p>
-                      <span className="px-2 py-0.5 bg-gold/20 text-gold text-caption rounded shrink-0">
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-1 flex items-start justify-between gap-2">
+                      <p className="text-ivory truncate font-medium">{item.title}</p>
+                      <span className="bg-gold/20 text-gold text-caption shrink-0 rounded px-2 py-0.5">
                         {item.roleType}
                       </span>
                     </div>
@@ -56,4 +60,3 @@ export function FilmographySection({ filmography }: FilmographySectionProps) {
     </section>
   );
 }
-

@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { memo } from "react";
+
+import Link from "next/link";
 
 interface ActorSearchHeaderProps {
   isAuthenticated: boolean;
@@ -7,17 +8,17 @@ interface ActorSearchHeaderProps {
 
 export const ActorSearchHeader = memo(function ActorSearchHeader({ isAuthenticated }: ActorSearchHeaderProps) {
   return (
-    <div className="text-center mb-8">
+    <div className="mb-8 text-center">
       <h1 className="text-heading-xl md:text-display-sm text-ivory">
         오늘보다 내일이 더 빛날 배우·모델분들을 만나보세요.
       </h1>
 
       {!isAuthenticated && (
-        <div className="bg-gradient-to-r from-gold/20 to-gold/10 rounded-2xl p-4 mt-8 border border-gold/30 max-w-4xl mx-auto">
-          <div className="flex items-center justify-between flex-wrap gap-4">
+        <div className="from-gold/20 to-gold/10 border-gold/30 mx-auto mt-8 max-w-4xl rounded-2xl border bg-gradient-to-r p-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
-                <svg className="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gold/20 flex h-10 w-10 items-center justify-center rounded-full">
+                <svg className="text-gold h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -33,7 +34,7 @@ export const ActorSearchHeader = memo(function ActorSearchHeader({ isAuthenticat
             </div>
             <Link
               href="/login"
-              className="px-4 py-2 bg-gold text-luxury-black font-medium text-body-sm rounded-lg hover:bg-gold-light transition-colors duration-200 active:scale-[0.98]"
+              className="bg-gold text-luxury-black text-body-sm hover:bg-gold-light rounded-lg px-4 py-2 font-medium transition-colors duration-200 active:scale-[0.98]"
             >
               로그인
             </Link>
