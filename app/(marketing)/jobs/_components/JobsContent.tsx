@@ -4,7 +4,7 @@ import { DoDreamLogo } from "@/components/common";
 import Link from "next/link";
 import { useGetJobs } from "@/src/jobs/jobs";
 import { useFilters } from "@/lib/hooks";
-import { Spinner, Input, Select } from "@/components/ui";
+import { Spinner, Input, Select, EmptyState } from "@/components/ui";
 import { JobCard } from "./JobCard";
 import type { JobCategory, GetJobsGender } from "@/src/model";
 
@@ -131,7 +131,7 @@ export function JobsContent() {
             {jobs.map((job) => (
               <JobCard key={job.id} job={job} />
             ))}
-            {jobs.length === 0 && <p className="text-center text-muted-gray py-12">등록된 작품구인이 없습니다</p>}
+            {jobs.length === 0 && <EmptyState description="등록된 작품구인이 없습니다" />}
           </div>
         )}
 

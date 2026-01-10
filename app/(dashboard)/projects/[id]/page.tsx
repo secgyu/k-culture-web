@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { DashboardLayout, DarkCard } from "@/components/common";
-import { Button } from "@/components/ui";
+import { Button, Spinner } from "@/components/ui";
 import { PlusIcon, UserIcon, PencilIcon, XMarkIcon } from "@/components/common/Misc/Icons";
 import { useGetProjectDetail } from "@/src/projects/projects";
 import { useGetProjectCharacters } from "@/src/characters/characters";
@@ -30,14 +30,14 @@ export default function ProjectDetailPage() {
     return (
       <DashboardLayout userType="agency">
         <div className="flex items-center justify-center h-64">
-          <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+          <Spinner size="md" />
         </div>
       </DashboardLayout>
     );
   }
 
   const totalCharacters = characters.length;
-  const castingComplete = characters.filter((c) => c.roleType === "주연").length; // 임시 로직
+  const castingComplete = characters.filter((c) => c.roleType === "주연").length;
   const progress = totalCharacters > 0 ? Math.round((castingComplete / totalCharacters) * 100) : 0;
 
   return (
@@ -83,16 +83,16 @@ export default function ProjectDetailPage() {
           <h2 className="text-lg font-semibold text-ivory mb-4">프로젝트 정보</h2>
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
-              <p className="text-sm text-muted-foreground">촬영 기간</p>
+              <p className="text-sm text-muted-gray">촬영 기간</p>
               <p className="text-ivory">{project.shootingPeriod || "미정"}</p>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">총 배역</p>
+              <p className="text-sm text-muted-gray">총 배역</p>
               <p className="text-ivory">{totalCharacters}개</p>
             </div>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground mb-1">배역 상세</p>
+            <p className="text-sm text-muted-gray mb-1">배역 상세</p>
             <p className="text-warm-gray">{project.roleInfo || "정보 없음"}</p>
           </div>
         </DarkCard>
@@ -123,7 +123,7 @@ export default function ProjectDetailPage() {
                     <p className="text-sm text-muted-gray mb-2">
                       {character.gender} · {character.ageRange}
                     </p>
-                    <p className="text-sm text-muted-foreground line-clamp-1">{character.description}</p>
+                    <p className="text-sm text-muted-gray line-clamp-1">{character.description}</p>
                   </div>
 
                   <div className="flex gap-2 shrink-0">
@@ -157,7 +157,11 @@ export default function ProjectDetailPage() {
           <DarkCard className="w-full max-w-md">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-bold text-ivory">캐릭터 추가</h2>
-              <button onClick={() => setShowAddModal(false)} className="text-muted-gray hover:text-ivory">
+              <button
+                onClick={() => setShowAddModal(false)}
+                className="text-muted-gray hover:text-ivory"
+                aria-label="모달 닫기"
+              >
                 <XMarkIcon className="w-6 h-6" />
               </button>
             </div>

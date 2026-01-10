@@ -5,7 +5,14 @@ import { useFilterStore } from "@/stores/useFilterStore";
 import { FilterSection } from "./FilterSection";
 import { FilterChip } from "./FilterChip";
 import { RangeInput } from "./RangeInput";
-import { SKILL_OPTIONS, FILMOGRAPHY_TYPE_OPTIONS } from "@/lib/constants/options";
+import {
+  SKILL_OPTIONS,
+  FILMOGRAPHY_TYPE_OPTIONS,
+  CATEGORY_FILTER_OPTIONS,
+  GENDER_FILTER_OPTIONS,
+  LICENSE_FILTER_OPTIONS,
+  WORK_EXCHANGE_FILTER_OPTIONS,
+} from "@/lib/constants/options";
 
 export function FilterSidebar() {
   const { filters, setFilter, resetFilters, getActiveFilterCount } = useFilterStore();
@@ -51,7 +58,7 @@ export function FilterSidebar() {
         <div className="divide-y divide-zinc-800">
           <FilterSection title="구분">
             <div className="flex flex-wrap gap-2">
-              {["무관", "배우", "모델"].map((option) => (
+              {CATEGORY_FILTER_OPTIONS.map((option) => (
                 <FilterChip
                   key={option}
                   label={option}
@@ -64,7 +71,7 @@ export function FilterSidebar() {
 
           <FilterSection title="성별">
             <div className="flex flex-wrap gap-2">
-              {["무관", "남자", "여자"].map((option) => (
+              {GENDER_FILTER_OPTIONS.map((option) => (
                 <FilterChip
                   key={option}
                   label={option}
@@ -136,7 +143,7 @@ export function FilterSidebar() {
 
           <FilterSection title="운전면허" defaultOpen={false}>
             <div className="flex flex-wrap gap-2">
-              {["무관", "1종", "2종"].map((option) => (
+              {LICENSE_FILTER_OPTIONS.map((option) => (
                 <FilterChip
                   key={option}
                   label={option}
@@ -147,9 +154,9 @@ export function FilterSidebar() {
             </div>
           </FilterSection>
 
-          <FilterSection title="workExchange" defaultOpen={false}>
+          <FilterSection title="품앗이" defaultOpen={false}>
             <div className="flex flex-wrap gap-2">
-              {["무관", "가능", "불가능"].map((option) => (
+              {WORK_EXCHANGE_FILTER_OPTIONS.map((option) => (
                 <FilterChip
                   key={option}
                   label={option}

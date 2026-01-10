@@ -22,7 +22,7 @@ export default function ProjectsPage() {
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-ivory">프로젝트</h1>
+            <h1 className="text-heading-xl text-ivory">프로젝트</h1>
             <p className="text-muted-gray mt-1">진행중인 프로젝트를 관리하세요</p>
           </div>
           <Link href="/projects/new">
@@ -72,7 +72,7 @@ export default function ProjectsPage() {
 
                     <div className="mb-3">
                       <div className="flex justify-between text-sm mb-1">
-                        <span className="text-muted-foreground">캐스팅 진행률</span>
+                        <span className="text-muted-gray">캐스팅 진행률</span>
                         <span className="text-gold">{project.progress}%</span>
                       </div>
                       <div className="h-1.5 bg-luxury-tertiary rounded-full overflow-hidden">
@@ -81,7 +81,7 @@ export default function ProjectsPage() {
                     </div>
 
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground">{project.createdAt?.slice(0, 10)}</span>
+                      <span className="text-muted-gray">{project.createdAt?.slice(0, 10)}</span>
                     </div>
                   </div>
                 </DarkCard>

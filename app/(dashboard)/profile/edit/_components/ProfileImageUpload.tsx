@@ -35,7 +35,7 @@ export function ProfileImageUpload({ imageUrl, onImageChange }: ProfileImageUplo
           </div>
         </button>
         <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-        <p className="mt-3 text-sm text-muted-foreground">클릭하여 사진 변경</p>
+        <p className="mt-3 text-sm text-muted-gray">클릭하여 사진 변경</p>
       </div>
     </DarkCard>
   );

@@ -49,7 +49,11 @@ export const PROJECT_TYPE_OPTIONS = ["영화", "드라마", "웹드라마", "OTT
 
 export const PROJECT_GENRE_OPTIONS = ["액션", "로맨스", "코미디", "드라마", "스릴러", "공포", "SF", "판타지", "사극", "기타"] as const;
 
-// Filter options for actor search
+export const CATEGORY_FILTER_OPTIONS = ["무관", "배우", "모델"] as const;
+export const GENDER_FILTER_OPTIONS = ["무관", "남자", "여자"] as const;
+export const LICENSE_FILTER_OPTIONS = ["무관", "1종", "2종"] as const;
+export const WORK_EXCHANGE_FILTER_OPTIONS = ["무관", "가능", "불가능"] as const;
+
 export const SKILL_OPTIONS = [
   "연기",
   "춤",

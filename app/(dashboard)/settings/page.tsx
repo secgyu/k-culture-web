@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DashboardLayout } from "@/components/common";
-import { ConfirmDialog } from "@/components/ui";
+import { ConfirmDialog, Spinner } from "@/components/ui";
 import { useGetNotificationSettings, useUpdateNotificationSettings, useGetMyProfile } from "@/src/users/users";
 import { useLogout, useDeleteAccount } from "@/src/auth/auth";
 import { useAuthStore } from "@/stores/useAuthStore";
@@ -85,7 +85,7 @@ export default function SettingsPage() {
     return (
       <DashboardLayout userType={userType}>
         <div className="flex items-center justify-center h-64">
-          <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+          <Spinner size="md" />
         </div>
       </DashboardLayout>
     );
@@ -95,7 +95,7 @@ export default function SettingsPage() {
     <DashboardLayout userType={userType}>
       <div className="max-w-2xl mx-auto space-y-8">
         <div>
-          <h1 className="text-2xl font-bold text-ivory">설정</h1>
+          <h1 className="text-heading-xl text-ivory">설정</h1>
           <p className="text-muted-gray mt-1">계정 및 알림 설정을 관리하세요</p>
         </div>
 

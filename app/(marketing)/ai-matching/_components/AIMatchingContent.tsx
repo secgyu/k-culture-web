@@ -61,7 +61,7 @@ export function AIMatchingContent() {
 
           <div className="space-y-4 mb-8">
             <div className="bg-luxury-black/50 border border-border rounded-lg px-4 py-3">
-              <p className="text-muted-foreground text-sm">원하는 캐릭터를 설명해주세요. 시놉시스와 캐릭터...</p>
+              <p className="text-muted-gray text-sm">원하는 캐릭터를 설명해주세요. 시놉시스와 캐릭터...</p>
             </div>
           </div>
 

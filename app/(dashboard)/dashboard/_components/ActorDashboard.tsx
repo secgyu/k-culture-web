@@ -29,7 +29,7 @@ export function ActorDashboard() {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-ivory">대시보드</h1>
+          <h1 className="text-heading-xl text-ivory">대시보드</h1>
           <p className="text-muted-gray mt-1">내 활동 현황을 확인하세요</p>
         </div>
         <Link href="/profile/edit">

@@ -31,7 +31,7 @@ export default function FavoritesPage() {
     <DashboardLayout userType="agency">
       <div className="space-y-8">
         <div>
-          <h1 className="text-2xl font-bold text-ivory">찜 목록</h1>
+          <h1 className="text-heading-xl text-ivory">찜 목록</h1>
           <p className="text-muted-gray mt-1">관심있는 배우를 저장하고 관리하세요</p>
         </div>
 

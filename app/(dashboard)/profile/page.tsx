@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { DashboardLayout, DarkCard } from "@/components/common";
-import { Button } from "@/components/ui";
+import { Button, Spinner } from "@/components/ui";
 import { PencilIcon } from "@/components/common/Misc/Icons";
 import { useGetMyProfile } from "@/src/users/users";
 
@@ -15,7 +15,7 @@ export default function ProfilePage() {
     return (
       <DashboardLayout userType="actor">
         <div className="flex items-center justify-center h-64">
-          <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+          <Spinner size="md" />
         </div>
       </DashboardLayout>
     );
@@ -27,7 +27,7 @@ export default function ProfilePage() {
     <DashboardLayout userType="actor">
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-ivory">내 프로필</h1>
+          <h1 className="text-heading-xl text-ivory">내 프로필</h1>
           <Link href="/profile/edit">
             <Button variant="gold-outline" size="sm">
               <PencilIcon className="w-4 h-4 mr-1" /> 수정
@@ -52,19 +52,19 @@ export default function ProfilePage() {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-muted-foreground">포지션</p>
+                  <p className="text-sm text-muted-gray">포지션</p>
                   <p className="text-ivory font-medium">{profile.position || "-"}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">소속사</p>
+                  <p className="text-sm text-muted-gray">소속사</p>
                   <p className="text-ivory font-medium">{profile.agency || "프리랜서"}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">키</p>
+                  <p className="text-sm text-muted-gray">키</p>
                   <p className="text-ivory font-medium">{profile.height ? `${profile.height}cm` : "-"}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">몸무게</p>
+                  <p className="text-sm text-muted-gray">몸무게</p>
                   <p className="text-ivory font-medium">{profile.weight ? `${profile.weight}kg` : "-"}</p>
                 </div>
               </div>

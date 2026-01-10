@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Spinner } from "@/components/ui";
+import { Spinner, EmptyState } from "@/components/ui";
 import { ActorCard } from "./ActorCard";
 
 interface Actor {
@@ -27,7 +27,7 @@ export const ActorGrid = memo(function ActorGrid({ actors, isLoading, isAuthenti
   }
 
   if (actors.length === 0) {
-    return <p className="text-center text-muted-gray py-12">등록된 배우가 없습니다</p>;
+    return <EmptyState description="등록된 배우가 없습니다" />;
   }
 
   return (

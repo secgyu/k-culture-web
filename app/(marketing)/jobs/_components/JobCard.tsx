@@ -56,7 +56,7 @@ export const JobCard = memo(function JobCard({ job }: JobCardProps) {
 
           <div className="text-right">
             <p className="text-yellow-500 font-medium mb-1">{job.status}</p>
-            <p className="text-muted-foreground text-sm">조회 : {job.views}</p>
+            <p className="text-muted-gray text-sm">조회 : {job.views}</p>
           </div>
         </div>
       </div>

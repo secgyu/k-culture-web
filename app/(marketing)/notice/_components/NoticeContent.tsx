@@ -1,7 +1,8 @@
 "use client";
 
-import { DoDreamLogo } from "@/components/common";
 import Link from "next/link";
+import { DoDreamLogo } from "@/components/common";
+import { Spinner, EmptyState } from "@/components/ui";
 import { useGetNotices } from "@/src/notices/notices";
 import type { NoticeSummary } from "@/src/model";
 
@@ -19,7 +20,7 @@ function NoticeItem({ notice }: { notice: NoticeSummary }) {
           {notice.type}
         </span>
         <h3 className="flex-1 text-white font-medium">{notice.title}</h3>
-        <span className="text-muted-foreground text-sm shrink-0">{formatDate(notice.createdAt)}</span>
+        <span className="text-muted-gray text-sm shrink-0">{formatDate(notice.createdAt)}</span>
       </div>
     </Link>
   );
@@ -34,11 +35,24 @@ export function NoticeContent() {
       <header className="w-full px-6 py-4 flex items-center justify-between border-b border-border">
         <DoDreamLogo href="/" size="md" className="text-white" />
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/ai-matching" className="text-gold hover:text-gold-light transition-colors text-sm font-medium">AI 매칭추천</Link>
-          <Link href="/actor-search" className="text-warm-gray hover:text-white transition-colors text-sm">배우&모델 찾기</Link>
-          <Link href="/jobs" className="text-warm-gray hover:text-white transition-colors text-sm">작품구인</Link>
-          <Link href="/notice" className="text-white text-sm font-medium">공지사항</Link>
-          <Link href="/profile-register" className="px-4 py-2 border border-muted-gray text-white text-sm rounded-lg hover:bg-luxury-secondary transition-all">프로필 등록하기</Link>
+          <Link href="/ai-matching" className="text-gold hover:text-gold-light transition-colors text-sm font-medium">
+            AI 매칭추천
+          </Link>
+          <Link href="/actor-search" className="text-warm-gray hover:text-white transition-colors text-sm">
+            배우&모델 찾기
+          </Link>
+          <Link href="/jobs" className="text-warm-gray hover:text-white transition-colors text-sm">
+            작품구인
+          </Link>
+          <Link href="/notice" className="text-white text-sm font-medium">
+            공지사항
+          </Link>
+          <Link
+            href="/profile-register"
+            className="px-4 py-2 border border-muted-gray text-white text-sm rounded-lg hover:bg-luxury-secondary transition-all"
+          >
+            프로필 등록하기
+          </Link>
         </nav>
       </header>
 
@@ -56,14 +70,12 @@ export function NoticeContent() {
         <div className="bg-luxury-black/30 rounded-2xl p-6 border border-border">
           {isLoading ? (
             <div className="flex items-center justify-center h-32">
-              <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+              <Spinner size="md" />
             </div>
           ) : notices.length === 0 ? (
-            <p className="text-center text-muted-gray py-12">등록된 공지사항이 없습니다</p>
+            <EmptyState description="등록된 공지사항이 없습니다" />
           ) : (
-            notices.map((notice) => (
-              <NoticeItem key={notice.id} notice={notice} />
-            ))
+            notices.map((notice) => <NoticeItem key={notice.id} notice={notice} />)
           )}
         </div>
       </main>

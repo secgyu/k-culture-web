@@ -2,6 +2,12 @@
 
 import { memo } from "react";
 import Image from "next/image";
+import {
+  CATEGORY_FILTER_OPTIONS,
+  GENDER_FILTER_OPTIONS,
+  LICENSE_FILTER_OPTIONS,
+  WORK_EXCHANGE_FILTER_OPTIONS,
+} from "@/lib/constants/options";
 
 export const SearchFilterSlide = memo(function SearchFilterSlide() {
   return (
@@ -13,7 +19,7 @@ export const SearchFilterSlide = memo(function SearchFilterSlide() {
           <div className="flex items-center gap-2">
             <span className="text-warm-gray text-body-sm w-16">구분</span>
             <div className="flex gap-2">
-              {["무관", "배우", "모델"].map((opt) => (
+              {CATEGORY_FILTER_OPTIONS.map((opt) => (
                 <span key={opt} className="px-3 py-1 bg-luxury-tertiary text-ivory text-caption rounded">
                   {opt}
                 </span>
@@ -23,7 +29,7 @@ export const SearchFilterSlide = memo(function SearchFilterSlide() {
           <div className="flex items-center gap-2">
             <span className="text-warm-gray text-body-sm w-16">성별</span>
             <div className="flex gap-2">
-              {["무관", "남자", "여자"].map((opt) => (
+              {GENDER_FILTER_OPTIONS.map((opt) => (
                 <span key={opt} className="px-3 py-1 bg-luxury-tertiary text-ivory text-caption rounded">
                   {opt}
                 </span>
@@ -45,7 +51,7 @@ export const SearchFilterSlide = memo(function SearchFilterSlide() {
           <div className="flex items-center gap-2">
             <span className="text-warm-gray text-body-sm w-16">운전면허</span>
             <div className="flex gap-2">
-              {["무관", "1종", "2종"].map((opt) => (
+              {LICENSE_FILTER_OPTIONS.map((opt) => (
                 <span key={opt} className="px-3 py-1 bg-luxury-tertiary text-ivory text-caption rounded">
                   {opt}
                 </span>
@@ -55,7 +61,7 @@ export const SearchFilterSlide = memo(function SearchFilterSlide() {
           <div className="flex items-center gap-2">
             <span className="text-warm-gray text-body-sm w-16">품앗이</span>
             <div className="flex gap-2">
-              {["무관", "가능", "불가능"].map((opt) => (
+              {WORK_EXCHANGE_FILTER_OPTIONS.map((opt) => (
                 <span key={opt} className="px-3 py-1 bg-luxury-tertiary text-ivory text-caption rounded">
                   {opt}
                 </span>

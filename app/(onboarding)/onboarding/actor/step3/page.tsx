@@ -72,7 +72,12 @@ export default function ActorOnboardingStep3() {
                   className="inline-flex items-center gap-1 px-3 py-1.5 bg-gold/10 border border-gold/30 rounded-full text-gold text-sm"
                 >
                   {skill}
-                  <button type="button" onClick={() => removeSkill(skill)} className="hover:text-gold-light">
+                  <button
+                    type="button"
+                    onClick={() => removeSkill(skill)}
+                    className="hover:text-gold-light"
+                    aria-label={`${skill} 삭제`}
+                  >
                     <XMarkIcon className="w-4 h-4" />
                   </button>
                 </span>
