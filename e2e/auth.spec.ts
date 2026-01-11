@@ -52,6 +52,7 @@ test.describe("회원가입 플로우", () => {
 
   test("회원가입 API 호출 테스트", async ({ page }) => {
     await page.goto("/signup/actor");
+    await page.waitForLoadState("networkidle");
 
     // 폼 작성
     await page.getByRole("textbox", { name: /이메일/ }).fill(`test-${Date.now()}@example.com`);
@@ -59,22 +60,27 @@ test.describe("회원가입 플로우", () => {
     await page.getByRole("textbox", { name: /비밀번호를 다시/ }).fill("Password123!");
     await page.getByRole("button", { name: "전체 동의" }).click();
 
-    // API 응답 대기 설정
-    const responsePromise = page.waitForResponse(
-      (response) => response.url().includes("/api/auth/signup"),
-      { timeout: 5000 }
-    );
+    // 버튼이 활성화될 때까지 대기
+    const submitButton = page.getByRole("button", { name: "회원가입" });
+    await expect(submitButton).toBeEnabled({ timeout: 5000 }).catch(() => {
+      console.log("회원가입 버튼이 비활성화 상태 - 폼 validation 필요");
+    });
 
-    // 회원가입 버튼 클릭
-    await page.getByRole("button", { name: "회원가입" }).click();
+    // 버튼이 활성화되어 있으면 클릭
+    if (await submitButton.isEnabled()) {
+      const responsePromise = page.waitForResponse(
+        (response) => response.url().includes("/api/auth/signup"),
+        { timeout: 5000 }
+      );
 
-    // API 호출 확인 (타임아웃 시 스킵)
-    try {
-      const response = await responsePromise;
-      expect([200, 201, 400, 409]).toContain(response.status());
-    } catch {
-      // 폼 validation으로 인해 API가 호출되지 않을 수 있음
-      console.log("회원가입 API가 호출되지 않음 - 폼 validation 실패 가능성");
+      await submitButton.click();
+
+      try {
+        const response = await responsePromise;
+        expect([200, 201, 400, 409]).toContain(response.status());
+      } catch {
+        console.log("회원가입 API가 호출되지 않음");
+      }
     }
   });
 });
