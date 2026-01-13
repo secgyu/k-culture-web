@@ -22,12 +22,12 @@ const SIGNUP_CONFIG = {
   actor: {
     title: "배우 회원가입",
     subtitle: "프로필을 등록하고 캐스팅 기회를 받으세요",
-    onboardingPath: "/onboarding/actor/step1",
+    onboardingPath: "/onboarding/actor/step1?new=true",
   },
   agency: {
     title: "캐스팅 담당자 회원가입",
     subtitle: "AI로 완벽한 배우를 찾아보세요",
-    onboardingPath: "/onboarding/agency/step1",
+    onboardingPath: "/onboarding/agency/step1?new=true",
   },
 } as const;
 
