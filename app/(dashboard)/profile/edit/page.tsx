@@ -14,7 +14,7 @@ import { Button, Spinner } from "@/components/ui";
 
 import { DarkCard, DashboardLayout } from "@/components/common";
 
-import { useActorProfile, useUpdateActorProfile } from "@/lib/hooks/use-actor-profile";
+import { useActorProfile, useUpdateActorProfile, useUploadProfileImage } from "@/lib/hooks/use-actor-profile";
 
 import { useGetMyProfile } from "@/src/users/users";
 
@@ -41,6 +41,7 @@ export default function ProfileEditPage() {
   const { data: userData } = useGetMyProfile();
   const { data: actorData, isLoading, isError, error } = useActorProfile();
   const updateMutation = useUpdateActorProfile();
+  const uploadImageMutation = useUploadProfileImage();
 
   const userType = userData?.data?.type ?? "actor";
   const actorProfile = actorData?.data;
@@ -139,10 +140,18 @@ export default function ProfileEditPage() {
 
           <ProfileImageUpload
             imageUrl={actorProfile?.profileImage ?? ""}
-            onImageChange={() => {
-              // TODO: 이미지 업로드 API 연동 필요
-              toast.info("이미지 업로드 기능은 준비 중입니다");
+            onImageChange={(file) => {
+              if (!file) return;
+              uploadImageMutation.mutate(file, {
+                onSuccess: () => {
+                  toast.success("프로필 이미지가 업로드되었습니다");
+                },
+                onError: () => {
+                  toast.error("이미지 업로드에 실패했습니다");
+                },
+              });
             }}
+            isUploading={uploadImageMutation.isPending}
           />
 
           <DarkCard>

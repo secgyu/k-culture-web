@@ -8,10 +8,10 @@ import { Button, Spinner } from "@/components/ui";
 import { DarkCard, DashboardLayout } from "@/components/common";
 import { PencilIcon } from "@/components/common/Misc/Icons";
 
-import { useGetMyProfile } from "@/src/users/users";
+import { useActorProfile } from "@/lib/hooks/use-actor-profile";
 
 export default function ProfilePage() {
-  const { data: profileData, isLoading } = useGetMyProfile();
+  const { data: profileData, isLoading } = useActorProfile();
   const profile = profileData?.data;
 
   if (isLoading || !profile) {
@@ -38,23 +38,28 @@ export default function ProfilePage() {
 
         <DarkCard>
           <div className="flex flex-col gap-6 md:flex-row">
-            <div className="relative mx-auto h-32 w-32 flex-shrink-0 overflow-hidden rounded-2xl md:mx-0 md:h-40 md:w-40">
-              <Image
-                src={profile.profileImage || "https://via.placeholder.com/160"}
-                alt={profile.name}
-                fill
-                className="object-cover"
-              />
+            <div className="bg-luxury-tertiary relative mx-auto flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-2xl md:mx-0 md:h-40 md:w-40">
+              {profile.profileImage ? (
+                <Image
+                  src={profile.profileImage}
+                  alt={profile.stageName || profile.name}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              ) : (
+                <span className="text-muted-gray text-4xl">👤</span>
+              )}
             </div>
 
             <div className="flex-1 text-center md:text-left">
-              <h2 className="text-ivory mb-2 text-2xl font-bold">{profile.name}</h2>
-              <p className="text-muted-gray mb-4">{profile.bio || "소개글이 없습니다"}</p>
+              <h2 className="text-ivory mb-2 text-2xl font-bold">{profile.stageName || profile.name}</h2>
+              <p className="text-muted-gray mb-4">{profile.introduction || "소개글이 없습니다"}</p>
 
               <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                 <div>
-                  <p className="text-muted-gray text-sm">포지션</p>
-                  <p className="text-ivory font-medium">{profile.position || "-"}</p>
+                  <p className="text-muted-gray text-sm">출생년도</p>
+                  <p className="text-ivory font-medium">{profile.birthYear ? `${profile.birthYear}년` : "-"}</p>
                 </div>
                 <div>
                   <p className="text-muted-gray text-sm">소속사</p>
@@ -82,16 +87,34 @@ export default function ProfilePage() {
               <span className="text-muted-gray">이메일</span>
               <span className="text-ivory">{profile.email}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-muted-gray">전화번호</span>
-              <span className="text-ivory">{profile.phone || "-"}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-gray">출연료</span>
-              <span className="text-ivory">{profile.fee || "협의"}</span>
-            </div>
           </div>
         </DarkCard>
+
+        {profile.skills && profile.skills.length > 0 && (
+          <DarkCard>
+            <h2 className="text-ivory mb-4 text-lg font-semibold">특기</h2>
+            <div className="flex flex-wrap gap-2">
+              {profile.skills.map((skill) => (
+                <span key={skill} className="bg-gold/10 text-gold rounded-full px-3 py-1 text-sm">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </DarkCard>
+        )}
+
+        {profile.languages && profile.languages.length > 0 && (
+          <DarkCard>
+            <h2 className="text-ivory mb-4 text-lg font-semibold">언어</h2>
+            <div className="flex flex-wrap gap-2">
+              {profile.languages.map((lang) => (
+                <span key={lang} className="bg-gold/10 text-gold rounded-full px-3 py-1 text-sm">
+                  {lang}
+                </span>
+              ))}
+            </div>
+          </DarkCard>
+        )}
 
         <DarkCard>
           <div className="mb-4 flex items-center justify-between">

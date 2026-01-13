@@ -71,3 +71,25 @@ export function useUpdateActorProfile() {
     },
   });
 }
+
+async function uploadProfileImage(file: File): Promise<{ data: { imageUrl: string }; success: boolean }> {
+  const formData = new FormData();
+  formData.append("image", file);
+
+  return customFetch<{ data: { imageUrl: string }; success: boolean }>({
+    url: "/api/actors/me/image",
+    method: "PUT",
+    data: formData,
+  });
+}
+
+export function useUploadProfileImage() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: uploadProfileImage,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ACTOR_PROFILE_KEY });
+    },
+  });
+}
