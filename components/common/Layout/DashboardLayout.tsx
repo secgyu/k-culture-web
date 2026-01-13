@@ -45,7 +45,7 @@ export function DashboardLayout({ children, userType = "actor" }: DashboardLayou
         onLogout={handleLogout}
       />
 
-      <main className="flex-1 lg:ml-64">
+      <main className="min-h-screen flex-1 lg:ml-64">
         <div className="bg-luxury-secondary border-border sticky top-0 z-30 flex items-center gap-3 border-b px-4 py-3 lg:hidden">
           <button
             onClick={() => setIsMobileMenuOpen(true)}
@@ -55,7 +55,7 @@ export function DashboardLayout({ children, userType = "actor" }: DashboardLayou
           </button>
           <DoDreamLogo size="sm" />
         </div>
-        <div className="p-4 md:p-8">{children}</div>
+        <div className="w-full p-4 md:p-8">{children}</div>
       </main>
     </div>
   );

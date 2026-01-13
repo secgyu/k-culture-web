@@ -58,23 +58,49 @@ export const customFetch = async <T>({
 
   const isFormData = data instanceof FormData;
 
+  const requestHeaders: Record<string, string> = {};
+
+  if (!isFormData) {
+    requestHeaders["Content-Type"] = "application/json";
+  }
+
+  if (token) {
+    requestHeaders["Authorization"] = `Bearer ${token}`;
+  }
+
+  if (headers) {
+    const headersObj = headers instanceof Headers
+      ? Object.fromEntries(headers.entries())
+      : (headers as Record<string, string>);
+
+    for (const [key, value] of Object.entries(headersObj)) {
+      if (isFormData && key.toLowerCase() === "content-type") {
+        continue;
+      }
+      requestHeaders[key] = value;
+    }
+  }
+
   const response = await fetch(fullUrl, {
     method,
     body: isFormData ? data : data ? JSON.stringify(data) : undefined,
     signal,
-    headers: {
-      ...(isFormData ? {} : { "Content-Type": "application/json" }),
-      ...(token && { Authorization: `Bearer ${token}` }),
-      ...headers,
-    },
+    headers: requestHeaders,
   });
 
   // 에러 응답 처리
   if (!response.ok) {
-    const error = await response.json().catch(() => ({
+    const errorBody = await response.json().catch(() => ({
       error: { message: `HTTP Error: ${response.status}` },
     }));
-    throw new Error(error?.error?.message || `HTTP Error: ${response.status}`);
+
+    const error = new Error(errorBody?.error?.message || `HTTP Error: ${response.status}`) as Error & {
+      status: number;
+      code: string;
+    };
+    error.status = response.status;
+    error.code = errorBody?.error?.code || "UNKNOWN";
+    throw error;
   }
 
   // 204 No Content 처리

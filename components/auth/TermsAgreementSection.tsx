@@ -21,9 +21,9 @@ export function TermsAgreementSection({ watch, setValue, errors }: TermsAgreemen
 
   const handleAgreeAll = () => {
     const newState = !allAgreed;
-    setValue("termsAgreed", newState);
-    setValue("privacyAgreed", newState);
-    setValue("marketingAgreed", newState);
+    setValue("termsAgreed", newState, { shouldValidate: true });
+    setValue("privacyAgreed", newState, { shouldValidate: true });
+    setValue("marketingAgreed", newState, { shouldValidate: true });
   };
 
   return (
@@ -47,7 +47,7 @@ export function TermsAgreementSection({ watch, setValue, errors }: TermsAgreemen
         <label className="group flex cursor-pointer items-center gap-3">
           <button
             type="button"
-            onClick={() => setValue("termsAgreed", !termsAgreed)}
+            onClick={() => setValue("termsAgreed", !termsAgreed, { shouldValidate: true })}
             className={`flex h-5 w-5 items-center justify-center rounded border transition-all ${
               termsAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
             }`}
@@ -62,7 +62,7 @@ export function TermsAgreementSection({ watch, setValue, errors }: TermsAgreemen
         <label className="group flex cursor-pointer items-center gap-3">
           <button
             type="button"
-            onClick={() => setValue("privacyAgreed", !privacyAgreed)}
+            onClick={() => setValue("privacyAgreed", !privacyAgreed, { shouldValidate: true })}
             className={`flex h-5 w-5 items-center justify-center rounded border transition-all ${
               privacyAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
             }`}
@@ -77,7 +77,7 @@ export function TermsAgreementSection({ watch, setValue, errors }: TermsAgreemen
         <label className="group flex cursor-pointer items-center gap-3">
           <button
             type="button"
-            onClick={() => setValue("marketingAgreed", !marketingAgreed)}
+            onClick={() => setValue("marketingAgreed", !marketingAgreed, { shouldValidate: true })}
             className={`flex h-5 w-5 items-center justify-center rounded border transition-all ${
               marketingAgreed ? "bg-gold border-gold" : "border-muted-gray group-hover:border-warm-gray"
             }`}

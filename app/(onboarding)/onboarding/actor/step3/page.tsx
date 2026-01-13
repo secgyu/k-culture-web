@@ -1,14 +1,19 @@
 "use client";
 
+import { useState } from "react";
+
 import { useRouter } from "next/navigation";
 
 import { OnboardingLayout } from "@/app/(onboarding)/onboarding/_components";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui";
 
 import { XMarkIcon } from "@/components/common/Misc/Icons";
 
 import { useOnboardingStore } from "@/stores/useOnboardingStore";
+
+import { useCreateActorProfile } from "@/src/actors/actors";
 
 const SKILL_CATEGORIES = [
   {
@@ -37,9 +42,25 @@ const SKILL_CATEGORIES = [
   },
 ];
 
+function birthYearToAgeGroup(birthYear: string): string {
+  if (!birthYear) return "20대";
+  const year = parseInt(birthYear);
+  const currentYear = new Date().getFullYear();
+  const age = currentYear - year;
+
+  if (age < 20) return "10대";
+  if (age < 30) return "20대";
+  if (age < 40) return "30대";
+  if (age < 50) return "40대";
+  if (age < 60) return "50대";
+  return "60대 이상";
+}
+
 export default function ActorOnboardingStep3() {
   const router = useRouter();
-  const { data, updateData } = useOnboardingStore();
+  const { data, updateData, resetData } = useOnboardingStore();
+  const createProfileMutation = useCreateActorProfile();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const toggleSkill = (skill: string) => {
     const newSkills = data.skills.includes(skill) ? data.skills.filter((s) => s !== skill) : [...data.skills, skill];
@@ -50,12 +71,39 @@ export default function ActorOnboardingStep3() {
     updateData({ skills: data.skills.filter((s) => s !== skill) });
   };
 
-  const handleComplete = () => {
-    router.push("/onboarding/actor/complete");
+  const handleComplete = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    try {
+      let profileImageBlob: Blob | undefined;
+      if (data.profileImage) {
+        const response = await fetch(data.profileImage);
+        profileImageBlob = await response.blob();
+      }
+
+      await createProfileMutation.mutateAsync({
+        data: {
+          name: data.name,
+          introduction: data.introduction || "안녕하세요!",
+          ageGroup: birthYearToAgeGroup(data.birthYear) as "10대" | "20대" | "30대" | "40대" | "50대" | "60대 이상",
+          profileImage: profileImageBlob,
+        },
+      });
+
+      resetData();
+      toast.success("프로필이 등록되었습니다!");
+      router.push("/onboarding/actor/complete");
+    } catch (error) {
+      console.error("프로필 등록 실패:", error);
+      toast.error("프로필 등록에 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSkip = () => {
-    router.push("/onboarding/actor/complete");
+    handleComplete();
   };
 
   return (
@@ -118,10 +166,10 @@ export default function ActorOnboardingStep3() {
         </div>
 
         <div className="flex gap-3 pt-4">
-          <Button variant="gold-secondary" className="flex-1" onClick={handleSkip}>
+          <Button variant="gold-secondary" className="flex-1" onClick={handleSkip} disabled={isSubmitting}>
             건너뛰기
           </Button>
-          <Button variant="gold" className="flex-1" onClick={handleComplete}>
+          <Button variant="gold" className="flex-1" onClick={handleComplete} loading={isSubmitting}>
             완료
           </Button>
         </div>

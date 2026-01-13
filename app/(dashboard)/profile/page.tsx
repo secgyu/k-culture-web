@@ -26,7 +26,7 @@ export default function ProfilePage() {
 
   return (
     <DashboardLayout userType="actor">
-      <div className="mx-auto max-w-4xl space-y-8">
+      <div className="max-w-4xl space-y-8">
         <div className="flex items-center justify-between">
           <h1 className="text-heading-xl text-ivory">내 프로필</h1>
           <Link href="/profile/edit">

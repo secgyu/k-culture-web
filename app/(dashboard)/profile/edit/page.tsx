@@ -8,65 +8,96 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
 
 import { Button, Spinner } from "@/components/ui";
 
 import { DarkCard, DashboardLayout } from "@/components/common";
 
-import { useImageUpload } from "@/lib/hooks";
-import { type ProfileFormData, profileFormSchema } from "@/lib/validations";
+import { useActorProfile, useUpdateActorProfile } from "@/lib/hooks/use-actor-profile";
 
-import { useGetMyProfile, useUpdateMyProfile } from "@/src/users/users";
+import { useGetMyProfile } from "@/src/users/users";
 
-import { BasicInfoForm } from "./_components/BasicInfoForm";
-import { ContactForm } from "./_components/ContactForm";
+import { BasicInfoSection } from "./_components/BasicInfoSection";
 import { ProfileImageUpload } from "./_components/ProfileImageUpload";
+import { SkillsSection } from "./_components/SkillsSection";
+
+const profileSchema = z.object({
+  stageName: z.string().min(2, "활동명은 2자 이상이어야 합니다").max(50),
+  birthYear: z.string().optional(),
+  introduction: z.string().max(500, "소개는 500자 이하여야 합니다").optional(),
+  nationality: z.string().max(50).optional(),
+  height: z.string().optional(),
+  weight: z.string().optional(),
+  agency: z.string().max(100).optional(),
+  skills: z.array(z.string()).optional(),
+  languages: z.array(z.string()).optional(),
+});
+
+type ProfileFormData = z.infer<typeof profileSchema>;
 
 export default function ProfileEditPage() {
   const router = useRouter();
-  const { data: profileData, isLoading } = useGetMyProfile();
-  const updateProfileMutation = useUpdateMyProfile();
+  const { data: userData } = useGetMyProfile();
+  const { data: actorData, isLoading, isError, error } = useActorProfile();
+  const updateMutation = useUpdateActorProfile();
 
-  const { imageUrl, handleImageChange } = useImageUpload(profileData?.data?.profileImage || "");
+  const userType = userData?.data?.type ?? "actor";
+  const actorProfile = actorData?.data;
 
   const form = useForm<ProfileFormData>({
-    resolver: zodResolver(profileFormSchema),
+    resolver: zodResolver(profileSchema),
     defaultValues: {
-      name: "",
-      phone: "",
+      stageName: "",
+      birthYear: "",
       introduction: "",
+      nationality: "",
       height: "",
       weight: "",
-      gender: "남성",
-      birthYear: "1995",
+      agency: "",
+      skills: [],
+      languages: [],
     },
   });
 
   useEffect(() => {
-    if (profileData?.data) {
-      const p = profileData.data;
+    if (actorProfile) {
       form.reset({
-        name: p.name || "",
-        phone: p.phone || "",
-        introduction: p.bio || "",
-        height: p.height ? String(p.height) : "",
-        weight: p.weight ? String(p.weight) : "",
-        gender: "남성",
-        birthYear: "1995",
+        stageName: actorProfile.stageName ?? "",
+        birthYear: actorProfile.birthYear?.toString() ?? "",
+        introduction: actorProfile.introduction ?? "",
+        nationality: actorProfile.nationality ?? "",
+        height: actorProfile.height?.toString() ?? "",
+        weight: actorProfile.weight?.toString() ?? "",
+        agency: actorProfile.agency ?? "",
+        skills: actorProfile.skills ?? [],
+        languages: actorProfile.languages ?? [],
       });
     }
-  }, [profileData, form]);
+  }, [actorProfile, form]);
+
+  useEffect(() => {
+    if (isError && error) {
+      const statusCode = (error as Error & { status?: number }).status;
+      if (statusCode === 404 || statusCode === 500) {
+        toast.info("프로필을 먼저 등록해주세요");
+        router.push("/onboarding/actor/step1?new=true");
+      }
+    }
+  }, [isError, error, router]);
 
   const onSubmit = form.handleSubmit((data) => {
-    updateProfileMutation.mutate(
+    updateMutation.mutate(
       {
-        data: {
-          name: data.name,
-          phone: data.phone,
-          bio: data.introduction,
-          height: data.height ? Number(data.height) : undefined,
-          weight: data.weight ? Number(data.weight) : undefined,
-        },
+        stageName: data.stageName,
+        birthYear: data.birthYear ? Number(data.birthYear) : undefined,
+        introduction: data.introduction || undefined,
+        nationality: data.nationality || undefined,
+        height: data.height ? Number(data.height) : undefined,
+        weight: data.weight ? Number(data.weight) : undefined,
+        agency: data.agency || undefined,
+        skills: data.skills?.length ? data.skills : undefined,
+        languages: data.languages?.length ? data.languages : undefined,
       },
       {
         onSuccess: () => {
@@ -82,7 +113,17 @@ export default function ProfileEditPage() {
 
   if (isLoading) {
     return (
-      <DashboardLayout userType="actor">
+      <DashboardLayout userType={userType}>
+        <div className="flex h-64 items-center justify-center">
+          <Spinner size="lg" />
+        </div>
+      </DashboardLayout>
+    );
+  }
+
+  if (isError) {
+    return (
+      <DashboardLayout userType={userType}>
         <div className="flex h-64 items-center justify-center">
           <Spinner size="lg" />
         </div>
@@ -91,35 +132,58 @@ export default function ProfileEditPage() {
   }
 
   return (
-    <DashboardLayout userType="actor">
-      <form onSubmit={onSubmit}>
-        <div className="mx-auto max-w-2xl space-y-8">
-          <div className="flex items-center justify-between">
-            <h1 className="text-ivory text-2xl font-bold">프로필 수정</h1>
-          </div>
+    <DashboardLayout userType={userType}>
+      <form onSubmit={onSubmit} className="w-full">
+        <div className="max-w-4xl space-y-8">
+          <PageHeader />
 
-          <ProfileImageUpload imageUrl={imageUrl} onImageChange={handleImageChange} />
+          <ProfileImageUpload
+            imageUrl={actorProfile?.profileImage ?? ""}
+            onImageChange={() => {
+              // TODO: 이미지 업로드 API 연동 필요
+              toast.info("이미지 업로드 기능은 준비 중입니다");
+            }}
+          />
 
           <DarkCard>
             <h2 className="text-ivory mb-6 text-lg font-semibold">기본 정보</h2>
-            <BasicInfoForm form={form} />
+            <BasicInfoSection form={form} />
           </DarkCard>
 
           <DarkCard>
-            <h2 className="text-ivory mb-6 text-lg font-semibold">연락처</h2>
-            <ContactForm form={form} />
+            <h2 className="text-ivory mb-6 text-lg font-semibold">특기 & 언어</h2>
+            <SkillsSection form={form} />
           </DarkCard>
 
-          <div className="flex gap-3">
-            <Button type="button" variant="gold-secondary" fullWidth onClick={() => router.back()}>
-              취소
-            </Button>
-            <Button type="submit" variant="gold" fullWidth loading={updateProfileMutation.isPending}>
-              저장
-            </Button>
-          </div>
+          <ActionButtons isLoading={updateMutation.isPending} onCancel={() => router.back()} />
         </div>
       </form>
     </DashboardLayout>
+  );
+}
+
+function PageHeader() {
+  return (
+    <div className="flex items-center justify-between">
+      <h1 className="text-ivory text-2xl font-bold">프로필 수정</h1>
+    </div>
+  );
+}
+
+interface ActionButtonsProps {
+  isLoading: boolean;
+  onCancel: () => void;
+}
+
+function ActionButtons({ isLoading, onCancel }: ActionButtonsProps) {
+  return (
+    <div className="flex gap-3">
+      <Button type="button" variant="gold-secondary" className="flex-1" onClick={onCancel}>
+        취소
+      </Button>
+      <Button type="submit" variant="gold" className="flex-1" loading={isLoading}>
+        저장
+      </Button>
+    </div>
   );
 }

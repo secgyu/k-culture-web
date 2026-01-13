@@ -46,7 +46,9 @@ export default function ActorOnboardingStep2() {
     updateData({ profileImage: null });
   };
 
-  const isValid = data.profileImage !== null && data.introduction.trim().length >= 10;
+  const hasImage = data.profileImage !== null;
+  const hasIntroduction = data.introduction.trim().length >= 10;
+  const isValid = hasImage || hasIntroduction;
 
   const handleNext = () => {
     if (!isValid) return;

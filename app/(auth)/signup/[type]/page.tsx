@@ -16,7 +16,9 @@ import { TermsAgreementSection } from "@/components/auth/TermsAgreementSection";
 
 import { type SignupFormData, signupFormSchema } from "@/lib/validations";
 
-import { useSignup } from "@/src/auth/auth";
+import { useAuthStore } from "@/stores/useAuthStore";
+
+import { useLogin, useSignup } from "@/src/auth/auth";
 
 const SIGNUP_CONFIG = {
   actor: {
@@ -35,6 +37,8 @@ export default function SignupPage() {
   const params = useParams();
   const router = useRouter();
   const signupMutation = useSignup();
+  const loginMutation = useLogin();
+  const login = useAuthStore((state) => state.login);
 
   const type = params.type as "actor" | "agency";
   const config = SIGNUP_CONFIG[type];
@@ -46,6 +50,7 @@ export default function SignupPage() {
 
   const form = useForm<SignupFormData>({
     resolver: zodResolver(signupFormSchema),
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
@@ -61,6 +66,7 @@ export default function SignupPage() {
     handleSubmit,
     watch,
     setValue,
+    getValues,
     formState: { errors, isValid },
   } = form;
 
@@ -79,8 +85,26 @@ export default function SignupPage() {
       },
       {
         onSuccess: () => {
-          toast.success("회원가입이 완료되었습니다");
-          router.push(config.onboardingPath);
+          const { email, password } = getValues();
+          loginMutation.mutate(
+            { data: { email, password } },
+            {
+              onSuccess: (response) => {
+                if (response.data) {
+                  const { accessToken, refreshToken, user } = response.data;
+                  if (accessToken && refreshToken && user) {
+                    login(accessToken, refreshToken, user.type);
+                  }
+                }
+                toast.success("회원가입이 완료되었습니다");
+                router.push(config.onboardingPath);
+              },
+              onError: () => {
+                toast.success("회원가입이 완료되었습니다. 로그인해주세요.");
+                router.push("/login");
+              },
+            }
+          );
         },
         onError: () => {
           toast.error("회원가입에 실패했습니다");
@@ -88,6 +112,8 @@ export default function SignupPage() {
       }
     );
   });
+
+  const isLoading = signupMutation.isPending || loginMutation.isPending;
 
   return (
     <AuthLayout title={config.title} subtitle={config.subtitle}>
@@ -115,7 +141,7 @@ export default function SignupPage() {
 
         <TermsAgreementSection watch={watch} setValue={setValue} errors={errors} />
 
-        <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={signupMutation.isPending}>
+        <Button type="submit" variant="gold" fullWidth disabled={!isValid} loading={isLoading}>
           회원가입
         </Button>
 
