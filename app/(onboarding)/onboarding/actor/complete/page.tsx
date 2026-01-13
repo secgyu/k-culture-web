@@ -26,13 +26,13 @@ export default function ActorOnboardingComplete() {
         <br />더 많은 정보를 입력하면 매칭 확률이 높아집니다.
       </p>
 
-      <div className="w-full max-w-xs space-y-3">
-        <Link href="/dashboard">
+      <div className="flex w-full max-w-xs flex-col gap-3">
+        <Link href="/dashboard" className="block">
           <Button variant="gold" fullWidth>
             대시보드로 이동
           </Button>
         </Link>
-        <Link href="/profile/edit">
+        <Link href="/profile/edit" className="block">
           <Button variant="gold-secondary" fullWidth>
             프로필 상세 입력하기
           </Button>
