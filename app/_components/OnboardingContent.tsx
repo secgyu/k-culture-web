@@ -4,6 +4,8 @@ import Link from "next/link";
 
 import { DoDreamLogo } from "@/components/common";
 
+import { useAuthStore } from "@/stores/useAuthStore";
+
 function RoleCard({
   title,
   description,
@@ -55,6 +57,8 @@ function RoleCard({
 }
 
 export function OnboardingContent() {
+  const { isAuthenticated } = useAuthStore();
+
   return (
     <div className="from-luxury-black via-luxury-black to-luxury-secondary flex min-h-screen flex-col bg-gradient-to-b">
       <div className="from-gold/10 pointer-events-none absolute top-0 right-0 left-0 h-96 bg-gradient-to-b to-transparent" />
@@ -62,9 +66,15 @@ export function OnboardingContent() {
       <header className="relative z-10 flex w-full items-center justify-between px-6 py-6">
         <DoDreamLogo href="/" size="md" className="text-ivory" />
 
-        <Link href="/login" className="text-warm-gray hover:text-ivory text-sm font-medium transition-colors">
-          로그인
-        </Link>
+        {isAuthenticated ? (
+          <Link href="/dashboard" className="text-gold hover:text-gold-light text-sm font-medium transition-colors">
+            대시보드
+          </Link>
+        ) : (
+          <Link href="/login" className="text-warm-gray hover:text-ivory text-sm font-medium transition-colors">
+            로그인
+          </Link>
+        )}
       </header>
 
       <main className="section-spacing-md relative z-10 flex flex-1 flex-col items-center justify-center px-6">
@@ -112,12 +122,14 @@ export function OnboardingContent() {
           />
         </div>
 
-        <p className="text-muted-gray mt-12 text-sm">
-          이미 계정이 있으신가요?{" "}
-          <Link href="/login" className="text-gold hover:text-gold-light underline transition-colors">
-            로그인
-          </Link>
-        </p>
+        {!isAuthenticated && (
+          <p className="text-muted-gray mt-12 text-sm">
+            이미 계정이 있으신가요?{" "}
+            <Link href="/login" className="text-gold hover:text-gold-light underline transition-colors">
+              로그인
+            </Link>
+          </p>
+        )}
       </main>
 
       <footer className="relative z-10 w-full px-6 py-8 text-center">
