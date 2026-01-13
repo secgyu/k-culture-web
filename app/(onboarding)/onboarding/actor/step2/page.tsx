@@ -120,10 +120,10 @@ export default function ActorOnboardingStep2() {
         />
 
         <div className="flex gap-3 pt-4">
-          <Button variant="gold-secondary" fullWidth onClick={handleSkip}>
+          <Button variant="gold-secondary" className="flex-1" onClick={handleSkip}>
             건너뛰기
           </Button>
-          <Button variant="gold" fullWidth disabled={!isValid} onClick={handleNext}>
+          <Button variant="gold" className="flex-1" disabled={!isValid} onClick={handleNext}>
             다음
           </Button>
         </div>
