@@ -17,6 +17,21 @@ interface CustomFetchConfig {
   responseType?: "json" | "blob" | "text";
 }
 
+// zustand persist 스토리지에서 토큰 가져오기
+const getAccessToken = (): string | null => {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const authStorage = localStorage.getItem("auth-storage");
+    if (!authStorage) return null;
+
+    const parsed = JSON.parse(authStorage);
+    return parsed?.state?.accessToken || null;
+  } catch {
+    return null;
+  }
+};
+
 export const customFetch = async <T>({
   url,
   method,
@@ -26,17 +41,17 @@ export const customFetch = async <T>({
   signal,
   responseType = "json",
 }: CustomFetchConfig): Promise<T> => {
-  // 토큰 가져오기 (클라이언트에서만)
-  const token = typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
+  // 토큰 가져오기 (zustand persist에서)
+  const token = getAccessToken();
 
   // URL에 쿼리 파라미터 추가
   const queryString = params
     ? "?" +
-      new URLSearchParams(
-        Object.entries(params)
-          .filter(([, v]) => v !== undefined && v !== null)
-          .map(([k, v]) => [k, String(v)])
-      ).toString()
+    new URLSearchParams(
+      Object.entries(params)
+        .filter(([, v]) => v !== undefined && v !== null)
+        .map(([k, v]) => [k, String(v)])
+    ).toString()
     : "";
 
   const fullUrl = `${BASE_URL}${url}${queryString}`;
