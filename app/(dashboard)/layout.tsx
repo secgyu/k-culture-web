@@ -1,10 +1,34 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "대시보드 | DoDream",
-  description: "DoDream 대시보드",
-};
+import { useEffect } from "react";
 
-export default function DashboardGroupLayout({ children }: { children: React.ReactNode }) {
+import { useRouter } from "next/navigation";
+
+import { Spinner } from "@/components/ui";
+
+import { useAuthStore } from "@/stores/useAuthStore";
+
+interface DashboardGroupLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function DashboardGroupLayout({ children }: DashboardGroupLayoutProps) {
+  const router = useRouter();
+  const { isAuthenticated } = useAuthStore();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.replace("/login");
+    }
+  }, [isAuthenticated, router]);
+
+  if (!isAuthenticated) {
+    return (
+      <div className="bg-luxury-black flex min-h-screen items-center justify-center">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
   return <>{children}</>;
 }
